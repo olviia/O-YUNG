@@ -25,12 +25,24 @@ def _reload_tools():
             importlib.reload(mod)
 
 
-def run_tex(recipe_name):
-    """Generate a texture recipe from tools/blender/textures and write PNGs into Assets/Art/Textures."""
+PREVIEW = r"D:/Projects/O-YUNG/art-src/preview"
+
+
+def run_tex(recipe_name, preview=False):
+    """Generate a texture recipe into Assets/Art/Textures, or (preview=True) into art-src/preview
+    plus a before|after comparison per map in docs/art/images/compare_<map>.png - Unity untouched."""
+    import os
     _reload_tools()
+    from oyung import texgen
     recipe = importlib.reload(importlib.import_module(recipe_name))
-    for path in recipe.build():
+    params = dict(recipe.PARAMS, out_dir=PREVIEW) if preview else recipe.PARAMS
+    for path in recipe.build(params):
         print("texture ->", path)
+        if preview:
+            live = os.path.join(texgen.UNITY_TEX, os.path.basename(path))
+            name = os.path.splitext(os.path.basename(path))[0]
+            cmp_path = r"D:/Projects/O-YUNG/docs/art/images/compare_" + name + ".png"
+            print("compare (left = current, right = new) ->", texgen.side_by_side([live, path], cmp_path))
 
 
 def run(prop, export=False):

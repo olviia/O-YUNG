@@ -91,11 +91,12 @@ def smooth_max(a, b, k=24.0):
     return np.logaddexp(k * a, k * b) / k
 
 
-def save_png(rgb, name, linear=False):
-    """Write an (n, n, 3) array to Assets/Art/Textures/<name>.png. linear=True for normal maps."""
+def save_png(rgb, name, linear=False, out_dir=None):
+    """Write an (n, n, 3) array to <out_dir or Assets/Art/Textures>/<name>.png. linear=True for data maps."""
     n = rgb.shape[0]
-    os.makedirs(UNITY_TEX, exist_ok=True)
-    path = os.path.join(UNITY_TEX, name + ".png")
+    out_dir = out_dir or UNITY_TEX
+    os.makedirs(out_dir, exist_ok=True)
+    path = os.path.join(out_dir, name + ".png")
     img = bpy.data.images.get(name)
     if img:
         bpy.data.images.remove(img)
@@ -118,3 +119,21 @@ def save_png(rgb, name, linear=False):
     else:
         raise RuntimeError(f"{path} stayed locked (Unity importing?) - run again")
     return path
+
+
+def side_by_side(paths, out_path, gap=16):
+    """Compose images left-to-right into one comparison PNG (for user review before applying)."""
+    imgs = [load(p, 512) for p in paths]
+    h = imgs[0].shape[0]
+    spacer = np.full((h, gap, 3), 0.1)
+    row = imgs[0]
+    for im in imgs[1:]:
+        row = np.concatenate([row, spacer, im], axis=1)
+    img = bpy.data.images.new("compare", row.shape[1], h, alpha=False)
+    img.colorspace_settings.name = 'Non-Color'
+    img.pixels.foreach_set(np.concatenate([row, np.ones((h, row.shape[1], 1))], axis=-1).astype(np.float32).ravel())
+    img.filepath_raw = out_path
+    img.file_format = 'PNG'
+    img.save()
+    bpy.data.images.remove(img)
+    return out_path
