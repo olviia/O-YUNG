@@ -115,3 +115,7 @@ InitTestScene*.unity*
 
 # Raw downloaded art sources (third-party licenses)
 /art-src/
+
+# Python bytecode
+__pycache__/
+*.pyc
