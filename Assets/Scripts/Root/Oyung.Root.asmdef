@@ -1,0 +1,28 @@
+{
+    "name": "Oyung.Root",
+    "rootNamespace": "Oyung.Root",
+    "references": [
+        "Oyung.Facts",
+        "Oyung.Input",
+        "Oyung.Input.Unity",
+        "Oyung.Save",
+        "Oyung.Save.Unity",
+        "Oyung.Cutscenes",
+        "Oyung.Cutscenes.Unity",
+        "Oyung.Vision",
+        "Oyung.Vision.Unity",
+        "Oyung.Quests",
+        "Oyung.Hints",
+        "Oyung.Hud",
+        "Oyung.Eyes"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

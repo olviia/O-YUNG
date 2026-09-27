@@ -1,0 +1,102 @@
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Olviia.CodeMap.Core.Model;
+using TypeKind = Olviia.CodeMap.Core.Model.TypeKind;
+
+namespace Olviia.CodeMap.Core.Parsing
+{
+    /// <summary>Turns one C# file into index entries. Reads syntax only; never compiles.</summary>
+    public sealed class SourceParser
+    {
+        private readonly CSharpParseOptions _options;
+
+        /// <param name="defineSymbols">Preprocessor symbols treated as defined, so code inside matching <c>#if</c> blocks is indexed.</param>
+        public SourceParser(IReadOnlyCollection<string> defineSymbols)
+        {
+            _options = new CSharpParseOptions(LanguageVersion.Latest, DocumentationMode.Parse, SourceCodeKind.Regular, defineSymbols);
+        }
+
+        /// <summary>Parses the text of one file.</summary>
+        /// <param name="path">Project-relative path, stored in the result.</param>
+        /// <param name="sourceText">Full file contents.</param>
+        /// <returns>All non-private types and members in source order; no types if the file declares none.</returns>
+        public FileEntry Parse(string path, string sourceText)
+        {
+            CompilationUnitSyntax root = CSharpSyntaxTree.ParseText(sourceText, _options).GetCompilationUnitRoot();
+            var types = new List<TypeEntry>();
+            CollectTypes(root.Members, string.Empty, Access.Public, false, types);
+            return new FileEntry(path, types);
+        }
+
+        private static void CollectTypes(SyntaxList<MemberDeclarationSyntax> members, string outerName, Access outerAccess, bool nested, List<TypeEntry> output)
+        {
+            foreach (MemberDeclarationSyntax member in members)
+            {
+                if (member is BaseNamespaceDeclarationSyntax ns)
+                    CollectTypes(ns.Members, outerName, outerAccess, nested, output);
+                else if (member is BaseTypeDeclarationSyntax || member is DelegateDeclarationSyntax)
+                    AddType(member, outerName, outerAccess, nested, output);
+            }
+        }
+
+        private static void AddType(MemberDeclarationSyntax declaration, string outerName, Access outerAccess, bool nested, List<TypeEntry> output)
+        {
+            Access? declared = AccessRules.FromModifiers(declaration.Modifiers, nested ? (Access?)null : Access.Internal);
+            if (declared == null)
+                return;
+
+            Access access = AccessRules.Narrow(outerAccess, declared.Value);
+            DocComment doc = DocCommentReader.Read(declaration);
+
+            switch (declaration)
+            {
+                case DelegateDeclarationSyntax d:
+                {
+                    string name = Qualify(outerName, d.Identifier.Text + SyntaxText.TypeParameters(d.TypeParameterList));
+                    var members = new[] { MemberReader.Delegate(d, access, doc) };
+                    output.Add(new TypeEntry(TypeKind.Delegate, access, name, new string[0], SyntaxText.Line(d.Identifier), doc, members));
+                    break;
+                }
+                case EnumDeclarationSyntax e:
+                {
+                    string name = Qualify(outerName, e.Identifier.Text);
+                    output.Add(new TypeEntry(TypeKind.Enum, access, name, BaseTypes(e), SyntaxText.Line(e.Identifier), doc, MemberReader.EnumValues(e, access)));
+                    break;
+                }
+                case TypeDeclarationSyntax t:
+                {
+                    string name = Qualify(outerName, t.Identifier.Text + SyntaxText.TypeParameters(t.TypeParameterList));
+                    output.Add(new TypeEntry(KindOf(t), access, name, BaseTypes(t), SyntaxText.Line(t.Identifier), doc, MemberReader.ReadAll(t, access)));
+                    CollectTypes(t.Members, name, access, true, output);
+                    break;
+                }
+            }
+        }
+
+        private static TypeKind KindOf(TypeDeclarationSyntax type)
+        {
+            switch (type)
+            {
+                case InterfaceDeclarationSyntax _: return TypeKind.Interface;
+                case StructDeclarationSyntax _: return TypeKind.Struct;
+                case RecordDeclarationSyntax _: return TypeKind.Record;
+                default: return TypeKind.Class;
+            }
+        }
+
+        private static IReadOnlyList<string> BaseTypes(BaseTypeDeclarationSyntax type)
+        {
+            if (type.BaseList == null)
+                return new string[0];
+            return type.BaseList.Types.Select(b => SyntaxText.Collapse(b.Type.ToString())).ToList();
+        }
+
+        private static string Qualify(string outerName, string name)
+        {
+            return outerName.Length == 0 ? name : outerName + "." + name;
+        }
+    }
+}

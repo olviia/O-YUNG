@@ -1,0 +1,13 @@
+{
+  "name": "com.olviia.codemap",
+  "version": "0.1.0",
+  "displayName": "CodeMap",
+  "description": "Generates a compact, per-assembly Markdown index of your C# API (signatures, file:line, /// docs) on every script import.",
+  "unity": "6000.0",
+  "dependencies": {
+    "org.nuget.microsoft.codeanalysis.csharp": "5.6.0"
+  },
+  "author": {
+    "name": "Olviia Stroivans"
+  }
+}

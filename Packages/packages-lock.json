@@ -1,5 +1,30 @@
 {
   "dependencies": {
+    "com.coplaydev.unity-mcp": {
+      "version": "https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.modules.animation": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.physics2d": "1.0.0",
+        "com.unity.modules.uielements": "1.0.0",
+        "com.unity.modules.screencapture": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.nuget.newtonsoft-json": "3.0.2",
+        "com.unity.test-framework": "1.1.31"
+      },
+      "hash": "63202654d5f9998fe9f583123c08e8cb13a41669"
+    },
+    "com.olviia.codemap": {
+      "version": "file:com.olviia.codemap",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "org.nuget.microsoft.codeanalysis.csharp": "5.6.0"
+      }
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.12",
       "depth": 0,
@@ -16,6 +41,16 @@
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
         "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.cinemachine": {
+      "version": "3.1.7",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.splines": "2.0.0",
+        "com.unity.modules.imgui": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -93,6 +128,13 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.2",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.render-pipelines.core": {
       "version": "17.4.0",
       "depth": 1,
@@ -131,6 +173,13 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.settings-manager": {
+      "version": "2.1.1",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.shadergraph": {
       "version": "17.4.0",
       "depth": 1,
@@ -139,6 +188,17 @@
         "com.unity.render-pipelines.core": "17.4.0",
         "com.unity.searcher": "4.9.3"
       }
+    },
+    "com.unity.splines": {
+      "version": "2.8.4",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.1",
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.settings-manager": "1.0.3"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
       "version": "1.6.0",
@@ -190,6 +250,118 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "org.nuget.microsoft.codeanalysis.analyzers": {
+      "version": "5.3.0",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.microsoft.codeanalysis.common": {
+      "version": "5.6.0",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {
+        "org.nuget.microsoft.codeanalysis.analyzers": "5.3.0",
+        "org.nuget.system.collections.immutable": "10.0.1",
+        "org.nuget.system.memory": "4.6.3",
+        "org.nuget.system.reflection.metadata": "10.0.1",
+        "org.nuget.system.runtime.compilerservices.unsafe": "6.1.2",
+        "org.nuget.system.text.encoding.codepages": "8.0.0",
+        "org.nuget.system.threading.tasks.extensions": "4.6.3",
+        "org.nuget.system.buffers": "4.6.1",
+        "org.nuget.system.numerics.vectors": "4.6.1"
+      },
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.microsoft.codeanalysis.csharp": {
+      "version": "5.6.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "org.nuget.microsoft.codeanalysis.common": "5.6.0",
+        "org.nuget.microsoft.codeanalysis.analyzers": "5.3.0",
+        "org.nuget.system.buffers": "4.6.1",
+        "org.nuget.system.collections.immutable": "10.0.1",
+        "org.nuget.system.memory": "4.6.3",
+        "org.nuget.system.numerics.vectors": "4.6.1",
+        "org.nuget.system.reflection.metadata": "10.0.1",
+        "org.nuget.system.runtime.compilerservices.unsafe": "6.1.2",
+        "org.nuget.system.text.encoding.codepages": "8.0.0",
+        "org.nuget.system.threading.tasks.extensions": "4.6.3"
+      },
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.buffers": {
+      "version": "4.6.1",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.collections.immutable": {
+      "version": "10.0.1",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {
+        "org.nuget.system.memory": "4.6.3",
+        "org.nuget.system.runtime.compilerservices.unsafe": "6.1.2"
+      },
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.memory": {
+      "version": "4.6.3",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {
+        "org.nuget.system.buffers": "4.6.1",
+        "org.nuget.system.numerics.vectors": "4.6.1",
+        "org.nuget.system.runtime.compilerservices.unsafe": "6.1.2"
+      },
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.numerics.vectors": {
+      "version": "4.6.1",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.reflection.metadata": {
+      "version": "10.0.1",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {
+        "org.nuget.system.collections.immutable": "10.0.1"
+      },
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.runtime.compilerservices.unsafe": {
+      "version": "6.1.2",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.text.encoding.codepages": {
+      "version": "8.0.0",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {
+        "org.nuget.system.memory": "4.5.5",
+        "org.nuget.system.runtime.compilerservices.unsafe": "6.0.0"
+      },
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.threading.tasks.extensions": {
+      "version": "4.6.3",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {
+        "org.nuget.system.runtime.compilerservices.unsafe": "6.1.2"
+      },
+      "url": "https://unitynuget-registry.openupm.com"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

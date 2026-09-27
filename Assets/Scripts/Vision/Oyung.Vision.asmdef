@@ -1,0 +1,16 @@
+{
+    "name": "Oyung.Vision",
+    "rootNamespace": "Oyung.Vision",
+    "references": [
+        "Oyung.Facts"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

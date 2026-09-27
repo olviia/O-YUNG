@@ -1,0 +1,17 @@
+{
+    "name": "Oyung.Quests",
+    "rootNamespace": "Oyung.Quests",
+    "references": [
+        "Oyung.Facts",
+        "Oyung.Input"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

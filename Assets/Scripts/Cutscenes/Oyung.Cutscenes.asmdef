@@ -1,0 +1,17 @@
+{
+    "name": "Oyung.Cutscenes",
+    "rootNamespace": "Oyung.Cutscenes",
+    "references": [
+        "Oyung.Facts",
+        "Oyung.Input"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

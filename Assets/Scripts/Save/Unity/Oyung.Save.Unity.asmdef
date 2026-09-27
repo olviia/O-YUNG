@@ -1,0 +1,16 @@
+{
+    "name": "Oyung.Save.Unity",
+    "rootNamespace": "Oyung.Save.Unity",
+    "references": [
+        "Oyung.Save"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

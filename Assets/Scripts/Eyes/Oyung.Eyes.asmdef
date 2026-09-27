@@ -1,0 +1,17 @@
+{
+    "name": "Oyung.Eyes",
+    "rootNamespace": "Oyung.Eyes",
+    "references": [
+        "Oyung.Input",
+        "Unity.Cinemachine"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

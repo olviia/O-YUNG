@@ -1,0 +1,17 @@
+{
+    "name": "Oyung.Cutscenes.Unity",
+    "rootNamespace": "Oyung.Cutscenes.Unity",
+    "references": [
+        "Oyung.Cutscenes",
+        "Unity.Timeline"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

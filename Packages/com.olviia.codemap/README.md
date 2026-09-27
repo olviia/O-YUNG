@@ -1,0 +1,42 @@
+# CodeMap
+
+Generates a compact Markdown index of your project's C# API — full signatures, `file:line` locations and `///` docs — split by assembly definition. It updates automatically whenever scripts are imported.
+
+Made to be read by both humans and AI coding assistants: a small map instead of searching the whole codebase.
+
+## Installation
+
+### 1. Add the NuGet registry (required)
+
+CodeMap parses C# with Roslyn, which comes from NuGet through [UnityNuGet](https://github.com/bdovaz/UnityNuGet). Unity packages cannot declare registries themselves, so add this block to your project's `Packages/manifest.json`, next to `"dependencies"`:
+
+```json
+"scopedRegistries": [
+  {
+    "name": "Unity NuGet",
+    "url": "https://unitynuget-registry.openupm.com",
+    "scopes": [
+      "org.nuget"
+    ]
+  }
+]
+```
+
+If you already have a `scopedRegistries` section, add only the inner object to it.
+
+### 2. Add the package
+
+Package Manager → **+** → **Add package from git URL…** and enter:
+
+```
+https://github.com/<owner>/codemap.git
+```
+
+Unity resolves the Roslyn dependency from the registry above automatically.
+
+## Output
+
+- `docs/INDEX.md` — module dependency table and the public API of every module.
+- `docs/index/<Module>.md` — everything inside one module, including internal members.
+
+Only code under `Assets/` is indexed. Private members are never indexed.

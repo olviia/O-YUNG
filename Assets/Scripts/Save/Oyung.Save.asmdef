@@ -1,0 +1,16 @@
+{
+    "name": "Oyung.Save",
+    "rootNamespace": "Oyung.Save",
+    "references": [
+        "Oyung.Facts"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}
