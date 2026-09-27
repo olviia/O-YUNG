@@ -109,3 +109,9 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Local API keys for external tools
+/tools/secrets.env
+
+# Raw downloaded art sources (third-party licenses)
+/art-src/
