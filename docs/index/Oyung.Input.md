@@ -3,7 +3,39 @@
 Root: Assets/Scripts/Input
 Depends on: —
 
-### interface IGameInput — Ports/IGameInput.cs:5
+### internal class InputModeStack : IInputModes — InputModeStack.cs:12
+Implements IInputModes as a stack-like list: the last entered mode is active, but any mode can be exited, e.g. a cutscene ending while the menu is open.
+- `internal InputMode ActiveMode { get; }` :16 (implements IInputModes)
+- `internal event Action<InputMode> ModeChanged` :19 (implements IInputModes)
+- `internal void EnterMode(InputMode mode)` :21 (implements IInputModes)
+- `internal void ExitMode(InputMode mode)` :28 (implements IInputModes)
+
+### interface IGameInput — Ports/IGameInput.cs:9
+port for game input
+- `event Action SkipCutsceneRequested` :14
+  is triggered during a cutscene if Skip input is pressed
+- `Vector2 LookDelta { get; }` :19
+  how fast and in what direction a player moves their look (eyes) by x and y axes per frame
+
+### interface IInputModes — Ports/IInputModes.cs:8
+port for selecting and changing the input modes
+- `InputMode ActiveMode { get; }` :13
+  what is the current mode of the input, Gameplay by default
+- `void EnterMode(InputMode mode)` :19
+  Enters the input mode
+  mode: what mode
+- `void ExitMode(InputMode mode)` :25
+  Exits the input mode
+  mode: what mode
+- `event Action<InputMode> ModeChanged` :30
+  declares when a mode is changed and gives the InputMode to which
+
+### enum InputMode — Ports/InputMode.cs:5
+Gameplay, Cutscene, Menu
 
 ## Undocumented
-- Oyung.Input: `IGameInput` Ports/IGameInput.cs:5
+- Oyung.Input: `InputModeStack.ActiveMode` InputModeStack.cs:16
+- Oyung.Input: `InputModeStack.ModeChanged` InputModeStack.cs:19
+- Oyung.Input: `InputModeStack.EnterMode` InputModeStack.cs:21
+- Oyung.Input: `InputModeStack.ExitMode` InputModeStack.cs:28
+- Oyung.Input: `InputMode` Ports/InputMode.cs:5

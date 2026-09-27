@@ -3,7 +3,8 @@
 Root: Assets/Scripts/Eyes
 Depends on: Oyung.Input, Unity.Cinemachine
 
-### class LookCamera : MonoBehaviour — LookCamera.cs:7
-
-## Undocumented
-- Oyung.Eyes: `LookCamera` LookCamera.cs:7
+### class LookCamera : MonoBehaviour — LookCamera.cs:12
+The baby's eyes. Turns strictly with LookDelta, only within the eyes' range. No sway, no smoothing (motion sickness). The rotation the object has in the scene is the resting gaze.
+- `void Init(IGameInput input)` :25
+  Given by the composition root.
+  input: Where the look comes from.

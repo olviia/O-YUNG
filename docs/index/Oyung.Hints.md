@@ -3,10 +3,10 @@
 Root: Assets/Scripts/Hints
 Depends on: Oyung.Quests
 
-### internal class Hints : IHints — Hints.cs:4
+### internal class Hints : IHints — Hints.cs:6
 
 ### interface IHints — Ports/IHints.cs:4
 
 ## Undocumented
-- Oyung.Hints: `Hints` Hints.cs:4
+- Oyung.Hints: `Hints` Hints.cs:6
 - Oyung.Hints: `IHints` Ports/IHints.cs:4

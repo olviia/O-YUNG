@@ -3,7 +3,5 @@
 Root: Assets/Scripts/Root
 Depends on: Oyung.Facts, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Hints, Oyung.Hud, Oyung.Eyes
 
-### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:7
-
-## Undocumented
-- Oyung.Root: `CompositionRoot` CompositionRoot.cs:7
+### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:14
+The only place that creates modules and hands them what they need. Startup: create → load → start. Shutdown: reverse order.

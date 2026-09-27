@@ -1,6 +1,8 @@
 namespace Oyung.Save
 {
-    // CLAUDE: the save rules — what goes into a save (Facts) and when to save/load. Talks to storage only through ISaveStorage.
+    // CLAUDE: the save rules: what goes into
+    // CLAUDE: a save (Facts), when to save/load.
+    // CLAUDE: Storage only via ISaveStorage.
     internal class SaveSystem
     {
     }

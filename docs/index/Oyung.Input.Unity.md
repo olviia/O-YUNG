@@ -5,8 +5,118 @@ Depends on: Oyung.Input, Unity.InputSystem
 
 ### class InputGlyphs — InputGlyphs.cs:5
 
-### class InputSystemAdapter : IGameInput — InputSystemAdapter.cs:5
+### class InputSystemAdapter : IGameInput, IDisposable — InputSystemAdapter.cs:13
+Implements IGameInput with Unity's Input System. The only class that knows the Input System exists. Enables the action map named like the active InputMode; Menu has no map yet, so all is off.
+- `event Action SkipCutsceneRequested` :20 (implements IGameInput)
+- `InputSystemAdapter(IInputModes modes, float mouseDegreesPerPixel, float stickDegreesPerSecond)` :25
+  modes: Decides which map is on. · mouseDegreesPerPixel: Mouse sensitivity. · stickDegreesPerSecond: Stick turn speed.
+- `Vector2 LookDelta { get; }` :43 (implements IGameInput)
+  Degrees this frame: X = left/right, Y = up/down. Mouse gives pixels, stick gives a -1..1 position; both become degrees here. Zero when the Gameplay map is off (cutscene, menu).
+- `void Dispose()` :58
+
+### class @OyungActions : IInputActionCollection2, IDisposable — OyungActions.cs:77
+Provides programmatic access to InputActionAsset, InputActionMap, InputAction and InputControlScheme instances defined in asset "Assets/Scripts/Input/Unity/OyungActions.inputactions".
+- `InputActionAsset asset { get; }` :82
+  Provides access to the underlying asset instance.
+- `@OyungActions()` :87
+  Constructs a new instance.
+- `void Dispose()` :229
+  Destroys this asset and all associated InputAction instances.
+- `InputBinding? bindingMask { get; set; }` :235
+  (inherited doc)
+- `ReadOnlyArray<InputDevice>? devices { get; set; }` :242
+  (inherited doc)
+- `ReadOnlyArray<InputControlScheme> controlSchemes { get; }` :249
+  (inherited doc)
+- `bool Contains(InputAction action)` :252
+  (inherited doc)
+- `IEnumerator<InputAction> GetEnumerator()` :258
+  (inherited doc)
+- `IEnumerator IEnumerable.GetEnumerator()` :264
+  (inherited doc)
+- `void Enable()` :270
+  (inherited doc)
+- `void Disable()` :276
+  (inherited doc)
+- `IEnumerable<InputBinding> bindings { get; }` :282
+  (inherited doc)
+- `InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)` :285
+  (inherited doc)
+- `int FindBinding(InputBinding bindingMask, out InputAction action)` :291
+  (inherited doc)
+- `GameplayActions @Gameplay { get; }` :401
+  Provides a new GameplayActions instance referencing this action map.
+- `CutsceneActions @Cutscene { get; }` :497
+  Provides a new CutsceneActions instance referencing this action map.
+- `InputControlScheme KeyboardMouseScheme { get; }` :503
+  Provides access to the input control scheme.
+- `InputControlScheme GamepadScheme { get; }` :516
+  Provides access to the input control scheme.
+
+### struct @OyungActions.GameplayActions — OyungActions.cs:304
+Provides access to input actions defined in input action map "Gameplay".
+- `GameplayActions(@OyungActions wrapper)` :311
+  Construct a new instance of the input action map wrapper class.
+- `InputAction @LookPointer { get; }` :315
+  Provides access to the underlying input action "Gameplay/LookPointer".
+- `InputAction @LookStick { get; }` :319
+  Provides access to the underlying input action "Gameplay/LookStick".
+- `InputActionMap Get()` :323
+  Provides access to the underlying input action map instance.
+- `void Enable()` :325
+  (inherited doc)
+- `void Disable()` :327
+  (inherited doc)
+- `bool enabled { get; }` :329
+  (inherited doc)
+- `static implicit operator InputActionMap(GameplayActions set)` :333
+  Implicitly converts an GameplayActions to an InputActionMap instance.
+- `void AddCallbacks(IGameplayActions instance)` :342
+  Adds InputAction.started, InputAction.performed and InputAction.canceled callbacks provided via instance on all input actions contained in this map.
+  instance: Callback instance.
+- `void RemoveCallbacks(IGameplayActions instance)` :375
+  Unregisters instance and unregisters all input action callbacks via GameplayActions.UnregisterCallbacks(IGameplayActions).
+- `void SetCallbacks(IGameplayActions instance)` :390
+  Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via instance.
+
+### struct @OyungActions.CutsceneActions — OyungActions.cs:410
+Provides access to input actions defined in input action map "Cutscene".
+- `CutsceneActions(@OyungActions wrapper)` :417
+  Construct a new instance of the input action map wrapper class.
+- `InputAction @Skip { get; }` :421
+  Provides access to the underlying input action "Cutscene/Skip".
+- `InputActionMap Get()` :425
+  Provides access to the underlying input action map instance.
+- `void Enable()` :427
+  (inherited doc)
+- `void Disable()` :429
+  (inherited doc)
+- `bool enabled { get; }` :431
+  (inherited doc)
+- `static implicit operator InputActionMap(CutsceneActions set)` :435
+  Implicitly converts an CutsceneActions to an InputActionMap instance.
+- `void AddCallbacks(ICutsceneActions instance)` :444
+  Adds InputAction.started, InputAction.performed and InputAction.canceled callbacks provided via instance on all input actions contained in this map.
+  instance: Callback instance.
+- `void RemoveCallbacks(ICutsceneActions instance)` :471
+  Unregisters instance and unregisters all input action callbacks via CutsceneActions.UnregisterCallbacks(ICutsceneActions).
+- `void SetCallbacks(ICutsceneActions instance)` :486
+  Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via instance.
+
+### interface @OyungActions.IGameplayActions — OyungActions.cs:529
+Interface to implement callback methods for all input action callbacks associated with input actions defined by "Gameplay" which allows adding and removing callbacks.
+- `void OnLookPointer(InputAction.CallbackContext context)` :537
+  Method invoked when associated input action "LookPointer" is either UnityEngine.InputSystem.InputAction.started, UnityEngine.InputSystem.InputAction.performed or UnityEngine.InputSystem.InputAction.canceled.
+- `void OnLookStick(InputAction.CallbackContext context)` :544
+  Method invoked when associated input action "LookStick" is either UnityEngine.InputSystem.InputAction.started, UnityEngine.InputSystem.InputAction.performed or UnityEngine.InputSystem.InputAction.canceled.
+
+### interface @OyungActions.ICutsceneActions — OyungActions.cs:551
+Interface to implement callback methods for all input action callbacks associated with input actions defined by "Cutscene" which allows adding and removing callbacks.
+- `void OnSkip(InputAction.CallbackContext context)` :559
+  Method invoked when associated input action "Skip" is either UnityEngine.InputSystem.InputAction.started, UnityEngine.InputSystem.InputAction.performed or UnityEngine.InputSystem.InputAction.canceled.
 
 ## Undocumented
 - Oyung.Input.Unity: `InputGlyphs` InputGlyphs.cs:5
-- Oyung.Input.Unity: `InputSystemAdapter` InputSystemAdapter.cs:5
+- Oyung.Input.Unity: `InputSystemAdapter.SkipCutsceneRequested` InputSystemAdapter.cs:20
+- Oyung.Input.Unity: `InputSystemAdapter.InputSystemAdapter` InputSystemAdapter.cs:25
+- Oyung.Input.Unity: `InputSystemAdapter.Dispose` InputSystemAdapter.cs:58

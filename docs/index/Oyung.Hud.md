@@ -3,7 +3,7 @@
 Root: Assets/Scripts/Hud
 Depends on: Oyung.Quests, Oyung.Hints, Oyung.Input.Unity
 
-### class Hud : MonoBehaviour — Hud.cs:7
+### class Hud : MonoBehaviour — Hud.cs:9
 
 ## Undocumented
-- Oyung.Hud: `Hud` Hud.cs:7
+- Oyung.Hud: `Hud` Hud.cs:9
