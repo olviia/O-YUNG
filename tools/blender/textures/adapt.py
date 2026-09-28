@@ -19,41 +19,13 @@ import palettes
 ART_SRC = r"D:/Projects/O-YUNG/art-src"
 
 SOURCES = {
-    # Candidate A: Poliigon Rattan Weave (Poliigon license - keep raw files out of git).
-    "WickerA": dict(
-        folder="Poliigon_RattanWeave_6945/2K",
-        albedo="Poliigon_RattanWeave_6945_BaseColor.jpg",
-        height="Poliigon_RattanWeave_6945_Displacement.tiff",
-        ao="Poliigon_RattanWeave_6945_AmbientOcclusion.jpg",
-        normal="Poliigon_RattanWeave_6945_Normal.png",
-        soften=6,           # blur passes on color: removes photo wood grain
-        round_edges=3,      # blur passes on height before building the normal
-        ao_amount=0.3,
-        tone=(0.35, 0.95),  # part of the palette the source's dark..light maps onto (contrast)
-        grain_in_normal=0.15,
-        normal_strength=3.0,
-        row_m=0.034,        # one strip = 3.4 cm (crib weave row spacing)
-        stretch_y=2.0,      # strips twice as thick as the source proportions
-    ),
-    # Candidate B: 3dtextures.me Wood Wicker 002 (CC0).
-    "WickerB": dict(
-        folder="Wood_Wicker_002_SD-20260927T223544Z-1-001/Wood_Wicker_002_SD",
-        albedo="Wood_Wicker_002_basecolor.jpg",
-        height="Wood_Wicker_002_height.png",
-        ao="Wood_Wicker_002_ambientOcclusion.jpg",
-        normal="Wood_Wicker_002_normal.jpg",
-        soften=4,
-        round_edges=6,      # this one has hard strand edges -> round them more
-        ao_amount=0.3,
-        tone=(0.4, 0.95),
-        grain_in_normal=0.1,
-        normal_strength=3.0,
-        row_m=0.034,
-        stretch_y=1.0,
-    ),
+    # One entry per downloaded set. Keys:
+    #   folder, albedo, height, ao, normal  - paths inside art-src/
+    #   soften, round_edges, ao_amount, tone, grain_in_normal, normal_strength  - processing knobs
+    #   row_m (meters per strip), stretch_y  - scale
 }
 
-PARAMS = dict(size=1024, palette=palettes.WICKER, only=None,   # only="WickerA" to run one
+PARAMS = dict(size=1024, palette=palettes.WICKER, only=None,   # only="<name>" to run one
               mode="recolor")   # "recolor": source untouched, only hue -> palette | "adapt": full processing
 
 
