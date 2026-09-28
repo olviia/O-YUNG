@@ -34,6 +34,15 @@ SOURCES = {
         palette=palettes.FLEECE,
         brightness=0.85,    # mean luminance of the albedo
     ),
+    # Ribbed corduroy (Poly Haven, CC0): second pillow fabric, visible wales. Same cream base, tinted per material.
+    "Corduroy": dict(
+        folder="polyhaven/ribbed_corduroy",
+        albedo="ribbed_corduroy_diff_2k.jpg",
+        normal="ribbed_corduroy_nor_gl_2k.jpg",
+        size_m=0.266,
+        palette=palettes.FLEECE,
+        brightness=0.85,
+    ),
 }
 
 PARAMS = dict(size=1024, palette=palettes.WICKER, only=None,   # only="<name>" to run one

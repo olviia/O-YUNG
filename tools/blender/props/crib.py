@@ -54,7 +54,7 @@ def build(p=PARAMS):
     materials.assign(strands, materials.placeholder("M_WickerStrand", (0.62, 0.45, 0.28)))
 
     pad = lathe.revolve("Crib_Mattress", _mattress_profile(inner[1:], p), p["segments"])
-    materials.assign(pad, materials.placeholder("M_Mattress", (0.86, 0.80, 0.68)))
+    materials.assign(pad, materials.placeholder("M_Fabric_Cream", (0.86, 0.80, 0.68)))
 
     parts = [shell, rim, strands, pad]
     for o in parts:

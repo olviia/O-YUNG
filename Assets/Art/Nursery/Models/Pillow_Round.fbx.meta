@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 19bd66a5d7893d34ba412f40cae876c0
+guid: 489709bdafa4c134dbbc95def47c720f
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,20 +7,10 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_Fabric_Cream
-    second: {fileID: 2100000, guid: 9f050580535499747bc14316d858e1b0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_WickerShell
-    second: {fileID: 2100000, guid: 895c7e20032e5eb4dba03cb5a0bf21d5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_WickerStrand
-    second: {fileID: 2100000, guid: 02effba0defac034686abbacd433ca81, type: 2}
+      name: M_Fabric_Rose
+    second: {fileID: 2100000, guid: 58e864fd7b5191d4cb237fc925213430, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
