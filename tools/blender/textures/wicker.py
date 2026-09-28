@@ -40,6 +40,7 @@ PARAMS = dict(
     weaver_tilt=0.75,       # normal: max up/down tilt at a weaver's edge (linear across it)
     streak_band=0.45,       # normal: weaver fiber streaks only where |t| < this (0 center, 1 edge)
     normal_stake_width=0.28, # normal: stake band width (albedo/height keep stake_width 0.35)
+    height_model="normal",  # height PNG: "normal" = built from the normal's model | "legacy" = previous
     stake_tilt=0.75,        # normal: max left/right tilt at a stake's edges (linear across it)
     weaver_end_tilt=0.35,   # normal: left/right tilt at a weaver's ends (gradient along the weaver)
     end_round_center=0.5,   # normal: 0 = linear along the weaver, 1 = flatter/rounder middle
@@ -165,6 +166,22 @@ def build(p=PARAMS):
     stake_lin = np.stack([sx, sy, sz], axis=-1)
     stake_lin /= np.linalg.norm(stake_lin, axis=-1, keepdims=True)
     normal = np.where(weaver_px[..., None], lin * 0.5 + 0.5, stake_lin * 0.5 + 0.5)
+
+    if p["height_model"] == "normal":
+        # Height built from the normal's own model (slope = tilt), in pixel units, so the
+        # parallax height and the lighting normal describe the same surface.
+        row_px, col_px = p["size"] / NY, p["size"] / NX
+        R = row_px / 2                                        # weaver half-height, px
+        Lh = (1 - p["normal_stake_width"] / 2) * col_px       # weaver half-length, px
+        Rs = p["normal_stake_width"] / 2 * col_px             # stake half-width, px
+        rr = p["end_round_center"]
+        h_cross = p["weaver_tilt"] * R * (1 - t * t) / 2
+        h_along = p["weaver_end_tilt"] * Lh * ((1 - rr) * (1 - s_along ** 2) / 2 + rr * (1 - s_along ** 4) / 4)
+        weaver_hm = h_cross + h_along
+        end_top = p["weaver_tilt"] * R / 2                    # weaver end, middle of its row
+        stake_hm = end_top + p["stake_tilt"] * Rs * (1 - s_across ** 2) / 2
+        height_map = np.where(weaver_px, weaver_hm, stake_hm)
+        height_map = height_map / height_map.max()
 
     out = p["out_dir"]
     return [texgen.save_png(albedo, "T_Wicker_Albedo", out_dir=out),
