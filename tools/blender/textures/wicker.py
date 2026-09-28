@@ -29,8 +29,9 @@ PARAMS = dict(
     shape_dive=0.6,         # height map only: weaver dive; deep enough for straight overlap edges
     height_weaver=0.85,     # height PNG only: weavers scaled down
     height_stake=1.8,       # height PNG only: stakes scaled up (lighter)
-    grooves=3,              # broad fiber grooves along each strand (normal map only)
-    groove_depth=0.06,
+    grooves=(10, 28),       # fiber streak frequencies across a strand (normal map only)
+    groove_count=7,         # layered -> irregular streaks, not a few clean lines
+    groove_depth=0.035,
     variation=0.10,         # per-strand tint variation (handmade feel)
     top_light=0.25,         # painted light from above: upper half of each weaver brighter
     occlusion=0.45,         # darkening where a strand disappears under another
@@ -104,10 +105,19 @@ def build(p=PARAMS):
                       texgen.masked_blur(albedo, on_stake, p["soften"]),
                       texgen.masked_blur(albedo, ~on_stake, p["soften"]))
 
-    # --- normal: weave shape + a few broad, soft grooves along each strand ---
-    groove = np.cos(2 * np.pi * p["grooves"] * np.where(on_stake, fx, fy))
-    detail = shape + p["groove_depth"] * groove * shape
-    normal = texgen.normal_from_height(texgen.blur(detail, p["normal_blur"]), p["normal_strength"])
+    # --- normal: weave shape + fine, irregular fiber streaks along each strand ---
+    # (user reference: screenshot 2026-09-28 000020, top). Streaks are added AFTER the blur,
+    # so they stay fine; the weave shape itself is blurred exactly as before.
+    grng = np.random.default_rng(p["seed"] + 1)
+    across_coord = np.where(on_stake, fx, fy)
+    along_coord = np.where(on_stake, v, u)
+    streaks = np.zeros_like(u)
+    for k in grng.integers(*p["grooves"], p["groove_count"]):
+        drift = 0.4 * np.sin(2 * np.pi * grng.integers(1, 4) * along_coord + grng.uniform(0, 6.3))
+        streaks += grng.uniform(0.4, 1.0) * np.sin(2 * np.pi * k * across_coord + drift + grng.uniform(0, 6.3))
+    streaks /= np.abs(streaks).max()
+    detail = texgen.blur(shape, p["normal_blur"]) + p["groove_depth"] * streaks * shape
+    normal = texgen.normal_from_height(detail, p["normal_strength"])
 
     out = p["out_dir"]
     return [texgen.save_png(albedo, "T_Wicker_Albedo", out_dir=out),
