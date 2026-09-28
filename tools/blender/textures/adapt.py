@@ -22,7 +22,18 @@ SOURCES = {
     # One entry per downloaded set. Keys:
     #   folder, albedo, height, ao, normal  - paths inside art-src/
     #   soften, round_edges, ao_amount, tone, grain_in_normal, normal_strength  - processing knobs
-    #   row_m (meters per strip), stretch_y  - scale
+    #   row_m (meters per strip), stretch_y  - scale (woven sources)
+    #   size_m (meters one tile covers), palette, brightness  - fabrics
+    # Caban fleece (Poly Haven, CC0): soft fabric for mattress and pillows.
+    # Light neutral cream - each material tints it (_BaseColor), so one texture serves all fabrics.
+    "Fleece": dict(
+        folder="polyhaven/caban",
+        albedo="caban_diff_2k.jpg",
+        normal="caban_nor_gl_2k.jpg",
+        size_m=0.274,
+        palette=palettes.FLEECE,
+        brightness=0.85,    # mean luminance of the albedo
+    ),
 }
 
 PARAMS = dict(size=1024, palette=palettes.WICKER, only=None,   # only="<name>" to run one
@@ -35,14 +46,22 @@ def recolor(name, c, size, palette):
     src = texgen.load(path(c["albedo"]), size)
     lum = texgen.luminance(src)
     tinted = texgen.ramp(texgen.normalize(lum), palette)
-    albedo = np.clip(tinted * (lum / np.maximum(texgen.luminance(tinted), 1e-4))[..., None], 0, 1)
+    albedo = tinted * (lum / np.maximum(texgen.luminance(tinted), 1e-4))[..., None]
+    if "brightness" in c:   # tintable fabrics: lift to a light base, keep the source's variation
+        albedo *= c["brightness"] / texgen.luminance(albedo).mean()
+    albedo = np.clip(albedo, 0, 1)
     normal = texgen.load(path(c["normal"]), size)
-    height = texgen.load(path(c["height"]), size, gray=True)
-    rows = texgen.count_rows(texgen.normalize(height))
-    print(f"{name}: {rows} strips per tile -> uniform Unity tiling {1.0 / (rows * c['row_m']):.2f}")
-    return [texgen.save_png(albedo, f"T_{name}_Albedo"),
-            texgen.save_png(normal, f"T_{name}_Normal", linear=True),
-            texgen.save_png(np.repeat(texgen.normalize(height)[..., None], 3, axis=-1), f"T_{name}_Height", linear=True)]
+    out = [texgen.save_png(albedo, f"T_{name}_Albedo"),
+           texgen.save_png(normal, f"T_{name}_Normal", linear=True)]
+    if "size_m" in c:
+        print(f"{name}: one tile = {c['size_m']} m -> Unity tiling {1.0 / c['size_m']:.2f} (lathe UVs are in meters)")
+    if "height" in c:
+        height = texgen.load(path(c["height"]), size, gray=True)
+        rows = texgen.count_rows(texgen.normalize(height))
+        print(f"{name}: {rows} strips per tile -> uniform Unity tiling {1.0 / (rows * c['row_m']):.2f}")
+        out.append(texgen.save_png(np.repeat(texgen.normalize(height)[..., None], 3, axis=-1),
+                                   f"T_{name}_Height", linear=True))
+    return out
 
 
 def adapt(name, c, size, palette):
@@ -75,5 +94,5 @@ def build(p=PARAMS):
     for name, c in SOURCES.items():
         if p["only"] in (None, name):
             step = recolor if p["mode"] == "recolor" else adapt
-            out += step(name, c, p["size"], p["palette"])
+            out += step(name, c, p["size"], c.get("palette", p["palette"]))
     return out

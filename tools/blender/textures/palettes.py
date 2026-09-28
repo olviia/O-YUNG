@@ -18,3 +18,9 @@ WICKER_STAKE = [            # vertical stakes: a separate, adjustable family (a 
     (0.75, (0.68, 0.48, 0.30)),
     (1.00, (0.84, 0.68, 0.46)),
 ]
+
+FLEECE = [                  # neutral light cream; materials tint it per use (mattress, pillows)
+    (0.00, (0.62, 0.55, 0.52)),   # fibre shadow: slightly violet
+    (0.50, (0.86, 0.82, 0.76)),
+    (1.00, (0.98, 0.95, 0.88)),   # highlight: warm
+]

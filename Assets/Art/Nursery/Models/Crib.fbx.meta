@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: M_Mattress
+    second: {fileID: 2100000, guid: 9f050580535499747bc14316d858e1b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: M_WickerShell
     second: {fileID: 2100000, guid: 895c7e20032e5eb4dba03cb5a0bf21d5, type: 2}
   - first:
