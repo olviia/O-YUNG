@@ -29,6 +29,9 @@ PARAMS = dict(
     shape_dive=0.6,         # height map only: weaver dive; deep enough for straight overlap edges
     height_weaver=0.85,     # height PNG only: weavers scaled down
     height_stake=1.8,       # height PNG only: stakes scaled up (lighter)
+    seam_width=0.06,        # height PNG only: seam half-width as a fraction of a row
+    seam_depth=0.6,         # height PNG only: how dark the seam gets (0..1)
+    weaver_edge=1.1,        # height PNG only: weaver edge value = stake top x this (slightly lighter)
     grooves=3,              # broad fiber grooves along each strand (normal map only)
     groove_depth=0.06,
     variation=0.10,         # per-strand tint variation (handmade feel)
@@ -81,8 +84,17 @@ def build(p=PARAMS):
     # The stake shows only in rows where it is in front; where a weaver is in front it is fully
     # hidden, so it never notches the weaver's edges (user feedback on the height map).
     stake_front_row = (cx + cy) % 2 == 1
-    height_map = np.maximum(h_weaver_shape * p["height_weaver"],
-                            np.where(stake_front_row, h_stake_shape * p["height_stake"], 0.0))
+    stake_h = np.where(stake_front_row, h_stake_shape * p["height_stake"], 0.0)   # unchanged
+    # Weaver (height map only): round, evenly from its current lightest middle down to an edge
+    # slightly lighter than the stake - it lies above the stake passing beneath it. Where the
+    # weaver dips below that level (passing behind a stake) its edges follow the dip.
+    middle = (0.7 + p["shape_dive"] * lift) * p["height_weaver"]
+    edge = np.minimum(stake_h.max() * p["weaver_edge"], middle)
+    weaver_h = edge + (middle - edge) * np.sin(np.pi * fy)
+    height_map = np.maximum(weaver_h, stake_h)
+    # Thin dark seam where two weaver rows meet (height map only).
+    seam = np.clip(np.minimum(fy, 1 - fy) / p["seam_width"], 0, 1)
+    height_map = height_map * (1 - p["seam_depth"] * (1 - seam * seam * (3 - 2 * seam)))
     height_map /= height_map.max()                          # fit 0..1 (no clipped white plateaus)
 
     # --- albedo: painted form + occlusion + tint, mapped through a hue-shifting palette ---
