@@ -38,6 +38,7 @@ PARAMS = dict(
     soften=3,               # blur passes inside each strand (keeps strand borders crisp)
     normal_strength=3.0,
     weaver_tilt=0.75,       # normal: max up/down tilt at a weaver's edge (linear across it)
+    streak_band=0.45,       # normal: weaver fiber streaks only where |t| < this (0 center, 1 edge)
     weaver_side=0.25,       # normal: how much of the along-strand (left/right) slope a weaver keeps
     normal_blur=3,          # smooths the height before deriving the normal (no dark creases)
     blend_sharpness=24,     # how softly crossing strands meet in height (higher = tighter)
@@ -126,6 +127,10 @@ def build(p=PARAMS):
     cyl_scale = 32 / (NY * 0.7 * p["normal_strength"])
     weaver_n = cyl * (0.7 + p["shape_dive"] * lift) * cyl_scale
     shape_n = np.maximum(weaver_n, h_stake_shape)
+    # Weavers: fiber streaks only in a central band, none near the top/bottom edges (user).
+    band = np.clip((p["streak_band"] - np.abs(t)) / 0.15, 0, 1)
+    band = band * band * (3 - 2 * band)
+    streaks = np.where(weaver_n >= h_stake_shape, streaks * band, streaks)
     detail = texgen.blur(shape_n, p["normal_blur"]) + p["groove_depth"] * streaks * shape_n
     normal = texgen.normal_from_height(detail, p["normal_strength"])
     # Weavers: up/down tilt set directly and LINEARLY across the strand (textbook horizontal
