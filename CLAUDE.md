@@ -12,6 +12,7 @@
   - name the patterns when they emerge, when i should use one, when it should be modified or simplified. try to give me a pattern with the text first, for me to try to make the structure and design following this pattern
   - you are helping me to learn design, architecture and structuring.
   - after the structuring is done and the responcibility of the method is defined, you write the implementation of this method. So instead of teaching me how to code, we are teaching me system thinking
+  - but if we haven't walked through a class design, don't implement it yet. if i tell you 'let's make this class', I mean lets follow all those steps above, not asking you to implement it immediatelly skipping the discussion
 - we aim for optimized and decoupled code,  classes, dependencies, files, folders and assemblies organization. i want it to be checked by the correct game and hexagonal modular architectures so every class knows where to belong. 
 - we also aim to make the blocks in this game that can be reused easily in future games.
 - we don't want to create everything from scratch. we want to find existing components that work well before we start making our implementation.
