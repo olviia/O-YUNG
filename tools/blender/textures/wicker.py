@@ -37,6 +37,8 @@ PARAMS = dict(
     occlusion=0.45,         # darkening where a strand disappears under another
     soften=3,               # blur passes inside each strand (keeps strand borders crisp)
     normal_strength=3.0,
+    weaver_tilt=0.75,       # normal: max up/down tilt at a weaver's edge (linear across it)
+    weaver_side=0.25,       # normal: how much of the along-strand (left/right) slope a weaver keeps
     normal_blur=3,          # smooths the height before deriving the normal (no dark creases)
     blend_sharpness=24,     # how softly crossing strands meet in height (higher = tighter)
     seed=7,
@@ -116,8 +118,28 @@ def build(p=PARAMS):
         drift = 0.4 * np.sin(2 * np.pi * grng.integers(1, 4) * along_coord + grng.uniform(0, 6.3))
         streaks += grng.uniform(0.4, 1.0) * np.sin(2 * np.pi * k * across_coord + drift + grng.uniform(0, 6.3))
     streaks /= np.abs(streaks).max()
-    detail = texgen.blur(shape, p["normal_blur"]) + p["groove_depth"] * streaks * shape
+    # Weaver as a true cylinder for the normal (user: uniform green->purple, no edge lines).
+    # A circle's normal tilts linearly across it; scale so the circle's height in pixels equals
+    # its radius after normal_from_height's scaling (32 = 0.5 * 64 in texgen).
+    t = 2 * fy - 1
+    cyl = np.sqrt(np.clip(1 - t * t, 0, 1))
+    cyl_scale = 32 / (NY * 0.7 * p["normal_strength"])
+    weaver_n = cyl * (0.7 + p["shape_dive"] * lift) * cyl_scale
+    shape_n = np.maximum(weaver_n, h_stake_shape)
+    detail = texgen.blur(shape_n, p["normal_blur"]) + p["groove_depth"] * streaks * shape_n
     normal = texgen.normal_from_height(detail, p["normal_strength"])
+    # Weavers: up/down tilt set directly and LINEARLY across the strand (textbook horizontal
+    # cylinder: green top edge -> neutral middle -> purple bottom edge, evenly). Left/right
+    # component and fiber streaks are kept from the computed normal.
+    n = normal * 2 - 1
+    streak_n = texgen.normal_from_height(p["groove_depth"] * streaks * shape_n, p["normal_strength"]) * 2 - 1
+    ny = np.clip(t * p["weaver_tilt"] + streak_n[..., 1], -0.99, 0.99)
+    nx = n[..., 0] * p["weaver_side"]                      # soften the along-strand slope (cheese-wheel look)
+    nz = np.sqrt(np.clip(1 - nx * nx - ny * ny, 0.01, 1))
+    lin = np.stack([nx, ny, nz], axis=-1)
+    lin /= np.linalg.norm(lin, axis=-1, keepdims=True)
+    weaver_px = weaver_n >= h_stake_shape
+    normal = np.where(weaver_px[..., None], lin * 0.5 + 0.5, normal)
 
     out = p["out_dir"]
     return [texgen.save_png(albedo, "T_Wicker_Albedo", out_dir=out),
