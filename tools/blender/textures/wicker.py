@@ -39,7 +39,8 @@ PARAMS = dict(
     normal_strength=3.0,
     weaver_tilt=0.75,       # normal: max up/down tilt at a weaver's edge (linear across it)
     streak_band=0.45,       # normal: weaver fiber streaks only where |t| < this (0 center, 1 edge)
-    weaver_side=0.25,       # normal: how much of the along-strand (left/right) slope a weaver keeps
+    weaver_end_tilt=0.35,   # normal: left/right tilt at a weaver's ends (gradient along the weaver)
+    end_round_center=0.5,   # normal: 0 = linear along the weaver, 1 = flatter/rounder middle
     normal_blur=3,          # smooths the height before deriving the normal (no dark creases)
     blend_sharpness=24,     # how softly crossing strands meet in height (higher = tighter)
     seed=7,
@@ -139,11 +140,20 @@ def build(p=PARAMS):
     n = normal * 2 - 1
     streak_n = texgen.normal_from_height(p["groove_depth"] * streaks * shape_n, p["normal_strength"]) * 2 - 1
     ny = np.clip(t * p["weaver_tilt"] + streak_n[..., 1], -0.99, 0.99)
-    nx = n[..., 0] * p["weaver_side"]                      # soften the along-strand slope (cheese-wheel look)
+    # Along the weaver: left/right gradient from its left end to its right end (user), linear
+    # toward the ends, gently rounded (flatter) in the middle. s = -1 left end .. +1 right end.
+    over_here = (cx + cy) % 2 == 0                           # this cell's stake is under the weaver
+    x_c = np.where(over_here, cx + 0.5, np.where(fx < 0.5, cx - 0.5, cx + 1.5))
+    s_along = np.clip((x - x_c) / (1 - p["stake_width"] / 2), -1, 1)
+    r = p["end_round_center"]
+    nx = p["weaver_end_tilt"] * ((1 - r) * s_along + r * s_along ** 3)
     nz = np.sqrt(np.clip(1 - nx * nx - ny * ny, 0.01, 1))
     lin = np.stack([nx, ny, nz], axis=-1)
     lin /= np.linalg.norm(lin, axis=-1, keepdims=True)
-    weaver_px = weaver_n >= h_stake_shape
+    # Weaver/stake boundary strictly vertical: where the stake is in front, the stake owns its
+    # whole band width in that row; elsewhere the weaver owns the pixel (user).
+    in_band = np.abs(fx - 0.5) <= p["stake_width"] / 2
+    weaver_px = ~(((cx + cy) % 2 == 1) & in_band)
     normal = np.where(weaver_px[..., None], lin * 0.5 + 0.5, normal)
 
     out = p["out_dir"]
