@@ -39,6 +39,8 @@ PARAMS = dict(
     normal_strength=3.0,
     weaver_tilt=0.75,       # normal: max up/down tilt at a weaver's edge (linear across it)
     streak_band=0.45,       # normal: weaver fiber streaks only where |t| < this (0 center, 1 edge)
+    normal_stake_width=0.28, # normal: stake band width (albedo/height keep stake_width 0.35)
+    stake_tilt=0.75,        # normal: max left/right tilt at a stake's edges (linear across it)
     weaver_end_tilt=0.35,   # normal: left/right tilt at a weaver's ends (gradient along the weaver)
     end_round_center=0.5,   # normal: 0 = linear along the weaver, 1 = flatter/rounder middle
     normal_blur=3,          # smooths the height before deriving the normal (no dark creases)
@@ -144,7 +146,7 @@ def build(p=PARAMS):
     # toward the ends, gently rounded (flatter) in the middle. s = -1 left end .. +1 right end.
     over_here = (cx + cy) % 2 == 0                           # this cell's stake is under the weaver
     x_c = np.where(over_here, cx + 0.5, np.where(fx < 0.5, cx - 0.5, cx + 1.5))
-    s_along = np.clip((x - x_c) / (1 - p["stake_width"] / 2), -1, 1)
+    s_along = np.clip((x - x_c) / (1 - p["normal_stake_width"] / 2), -1, 1)
     r = p["end_round_center"]
     nx = p["weaver_end_tilt"] * ((1 - r) * s_along + r * s_along ** 3)
     nz = np.sqrt(np.clip(1 - nx * nx - ny * ny, 0.01, 1))
@@ -152,9 +154,17 @@ def build(p=PARAMS):
     lin /= np.linalg.norm(lin, axis=-1, keepdims=True)
     # Weaver/stake boundary strictly vertical: where the stake is in front, the stake owns its
     # whole band width in that row; elsewhere the weaver owns the pixel (user).
-    in_band = np.abs(fx - 0.5) <= p["stake_width"] / 2
+    in_band = np.abs(fx - 0.5) <= p["normal_stake_width"] / 2
     weaver_px = ~(((cx + cy) % 2 == 1) & in_band)
-    normal = np.where(weaver_px[..., None], lin * 0.5 + 0.5, normal)
+    # Stake band between the weaver ends: a well-defined VERTICAL cylinder, same recipe as the
+    # weavers turned 90 deg - left/right tilt linear across the band, fiber streaks kept.
+    s_across = np.clip((fx - 0.5) / (p["normal_stake_width"] / 2), -1, 1)
+    sx = np.clip(s_across * p["stake_tilt"] + streak_n[..., 0], -0.99, 0.99)
+    sy = np.zeros_like(sx)
+    sz = np.sqrt(np.clip(1 - sx * sx, 0.01, 1))
+    stake_lin = np.stack([sx, sy, sz], axis=-1)
+    stake_lin /= np.linalg.norm(stake_lin, axis=-1, keepdims=True)
+    normal = np.where(weaver_px[..., None], lin * 0.5 + 0.5, stake_lin * 0.5 + 0.5)
 
     out = p["out_dir"]
     return [texgen.save_png(albedo, "T_Wicker_Albedo", out_dir=out),
