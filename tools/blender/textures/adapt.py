@@ -43,6 +43,16 @@ SOURCES = {
         palette=palettes.FLEECE,
         brightness=0.85,
     ),
+    # Chunky stockinette knit (ambientCG Fabric016, CC0): the blanket. No published size; ~23 stitch
+    # columns per tile, sized so one stitch is ~1.2 cm wide.
+    "Knit": dict(
+        folder="ambientcg/Fabric016",
+        albedo="Fabric016_2K-JPG_Color.jpg",
+        normal="Fabric016_2K-JPG_NormalGL.jpg",
+        size_m=0.28,
+        palette=palettes.FLEECE,
+        brightness=0.85,
+    ),
 }
 
 PARAMS = dict(size=1024, palette=palettes.WICKER, only=None,   # only="<name>" to run one

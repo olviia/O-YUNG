@@ -22,7 +22,7 @@ PARAMS = dict(
     rim_strands=4,          # branches braided into the rim
     rim_strand=0.015,       # rim branch radius
     rim_twists=5,           # full twists around the ring; low = long lying strands
-    mattress_top=0.227,     # mattress surface height
+    mattress_top=0.201,     # mattress surface height
     mattress_edge=0.04,     # radius of its rounded edge
     mattress_tuck=0.02,     # how far the edge continues down the wall, hiding the gap
     mattress_gap=0.088,     # clearance to the shell (clears the inner weave)
