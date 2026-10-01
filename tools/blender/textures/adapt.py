@@ -53,6 +53,26 @@ SOURCES = {
         palette=palettes.FLEECE,
         brightness=0.85,
     ),
+    # Plastered wall (Poly Haven, CC0): placeholder room shell, walls + ceiling. Soft stucco bumps.
+    # Same cream base as fabrics, tinted per material.
+    "Plaster": dict(
+        folder="polyhaven/plastered_wall",
+        albedo="plastered_wall_diff_2k.jpg",
+        normal="plastered_wall_nor_gl_2k.jpg",
+        size_m=2.0,
+        palette=palettes.FLEECE,
+        brightness=0.85,
+    ),
+    # Wood floor (Poly Haven, CC0): placeholder room shell floor. Wide planks, willow palette
+    # so it sits in the crib's colour family.
+    "WoodFloor": dict(
+        folder="polyhaven/wood_floor",
+        albedo="wood_floor_diff_2k.jpg",
+        normal="wood_floor_nor_gl_2k.jpg",
+        size_m=1.7,
+        palette=palettes.WICKER,
+        brightness=0.6,
+    ),
 }
 
 PARAMS = dict(size=1024, palette=palettes.WICKER, only=None,   # only="<name>" to run one
