@@ -14,7 +14,8 @@
         "Oyung.Quests",
         "Oyung.Hints",
         "Oyung.Hud",
-        "Oyung.Eyes"
+        "Oyung.Eyes",
+        "Oyung.DevTools"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

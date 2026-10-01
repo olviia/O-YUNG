@@ -3,17 +3,17 @@
 Root: Assets/Scripts/Vision
 Depends on: —
 
+### internal interface IBlurDisplay — Ports/Driven/IBlurDisplay.cs:8
+Driven port: whoever draws the blur (implemented by DepthOfFieldBlurDisplay, Vision's own Unity side). Receives the FINAL picture Vision decided, after its rules (e.g. a reduced-blur setting) — not the raw request from IVision.
+- `internal void Show(float clearDistance, float strength)` :15
+  Shows the world blurred like this, as one picture.
+  clearDistance: How far things look sharp, in metres. · strength: How blurry things beyond it are: 0 = sharp, 1 = newborn maximum.
+
 ### interface IVision — Ports/Offered/IVision.cs:8
 Offered port: the only way into Vision. Callers (Root at startup, later Progression) REQUEST how the baby sees; Vision applies its own rules before anything is shown.
 - `void SetBlur(float clearDistance, float strength)` :17
   Requests how well the baby sees. Both values change together: when eyes get better, the clear zone grows and the blur weakens. A grown child with normal sight: strength 0.
   clearDistance: How far the baby sees clearly, in metres. · strength: How blurry things beyond it are: 0 = sharp, 1 = newborn maximum.
-
-### interface IBlurDisplay — Ports/Required/IBlurDisplay.cs:8
-Required port: whoever draws the blur (implemented by DepthOfFieldBlurDisplay). Receives the FINAL picture Vision decided, after its rules (e.g. a reduced-blur setting) — not the raw request from IVision.
-- `void Show(float clearDistance, float strength)` :15
-  Shows the world blurred like this, as one picture.
-  clearDistance: How far things look sharp, in metres. · strength: How blurry things beyond it are: 0 = sharp, 1 = newborn maximum.
 
 ### internal class Vision : IVision — Vision.cs:6
 - `internal Vision(IBlurDisplay display)` :11

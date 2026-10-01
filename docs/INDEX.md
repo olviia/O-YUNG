@@ -6,6 +6,7 @@
 |---|---|---|
 | Oyung.Cutscenes | Assets/Scripts/Cutscenes | Oyung.Facts, Oyung.Input |
 | Oyung.Cutscenes.Unity | Assets/Scripts/Cutscenes/Unity | Oyung.Cutscenes, Unity.Timeline |
+| Oyung.DevTools | Assets/Scripts/DevTools | Oyung.Vision, Oyung.Input, Unity.InputSystem |
 | Oyung.Eyes | Assets/Scripts/Eyes | Oyung.Input, Unity.Cinemachine |
 | Oyung.Facts | Assets/Scripts/Facts | — |
 | Oyung.Hints | Assets/Scripts/Hints | Oyung.Quests |
@@ -13,7 +14,7 @@
 | Oyung.Input | Assets/Scripts/Input | — |
 | Oyung.Input.Unity | Assets/Scripts/Input/Unity | Oyung.Input, Unity.InputSystem |
 | Oyung.Quests | Assets/Scripts/Quests | Oyung.Facts, Oyung.Input |
-| Oyung.Root | Assets/Scripts/Root | Oyung.Facts, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Hints, Oyung.Hud, Oyung.Eyes |
+| Oyung.Root | Assets/Scripts/Root | Oyung.Facts, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.DevTools |
 | Oyung.Save | Assets/Scripts/Save | Oyung.Facts |
 | Oyung.Save.Unity | Assets/Scripts/Save/Unity | Oyung.Save |
 | Oyung.Vision | Assets/Scripts/Vision | — |
@@ -30,6 +31,13 @@ Internals: [index/Oyung.Cutscenes.md](index/Oyung.Cutscenes.md)
 Internals: [index/Oyung.Cutscenes.Unity.md](index/Oyung.Cutscenes.Unity.md)
 
 ### class TimelineCutscenePlayer : MonoBehaviour, ICutscenePlayer — TimelineCutscenePlayer.cs:6
+
+## Oyung.DevTools
+Internals: [index/Oyung.DevTools.md](index/Oyung.DevTools.md)
+
+### class VisionTestSlider : MonoBehaviour — VisionTestSlider.cs:11
+- `void Use(IVision vision, IInputModes inputModes)` :23
+  Called by the root, like a module receiving its required ports.
 
 ## Oyung.Eyes
 Internals: [index/Oyung.Eyes.md](index/Oyung.Eyes.md)
@@ -204,7 +212,7 @@ Internals: [index/Oyung.Quests.md](index/Oyung.Quests.md)
 ## Oyung.Root
 Internals: [index/Oyung.Root.md](index/Oyung.Root.md)
 
-### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:14
+### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:15
 The only place that creates modules and hands them what they need. Startup: create → load → start. Shutdown: reverse order.
 
 ## Oyung.Save
@@ -225,12 +233,6 @@ Offered port: the only way into Vision. Callers (Root at startup, later Progress
 - `void SetBlur(float clearDistance, float strength)` :17
   Requests how well the baby sees. Both values change together: when eyes get better, the clear zone grows and the blur weakens. A grown child with normal sight: strength 0.
   clearDistance: How far the baby sees clearly, in metres. · strength: How blurry things beyond it are: 0 = sharp, 1 = newborn maximum.
-
-### interface IBlurDisplay — Ports/Required/IBlurDisplay.cs:8
-Required port: whoever draws the blur (implemented by DepthOfFieldBlurDisplay). Receives the FINAL picture Vision decided, after its rules (e.g. a reduced-blur setting) — not the raw request from IVision.
-- `void Show(float clearDistance, float strength)` :15
-  Shows the world blurred like this, as one picture.
-  clearDistance: How far things look sharp, in metres. · strength: How blurry things beyond it are: 0 = sharp, 1 = newborn maximum.
 
 ## Oyung.Vision.Unity
 Internals: [index/Oyung.Vision.Unity.md](index/Oyung.Vision.Unity.md)
@@ -266,6 +268,7 @@ Internals: [index/Assembly-CSharp-Editor.md](index/Assembly-CSharp-Editor.md)
 ## Undocumented
 - Oyung.Cutscenes: `ICutscenePlayer` Ports/Required/ICutscenePlayer.cs:5
 - Oyung.Cutscenes.Unity: `TimelineCutscenePlayer` TimelineCutscenePlayer.cs:6
+- Oyung.DevTools: `VisionTestSlider` VisionTestSlider.cs:11
 - Oyung.Eyes: `EyesInstaller` EyesInstaller.cs:8
 - Oyung.Eyes: `EyesInstaller.Build` EyesInstaller.cs:15
 - Oyung.Eyes: `EyesInstaller.Dispose` EyesInstaller.cs:20

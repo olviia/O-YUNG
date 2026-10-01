@@ -1,3 +1,4 @@
+using Oyung.DevTools;
 using Oyung.Eyes;
 using Oyung.Input.Unity;
 using Oyung.Vision.Unity;
@@ -18,6 +19,10 @@ namespace Oyung.Root
         [SerializeField] private EyesInstaller eyesInstaller;
         [SerializeField] private VisionInstaller visionInstaller;
 
+        // CLAUDE: dev tools: optional, stand in for modules that don't exist yet.
+        [Header("Dev tools")]
+        [SerializeField] private VisionTestSlider visionTestSlider;
+
         private void Awake()
         {
             // 1. Create, in dependency order.
@@ -28,6 +33,7 @@ namespace Oyung.Root
             // 2. Load: nothing saved yet.
 
             // 3. Start: nothing yet.
+            if (visionTestSlider != null) visionTestSlider.Use(vision, inputModes);
 
             // CLAUDE: temporary, so the mouse stays in
             // CLAUDE: the window. Belongs in a future

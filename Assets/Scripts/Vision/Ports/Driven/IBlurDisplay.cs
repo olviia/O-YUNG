@@ -1,11 +1,11 @@
 namespace Oyung.Vision
 {
     /// <summary>
-    /// Required port: whoever draws the blur (implemented by DepthOfFieldBlurDisplay).
+    /// Driven port: whoever draws the blur (implemented by DepthOfFieldBlurDisplay, Vision's own Unity side).
     /// Receives the FINAL picture Vision decided, after its rules
     /// (e.g. a reduced-blur setting) — not the raw request from IVision.
     /// </summary>
-    public interface IBlurDisplay
+    internal interface IBlurDisplay
     {
         /// <summary>
         /// Shows the world blurred like this, as one picture.
