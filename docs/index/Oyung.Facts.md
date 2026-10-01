@@ -5,8 +5,8 @@ Depends on: —
 
 ### internal class Facts : IFacts — Facts.cs:4
 
-### interface IFacts — Ports/IFacts.cs:4
+### interface IFacts — Ports/Offered/IFacts.cs:4
 
 ## Undocumented
 - Oyung.Facts: `Facts` Facts.cs:4
-- Oyung.Facts: `IFacts` Ports/IFacts.cs:4
+- Oyung.Facts: `IFacts` Ports/Offered/IFacts.cs:4

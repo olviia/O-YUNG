@@ -1,9 +1,7 @@
 {
     "name": "Oyung.Vision",
     "rootNamespace": "Oyung.Vision",
-    "references": [
-        "Oyung.Facts"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

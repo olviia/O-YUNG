@@ -16,7 +16,7 @@
 | Oyung.Root | Assets/Scripts/Root | Oyung.Facts, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Hints, Oyung.Hud, Oyung.Eyes |
 | Oyung.Save | Assets/Scripts/Save | Oyung.Facts |
 | Oyung.Save.Unity | Assets/Scripts/Save/Unity | Oyung.Save |
-| Oyung.Vision | Assets/Scripts/Vision | Oyung.Facts |
+| Oyung.Vision | Assets/Scripts/Vision | — |
 | Oyung.Vision.Unity | Assets/Scripts/Vision/Unity | Oyung.Vision, Unity.RenderPipelines.Core.Runtime, Unity.RenderPipelines.Universal.Runtime |
 | Assembly-CSharp | Assets | — |
 | Assembly-CSharp-Editor | Assets | — |
@@ -24,7 +24,7 @@
 ## Oyung.Cutscenes
 Internals: [index/Oyung.Cutscenes.md](index/Oyung.Cutscenes.md)
 
-### interface ICutscenePlayer — Ports/ICutscenePlayer.cs:5
+### interface ICutscenePlayer — Ports/Required/ICutscenePlayer.cs:5
 
 ## Oyung.Cutscenes.Unity
 Internals: [index/Oyung.Cutscenes.Unity.md](index/Oyung.Cutscenes.Unity.md)
@@ -34,21 +34,25 @@ Internals: [index/Oyung.Cutscenes.Unity.md](index/Oyung.Cutscenes.Unity.md)
 ## Oyung.Eyes
 Internals: [index/Oyung.Eyes.md](index/Oyung.Eyes.md)
 
+### class EyesInstaller : MonoBehaviour, IDisposable — EyesInstaller.cs:8
+- `void Build(IGameInput input)` :15
+- `void Dispose()` :20
+
 ### class LookCamera : MonoBehaviour — LookCamera.cs:12
 The baby's eyes. Turns strictly with LookDelta, only within the eyes' range. No sway, no smoothing (motion sickness). The rotation the object has in the scene is the resting gaze.
 - `void Init(IGameInput input)` :25
-  Given by the composition root.
+  Given by EyesInstaller.
   input: Where the look comes from.
 
 ## Oyung.Facts
 Internals: [index/Oyung.Facts.md](index/Oyung.Facts.md)
 
-### interface IFacts — Ports/IFacts.cs:4
+### interface IFacts — Ports/Offered/IFacts.cs:4
 
 ## Oyung.Hints
 Internals: [index/Oyung.Hints.md](index/Oyung.Hints.md)
 
-### interface IHints — Ports/IHints.cs:4
+### interface IHints — Ports/Offered/IHints.cs:4
 
 ## Oyung.Hud
 Internals: [index/Oyung.Hud.md](index/Oyung.Hud.md)
@@ -58,14 +62,14 @@ Internals: [index/Oyung.Hud.md](index/Oyung.Hud.md)
 ## Oyung.Input
 Internals: [index/Oyung.Input.md](index/Oyung.Input.md)
 
-### interface IGameInput — Ports/IGameInput.cs:9
+### interface IGameInput — Ports/Offered/IGameInput.cs:9
 port for game input
 - `event Action SkipCutsceneRequested` :14
   is triggered during a cutscene if Skip input is pressed
 - `Vector2 LookDelta { get; }` :19
   how fast and in what direction a player moves their look (eyes) by x and y axes per frame
 
-### interface IInputModes — Ports/IInputModes.cs:8
+### interface IInputModes — Ports/Offered/IInputModes.cs:8
 port for selecting and changing the input modes
 - `InputMode ActiveMode { get; }` :13
   what is the current mode of the input, Gameplay by default
@@ -78,7 +82,7 @@ port for selecting and changing the input modes
 - `event Action<InputMode> ModeChanged` :30
   declares when a mode is changed and gives the InputMode to which
 
-### enum InputMode — Ports/InputMode.cs:5
+### enum InputMode — Ports/Offered/InputMode.cs:5
 Gameplay, Cutscene, Menu
 
 ## Oyung.Input.Unity
@@ -86,14 +90,10 @@ Internals: [index/Oyung.Input.Unity.md](index/Oyung.Input.Unity.md)
 
 ### class InputGlyphs — InputGlyphs.cs:5
 
-### class InputSystemAdapter : IGameInput, IDisposable — InputSystemAdapter.cs:13
-Implements IGameInput with Unity's Input System. The only class that knows the Input System exists. Enables the action map named like the active InputMode; Menu has no map yet, so all is off.
-- `event Action SkipCutsceneRequested` :20 (implements IGameInput)
-- `InputSystemAdapter(IInputModes modes, float mouseDegreesPerPixel, float stickDegreesPerSecond)` :25
-  modes: Decides which map is on. · mouseDegreesPerPixel: Mouse sensitivity. · stickDegreesPerSecond: Stick turn speed.
-- `Vector2 LookDelta { get; }` :43 (implements IGameInput)
-  Degrees this frame: X = left/right, Y = up/down. Mouse gives pixels, stick gives a -1..1 position; both become degrees here. Zero when the Gameplay map is off (cutscene, menu).
-- `void Dispose()` :58
+### class InputInstaller : MonoBehaviour, IDisposable — InputInstaller.cs:9
+Gets Monobehavior references for Input module and hands ports to root
+- `(IGameInput gameInput, IInputModes modes) Build()` :18
+- `void Dispose()` :26
 
 ### class @OyungActions : IInputActionCollection2, IDisposable — OyungActions.cs:77
 Provides programmatic access to InputActionAsset, InputActionMap, InputAction and InputControlScheme instances defined in asset "Assets/Scripts/Input/Unity/OyungActions.inputactions".
@@ -199,7 +199,7 @@ Interface to implement callback methods for all input action callbacks associate
 ## Oyung.Quests
 Internals: [index/Oyung.Quests.md](index/Oyung.Quests.md)
 
-### interface IQuests — Ports/IQuests.cs:5
+### interface IQuests — Ports/Offered/IQuests.cs:5
 
 ## Oyung.Root
 Internals: [index/Oyung.Root.md](index/Oyung.Root.md)
@@ -210,7 +210,7 @@ The only place that creates modules and hands them what they need. Startup: crea
 ## Oyung.Save
 Internals: [index/Oyung.Save.md](index/Oyung.Save.md)
 
-### interface ISaveStorage — Ports/ISaveStorage.cs:5
+### interface ISaveStorage — Ports/Required/ISaveStorage.cs:5
 
 ## Oyung.Save.Unity
 Internals: [index/Oyung.Save.Unity.md](index/Oyung.Save.Unity.md)
@@ -220,12 +220,25 @@ Internals: [index/Oyung.Save.Unity.md](index/Oyung.Save.Unity.md)
 ## Oyung.Vision
 Internals: [index/Oyung.Vision.md](index/Oyung.Vision.md)
 
-### interface IBlurDisplay — Ports/IBlurDisplay.cs:5
+### interface IVision — Ports/Offered/IVision.cs:8
+Offered port: the only way into Vision. Callers (Root at startup, later Progression) REQUEST how the baby sees; Vision applies its own rules before anything is shown.
+- `void SetBlur(float clearDistance, float strength)` :17
+  Requests how well the baby sees. Both values change together: when eyes get better, the clear zone grows and the blur weakens. A grown child with normal sight: strength 0.
+  clearDistance: How far the baby sees clearly, in metres. · strength: How blurry things beyond it are: 0 = sharp, 1 = newborn maximum.
+
+### interface IBlurDisplay — Ports/Required/IBlurDisplay.cs:8
+Required port: whoever draws the blur (implemented by DepthOfFieldBlurDisplay). Receives the FINAL picture Vision decided, after its rules (e.g. a reduced-blur setting) — not the raw request from IVision.
+- `void Show(float clearDistance, float strength)` :15
+  Shows the world blurred like this, as one picture.
+  clearDistance: How far things look sharp, in metres. · strength: How blurry things beyond it are: 0 = sharp, 1 = newborn maximum.
 
 ## Oyung.Vision.Unity
 Internals: [index/Oyung.Vision.Unity.md](index/Oyung.Vision.Unity.md)
 
-### class DepthOfFieldBlurDisplay : MonoBehaviour, IBlurDisplay — DepthOfFieldBlurDisplay.cs:6
+### class VisionInstaller : MonoBehaviour, IDisposable — VisionInstaller.cs:9
+Vision: needs nothing from other modules, offers IVision.
+- `IVision Build()` :13
+- `void Dispose()` :18
 
 ## Assembly-CSharp
 Internals: [index/Assembly-CSharp.md](index/Assembly-CSharp.md)
@@ -251,21 +264,23 @@ Internals: [index/Assembly-CSharp.md](index/Assembly-CSharp.md)
 Internals: [index/Assembly-CSharp-Editor.md](index/Assembly-CSharp-Editor.md)
 
 ## Undocumented
-- Oyung.Cutscenes: `ICutscenePlayer` Ports/ICutscenePlayer.cs:5
+- Oyung.Cutscenes: `ICutscenePlayer` Ports/Required/ICutscenePlayer.cs:5
 - Oyung.Cutscenes.Unity: `TimelineCutscenePlayer` TimelineCutscenePlayer.cs:6
-- Oyung.Facts: `IFacts` Ports/IFacts.cs:4
-- Oyung.Hints: `IHints` Ports/IHints.cs:4
+- Oyung.Eyes: `EyesInstaller` EyesInstaller.cs:8
+- Oyung.Eyes: `EyesInstaller.Build` EyesInstaller.cs:15
+- Oyung.Eyes: `EyesInstaller.Dispose` EyesInstaller.cs:20
+- Oyung.Facts: `IFacts` Ports/Offered/IFacts.cs:4
+- Oyung.Hints: `IHints` Ports/Offered/IHints.cs:4
 - Oyung.Hud: `Hud` Hud.cs:9
-- Oyung.Input: `InputMode` Ports/InputMode.cs:5
+- Oyung.Input: `InputMode` Ports/Offered/InputMode.cs:5
 - Oyung.Input.Unity: `InputGlyphs` InputGlyphs.cs:5
-- Oyung.Input.Unity: `InputSystemAdapter.SkipCutsceneRequested` InputSystemAdapter.cs:20
-- Oyung.Input.Unity: `InputSystemAdapter.InputSystemAdapter` InputSystemAdapter.cs:25
-- Oyung.Input.Unity: `InputSystemAdapter.Dispose` InputSystemAdapter.cs:58
-- Oyung.Quests: `IQuests` Ports/IQuests.cs:5
-- Oyung.Save: `ISaveStorage` Ports/ISaveStorage.cs:5
+- Oyung.Input.Unity: `InputInstaller.Build` InputInstaller.cs:18
+- Oyung.Input.Unity: `InputInstaller.Dispose` InputInstaller.cs:26
+- Oyung.Quests: `IQuests` Ports/Offered/IQuests.cs:5
+- Oyung.Save: `ISaveStorage` Ports/Required/ISaveStorage.cs:5
 - Oyung.Save.Unity: `FileSaveStorage` FileSaveStorage.cs:4
-- Oyung.Vision: `IBlurDisplay` Ports/IBlurDisplay.cs:5
-- Oyung.Vision.Unity: `DepthOfFieldBlurDisplay` DepthOfFieldBlurDisplay.cs:6
+- Oyung.Vision.Unity: `VisionInstaller.Build` VisionInstaller.cs:13
+- Oyung.Vision.Unity: `VisionInstaller.Dispose` VisionInstaller.cs:18
 - Assembly-CSharp: `NewMonoBehaviourScript` Scripts/NewMonoBehaviourScript.cs:3
 - Assembly-CSharp: `Readme` TutorialInfo/Readme.cs:5
 - Assembly-CSharp: `Readme.commonStyle` TutorialInfo/Readme.cs:7

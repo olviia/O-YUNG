@@ -1,4 +1,4 @@
 using System.Runtime.CompilerServices;
 
-// Only the composition root may see this module's internals, so it can create them.
-[assembly: InternalsVisibleTo("Oyung.Root")]
+// Only the module's installer may see its internals, so it can create them.
+[assembly: InternalsVisibleTo("Oyung.Vision.Unity")]

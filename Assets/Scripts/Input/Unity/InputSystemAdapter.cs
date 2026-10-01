@@ -10,7 +10,7 @@ namespace Oyung.Input.Unity
     /// Enables the action map named like the active
     /// InputMode; Menu has no map yet, so all is off.
     /// </summary>
-    public class InputSystemAdapter : IGameInput, IDisposable
+    internal class InputSystemAdapter : IGameInput, IDisposable
     {
         private readonly OyungActions actions = new OyungActions();
         private readonly IInputModes modes;

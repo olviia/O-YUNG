@@ -20,7 +20,7 @@ namespace Oyung.Eyes
         private float leftRight;
         private float upDown;
 
-        /// <summary>Given by the composition root.</summary>
+        /// <summary>Given by EyesInstaller.</summary>
         /// <param name="input">Where the look comes from.</param>
         public void Init(IGameInput input)
         {

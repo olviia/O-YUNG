@@ -3,7 +3,16 @@
 Root: Assets/Scripts/Vision/Unity
 Depends on: Oyung.Vision, Unity.RenderPipelines.Core.Runtime, Unity.RenderPipelines.Universal.Runtime
 
-### class DepthOfFieldBlurDisplay : MonoBehaviour, IBlurDisplay — DepthOfFieldBlurDisplay.cs:6
+### internal class DepthOfFieldBlurDisplay : MonoBehaviour, IBlurDisplay — DepthOfFieldBlurDisplay.cs:6
+- `internal void Show(float clearDistance, float strength)` :9 (implements IBlurDisplay)
+
+### class VisionInstaller : MonoBehaviour, IDisposable — VisionInstaller.cs:9
+Vision: needs nothing from other modules, offers IVision.
+- `IVision Build()` :13
+- `void Dispose()` :18
 
 ## Undocumented
 - Oyung.Vision.Unity: `DepthOfFieldBlurDisplay` DepthOfFieldBlurDisplay.cs:6
+- Oyung.Vision.Unity: `DepthOfFieldBlurDisplay.Show` DepthOfFieldBlurDisplay.cs:9
+- Oyung.Vision.Unity: `VisionInstaller.Build` VisionInstaller.cs:13
+- Oyung.Vision.Unity: `VisionInstaller.Dispose` VisionInstaller.cs:18

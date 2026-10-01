@@ -3,13 +3,13 @@
 Root: Assets/Scripts/Quests
 Depends on: Oyung.Facts, Oyung.Input
 
-### interface IQuests — Ports/IQuests.cs:5
+### interface IQuests — Ports/Offered/IQuests.cs:5
 
 ### internal class QuestTracker — QuestTracker.cs:5
 
 ### internal class Quests : IQuests — Quests.cs:5
 
 ## Undocumented
-- Oyung.Quests: `IQuests` Ports/IQuests.cs:5
+- Oyung.Quests: `IQuests` Ports/Offered/IQuests.cs:5
 - Oyung.Quests: `QuestTracker` QuestTracker.cs:5
 - Oyung.Quests: `Quests` Quests.cs:5

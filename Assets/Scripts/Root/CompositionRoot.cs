@@ -1,6 +1,6 @@
 using Oyung.Eyes;
-using Oyung.Input;
 using Oyung.Input.Unity;
+using Oyung.Vision.Unity;
 using UnityEngine;
 
 namespace Oyung.Root
@@ -13,25 +13,21 @@ namespace Oyung.Root
     /// </summary>
     public class CompositionRoot : MonoBehaviour
     {
-        [Header("Scene objects")]
-        [SerializeField] private LookCamera lookCamera;
-
-        [Header("Input settings")]
-        [SerializeField] private float mouseDegreesPerPixel = 0.1f;
-        [SerializeField] private float stickDegreesPerSecond = 120f;
-
-        private InputSystemAdapter input;
+        [Header("Module installers")]
+        [SerializeField] private InputInstaller inputInstaller;
+        [SerializeField] private EyesInstaller eyesInstaller;
+        [SerializeField] private VisionInstaller visionInstaller;
 
         private void Awake()
         {
             // 1. Create, in dependency order.
-            var inputModes = new InputModeStack();
-            input = new InputSystemAdapter(inputModes, mouseDegreesPerPixel, stickDegreesPerSecond);
+            var (gameInput, inputModes) = inputInstaller.Build();
+            eyesInstaller.Build(gameInput);
+            var vision = visionInstaller.Build();
 
             // 2. Load: nothing saved yet.
 
-            // 3. Start: hand scene objects their ports.
-            lookCamera.Init(input);
+            // 3. Start: nothing yet.
 
             // CLAUDE: temporary, so the mouse stays in
             // CLAUDE: the window. Belongs in a future
@@ -41,7 +37,10 @@ namespace Oyung.Root
 
         private void OnDestroy()
         {
-            input?.Dispose();
+            // Reverse order of creation.
+            visionInstaller.Dispose();
+            eyesInstaller.Dispose();
+            inputInstaller.Dispose();
         }
     }
 }

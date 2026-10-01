@@ -5,8 +5,8 @@ Depends on: Oyung.Facts, Oyung.Input
 
 ### internal class Cutscenes — Cutscenes.cs:5
 
-### interface ICutscenePlayer — Ports/ICutscenePlayer.cs:5
+### interface ICutscenePlayer — Ports/Required/ICutscenePlayer.cs:5
 
 ## Undocumented
 - Oyung.Cutscenes: `Cutscenes` Cutscenes.cs:5
-- Oyung.Cutscenes: `ICutscenePlayer` Ports/ICutscenePlayer.cs:5
+- Oyung.Cutscenes: `ICutscenePlayer` Ports/Required/ICutscenePlayer.cs:5

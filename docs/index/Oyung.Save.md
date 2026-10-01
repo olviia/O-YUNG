@@ -3,10 +3,10 @@
 Root: Assets/Scripts/Save
 Depends on: Oyung.Facts
 
-### interface ISaveStorage — Ports/ISaveStorage.cs:5
+### interface ISaveStorage — Ports/Required/ISaveStorage.cs:5
 
 ### internal class SaveSystem — SaveSystem.cs:6
 
 ## Undocumented
-- Oyung.Save: `ISaveStorage` Ports/ISaveStorage.cs:5
+- Oyung.Save: `ISaveStorage` Ports/Required/ISaveStorage.cs:5
 - Oyung.Save: `SaveSystem` SaveSystem.cs:6

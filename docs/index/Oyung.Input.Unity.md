@@ -5,14 +5,19 @@ Depends on: Oyung.Input, Unity.InputSystem
 
 ### class InputGlyphs — InputGlyphs.cs:5
 
-### class InputSystemAdapter : IGameInput, IDisposable — InputSystemAdapter.cs:13
+### class InputInstaller : MonoBehaviour, IDisposable — InputInstaller.cs:9
+Gets Monobehavior references for Input module and hands ports to root
+- `(IGameInput gameInput, IInputModes modes) Build()` :18
+- `void Dispose()` :26
+
+### internal class InputSystemAdapter : IGameInput, IDisposable — InputSystemAdapter.cs:13
 Implements IGameInput with Unity's Input System. The only class that knows the Input System exists. Enables the action map named like the active InputMode; Menu has no map yet, so all is off.
-- `event Action SkipCutsceneRequested` :20 (implements IGameInput)
-- `InputSystemAdapter(IInputModes modes, float mouseDegreesPerPixel, float stickDegreesPerSecond)` :25
+- `internal event Action SkipCutsceneRequested` :20 (implements IGameInput)
+- `internal InputSystemAdapter(IInputModes modes, float mouseDegreesPerPixel, float stickDegreesPerSecond)` :25
   modes: Decides which map is on. · mouseDegreesPerPixel: Mouse sensitivity. · stickDegreesPerSecond: Stick turn speed.
-- `Vector2 LookDelta { get; }` :43 (implements IGameInput)
+- `internal Vector2 LookDelta { get; }` :43 (implements IGameInput)
   Degrees this frame: X = left/right, Y = up/down. Mouse gives pixels, stick gives a -1..1 position; both become degrees here. Zero when the Gameplay map is off (cutscene, menu).
-- `void Dispose()` :58
+- `internal void Dispose()` :58
 
 ### class @OyungActions : IInputActionCollection2, IDisposable — OyungActions.cs:77
 Provides programmatic access to InputActionAsset, InputActionMap, InputAction and InputControlScheme instances defined in asset "Assets/Scripts/Input/Unity/OyungActions.inputactions".
@@ -117,6 +122,8 @@ Interface to implement callback methods for all input action callbacks associate
 
 ## Undocumented
 - Oyung.Input.Unity: `InputGlyphs` InputGlyphs.cs:5
+- Oyung.Input.Unity: `InputInstaller.Build` InputInstaller.cs:18
+- Oyung.Input.Unity: `InputInstaller.Dispose` InputInstaller.cs:26
 - Oyung.Input.Unity: `InputSystemAdapter.SkipCutsceneRequested` InputSystemAdapter.cs:20
 - Oyung.Input.Unity: `InputSystemAdapter.InputSystemAdapter` InputSystemAdapter.cs:25
 - Oyung.Input.Unity: `InputSystemAdapter.Dispose` InputSystemAdapter.cs:58
