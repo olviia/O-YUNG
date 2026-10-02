@@ -14,10 +14,10 @@ namespace Olviia.CodeMap.Editor
         private const string GuidPrefix = "GUID:";
 
         /// <summary>Unity's default assembly for scripts outside any assembly definition.</summary>
-        public static readonly ModuleInfo RuntimeFallback = new ModuleInfo("Assembly-CSharp", new[] { "Assets" }, new string[0]);
+        public static readonly ModuleInfo RuntimeFallback = new ModuleInfo("Assembly-CSharp", new[] { "Assets" }, new string[0], false);
 
         /// <summary>Unity's default assembly for such scripts inside an "Editor" folder.</summary>
-        public static readonly ModuleInfo EditorFallback = new ModuleInfo("Assembly-CSharp-Editor", new[] { "Assets" }, new string[0]);
+        public static readonly ModuleInfo EditorFallback = new ModuleInfo("Assembly-CSharp-Editor", new[] { "Assets" }, new string[0], false);
 
         /// <summary>Reads every assembly definition under a folder.</summary>
         /// <param name="searchRoot">Folder to search, e.g. <c>Assets</c>.</param>
@@ -26,12 +26,15 @@ namespace Olviia.CodeMap.Editor
         {
             var roots = new Dictionary<string, List<string>>(StringComparer.Ordinal);
             var references = new Dictionary<string, string[]>(StringComparer.Ordinal);
+            var engineFree = new HashSet<string>(StringComparer.Ordinal);
 
             foreach (string path in FindAssets("t:AssemblyDefinitionAsset", searchRoot))
             {
                 AsmdefJson asmdef = JsonUtility.FromJson<AsmdefJson>(File.ReadAllText(path));
                 roots[asmdef.name] = new List<string> { FolderOf(path) };
                 references[asmdef.name] = asmdef.references ?? new string[0];
+                if (asmdef.noEngineReferences)
+                    engineFree.Add(asmdef.name);
             }
 
             foreach (string path in FindAssets("t:AssemblyDefinitionReferenceAsset", searchRoot))
@@ -42,7 +45,7 @@ namespace Olviia.CodeMap.Editor
             }
 
             return roots
-                .Select(pair => new ModuleInfo(pair.Key, pair.Value, references[pair.Key].Select(ResolveName).ToList()))
+                .Select(pair => new ModuleInfo(pair.Key, pair.Value, references[pair.Key].Select(ResolveName).ToList(), engineFree.Contains(pair.Key)))
                 .ToList();
         }
 
@@ -75,6 +78,7 @@ namespace Olviia.CodeMap.Editor
         {
             public string name;
             public string[] references;
+            public bool noEngineReferences;
         }
 
         [Serializable]

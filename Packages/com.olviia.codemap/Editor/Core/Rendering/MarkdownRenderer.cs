@@ -2,11 +2,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Olviia.CodeMap.Core.Model;
+using Olviia.CodeMap.Core.Modules;
 using Olviia.CodeMap.Core.Resolution;
 
 namespace Olviia.CodeMap.Core.Rendering
 {
-    /// <summary>Turns parsed modules into Markdown: one main index with the public API, one file per module with everything.</summary>
+    /// <summary>
+    /// Turns parsed modules into Markdown: one main index with the module table and the ports
+    /// (see <see cref="PortConvention"/>), and one file per module with everything else.
+    /// </summary>
     public sealed class MarkdownRenderer
     {
         /// <summary>File name of the main index.</summary>
@@ -23,48 +27,84 @@ namespace Olviia.CodeMap.Core.Rendering
         /// <returns>The main index first, then one file per module that declares any type.</returns>
         public IReadOnlyList<RenderedFile> Render(IReadOnlyList<ModuleFiles> modules, OverrideResolver overrides)
         {
-            var output = new List<RenderedFile> { new RenderedFile(MainFileName, RenderMain(modules, overrides)) };
+            var implementers = new ImplementerResolver(modules);
+            var output = new List<RenderedFile> { new RenderedFile(MainFileName, RenderMain(modules, overrides, implementers)) };
             foreach (ModuleFiles module in modules.Where(HasTypes))
-                output.Add(new RenderedFile(ModulePath(module.Module), RenderModule(module, overrides)));
+                output.Add(new RenderedFile(ModulePath(module.Module), RenderModule(module, modules, overrides, implementers)));
             return output;
         }
 
-        private static string RenderMain(IReadOnlyList<ModuleFiles> modules, OverrideResolver overrides)
+        private static string RenderMain(IReadOnlyList<ModuleFiles> modules, OverrideResolver overrides, ImplementerResolver implementers)
         {
             var text = new StringBuilder();
             text.Append("# API Index\n").Append(GeneratedNotice).Append('\n');
+            text.Append("Module table and ports only. Offered ports are each module's API; everything else is in the linked module files.\n");
 
-            text.Append("\n## Modules\n| Module | Root | Depends on |\n|---|---|---|\n");
+            text.Append("\n## Modules\n| Module | Pure C# | Root | Depends on | Used by |\n|---|---|---|---|---|\n");
             foreach (ModuleFiles module in modules)
-                text.Append("| ").Append(module.Module.Name).Append(" | ").Append(Roots(module.Module)).Append(" | ").Append(References(module.Module)).Append(" |\n");
+            {
+                // Modules without types get no file, so there is nothing to link to.
+                string name = HasTypes(module) ? "[" + module.Module.Name + "](" + ModulePath(module.Module) + ")" : module.Module.Name;
+                text.Append("| ").Append(name)
+                    .Append(" | ").Append(module.Module.IsEngineFree ? "yes" : string.Empty)
+                    .Append(" | ").Append(Roots(module.Module))
+                    .Append(" | ").Append(References(module.Module))
+                    .Append(" | ").Append(UsedBy(module.Module, modules))
+                    .Append(" |\n");
+            }
 
             var undocumented = new List<string>();
-            foreach (ModuleFiles module in modules.Where(HasTypes))
+            foreach (ModuleFiles module in modules)
             {
+                List<List<Declared<TypeEntry>>> ports = GroupPartials(module).Where(p => RoleOf(module, p).Length > 0).ToList();
+                if (ports.Count == 0)
+                    continue;
+
                 text.Append("\n## ").Append(module.Module.Name).Append('\n');
-                text.Append("Internals: [").Append(ModulePath(module.Module)).Append("](").Append(ModulePath(module.Module)).Append(")\n");
-                AppendTypes(text, module, true, overrides, undocumented);
+                List<List<Declared<TypeEntry>>> offered = ports.Where(p => PortConvention.IsOffered(RoleOf(module, p))).ToList();
+                if (offered.Count > 0)
+                {
+                    text.Append("Offered ports:\n");
+                    AppendTypes(text, module, offered, true, overrides, implementers, undocumented);
+                }
+
+                // Ports the module needs from outside: one line each, enough to find the adapter.
+                foreach (IGrouping<string, List<Declared<TypeEntry>>> role in ports.Where(p => !PortConvention.IsOffered(RoleOf(module, p))).GroupBy(p => RoleOf(module, p)))
+                {
+                    text.Append(offered.Count > 0 ? "\n" : string.Empty).Append(role.Key).Append(" ports:\n");
+                    foreach (List<Declared<TypeEntry>> port in role)
+                    {
+                        TypeEntry type = port[0].Item;
+                        IReadOnlyList<string> adapters = implementers.ImplementersOf(type.Name);
+                        text.Append("- `").Append(AccessPrefix(type.Access)).Append(KindWord(type.Kind)).Append(' ').Append(type.Name).Append("` ")
+                            .Append(RelativePath(module.Module, port[0].File.Path)).Append(':').Append(type.Line)
+                            .Append(" → ").Append(adapters.Count > 0 ? string.Join(", ", adapters) : "not implemented").Append('\n');
+                    }
+                }
             }
             AppendUndocumented(text, undocumented);
             return text.ToString();
         }
 
-        private static string RenderModule(ModuleFiles module, OverrideResolver overrides)
+        private static string RenderModule(ModuleFiles module, IReadOnlyList<ModuleFiles> modules, OverrideResolver overrides, ImplementerResolver implementers)
         {
             var text = new StringBuilder();
             text.Append("# ").Append(module.Module.Name).Append('\n').Append(GeneratedNotice).Append('\n');
             text.Append("Root: ").Append(Roots(module.Module)).Append('\n');
+            text.Append("Pure C#: ").Append(module.Module.IsEngineFree ? "yes" : "no").Append('\n');
             text.Append("Depends on: ").Append(References(module.Module)).Append('\n');
+            text.Append("Used by: ").Append(UsedBy(module.Module, modules)).Append('\n');
 
             var undocumented = new List<string>();
-            AppendTypes(text, module, false, overrides, undocumented);
+            AppendTypes(text, module, GroupPartials(module), false, overrides, implementers, undocumented);
             AppendUndocumented(text, undocumented);
             return text.ToString();
         }
 
-        private static void AppendTypes(StringBuilder text, ModuleFiles module, bool externalOnly, OverrideResolver overrides, List<string> undocumented)
+        private static void AppendTypes(StringBuilder text, ModuleFiles module, IEnumerable<List<Declared<TypeEntry>>> types, bool externalOnly,
+            OverrideResolver overrides, ImplementerResolver implementers, List<string> undocumented)
         {
-            foreach (List<Declared<TypeEntry>> parts in GroupPartials(module))
+            foreach (List<Declared<TypeEntry>> parts in types)
             {
                 TypeEntry type = parts[0].Item;
                 if (externalOnly && !type.Access.IsVisibleOutsideAssembly())
@@ -82,6 +122,12 @@ namespace Olviia.CodeMap.Core.Rendering
                     text.Append(" : ").Append(string.Join(", ", baseTypes));
                 text.Append(" — ").Append(string.Join(", ", parts.Select(p => RelativePath(module.Module, p.File.Path) + ":" + p.Item.Line))).Append('\n');
                 AppendDoc(text, typeDoc, string.Empty);
+                if (type.Kind == TypeKind.Interface)
+                {
+                    IReadOnlyList<string> adapters = implementers.ImplementersOf(type.Name);
+                    if (adapters.Count > 0)
+                        text.Append("Implemented by: ").Append(string.Join(", ", adapters)).Append('\n');
+                }
 
                 if (typeDoc.IsEmpty)
                     undocumented.Add(Undocumented(module, type.Name, RelativePath(module.Module, parts[0].File.Path), type.Line));
@@ -109,7 +155,8 @@ namespace Olviia.CodeMap.Core.Rendering
                         AppendDoc(text, member.Doc, "  ");
 
                         // A delegate's only member shares the delegate's own doc, so it is reported once, above.
-                        if (member.Doc.IsEmpty && type.Kind != TypeKind.Delegate)
+                        // Implementations and overrides inherit the doc of the member they come from, like <inheritdoc/>.
+                        if (member.Doc.IsEmpty && type.Kind != TypeKind.Delegate && origin.Length == 0)
                             undocumented.Add(Undocumented(module, type.Name + "." + member.Name, file, member.Line));
                     }
                 }
@@ -120,8 +167,6 @@ namespace Olviia.CodeMap.Core.Rendering
         {
             if (doc.Summary.Length > 0)
                 text.Append(indent).Append(doc.Summary).Append('\n');
-            else if (doc.IsInherited)
-                text.Append(indent).Append("(inherited doc)\n");
 
             string[] parameters = doc.Params.Where(p => p.Value.Length > 0).Select(p => p.Key + ": " + p.Value).ToArray();
             if (parameters.Length > 0)
@@ -144,8 +189,14 @@ namespace Olviia.CodeMap.Core.Rendering
             return "- " + module.Module.Name + ": `" + name + "` " + file + ":" + line;
         }
 
+        // Port role of a type, read from the folder of its first part; empty when it is not a port.
+        private static string RoleOf(ModuleFiles module, List<Declared<TypeEntry>> parts)
+        {
+            return PortConvention.RoleOf(RelativePath(module.Module, parts[0].File.Path));
+        }
+
         // Types with the same name in one module are parts of a partial type; keeps first-seen order.
-        private static IEnumerable<List<Declared<TypeEntry>>> GroupPartials(ModuleFiles module)
+        private static List<List<Declared<TypeEntry>>> GroupPartials(ModuleFiles module)
         {
             var groups = new List<List<Declared<TypeEntry>>>();
             var byName = new Dictionary<string, List<Declared<TypeEntry>>>();
@@ -182,6 +233,13 @@ namespace Olviia.CodeMap.Core.Rendering
         private static string References(ModuleInfo module)
         {
             return module.References.Count == 0 ? "—" : string.Join(", ", module.References);
+        }
+
+        // Reverse of References: what breaks when this module changes.
+        private static string UsedBy(ModuleInfo module, IReadOnlyList<ModuleFiles> modules)
+        {
+            string[] users = modules.Where(m => m.Module.References.Contains(module.Name)).Select(m => m.Module.Name).ToArray();
+            return users.Length == 0 ? "—" : string.Join(", ", users);
         }
 
         // Paths are shown relative to the module root, which the module table already lists.

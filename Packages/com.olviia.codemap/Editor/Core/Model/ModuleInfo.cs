@@ -14,14 +14,19 @@ namespace Olviia.CodeMap.Core.Model
         /// <summary>Names of referenced modules, already resolved from GUIDs.</summary>
         public IReadOnlyList<string> References { get; }
 
+        /// <summary>True when the assembly definition sets <c>noEngineReferences</c>: pure C#, the compiler keeps Unity out.</summary>
+        public bool IsEngineFree { get; }
+
         /// <param name="name">Assembly name.</param>
         /// <param name="rootPaths">Owned folders.</param>
         /// <param name="references">Referenced module names.</param>
-        public ModuleInfo(string name, IReadOnlyList<string> rootPaths, IReadOnlyList<string> references)
+        /// <param name="isEngineFree">Whether the assembly cannot reference Unity.</param>
+        public ModuleInfo(string name, IReadOnlyList<string> rootPaths, IReadOnlyList<string> references, bool isEngineFree)
         {
             Name = name;
             RootPaths = rootPaths;
             References = references;
+            IsEngineFree = isEngineFree;
         }
     }
 }
