@@ -4,12 +4,7 @@ Root: Assets/Scripts/Save
 Pure C#: yes
 Depends on: Oyung.Facts
 Used by: Oyung.Root, Oyung.Save.Unity
-
-### interface ISaveStorage — Ports/Required/ISaveStorage.cs:5
-Implemented by: FileSaveStorage (Oyung.Save.Unity)
+Internal and private members only; the rest is in INDEX.md.
 
 ### internal class SaveSystem — SaveSystem.cs:6
-
-## Undocumented
-- Oyung.Save: `ISaveStorage` Ports/Required/ISaveStorage.cs:5
-- Oyung.Save: `SaveSystem` SaveSystem.cs:6
+undocumented

@@ -15,9 +15,9 @@ namespace Olviia.CodeMap.Core.Parsing
 
         /// <summary>Reads the declared access level from modifiers.</summary>
         /// <param name="modifiers">Modifiers of a type or member.</param>
-        /// <param name="whenMissing">C# default when no access modifier is written; null means private.</param>
-        /// <returns>The declared access level, or null when private (not indexed).</returns>
-        public static Access? FromModifiers(SyntaxTokenList modifiers, Access? whenMissing)
+        /// <param name="whenMissing">C# default when no access modifier is written.</param>
+        /// <returns>The declared access level.</returns>
+        public static Access FromModifiers(SyntaxTokenList modifiers, Access whenMissing)
         {
             bool isPublic = modifiers.Any(SyntaxKind.PublicKeyword);
             bool isProtected = modifiers.Any(SyntaxKind.ProtectedKeyword);
@@ -29,7 +29,7 @@ namespace Olviia.CodeMap.Core.Parsing
             if (isProtected && isPrivate) return Access.PrivateProtected;
             if (isProtected) return Access.Protected;
             if (isInternal) return Access.Internal;
-            if (isPrivate) return null;
+            if (isPrivate) return Access.Private;
             return whenMissing;
         }
 
@@ -54,6 +54,7 @@ namespace Olviia.CodeMap.Core.Parsing
                 case Access.Internal: return (Everyone, Nobody);
                 case Access.Protected: return (Derived, Derived);
                 case Access.PrivateProtected: return (Derived, Nobody);
+                case Access.Private: return (Nobody, Nobody);
                 default: throw new ArgumentOutOfRangeException(nameof(access), access, null);
             }
         }
@@ -62,6 +63,8 @@ namespace Olviia.CodeMap.Core.Parsing
         {
             if (inside == Everyone)
                 return outside == Everyone ? Access.Public : outside == Derived ? Access.ProtectedInternal : Access.Internal;
+            if (inside == Nobody)
+                return Access.Private;
             return outside == Derived ? Access.Protected : Access.PrivateProtected;
         }
     }

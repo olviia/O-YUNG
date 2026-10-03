@@ -14,7 +14,7 @@ namespace Olviia.CodeMap.Editor
     internal static class CacheStore
     {
         // Bump when the model or parser output changes; an old cache is then ignored and everything is re-parsed.
-        private const int Version = 2;
+        private const int Version = 3;
         private const string CachePath = "Library/CodeMap/cache.json";
 
         /// <summary>Loads the cache.</summary>

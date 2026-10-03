@@ -4,12 +4,7 @@ Root: Assets/Scripts/Facts
 Pure C#: yes
 Depends on: —
 Used by: Oyung.Cutscenes, Oyung.Quests, Oyung.Root, Oyung.Save
+Internal and private members only; the rest is in INDEX.md.
 
 ### internal class Facts : IFacts — Facts.cs:4
-
-### interface IFacts — Ports/Offered/IFacts.cs:4
-Implemented by: Facts (Oyung.Facts)
-
-## Undocumented
-- Oyung.Facts: `Facts` Facts.cs:4
-- Oyung.Facts: `IFacts` Ports/Offered/IFacts.cs:4
+undocumented

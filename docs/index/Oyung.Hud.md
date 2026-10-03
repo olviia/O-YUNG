@@ -4,8 +4,4 @@ Root: Assets/Scripts/Hud
 Pure C#: no
 Depends on: Oyung.Quests, Oyung.Hints, Oyung.Input.Unity
 Used by: Oyung.Root
-
-### class Hud : MonoBehaviour — Hud.cs:9
-
-## Undocumented
-- Oyung.Hud: `Hud` Hud.cs:9
+Internal and private members only; the rest is in INDEX.md.

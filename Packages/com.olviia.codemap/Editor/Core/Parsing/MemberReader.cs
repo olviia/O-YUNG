@@ -9,14 +9,14 @@ namespace Olviia.CodeMap.Core.Parsing
     /// <summary>Builds <see cref="MemberEntry"/> objects from member declarations, one method per kind of member.</summary>
     internal static class MemberReader
     {
-        /// <summary>Reads all non-private members of a class, struct, interface or record, in source order. Nested types are skipped here.</summary>
+        /// <summary>Reads the members of a class, struct, interface or record, in source order, except private fields. Nested types are skipped here.</summary>
         /// <param name="type">Type declaration.</param>
         /// <param name="typeAccess">Effective access of the type; members cannot be more visible.</param>
         /// <returns>Member entries.</returns>
         public static IReadOnlyList<MemberEntry> ReadAll(TypeDeclarationSyntax type, Access typeAccess)
         {
             // Interface members are public unless stated otherwise; everything else defaults to private.
-            Access? whenMissing = type is InterfaceDeclarationSyntax ? Access.Public : (Access?)null;
+            Access whenMissing = type is InterfaceDeclarationSyntax ? Access.Public : Access.Private;
             var result = new List<MemberEntry>();
 
             if (type is RecordDeclarationSyntax record && record.ParameterList != null)
@@ -25,10 +25,11 @@ namespace Olviia.CodeMap.Core.Parsing
             foreach (MemberDeclarationSyntax member in type.Members)
             {
                 // Explicit interface implementations have no modifier but are reachable through the interface.
-                Access? declared = HasExplicitInterface(member) ? Access.Public : AccessRules.FromModifiers(member.Modifiers, whenMissing);
-                if (declared == null)
+                Access declared = HasExplicitInterface(member) ? Access.Public : AccessRules.FromModifiers(member.Modifiers, whenMissing);
+                // Private fields are state, not something to call or reuse.
+                if (declared == Access.Private && member is FieldDeclarationSyntax)
                     continue;
-                Access access = AccessRules.Narrow(typeAccess, declared.Value);
+                Access access = AccessRules.Narrow(typeAccess, declared);
 
                 switch (member)
                 {

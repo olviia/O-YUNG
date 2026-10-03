@@ -4,6 +4,8 @@ Root: Assets/Scripts/Root
 Pure C#: no
 Depends on: Oyung.Facts, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.DevTools
 Used by: —
+Internal and private members only; the rest is in INDEX.md.
 
-### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:15
-The only place that creates modules and hands them what they need. Startup: create → load → start. Shutdown: reverse order.
+### class CompositionRoot — CompositionRoot.cs:15
+- `private void Awake()` :26 — undocumented
+- `private void OnDestroy()` :44 — undocumented

@@ -4,8 +4,4 @@ Root: Assets/Scripts/Save/Unity
 Pure C#: no
 Depends on: Oyung.Save
 Used by: Oyung.Root
-
-### class FileSaveStorage : ISaveStorage — FileSaveStorage.cs:4
-
-## Undocumented
-- Oyung.Save.Unity: `FileSaveStorage` FileSaveStorage.cs:4
+Internal and private members only; the rest is in INDEX.md.

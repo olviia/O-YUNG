@@ -1,13 +1,14 @@
 namespace Olviia.CodeMap.Core.Model
 {
-    /// <summary>C# access level of an indexed type or member. Private code is never indexed, so it has no value here.</summary>
+    /// <summary>C# access level of an indexed type or member.</summary>
     public enum Access
     {
         Public,
         Protected,
         ProtectedInternal,
         Internal,
-        PrivateProtected
+        PrivateProtected,
+        Private
     }
 
     /// <summary>Rules derived from <see cref="Access"/>.</summary>

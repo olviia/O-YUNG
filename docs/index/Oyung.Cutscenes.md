@@ -4,12 +4,7 @@ Root: Assets/Scripts/Cutscenes
 Pure C#: yes
 Depends on: Oyung.Facts, Oyung.Input
 Used by: Oyung.Cutscenes.Unity, Oyung.Root
+Internal and private members only; the rest is in INDEX.md.
 
 ### internal class Cutscenes — Cutscenes.cs:5
-
-### interface ICutscenePlayer — Ports/Required/ICutscenePlayer.cs:5
-Implemented by: TimelineCutscenePlayer (Oyung.Cutscenes.Unity)
-
-## Undocumented
-- Oyung.Cutscenes: `Cutscenes` Cutscenes.cs:5
-- Oyung.Cutscenes: `ICutscenePlayer` Ports/Required/ICutscenePlayer.cs:5
+undocumented

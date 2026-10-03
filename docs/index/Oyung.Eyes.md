@@ -4,18 +4,8 @@ Root: Assets/Scripts/Eyes
 Pure C#: no
 Depends on: Oyung.Input, Unity.Cinemachine
 Used by: Oyung.Root
+Internal and private members only; the rest is in INDEX.md.
 
-### class EyesInstaller : MonoBehaviour, IDisposable — EyesInstaller.cs:8
-- `void Build(IGameInput input)` :15
-- `void Dispose()` :20
-
-### class LookCamera : MonoBehaviour — LookCamera.cs:12
-The baby's eyes. Turns strictly with LookDelta, only within the eyes' range. No sway, no smoothing (motion sickness). The rotation the object has in the scene is the resting gaze.
-- `void Init(IGameInput input)` :25
-  Given by EyesInstaller.
-  input: Where the look comes from.
-
-## Undocumented
-- Oyung.Eyes: `EyesInstaller` EyesInstaller.cs:8
-- Oyung.Eyes: `EyesInstaller.Build` EyesInstaller.cs:15
-- Oyung.Eyes: `EyesInstaller.Dispose` EyesInstaller.cs:20
+### class LookCamera — LookCamera.cs:12
+- `private void Awake()` :30 — undocumented
+- `private void Update()` :35 — undocumented

@@ -4,15 +4,10 @@ Root: Assets/Scripts/Quests
 Pure C#: yes
 Depends on: Oyung.Facts, Oyung.Input
 Used by: Oyung.Hints, Oyung.Hud, Oyung.Root
-
-### interface IQuests — Ports/Offered/IQuests.cs:5
-Implemented by: Quests (Oyung.Quests)
+Internal and private members only; the rest is in INDEX.md.
 
 ### internal class QuestTracker — QuestTracker.cs:5
+undocumented
 
 ### internal class Quests : IQuests — Quests.cs:5
-
-## Undocumented
-- Oyung.Quests: `IQuests` Ports/Offered/IQuests.cs:5
-- Oyung.Quests: `QuestTracker` QuestTracker.cs:5
-- Oyung.Quests: `Quests` Quests.cs:5
+undocumented

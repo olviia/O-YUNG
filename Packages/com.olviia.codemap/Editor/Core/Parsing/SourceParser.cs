@@ -46,11 +46,8 @@ namespace Olviia.CodeMap.Core.Parsing
 
         private static void AddType(MemberDeclarationSyntax declaration, string outerName, Access outerAccess, bool nested, List<TypeEntry> output)
         {
-            Access? declared = AccessRules.FromModifiers(declaration.Modifiers, nested ? (Access?)null : Access.Internal);
-            if (declared == null)
-                return;
-
-            Access access = AccessRules.Narrow(outerAccess, declared.Value);
+            Access declared = AccessRules.FromModifiers(declaration.Modifiers, nested ? Access.Private : Access.Internal);
+            Access access = AccessRules.Narrow(outerAccess, declared);
             DocComment doc = DocCommentReader.Read(declaration);
 
             switch (declaration)

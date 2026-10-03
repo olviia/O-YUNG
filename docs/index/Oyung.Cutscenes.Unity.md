@@ -4,8 +4,4 @@ Root: Assets/Scripts/Cutscenes/Unity
 Pure C#: no
 Depends on: Oyung.Cutscenes, Unity.Timeline
 Used by: Oyung.Root
-
-### class TimelineCutscenePlayer : MonoBehaviour, ICutscenePlayer — TimelineCutscenePlayer.cs:6
-
-## Undocumented
-- Oyung.Cutscenes.Unity: `TimelineCutscenePlayer` TimelineCutscenePlayer.cs:6
+Internal and private members only; the rest is in INDEX.md.

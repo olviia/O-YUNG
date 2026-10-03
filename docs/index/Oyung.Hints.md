@@ -4,12 +4,7 @@ Root: Assets/Scripts/Hints
 Pure C#: yes
 Depends on: Oyung.Quests
 Used by: Oyung.Hud, Oyung.Root
+Internal and private members only; the rest is in INDEX.md.
 
 ### internal class Hints : IHints — Hints.cs:6
-
-### interface IHints — Ports/Offered/IHints.cs:4
-Implemented by: Hints (Oyung.Hints)
-
-## Undocumented
-- Oyung.Hints: `Hints` Hints.cs:6
-- Oyung.Hints: `IHints` Ports/Offered/IHints.cs:4
+undocumented

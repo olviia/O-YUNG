@@ -4,10 +4,11 @@ Root: Assets/Scripts/DevTools
 Pure C#: no
 Depends on: Oyung.Vision, Oyung.Input, Unity.InputSystem
 Used by: Oyung.Root
+Internal and private members only; the rest is in INDEX.md.
 
-### class VisionTestSlider : MonoBehaviour — VisionTestSlider.cs:11
-- `void Use(IVision vision, IInputModes inputModes)` :23
-  Called by the root, like a module receiving its required ports.
-
-## Undocumented
-- Oyung.DevTools: `VisionTestSlider` VisionTestSlider.cs:11
+### class VisionTestSlider — VisionTestSlider.cs:11
+- `private void Update()` :30 — undocumented
+- `private void OnGUI()` :41 — undocumented
+- `private void Apply()` :58 — undocumented
+- `private float ClearDistance()` :60 — undocumented
+- `private float Strength()` :62 — undocumented

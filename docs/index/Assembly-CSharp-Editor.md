@@ -4,11 +4,14 @@ Root: Assets
 Pure C#: no
 Depends on: —
 Used by: —
+Internal and private members only; the rest is in INDEX.md.
 
 ### internal class ReadmeEditor : Editor — TutorialInfo/Editor/ReadmeEditor.cs:8
+undocumented
+- `private ReadmeEditor()` :13 — undocumented
+- `private static void SelectReadmeAutomatically()` :16 — undocumented
+- `private static Readme SelectReadme()` :31 — undocumented
+- `private void RemoveTutorial()` :45 — undocumented
 - `private protected sealed override void OnHeaderGUI()` :76 (override)
 - `internal sealed override void OnInspectorGUI()` :77 (override)
 - `internal override VisualElement CreateInspectorGUI()` :79 (override)
-
-## Undocumented
-- Assembly-CSharp-Editor: `ReadmeEditor` TutorialInfo/Editor/ReadmeEditor.cs:8
