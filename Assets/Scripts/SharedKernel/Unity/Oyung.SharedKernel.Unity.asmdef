@@ -1,0 +1,16 @@
+{
+    "name": "Oyung.SharedKernel.Unity",
+    "rootNamespace": "Oyung.SharedKernel.Unity",
+    "references": [
+        "Oyung.SharedKernel"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

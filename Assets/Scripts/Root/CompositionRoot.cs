@@ -1,5 +1,6 @@
 using Oyung.DevTools;
 using Oyung.Eyes;
+using Oyung.Globals.Unity;
 using Oyung.Input.Unity;
 using Oyung.Vision.Unity;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Oyung.Root
     public class CompositionRoot : MonoBehaviour
     {
         [Header("Module installers")]
+        [SerializeField] private GlobalsInstaller globalsInstaller;
         [SerializeField] private InputInstaller inputInstaller;
         [SerializeField] private EyesInstaller eyesInstaller;
         [SerializeField] private VisionInstaller visionInstaller;
@@ -26,6 +28,7 @@ namespace Oyung.Root
         private void Awake()
         {
             // 1. Create, in dependency order.
+            globalsInstaller.Build();
             var (gameInput, inputModes) = inputInstaller.Build();
             eyesInstaller.Build(gameInput);
             var vision = visionInstaller.Build();
@@ -47,6 +50,7 @@ namespace Oyung.Root
             visionInstaller.Dispose();
             eyesInstaller.Dispose();
             inputInstaller.Dispose();
+            globalsInstaller.Dispose();
         }
     }
 }

@@ -1,0 +1,10 @@
+{
+    "name": "Oyung.Scratch",
+    "rootNamespace": "Oyung.Scratch",
+    "references": [
+        "Oyung.SharedKernel",
+        "Oyung.SharedKernel.Unity"
+    ],
+    "autoReferenced": false,
+    "noEngineReferences": false
+}

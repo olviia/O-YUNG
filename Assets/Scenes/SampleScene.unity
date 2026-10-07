@@ -702,6 +702,62 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &688087128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 688087130}
+  - component: {fileID: 688087129}
+  m_Layer: 0
+  m_Name: _ConditionDrawerTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &688087129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688087128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07002984ab3f4fe42aee15fff1a33ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oyung.Scratch::Oyung.Scratch.ConditionDrawerTest
+  condition:
+    rid: 8669409666176909393
+  pressCounter: {fileID: 11400000, guid: e6f14bc534f72924387c9b04a368328a, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: 8669409666176909393
+      type: {class: IntCondition, ns: Oyung.SharedKernel.Unity, asm: Oyung.SharedKernel.Unity}
+      data:
+        fact: {fileID: 11400000, guid: e6f14bc534f72924387c9b04a368328a, type: 2}
+        comparison: 5
+        target: 3
+--- !u!4 &688087130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688087128}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,9 +958,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1359552092}
   - {fileID: 2017292694}
   - {fileID: 1178177903}
   - {fileID: 1595045006}
+  - {fileID: 1452105548}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1347315722
@@ -919,10 +977,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424fd9fdf6f120e46a3c27b1de9fd32d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Oyung.Root::Oyung.Root.CompositionRoot
+  globalsInstaller: {fileID: 1359552091}
   inputInstaller: {fileID: 2017292695}
   eyesInstaller: {fileID: 1178177904}
   visionInstaller: {fileID: 1595045007}
   visionTestSlider: {fileID: 1933133465}
+--- !u!1 &1359552090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1359552092}
+  - component: {fileID: 1359552091}
+  m_Layer: 0
+  m_Name: Globals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1359552091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359552090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38706d7fbe5052448bcf7510f9f726cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oyung.Globals.Unity::Oyung.Globals.Unity.GlobalsInstaller
+  catalog: {fileID: 11400000, guid: 2b39563ed11ea3f4aafb2fb3e32d58b1, type: 2}
+--- !u!4 &1359552092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359552090}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1347315721}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1365908268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,6 +1186,51 @@ Transform:
   - {fileID: 1660487029}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 179.577, z: 0}
+--- !u!1 &1452105547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1452105548}
+  - component: {fileID: 1452105549}
+  m_Layer: 0
+  m_Name: Globals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1452105548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452105547}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1347315721}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1452105549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452105547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38706d7fbe5052448bcf7510f9f726cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oyung.Globals.Unity::Oyung.Globals.Unity.GlobalsInstaller
+  catalog: {fileID: 0}
 --- !u!1 &1595045005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,3 +1639,4 @@ SceneRoots:
   - {fileID: 1365908270}
   - {fileID: 1347315721}
   - {fileID: 1933133466}
+  - {fileID: 688087130}

@@ -1,0 +1,14 @@
+{
+    "name": "Oyung.SharedKernel",
+    "rootNamespace": "Oyung.SharedKernel",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

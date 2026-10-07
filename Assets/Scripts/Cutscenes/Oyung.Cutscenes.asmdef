@@ -2,7 +2,6 @@
     "name": "Oyung.Cutscenes",
     "rootNamespace": "Oyung.Cutscenes",
     "references": [
-        "Oyung.Facts",
         "Oyung.Input"
     ],
     "includePlatforms": [],

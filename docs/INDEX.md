@@ -5,19 +5,24 @@ Module table and everything visible outside its assembly. Internal and private m
 ## Modules
 | Module | Pure C# | Root | Depends on | Used by |
 |---|---|---|---|---|
-| [Oyung.Cutscenes](index/Oyung.Cutscenes.md) | yes | Assets/Scripts/Cutscenes | Oyung.Facts, Oyung.Input | Oyung.Cutscenes.Unity, Oyung.Root |
+| [Oyung.Cutscenes](index/Oyung.Cutscenes.md) | yes | Assets/Scripts/Cutscenes | Oyung.Input | Oyung.Cutscenes.Unity, Oyung.Root |
 | [Oyung.Cutscenes.Unity](index/Oyung.Cutscenes.Unity.md) |  | Assets/Scripts/Cutscenes/Unity | Oyung.Cutscenes, Unity.Timeline | Oyung.Root |
 | [Oyung.DevTools](index/Oyung.DevTools.md) |  | Assets/Scripts/DevTools | Oyung.Vision, Oyung.Input, Unity.InputSystem | Oyung.Root |
 | [Oyung.Eyes](index/Oyung.Eyes.md) |  | Assets/Scripts/Eyes | Oyung.Input, Unity.Cinemachine | Oyung.Root |
-| [Oyung.Facts](index/Oyung.Facts.md) | yes | Assets/Scripts/Facts | — | Oyung.Cutscenes, Oyung.Quests, Oyung.Root, Oyung.Save |
+| [Oyung.Globals](index/Oyung.Globals.md) | yes | Assets/Scripts/Globals | — | Oyung.Globals.Unity, Oyung.Root |
+| [Oyung.Globals.Unity](index/Oyung.Globals.Unity.md) |  | Assets/Scripts/Globals/Unity | Oyung.Globals, Oyung.SharedKernel.Unity | Oyung.Root |
 | [Oyung.Hints](index/Oyung.Hints.md) | yes | Assets/Scripts/Hints | Oyung.Quests | Oyung.Hud, Oyung.Root |
 | [Oyung.Hud](index/Oyung.Hud.md) |  | Assets/Scripts/Hud | Oyung.Quests, Oyung.Hints, Oyung.Input.Unity | Oyung.Root |
 | [Oyung.Input](index/Oyung.Input.md) | yes | Assets/Scripts/Input | — | Oyung.Cutscenes, Oyung.DevTools, Oyung.Eyes, Oyung.Input.Unity, Oyung.Quests, Oyung.Root |
 | [Oyung.Input.Unity](index/Oyung.Input.Unity.md) |  | Assets/Scripts/Input/Unity | Oyung.Input, Unity.InputSystem | Oyung.Hud, Oyung.Root |
-| [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.Facts, Oyung.Input | Oyung.Hints, Oyung.Hud, Oyung.Root |
-| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Facts, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.DevTools | — |
-| [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | Oyung.Facts | Oyung.Root, Oyung.Save.Unity |
+| [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.Input | Oyung.Hints, Oyung.Hud, Oyung.Root |
+| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.DevTools | — |
+| [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | — | Oyung.Root, Oyung.Save.Unity |
 | [Oyung.Save.Unity](index/Oyung.Save.Unity.md) |  | Assets/Scripts/Save/Unity | Oyung.Save | Oyung.Root |
+| [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity | — |
+| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
+| [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | — |
+| [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Globals.Unity, Oyung.Scratch |
 | [Oyung.Vision](index/Oyung.Vision.md) | yes | Assets/Scripts/Vision | — | Oyung.DevTools, Oyung.Root, Oyung.Vision.Unity |
 | [Oyung.Vision.Unity](index/Oyung.Vision.Unity.md) |  | Assets/Scripts/Vision/Unity | Oyung.Vision, Unity.RenderPipelines.Core.Runtime, Unity.RenderPipelines.Universal.Runtime | Oyung.Root |
 | [Assembly-CSharp](index/Assembly-CSharp.md) |  | Assets | — | — |
@@ -51,11 +56,18 @@ undocumented
 The baby's eyes. Turns strictly with LookDelta, only within the eyes' range. No sway, no smoothing (motion sickness). The rotation the object has in the scene is the resting gaze.
 - `void Init(IGameInput input)` :25 — Given by EyesInstaller.
 
-## Oyung.Facts
+## Oyung.Globals.Unity
 
-### interface IFacts — Ports/Offered/IFacts.cs:4
+### class `GlobalFact<T>` : ModuleFact<T>, IGlobalFact — GlobalFact.cs:9
 undocumented
-Implemented by: Facts (Oyung.Facts)
+- `override T Value { get; }` :13 (override of ModuleFact<T>)
+- `void IGlobalFact.Bind(GlobalStore store)` :17 — undocumented
+- `void IGlobalFact.Unbind()` :23 — undocumented
+
+### class GlobalsInstaller : MonoBehaviour, IDisposable — GlobalsInstaller.cs:10
+Globals: needs nothing from other modules. Creates the store and gives it to every fact in the catalog.
+- `void Build()` :14 — undocumented
+- `void Dispose()` :20 — undocumented
 
 ## Oyung.Hints
 
@@ -106,7 +118,7 @@ Implemented by: Quests (Oyung.Quests)
 
 ## Oyung.Root
 
-### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:15
+### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:16
 The only place that creates modules and hands them what they need. Startup: create → load → start. Shutdown: reverse order.
 
 ## Oyung.Save
@@ -119,6 +131,72 @@ Implemented by: FileSaveStorage (Oyung.Save.Unity)
 
 ### class FileSaveStorage : ISaveStorage — FileSaveStorage.cs:4
 undocumented
+
+## Oyung.Scratch
+
+### class ConditionDrawerTest : MonoBehaviour — ConditionDrawerTest.cs:11
+undocumented
+- `void Press()` :44 — undocumented
+
+## Oyung.SharedKernel
+
+### class Condition — Conditions/Condition.cs:13
+Shared Kernel contract: a question about some module's state ("is the intro seen?", "has 3 flowers?"). Knows nothing itself; each state owner subclasses it in its own .Unity side to ask about its own data. Used by deciders (Story, NPC AI), which hold it inline and never know which module answers.
+- `abstract bool IsMet { get; }` :17 — True when the condition holds right now. Cheap, no side effects. Throws if the provider isn't bound.
+- `abstract event Action Changed` :24 — Raised when a value the condition reads has changed; ask IsMet again. The answer itself may stay the same. Subscribe with a method, not a lambda, so you can unsubscribe (-=) when you stop caring.
+
+### class Instruction — Instruction.cs:13
+Shared Kernel contract: an order to change some module's state ("set intro_seen", "remove 5 flowers"). Knows nothing itself; each state owner subclasses it in its own .Unity side. Used by deciders (Story, NPC AI), which hold it inline and never know which module carries it out.
+- `abstract void Execute()` :18 — Carries out the order. Strict: if it can't be done (precondition broken), throws naming the asset. To check first, the designer pairs it with a Condition.
+
+## Oyung.SharedKernel.Unity
+
+### class AllOf : Condition — Conditions/AllOf.cs:14
+Composite condition: met when every child is met. Knows only its children (any Condition, from any module). Lets designers combine conditions inline instead of every decider writing its own AND / OR.
+- `override bool IsMet { get; }` :19 (override of Condition)
+- `override event Action Changed` :32 (override of Condition) — Subscribes to / unsubscribes from every child; keeps no listeners itself.
+
+### class AnyOf : Condition — Conditions/AnyOf.cs:14
+Composite condition: met when at least one child is met. Knows only its children (any Condition, from any module). Lets designers combine conditions inline instead of every decider writing its own AND / OR.
+- `override bool IsMet { get; }` :19 (override of Condition)
+- `override event Action Changed` :32 (override of Condition) — Subscribes to / unsubscribes from every child; keeps no listeners itself.
+
+### class BoolCondition : FactCondition<bool> — Conditions/BoolCondition.cs:10
+Met when a bool fact equals the expected value.
+- `override bool IsMet { get; }` :14 (override of Condition)
+
+### class `FactCondition<T>` : Condition — Conditions/FactCondition.cs:13
+Base of conditions that read one fact (Bool/Int/Float/String). Knows: the fact dragged in the Inspector. Does: passes Changed straight to the fact, gives subclasses its value. Subclasses only decide how to compare (Template Method).
+- `override event Action Changed` :17 (override of Condition)
+- `protected T Value { get; }` :24 — The fact's current value, for comparing.
+
+### class FloatCondition : FactCondition<float> — Conditions/FloatCondition.cs:10
+Met when a float fact compares to the target as chosen.
+- `override bool IsMet { get; }` :17 (override of Condition)
+
+### class IntCondition : FactCondition<int> — Conditions/IntCondition.cs:11
+Met when an int fact compares to the target as chosen ("flowers >= 3").
+- `override bool IsMet { get; }` :16 (override of Condition)
+
+### class Not : Condition — Conditions/Not.cs:11
+Composite condition: met when its one child is NOT met. Knows only its child (any Condition, from any module).
+- `override bool IsMet { get; }` :15 (override of Condition)
+- `override event Action Changed` :18 (override of Condition) — Passes subscriptions straight to the child.
+
+### enum NumberComparison — Conditions/NumberComparison.cs:9
+How a number condition compares the fact's value with its target. Used by IntCondition and FloatCondition.
+Equal, NotEqual, Less, LessOrEqual, Greater, GreaterOrEqual
+
+### class StringCondition : FactCondition<string> — Conditions/StringCondition.cs:11
+Met when a string fact equals the target exactly (case matters). For "not equal", wrap it in Not.
+- `override bool IsMet { get; }` :15 (override of Condition)
+
+### class `ModuleFact<T>` : ScriptableObject — ModuleFact.cs:10
+undocumented
+- `string Name { get; }` :18 — Stable name; the module's store keys values by it.
+- `abstract T Value { get; }` :22 — Current value, read from the owning module's store.
+- `event Action Changed` :27 — Raised when this fact's value really changes; read Value again.
+- `protected void RaiseChanged()` :31 — undocumented
 
 ## Oyung.Vision
 

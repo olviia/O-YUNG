@@ -2,7 +2,8 @@
     "name": "Oyung.Root",
     "rootNamespace": "Oyung.Root",
     "references": [
-        "Oyung.Facts",
+        "Oyung.Globals",
+        "Oyung.Globals.Unity",
         "Oyung.Input",
         "Oyung.Input.Unity",
         "Oyung.Save",
