@@ -6,13 +6,13 @@ Depends on: Oyung.SharedKernel
 Used by: —
 Internal and private members only; the rest is in INDEX.md.
 
-### internal class ConditionDrawer : PropertyDrawer — Conditions/ConditionDrawer.cs:18
-Inspector for any [SerializeReference] Condition field, in any module: a dropdown to pick the concrete condition, then its fields. Knows: every non-abstract Condition subclass (via TypeCache). Does: creates / replaces / clears the inline instance. Used by: Unity, automatically; deciders only write [SerializeReference] and never reference this assembly.
-- `internal override void OnGUI(Rect position, SerializedProperty property, GUIContent label)` :22 (override)
-- `internal override float GetPropertyHeight(SerializedProperty property, GUIContent label)` :67 (override)
-- `private static IEnumerable<SerializedProperty> VisibleChildren(SerializedProperty property)` :82 — undocumented
-- `private void ShowTypeMenu(SerializedProperty property, Type current)` :95 — undocumented
-- `private static void Assign(SerializedObject target, string path, Type type)` :112 — undocumented
-- `private Type BaseType()` :125 — undocumented
-- `private static IEnumerable<Type> ConcreteConditions(Type baseType)` :134 — undocumented
-- `private static string MenuPath(Type type)` :146 — undocumented
+### internal class TypePickerDrawer : PropertyDrawer — TypePickerDrawer.cs:21
+Inspector for [SerializeReference] fields of the kernel contracts listed below (Condition, Instruction), in any module: a dropdown to pick the concrete type, then its fields. Applies only to those contracts, not to every [SerializeReference] field. Knows: every non-abstract subclass of the field's type (TypeCache). Does: creates / replaces / clears the inline instance. Used by: Unity, automatically; deciders only write [SerializeReference] and never reference this assembly.
+- `internal override void OnGUI(Rect position, SerializedProperty property, GUIContent label)` :25 (override)
+- `internal override float GetPropertyHeight(SerializedProperty property, GUIContent label)` :70 (override)
+- `private static IEnumerable<SerializedProperty> VisibleChildren(SerializedProperty property)` :85 — undocumented
+- `private void ShowTypeMenu(SerializedProperty property, Type current)` :98 — undocumented
+- `private static void Assign(SerializedObject target, string path, Type type)` :115 — undocumented
+- `private Type BaseType()` :128 — undocumented
+- `private static IEnumerable<Type> ConcreteTypes(Type baseType)` :137 — undocumented
+- `private static string MenuPath(Type type)` :149 — undocumented

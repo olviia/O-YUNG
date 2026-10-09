@@ -3,6 +3,7 @@
     "rootNamespace": "Oyung.Globals.Unity",
     "references": [
         "Oyung.Globals",
+        "Oyung.SharedKernel",
         "Oyung.SharedKernel.Unity"
     ],
     "includePlatforms": [],

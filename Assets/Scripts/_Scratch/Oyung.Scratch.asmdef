@@ -3,7 +3,10 @@
     "rootNamespace": "Oyung.Scratch",
     "references": [
         "Oyung.SharedKernel",
-        "Oyung.SharedKernel.Unity"
+        "Oyung.SharedKernel.Unity",
+        "Oyung.Vision",
+        "Oyung.Input",
+        "Unity.InputSystem"
     ],
     "autoReferenced": false,
     "noEngineReferences": false

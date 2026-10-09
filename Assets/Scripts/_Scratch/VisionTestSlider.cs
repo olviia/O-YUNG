@@ -3,7 +3,7 @@ using Oyung.Vision;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Oyung.DevTools
+namespace Oyung.Scratch
 {
     // CLAUDE: dev-only stand-in for the future Progression module: drives IVision from a "Better eyes" slider.
     // CLAUDE: Talks only through public ports, so it behaves exactly like a real caller would.

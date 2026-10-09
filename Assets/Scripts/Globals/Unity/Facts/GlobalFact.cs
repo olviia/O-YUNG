@@ -12,6 +12,12 @@ namespace Oyung.Globals.Unity
 
         public override T Value => Store.Get<T>(Name);
 
+        /// <summary>Passes the new value to the GlobalStore, which holds
+        /// it and raises Changed only if it really changed. Internal:
+        /// only Globals instructions write; other modules just read.
+        /// </summary>
+        internal void Set(T value) => Store.Set(Name, value);
+
         // CLAUDE: explicit: only code that sees the internal IGlobalFact
         // CLAUDE: (the installer) can bind; other modules can't.
         void IGlobalFact.Bind(GlobalStore store)
@@ -28,7 +34,9 @@ namespace Oyung.Globals.Unity
 
         // CLAUDE: unbound means the fact is missing from the catalog or
         // CLAUDE: read before the installer ran: fail fast.
-        private GlobalStore Store => _store ??
+        // CLAUDE: private protected: typed subclasses (GlobalIntFact)
+        // CLAUDE: route their own operations; outside Globals unseen.
+        private protected GlobalStore Store => _store ??
             throw new InvalidOperationException(
                 $"Global fact '{Name}' is not bound. Is it in the catalog?");
     }

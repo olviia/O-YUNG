@@ -3,7 +3,7 @@
 Root: Assets/Scripts/Input
 Pure C#: yes
 Depends on: —
-Used by: Oyung.Cutscenes, Oyung.DevTools, Oyung.Eyes, Oyung.Input.Unity, Oyung.Quests, Oyung.Root
+Used by: Oyung.Cutscenes, Oyung.Eyes, Oyung.Input.Unity, Oyung.Quests, Oyung.Root, Oyung.Scratch
 Internal and private members only; the rest is in INDEX.md.
 
 ### internal class InputModeStack : IInputModes — InputModeStack.cs:12

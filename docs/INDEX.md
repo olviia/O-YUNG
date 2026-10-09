@@ -7,23 +7,22 @@ Module table and everything visible outside its assembly. Internal and private m
 |---|---|---|---|---|
 | [Oyung.Cutscenes](index/Oyung.Cutscenes.md) | yes | Assets/Scripts/Cutscenes | Oyung.Input | Oyung.Cutscenes.Unity, Oyung.Root |
 | [Oyung.Cutscenes.Unity](index/Oyung.Cutscenes.Unity.md) |  | Assets/Scripts/Cutscenes/Unity | Oyung.Cutscenes, Unity.Timeline | Oyung.Root |
-| [Oyung.DevTools](index/Oyung.DevTools.md) |  | Assets/Scripts/DevTools | Oyung.Vision, Oyung.Input, Unity.InputSystem | Oyung.Root |
 | [Oyung.Eyes](index/Oyung.Eyes.md) |  | Assets/Scripts/Eyes | Oyung.Input, Unity.Cinemachine | Oyung.Root |
 | [Oyung.Globals](index/Oyung.Globals.md) | yes | Assets/Scripts/Globals | — | Oyung.Globals.Unity, Oyung.Root |
-| [Oyung.Globals.Unity](index/Oyung.Globals.Unity.md) |  | Assets/Scripts/Globals/Unity | Oyung.Globals, Oyung.SharedKernel.Unity | Oyung.Root |
+| [Oyung.Globals.Unity](index/Oyung.Globals.Unity.md) |  | Assets/Scripts/Globals/Unity | Oyung.Globals, Oyung.SharedKernel, Oyung.SharedKernel.Unity | Oyung.Root |
 | [Oyung.Hints](index/Oyung.Hints.md) | yes | Assets/Scripts/Hints | Oyung.Quests | Oyung.Hud, Oyung.Root |
 | [Oyung.Hud](index/Oyung.Hud.md) |  | Assets/Scripts/Hud | Oyung.Quests, Oyung.Hints, Oyung.Input.Unity | Oyung.Root |
-| [Oyung.Input](index/Oyung.Input.md) | yes | Assets/Scripts/Input | — | Oyung.Cutscenes, Oyung.DevTools, Oyung.Eyes, Oyung.Input.Unity, Oyung.Quests, Oyung.Root |
+| [Oyung.Input](index/Oyung.Input.md) | yes | Assets/Scripts/Input | — | Oyung.Cutscenes, Oyung.Eyes, Oyung.Input.Unity, Oyung.Quests, Oyung.Root, Oyung.Scratch |
 | [Oyung.Input.Unity](index/Oyung.Input.Unity.md) |  | Assets/Scripts/Input/Unity | Oyung.Input, Unity.InputSystem | Oyung.Hud, Oyung.Root |
 | [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.Input | Oyung.Hints, Oyung.Hud, Oyung.Root |
-| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.DevTools | — |
+| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch | — |
 | [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | — | Oyung.Root, Oyung.Save.Unity |
 | [Oyung.Save.Unity](index/Oyung.Save.Unity.md) |  | Assets/Scripts/Save/Unity | Oyung.Save | Oyung.Root |
-| [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity | — |
-| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
+| [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem | Oyung.Root |
+| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Globals.Unity, Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
 | [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | — |
 | [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Globals.Unity, Oyung.Scratch |
-| [Oyung.Vision](index/Oyung.Vision.md) | yes | Assets/Scripts/Vision | — | Oyung.DevTools, Oyung.Root, Oyung.Vision.Unity |
+| [Oyung.Vision](index/Oyung.Vision.md) | yes | Assets/Scripts/Vision | — | Oyung.Root, Oyung.Scratch, Oyung.Vision.Unity |
 | [Oyung.Vision.Unity](index/Oyung.Vision.Unity.md) |  | Assets/Scripts/Vision/Unity | Oyung.Vision, Unity.RenderPipelines.Core.Runtime, Unity.RenderPipelines.Universal.Runtime | Oyung.Root |
 | [Assembly-CSharp](index/Assembly-CSharp.md) |  | Assets | — | — |
 | [Assembly-CSharp-Editor](index/Assembly-CSharp-Editor.md) |  | Assets | — | — |
@@ -39,12 +38,6 @@ Implemented by: TimelineCutscenePlayer (Oyung.Cutscenes.Unity)
 ### class TimelineCutscenePlayer : MonoBehaviour, ICutscenePlayer — TimelineCutscenePlayer.cs:6
 undocumented
 
-## Oyung.DevTools
-
-### class VisionTestSlider : MonoBehaviour — VisionTestSlider.cs:11
-undocumented
-- `void Use(IVision vision, IInputModes inputModes)` :23 — Called by the root, like a module receiving its required ports.
-
 ## Oyung.Eyes
 
 ### class EyesInstaller : MonoBehaviour, IDisposable — EyesInstaller.cs:8
@@ -58,16 +51,20 @@ The baby's eyes. Turns strictly with LookDelta, only within the eyes' range. No 
 
 ## Oyung.Globals.Unity
 
-### class `GlobalFact<T>` : ModuleFact<T>, IGlobalFact — GlobalFact.cs:9
+### class `GlobalFact<T>` : ModuleFact<T>, IGlobalFact — Facts/GlobalFact.cs:9
 undocumented
 - `override T Value { get; }` :13 (override of ModuleFact<T>)
-- `void IGlobalFact.Bind(GlobalStore store)` :17 — undocumented
-- `void IGlobalFact.Unbind()` :23 — undocumented
+- `void IGlobalFact.Bind(GlobalStore store)` :23 — undocumented
+- `void IGlobalFact.Unbind()` :29 — undocumented
 
 ### class GlobalsInstaller : MonoBehaviour, IDisposable — GlobalsInstaller.cs:10
 Globals: needs nothing from other modules. Creates the store and gives it to every fact in the catalog.
 - `void Build()` :14 — undocumented
 - `void Dispose()` :20 — undocumented
+
+### class AddToGlobalInt : Instruction — Instructions/AddToGlobalInt.cs:13
+undocumented
+- `override void Execute()` :19 (override of Instruction)
 
 ## Oyung.Hints
 
@@ -134,13 +131,17 @@ undocumented
 
 ## Oyung.Scratch
 
-### class ConditionDrawerTest : MonoBehaviour — ConditionDrawerTest.cs:11
+### class ConditionDrawerTest : MonoBehaviour — ConditionDrawerTest.cs:10
 undocumented
-- `void Press()` :44 — undocumented
+- `void Press()` :42 — undocumented
+
+### class VisionTestSlider : MonoBehaviour — VisionTestSlider.cs:11
+undocumented
+- `void Use(IVision vision, IInputModes inputModes)` :23 — Called by the root, like a module receiving its required ports.
 
 ## Oyung.SharedKernel
 
-### class Condition — Conditions/Condition.cs:13
+### class Condition — Condition.cs:13
 Shared Kernel contract: a question about some module's state ("is the intro seen?", "has 3 flowers?"). Knows nothing itself; each state owner subclasses it in its own .Unity side to ask about its own data. Used by deciders (Story, NPC AI), which hold it inline and never know which module answers.
 - `abstract bool IsMet { get; }` :17 — True when the condition holds right now. Cheap, no side effects. Throws if the provider isn't bound.
 - `abstract event Action Changed` :24 — Raised when a value the condition reads has changed; ask IsMet again. The answer itself may stay the same. Subscribe with a method, not a lambda, so you can unsubscribe (-=) when you stop caring.

@@ -3,5 +3,5 @@
 Root: Assets/Scripts/SharedKernel
 Pure C#: yes
 Depends on: —
-Used by: Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity
+Used by: Oyung.Globals.Unity, Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity
 Internal and private members only; the rest is in INDEX.md.

@@ -7,15 +7,18 @@ using UnityEngine;
 namespace Oyung.SharedKernel.Editor
 {
     /// <summary>
-    /// Inspector for any [SerializeReference] Condition field, in any
-    /// module: a dropdown to pick the concrete condition, then its fields.
-    /// Knows: every non-abstract Condition subclass (via TypeCache).
+    /// Inspector for [SerializeReference] fields of the kernel contracts
+    /// listed below (Condition, Instruction), in any module: a dropdown
+    /// to pick the concrete type, then its fields. Applies only to those
+    /// contracts, not to every [SerializeReference] field.
+    /// Knows: every non-abstract subclass of the field's type (TypeCache).
     /// Does: creates / replaces / clears the inline instance.
     /// Used by: Unity, automatically; deciders only write
     /// [SerializeReference] and never reference this assembly.
     /// </summary>
     [CustomPropertyDrawer(typeof(Condition), true)]
-    internal sealed class ConditionDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(Instruction), true)]
+    internal sealed class TypePickerDrawer : PropertyDrawer
     {
         private const string NoneLabel = "None";
 
@@ -103,7 +106,7 @@ namespace Oyung.SharedKernel.Editor
             menu.AddItem(new GUIContent(NoneLabel), current == null,
                 () => Assign(target, path, null));
             menu.AddSeparator(string.Empty);
-            foreach (var type in ConcreteConditions(BaseType()))
+            foreach (var type in ConcreteTypes(BaseType()))
                 menu.AddItem(new GUIContent(MenuPath(type)), type == current,
                     () => Assign(target, path, type));
             menu.ShowAsContext();
@@ -120,7 +123,7 @@ namespace Oyung.SharedKernel.Editor
             target.ApplyModifiedProperties();
         }
 
-        // CLAUDE: for List<Condition> fields (AllOf / AnyOf children),
+        // CLAUDE: for List<...> fields (e.g. AllOf / AnyOf children),
         // CLAUDE: fieldInfo is the list; the picker needs its element type.
         private Type BaseType()
         {
@@ -131,7 +134,7 @@ namespace Oyung.SharedKernel.Editor
             return type;
         }
 
-        private static IEnumerable<Type> ConcreteConditions(Type baseType) =>
+        private static IEnumerable<Type> ConcreteTypes(Type baseType) =>
             TypeCache.GetTypesDerivedFrom(baseType)
                 .Append(baseType)
                 .Where(t => !t.IsAbstract && !t.IsGenericTypeDefinition &&

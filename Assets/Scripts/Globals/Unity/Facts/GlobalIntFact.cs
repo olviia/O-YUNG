@@ -8,5 +8,8 @@ namespace Oyung.Globals.Unity
         fileName = "NewGlobalIntFact")]
     internal sealed class GlobalIntFact : GlobalFact<int>
     {
+        // CLAUDE: method comment (your words): proxy only routes; the
+        // CLAUDE: store does the math and any future rules.
+        internal void Add(int amount) => Store.Add(Name, amount);
     }
 }

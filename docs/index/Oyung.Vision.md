@@ -3,7 +3,7 @@
 Root: Assets/Scripts/Vision
 Pure C#: yes
 Depends on: —
-Used by: Oyung.DevTools, Oyung.Root, Oyung.Vision.Unity
+Used by: Oyung.Root, Oyung.Scratch, Oyung.Vision.Unity
 Internal and private members only; the rest is in INDEX.md.
 
 ### internal interface IBlurDisplay — Ports/Driven/IBlurDisplay.cs:8
