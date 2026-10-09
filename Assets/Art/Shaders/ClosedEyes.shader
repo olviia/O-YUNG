@@ -3,21 +3,24 @@
 // CLAUDE: prefab. Every value is driven from the Timeline, including
 // CLAUDE: _T (time), so Speed x2 and scrubbing stay in sync.
 // CLAUDE: Calm by design: slow pulse, low contrast, no flashes.
+// CLAUDE: Look: compute "how much light passes the lids" (one number),
+// CLAUDE: then colour it through a warm ramp, like light through skin.
 Shader "Oyung/Cutscenes/ClosedEyes"
 {
     Properties
     {
         [PerRendererData] _MainTex ("Unused (UI)", 2D) = "white" {}
         _T ("Time (driven by Timeline)", Float) = 0
-        _Brightness ("Brightness", Range(0, 1)) = 0.2
-        _Warmth ("Warmth (dark -> red)", Range(0, 1)) = 0
-        _PulseFreq ("Pulse per second", Range(0, 2)) = 1
+        _Brightness ("Brightness", Range(0, 1.5)) = 0.2
+        _Warmth ("Warmth (cool dark -> skin red)", Range(0, 1)) = 0
+        _PulseFreq ("Pulse per second (keep constant)", Range(0, 2)) = 1
         _PulseAmount ("Pulse amount", Range(0, 0.3)) = 0.08
-        _Cloud ("Cloudy variation", Range(0, 1)) = 0.4
-        _Grain ("Grain", Range(0, 0.1)) = 0.02
-        _BlobColor ("Light shapes colour", Color) = (1, 0.85, 0.7, 1)
+        _Pressure ("Pressure (swell with pulse)", Range(0, 0.1)) = 0.03
+        _Cloud ("Cloudy variation", Range(0, 1)) = 0.5
+        _Vignette ("Vignette", Range(0, 1)) = 0.6
+        _Grain ("Grain", Range(0, 0.1)) = 0.015
         // CLAUDE: light shapes: xy = screen pos (0..1), z = radius,
-        // CLAUDE: w = strength. Timeline moves them.
+        // CLAUDE: w = strength; negative w = a dark silhouette.
         _Blob0 ("Light shape 0", Vector) = (0.3, 0.6, 0.25, 0)
         _Blob1 ("Light shape 1", Vector) = (0.7, 0.5, 0.2, 0)
         _Blob2 ("Light shape 2", Vector) = (0.5, 0.3, 0.3, 0)
@@ -65,8 +68,9 @@ Shader "Oyung/Cutscenes/ClosedEyes"
             };
 
             float _T, _Brightness, _Warmth, _PulseFreq, _PulseAmount;
-            float _Cloud, _Grain, _Open, _LidSoftness;
-            float4 _BlobColor, _Blob0, _Blob1, _Blob2, _Blob3;
+            float _Pressure, _Cloud, _Vignette, _Grain;
+            float _Open, _LidSoftness;
+            float4 _Blob0, _Blob1, _Blob2, _Blob3;
 
             v2f vert(appdata v)
             {
@@ -84,8 +88,6 @@ Shader "Oyung/Cutscenes/ClosedEyes"
                 return frac(p.x * p.y);
             }
 
-            // CLAUDE: smooth value noise, two octaves: the slow "clouds"
-            // CLAUDE: of blood-warm light behind the lids.
             float noise(float2 p)
             {
                 float2 i = floor(p);
@@ -96,41 +98,73 @@ Shader "Oyung/Cutscenes/ClosedEyes"
                             u.y);
             }
 
+            // CLAUDE: three octaves of slow "clouds": blood-warm light
+            // CLAUDE: that is never perfectly even behind the lids.
             float clouds(float2 p)
             {
-                return noise(p) * 0.65 + noise(p * 2.3 + 7.1) * 0.35;
+                return noise(p) * 0.55 + noise(p * 2.1 + 7.1) * 0.3
+                     + noise(p * 4.3 + 3.7) * 0.15;
             }
 
-            // CLAUDE: a soft round light, gaussian falloff, no hard edge.
-            float blob(float2 p, float4 b, float aspect)
+            // CLAUDE: soft round light or shadow; sways a little. Move
+            // CLAUDE: it with poses: a speed value can't crossfade (a
+            // CLAUDE: speed times time jumps when the speed changes).
+            float blob(float2 p, float4 b, float aspect, float seed)
             {
-                float2 d = p - b.xy;
+                float2 c = b.xy;
+                c += 0.012 * float2(sin(_T * 0.7 + seed * 1.7),
+                                    sin(_T * 0.5 + seed * 2.3));
+                float2 d = p - c;
                 d.x *= aspect;
                 return b.w * exp(-dot(d, d) / max(b.z * b.z, 1e-4));
+            }
+
+            // CLAUDE: light through skin: black -> deep crimson ->
+            // CLAUDE: red-orange -> pale peach where light is strongest.
+            float3 skinRamp(float l)
+            {
+                float3 c0 = float3(0.015, 0.002, 0.005);
+                float3 c1 = float3(0.30, 0.025, 0.035);
+                float3 c2 = float3(0.72, 0.19, 0.08);
+                float3 c3 = float3(1.0, 0.72, 0.52);
+                float3 c = lerp(c0, c1, smoothstep(0.0, 0.35, l));
+                c = lerp(c, c2, smoothstep(0.3, 0.75, l));
+                return lerp(c, c3, smoothstep(0.75, 1.3, l));
+            }
+
+            // CLAUDE: before warmth: a muted, cool dark.
+            float3 coolRamp(float l)
+            {
+                return float3(0.16, 0.12, 0.16) * smoothstep(0.0, 1.2, l);
             }
 
             float4 frag(v2f i) : SV_Target
             {
                 float2 uv = i.uv;
                 float aspect = _ScreenParams.x / _ScreenParams.y;
+                float2 e = uv * 2.0 - 1.0;
 
-                // Warm haze: near-black to blood red, slow pulse.
-                float3 dark = float3(0.03, 0.005, 0.01);
-                float3 red = float3(0.6, 0.09, 0.05);
-                float3 haze = lerp(dark, red, _Warmth);
-                float pulse = 1.0 +
-                    _PulseAmount * sin(_T * _PulseFreq * 6.2831853);
-                float c = clouds(uv * float2(aspect, 1) * 2.0 +
-                                 _T * float2(0.03, 0.02));
-                float3 col = haze * _Brightness * pulse *
-                             lerp(1.0, 0.6 + 0.8 * c, _Cloud);
+                float beat = sin(_T * _PulseFreq * 6.2831853);
+                float pulse = 1.0 + _PulseAmount * beat;
 
-                // Light shapes, seen through red skin: tinted warm.
-                float l = blob(uv, _Blob0, aspect) + blob(uv, _Blob1, aspect)
-                        + blob(uv, _Blob2, aspect) + blob(uv, _Blob3, aspect);
-                float3 lidTint = lerp(float3(1, 1, 1), float3(1, 0.35, 0.2),
-                                      0.4 + 0.4 * _Warmth);
-                col += _BlobColor.rgb * lidTint * l * pulse;
+                // Pressure: the cloud field swells from the centre.
+                float2 q = (uv - 0.5) * (1.0 - _Pressure * beat) + 0.5;
+                float c = clouds(q * float2(aspect, 1) * 1.8 +
+                                 _T * float2(0.025, 0.015));
+
+                float light = _Brightness * pulse *
+                              lerp(1.0, 0.55 + 0.9 * c, _Cloud);
+                light += (blob(uv, _Blob0, aspect, 0)
+                        + blob(uv, _Blob1, aspect, 1)
+                        + blob(uv, _Blob2, aspect, 2)
+                        + blob(uv, _Blob3, aspect, 3)) * pulse;
+
+                // Vignette: the curve of the eyelid, darker at the rim.
+                float v = smoothstep(1.35, 0.25, length(e * float2(0.85, 1.1)));
+                light *= lerp(1.0, v, _Vignette);
+                light = max(light, 0.0);
+
+                float3 col = lerp(coolRamp(light), skinRamp(light), _Warmth);
 
                 // CLAUDE: film grain, changes 12 times a second at very
                 // CLAUDE: low strength (texture, not flicker).
@@ -139,10 +173,13 @@ Shader "Oyung/Cutscenes/ClosedEyes"
 
                 // CLAUDE: eyelids: an almond-shaped opening grows from
                 // CLAUDE: the middle; inside it the game shows through.
-                float2 e = uv * 2.0 - 1.0;
+                // CLAUDE: The lid rim is darker (lashes, shadow).
                 float h = _Open * 2.0 * (1.0 - 0.5 * e.x * e.x)
                           - _LidSoftness;
-                float lid = smoothstep(h, h + _LidSoftness, abs(e.y));
+                float y = abs(e.y);
+                float lid = smoothstep(h, h + _LidSoftness, y);
+                float rim = smoothstep(h, h + _LidSoftness * 3.0, y);
+                col *= lerp(1.0, lerp(0.25, 1.0, rim), saturate(_Open * 4));
 
                 return float4(col, lid * i.color.a);
             }
