@@ -6,6 +6,6 @@ Depends on: Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, 
 Used by: —
 Internal and private members only; the rest is in INDEX.md.
 
-### class CompositionRoot — CompositionRoot.cs:16
-- `private void Awake()` :28 — undocumented
-- `private void OnDestroy()` :47 — undocumented
+### class CompositionRoot — CompositionRoot.cs:17
+- `private void Awake()` :30 — undocumented
+- `private void OnDestroy()` :51 — undocumented

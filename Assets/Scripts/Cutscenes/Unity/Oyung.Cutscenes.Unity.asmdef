@@ -3,7 +3,10 @@
     "rootNamespace": "Oyung.Cutscenes.Unity",
     "references": [
         "Oyung.Cutscenes",
-        "Unity.Timeline"
+        "Oyung.SharedKernel",
+        "Oyung.SharedKernel.Unity",
+        "Unity.Timeline",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

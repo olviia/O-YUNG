@@ -3,7 +3,7 @@
 Root: Assets/Scripts/SharedKernel/Unity
 Pure C#: no
 Depends on: Oyung.SharedKernel
-Used by: Oyung.Globals.Unity, Oyung.Scratch
+Used by: Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Scratch
 Internal and private members only; the rest is in INDEX.md.
 
 ### class AllOf — Conditions/AllOf.cs:14

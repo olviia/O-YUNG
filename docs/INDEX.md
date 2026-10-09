@@ -6,7 +6,7 @@ Module table and everything visible outside its assembly. Internal and private m
 | Module | Pure C# | Root | Depends on | Used by |
 |---|---|---|---|---|
 | [Oyung.Cutscenes](index/Oyung.Cutscenes.md) | yes | Assets/Scripts/Cutscenes | Oyung.Input | Oyung.Cutscenes.Unity, Oyung.Root |
-| [Oyung.Cutscenes.Unity](index/Oyung.Cutscenes.Unity.md) |  | Assets/Scripts/Cutscenes/Unity | Oyung.Cutscenes, Unity.Timeline | Oyung.Root |
+| [Oyung.Cutscenes.Unity](index/Oyung.Cutscenes.Unity.md) |  | Assets/Scripts/Cutscenes/Unity | Oyung.Cutscenes, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Timeline, UnityEngine.UI | Oyung.Root |
 | [Oyung.Eyes](index/Oyung.Eyes.md) |  | Assets/Scripts/Eyes | Oyung.Input, Unity.Cinemachine | Oyung.Root |
 | [Oyung.Globals](index/Oyung.Globals.md) | yes | Assets/Scripts/Globals | — | Oyung.Globals.Unity, Oyung.Root |
 | [Oyung.Globals.Unity](index/Oyung.Globals.Unity.md) |  | Assets/Scripts/Globals/Unity | Oyung.Globals, Oyung.SharedKernel, Oyung.SharedKernel.Unity | Oyung.Root |
@@ -19,24 +19,47 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | — | Oyung.Root, Oyung.Save.Unity |
 | [Oyung.Save.Unity](index/Oyung.Save.Unity.md) |  | Assets/Scripts/Save/Unity | Oyung.Save | Oyung.Root |
 | [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem | Oyung.Root |
-| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Globals.Unity, Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
+| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
 | [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | — |
-| [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Globals.Unity, Oyung.Scratch |
+| [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Scratch |
 | [Oyung.Vision](index/Oyung.Vision.md) | yes | Assets/Scripts/Vision | — | Oyung.Root, Oyung.Scratch, Oyung.Vision.Unity |
 | [Oyung.Vision.Unity](index/Oyung.Vision.Unity.md) |  | Assets/Scripts/Vision/Unity | Oyung.Vision, Unity.RenderPipelines.Core.Runtime, Unity.RenderPipelines.Universal.Runtime | Oyung.Root |
 | [Assembly-CSharp](index/Assembly-CSharp.md) |  | Assets | — | — |
 | [Assembly-CSharp-Editor](index/Assembly-CSharp-Editor.md) |  | Assets | — | — |
 
-## Oyung.Cutscenes
-
-### interface ICutscenePlayer — Ports/Required/ICutscenePlayer.cs:5
-undocumented
-Implemented by: TimelineCutscenePlayer (Oyung.Cutscenes.Unity)
-
 ## Oyung.Cutscenes.Unity
 
-### class TimelineCutscenePlayer : MonoBehaviour, ICutscenePlayer — TimelineCutscenePlayer.cs:6
+### class CutsceneAsset : ModuleFact<bool> — CutsceneAsset.cs:14
 undocumented
+- `override bool Value { get; }` :23 (override of ModuleFact<T>)
+
+### class CutscenesInstaller : MonoBehaviour, IDisposable — CutscenesInstaller.cs:10
+Cutscenes: creates the store with the scene's player and binds every catalog cutscene to it. Start lets them play.
+- `void Build()` :15 — undocumented
+- `void StartListening()` :24 — Start phase, after load: cutscenes whose condition is met may play.
+- `void Dispose()` :30 — undocumented
+
+### class MaterialPropertyBehaviour : PlayableBehaviour — Timeline/MaterialPropertyBehaviour.cs:9
+Runtime stand-in for one MaterialPropertyClip while the timeline plays. Only points at its pose; the mixer reads and blends.
+
+### class MaterialPropertyClip : PlayableAsset, ITimelineClipAsset — Timeline/MaterialPropertyClip.cs:15
+One pose on a MaterialPropertyTrack: the shader values it sets. A value the pose doesn't list keeps the material's own value. Saved in the timeline asset; never changed while playing.
+- `ClipCaps clipCaps { get; }` :29 — undocumented
+- `override double duration { get; }` :31 (override)
+- `override Playable CreatePlayable(PlayableGraph graph, GameObject owner)` :33 (override)
+
+### class MaterialPropertyMixer : PlayableBehaviour — Timeline/MaterialPropertyMixer.cs:14
+Every frame: blends the active poses by their weights and writes the result into the bound image's material. Works on a private copy of the material (UI materials are shared) and puts the original back when the timeline stops.
+- `override void ProcessFrame(Playable playable, FrameData info, object playerData)` :30 (override)
+- `override void OnPlayableDestroy(Playable playable)` :65 (override)
+
+### class MaterialPropertyTrack : TrackAsset — Timeline/MaterialPropertyTrack.cs:17
+Timeline row that animates a UI image's material: its clips are poses (named shader values); overlapping clips crossfade. Optionally writes the Timeline's time into a shader property, so shader motion follows Speed x2 and scrubbing.
+- `override Playable CreateTrackMixer(PlayableGraph graph, GameObject go, int inputCount)` :23 (override)
+
+### class TimelineCutscenePlayer : MonoBehaviour, ICutscenePlayer — TimelineCutscenePlayer.cs:10
+undocumented
+- `void ICutscenePlayer.Play(string id, Action ended)` :16 — undocumented
 
 ## Oyung.Eyes
 
@@ -115,7 +138,7 @@ Implemented by: Quests (Oyung.Quests)
 
 ## Oyung.Root
 
-### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:16
+### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:17
 The only place that creates modules and hands them what they need. Startup: create → load → start. Shutdown: reverse order.
 
 ## Oyung.Save

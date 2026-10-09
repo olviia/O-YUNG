@@ -1,0 +1,479 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4147167892219438190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 460915b63e2b37c46a849bd598f51cdc, type: 3}
+  m_Name: MaterialPropertyClip
+  m_EditorClassIdentifier: Oyung.Cutscenes.Unity::Oyung.Cutscenes.Unity.MaterialPropertyClip
+  floats:
+  - name: _Brightness
+    value: 0.08
+  - name: _Warmth
+    value: 0.4
+  - name: _PulseAmount
+    value: 0.04
+  - name: _PulseFreq
+    value: 0.6
+  - name: _Open
+    value: 0
+  colors: []
+  vectors:
+  - name: _Blob0
+    value: {x: -0.3, y: 0.7, z: 0.18, w: 0}
+  - name: _Blob1
+    value: {x: 0, y: 0.65, z: 0.15, w: 0}
+  - name: _Blob2
+    value: {x: -0.1, y: 0.3, z: 0.3, w: 0}
+  - name: _Blob3
+    value: {x: 0.5, y: 0.6, z: 0.22, w: 0}
+--- !u!114 &-4068600261563368648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 460915b63e2b37c46a849bd598f51cdc, type: 3}
+  m_Name: MaterialPropertyClip
+  m_EditorClassIdentifier: Oyung.Cutscenes.Unity::Oyung.Cutscenes.Unity.MaterialPropertyClip
+  floats:
+  - name: _Brightness
+    value: 0.35
+  - name: _Warmth
+    value: 0.6
+  - name: _PulseAmount
+    value: 0.03
+  - name: _PulseFreq
+    value: 0.6
+  - name: _Open
+    value: 1
+  colors: []
+  vectors:
+  - name: _Blob0
+    value: {x: -0.3, y: 0.7, z: 0.18, w: 0}
+  - name: _Blob1
+    value: {x: 0, y: 0.65, z: 0.15, w: 0}
+  - name: _Blob2
+    value: {x: -0.1, y: 0.3, z: 0.3, w: 0}
+  - name: _Blob3
+    value: {x: 0.5, y: 0.6, z: 0.22, w: 0}
+--- !u!114 &-3100328915377311741
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eceb0a251be78fa49ab68452f18429cb, type: 3}
+  m_Name: Closed eyes
+  m_EditorClassIdentifier: Oyung.Cutscenes.Unity::Oyung.Cutscenes.Unity.MaterialPropertyTrack
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 0
+    m_ClipIn: 0
+    m_Asset: {fileID: 565765169188022249}
+    m_Duration: 4
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -3100328915377311741}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: 2
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: Dark
+  - m_Version: 1
+    m_Start: 2
+    m_ClipIn: 0
+    m_Asset: {fileID: 9111198999934668028}
+    m_Duration: 6
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -3100328915377311741}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 2
+    m_BlendOutDuration: 2
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: Womb
+  - m_Version: 1
+    m_Start: 6
+    m_ClipIn: 0
+    m_Asset: {fileID: 317801454482226238}
+    m_Duration: 5.5
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -3100328915377311741}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 2
+    m_BlendOutDuration: 2
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: Hospital
+  - m_Version: 1
+    m_Start: 9.5
+    m_ClipIn: 0
+    m_Asset: {fileID: -2327375700316987027}
+    m_Duration: 5.5
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -3100328915377311741}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 2
+    m_BlendOutDuration: 2
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: Travel
+  - m_Version: 1
+    m_Start: 13
+    m_ClipIn: 0
+    m_Asset: {fileID: -4147167892219438190}
+    m_Duration: 6
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -3100328915377311741}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 2
+    m_BlendOutDuration: 2
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: Sleep
+  - m_Version: 1
+    m_Start: 17
+    m_ClipIn: 0
+    m_Asset: {fileID: -4068600261563368648}
+    m_Duration: 4
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -3100328915377311741}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 2
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: Wake
+  m_Markers:
+    m_Objects: []
+  timeProperty: _T
+--- !u!114 &-2327375700316987027
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 460915b63e2b37c46a849bd598f51cdc, type: 3}
+  m_Name: MaterialPropertyClip
+  m_EditorClassIdentifier: Oyung.Cutscenes.Unity::Oyung.Cutscenes.Unity.MaterialPropertyClip
+  floats:
+  - name: _Brightness
+    value: 0.5
+  - name: _Warmth
+    value: 0.75
+  - name: _PulseAmount
+    value: 0.05
+  - name: _PulseFreq
+    value: 0.9
+  - name: _Open
+    value: 0
+  colors: []
+  vectors:
+  - name: _Blob0
+    value: {x: -0.05, y: 0.7, z: 0.18, w: 0.3}
+  - name: _Blob1
+    value: {x: 0.3, y: 0.65, z: 0.15, w: 0.3}
+  - name: _Blob2
+    value: {x: 0.15, y: 0.3, z: 0.3, w: 0.15}
+  - name: _Blob3
+    value: {x: 0.75, y: 0.6, z: 0.22, w: 0.4}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfda56da833e2384a9677cd3c976a436, type: 3}
+  m_Name: Intro
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.TimelineAsset
+  m_Version: 0
+  m_Tracks:
+  - {fileID: -3100328915377311741}
+  m_FixedDuration: 0
+  m_EditorSettings:
+    m_Framerate: 60
+    m_ScenePreview: 1
+  m_DurationMode: 0
+  m_MarkerTrack: {fileID: 0}
+--- !u!114 &317801454482226238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 460915b63e2b37c46a849bd598f51cdc, type: 3}
+  m_Name: MaterialPropertyClip
+  m_EditorClassIdentifier: Oyung.Cutscenes.Unity::Oyung.Cutscenes.Unity.MaterialPropertyClip
+  floats:
+  - name: _Brightness
+    value: 0.6
+  - name: _Warmth
+    value: 0.85
+  - name: _PulseAmount
+    value: 0.06
+  - name: _PulseFreq
+    value: 1
+  - name: _Open
+    value: 0
+  colors: []
+  vectors:
+  - name: _Blob0
+    value: {x: 0.35, y: 0.7, z: 0.18, w: 0.5}
+  - name: _Blob1
+    value: {x: 0.7, y: 0.65, z: 0.15, w: 0.35}
+  - name: _Blob2
+    value: {x: 0.55, y: 0.3, z: 0.3, w: 0.22}
+  - name: _Blob3
+    value: {x: 1.1, y: 0.6, z: 0.2, w: 0}
+--- !u!114 &565765169188022249
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 460915b63e2b37c46a849bd598f51cdc, type: 3}
+  m_Name: MaterialPropertyClip
+  m_EditorClassIdentifier: Oyung.Cutscenes.Unity::Oyung.Cutscenes.Unity.MaterialPropertyClip
+  floats:
+  - name: _Brightness
+    value: 0.12
+  - name: _Warmth
+    value: 0
+  - name: _PulseAmount
+    value: 0.05
+  - name: _PulseFreq
+    value: 0.9
+  - name: _Open
+    value: 0
+  colors: []
+  vectors:
+  - name: _Blob0
+    value: {x: 0.35, y: 0.7, z: 0.18, w: 0}
+  - name: _Blob1
+    value: {x: 0.7, y: 0.65, z: 0.15, w: 0}
+  - name: _Blob2
+    value: {x: 0.55, y: 0.3, z: 0.3, w: 0}
+  - name: _Blob3
+    value: {x: 1.1, y: 0.6, z: 0.2, w: 0}
+--- !u!114 &9111198999934668028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 460915b63e2b37c46a849bd598f51cdc, type: 3}
+  m_Name: MaterialPropertyClip
+  m_EditorClassIdentifier: Oyung.Cutscenes.Unity::Oyung.Cutscenes.Unity.MaterialPropertyClip
+  floats:
+  - name: _Brightness
+    value: 0.5
+  - name: _Warmth
+    value: 0.7
+  - name: _PulseAmount
+    value: 0.1
+  - name: _PulseFreq
+    value: 1.1
+  - name: _Open
+    value: 0
+  colors: []
+  vectors:
+  - name: _Blob0
+    value: {x: 0.35, y: 0.7, z: 0.18, w: 0}
+  - name: _Blob1
+    value: {x: 0.7, y: 0.65, z: 0.15, w: 0}
+  - name: _Blob2
+    value: {x: 0.55, y: 0.3, z: 0.3, w: 0}
+  - name: _Blob3
+    value: {x: 1.1, y: 0.6, z: 0.2, w: 0}

@@ -6,5 +6,16 @@ Depends on: Oyung.Input
 Used by: Oyung.Cutscenes.Unity, Oyung.Root
 Internal and private members only; the rest is in INDEX.md.
 
-### internal class Cutscenes — Cutscenes.cs:5
+### internal class CutsceneStore — CutsceneStore.cs:11
 undocumented
+- `internal CutsceneStore(ICutscenePlayer player)` :24 — undocumented
+- `internal bool IsPlayed(string id)` :26 — undocumented
+- `internal void Subscribe(string id, Action listener)` :30 — Calls the listener when this id becomes played.
+- `internal void Unsubscribe(string id, Action listener)` :36 — undocumented
+- `internal void RequestPlay(string id)` :46 — "Play me" from a cutscene. Ignored if it already played or another cutscene is playing.
+- `private void OnEnded(string id)` :56 — undocumented
+
+### internal interface ICutscenePlayer — ICutscenePlayer.cs:8
+undocumented
+Implemented by: TimelineCutscenePlayer (Oyung.Cutscenes.Unity)
+- `internal void Play(string id, Action ended)` :12 — Plays the cutscene with this id; calls ended once when it finishes.

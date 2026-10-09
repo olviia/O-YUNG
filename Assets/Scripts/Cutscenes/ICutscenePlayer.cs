@@ -1,0 +1,14 @@
+using System;
+
+namespace Oyung.Cutscenes
+{
+    // CLAUDE: class comment (your words). Draft: what the store needs
+    // CLAUDE: from whoever really plays cutscenes. Internal: only this
+    // CLAUDE: module's Unity side implements it (TimelineCutscenePlayer).
+    internal interface ICutscenePlayer
+    {
+        /// <summary>Plays the cutscene with this id; calls ended once
+        /// when it finishes.</summary>
+        void Play(string id, Action ended);
+    }
+}

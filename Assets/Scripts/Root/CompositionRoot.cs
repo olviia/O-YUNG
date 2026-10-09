@@ -1,3 +1,4 @@
+using Oyung.Cutscenes.Unity;
 using Oyung.Eyes;
 using Oyung.Globals.Unity;
 using Oyung.Input.Unity;
@@ -20,6 +21,7 @@ namespace Oyung.Root
         [SerializeField] private InputInstaller inputInstaller;
         [SerializeField] private EyesInstaller eyesInstaller;
         [SerializeField] private VisionInstaller visionInstaller;
+        [SerializeField] private CutscenesInstaller cutscenesInstaller;
 
         // CLAUDE: dev tools: optional, stand in for modules that don't exist yet.
         [Header("Dev tools")]
@@ -32,10 +34,12 @@ namespace Oyung.Root
             var (gameInput, inputModes) = inputInstaller.Build();
             eyesInstaller.Build(gameInput);
             var vision = visionInstaller.Build();
+            cutscenesInstaller.Build();
 
             // 2. Load: nothing saved yet.
 
-            // 3. Start: nothing yet.
+            // 3. Start.
+            cutscenesInstaller.StartListening();
             if (visionTestSlider != null) visionTestSlider.Use(vision, inputModes);
 
             // CLAUDE: temporary, so the mouse stays in
@@ -47,6 +51,7 @@ namespace Oyung.Root
         private void OnDestroy()
         {
             // Reverse order of creation.
+            cutscenesInstaller.Dispose();
             visionInstaller.Dispose();
             eyesInstaller.Dispose();
             inputInstaller.Dispose();

@@ -575,6 +575,65 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &499319160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 499319163}
+  - component: {fileID: 499319161}
+  - component: {fileID: 499319162}
+  m_Layer: 0
+  m_Name: Cutscenes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &499319161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499319160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d1e411657cdda14283805d8614b2874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oyung.Cutscenes.Unity::Oyung.Cutscenes.Unity.CutscenesInstaller
+  catalog: {fileID: 11400000, guid: 6ab30023f7739434d8bde61a98fde1b1, type: 2}
+  player: {fileID: 499319162}
+--- !u!114 &499319162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499319160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846bcf5b544626b4bab058785f17bf0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oyung.Cutscenes.Unity::Oyung.Cutscenes.Unity.TimelineCutscenePlayer
+--- !u!4 &499319163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499319160}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1347315721}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &660435154
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,17 +791,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Oyung.Scratch::Oyung.Scratch.ConditionDrawerTest
   condition:
-    rid: 8669409666176909393
+    rid: 8669409711890104398
+  onPress:
+    rid: 8669409707380965452
   pressCounter: {fileID: 11400000, guid: e6f14bc534f72924387c9b04a368328a, type: 2}
   references:
     version: 2
     RefIds:
-    - rid: 8669409666176909393
-      type: {class: IntCondition, ns: Oyung.SharedKernel.Unity, asm: Oyung.SharedKernel.Unity}
+    - rid: 8669409707380965452
+      type: {class: AddToGlobalInt, ns: Oyung.Globals.Unity, asm: Oyung.Globals.Unity}
       data:
-        fact: {fileID: 11400000, guid: e6f14bc534f72924387c9b04a368328a, type: 2}
-        comparison: 5
-        target: 3
+        _fact: {fileID: 11400000, guid: e6f14bc534f72924387c9b04a368328a, type: 2}
+        _amount: 1
+    - rid: 8669409711890104398
+      type: {class: BoolCondition, ns: Oyung.SharedKernel.Unity, asm: Oyung.SharedKernel.Unity}
+      data:
+        fact: {fileID: 11400000, guid: 15e74d2202d506d4b9331fecd4f1c88e, type: 2}
+        expected: 1
 --- !u!4 &688087130
 Transform:
   m_ObjectHideFlags: 0
@@ -996,6 +1061,7 @@ Transform:
   - {fileID: 1178177903}
   - {fileID: 1595045006}
   - {fileID: 1452105548}
+  - {fileID: 499319163}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1347315722
@@ -1014,6 +1080,7 @@ MonoBehaviour:
   inputInstaller: {fileID: 2017292695}
   eyesInstaller: {fileID: 1178177904}
   visionInstaller: {fileID: 1595045007}
+  cutscenesInstaller: {fileID: 499319161}
   visionTestSlider: {fileID: 1933133465}
 --- !u!1 &1359552090
 GameObject:
