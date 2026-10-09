@@ -25,6 +25,12 @@ Shader "Oyung/Cutscenes/ClosedEyes"
         _Blob1 ("Light shape 1", Vector) = (0.7, 0.5, 0.2, 0)
         _Blob2 ("Light shape 2", Vector) = (0.5, 0.3, 0.3, 0)
         _Blob3 ("Light shape 3", Vector) = (0.2, 0.2, 0.15, 0)
+        // CLAUDE: tree tops seen from below while being carried. Move
+        // CLAUDE: them with _CanopyOffset in poses (not a speed).
+        _Canopy ("Tree tops", Range(0, 1)) = 0
+        _CanopyLevel ("Tree tops reach down", Range(0, 0.8)) = 0.3
+        _CanopyOffset ("Tree tops position", Float) = 0
+        _StepBob ("Step bob (tree tops only)", Range(0, 0.05)) = 0
         _Open ("Eyelids open", Range(0, 1)) = 0
         _LidSoftness ("Eyelid edge softness", Range(0.01, 0.5)) = 0.2
     }
@@ -69,6 +75,7 @@ Shader "Oyung/Cutscenes/ClosedEyes"
 
             float _T, _Brightness, _Warmth, _PulseFreq, _PulseAmount;
             float _Pressure, _Cloud, _Vignette, _Grain;
+            float _Canopy, _CanopyLevel, _CanopyOffset, _StepBob;
             float _Open, _LidSoftness;
             float4 _Blob0, _Blob1, _Blob2, _Blob3;
 
@@ -119,6 +126,35 @@ Shader "Oyung/Cutscenes/ClosedEyes"
                 return b.w * exp(-dot(d, d) / max(b.z * b.z, 1e-4));
             }
 
+            // CLAUDE: tree crowns seen from below while being carried:
+            // CLAUDE: clumpy leaf masses with gaps of sky, denser toward
+            // CLAUDE: the top and the left (looking up and sideways).
+            // CLAUDE: Near + far layer (parallax). Both bob with the
+            // CLAUDE: parent's steps at a fixed walking rhythm.
+            float crowns(float2 p)
+            {
+                return noise(p) * 0.6 + noise(p * 2.3 + 5.2) * 0.3
+                     + noise(p * 5.1 + 1.7) * 0.1;
+            }
+
+            float canopy(float2 uv, float aspect)
+            {
+                float step = sin(_T * 1.8 * 6.2831853);
+                float2 q = float2(uv.x * aspect, uv.y);
+                float edge = smoothstep(0.25, 1.0, uv.y) * 0.45
+                           + smoothstep(0.6, 0.0, uv.x) * 0.3
+                           + (_CanopyLevel - 0.3);
+
+                float2 qn = q + float2(_CanopyOffset, _StepBob * step);
+                float near = smoothstep(0.56, 0.78,
+                                        crowns(qn * 2.6) + edge);
+                float2 qf = q + float2(_CanopyOffset * 0.5,
+                                       _StepBob * 0.5 * step);
+                float far = smoothstep(0.6, 0.86,
+                                       crowns(qf * 4.0 + 9.0) + edge * 0.8);
+                return saturate(near + far * 0.5);
+            }
+
             // CLAUDE: light through skin: black -> deep crimson ->
             // CLAUDE: red-orange -> pale peach where light is strongest.
             float3 skinRamp(float l)
@@ -158,6 +194,9 @@ Shader "Oyung/Cutscenes/ClosedEyes"
                         + blob(uv, _Blob1, aspect, 1)
                         + blob(uv, _Blob2, aspect, 2)
                         + blob(uv, _Blob3, aspect, 3)) * pulse;
+
+                // Tree tops block the light; gaps between them glow.
+                light *= lerp(1.0, 0.12, canopy(uv, aspect) * _Canopy);
 
                 // Vignette: the curve of the eyelid, darker at the rim.
                 float v = smoothstep(1.35, 0.25, length(e * float2(0.85, 1.1)));
