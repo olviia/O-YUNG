@@ -127,8 +127,8 @@ Shader "Oyung/Cutscenes/ClosedEyes"
             }
 
             // CLAUDE: tree crowns seen from below while being carried:
-            // CLAUDE: clumpy leaf masses with gaps of sky, denser toward
-            // CLAUDE: the top and the left (looking up and sideways).
+            // CLAUDE: clumpy leaf masses rising from the bottom, sky above;
+            // CLAUDE: denser low and to the left (looking up, sideways).
             // CLAUDE: Near + far layer (parallax). Both bob with the
             // CLAUDE: parent's steps at a fixed walking rhythm.
             float crowns(float2 p)
@@ -141,7 +141,7 @@ Shader "Oyung/Cutscenes/ClosedEyes"
             {
                 float step = sin(_T * 1.8 * 6.2831853);
                 float2 q = float2(uv.x * aspect, uv.y);
-                float edge = smoothstep(0.25, 1.0, uv.y) * 0.45
+                float edge = smoothstep(0.75, 0.0, uv.y) * 0.45
                            + smoothstep(0.6, 0.0, uv.x) * 0.3
                            + (_CanopyLevel - 0.3);
 
