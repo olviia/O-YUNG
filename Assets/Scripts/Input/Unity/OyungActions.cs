@@ -148,6 +148,15 @@ namespace Oyung.Input.Unity
                     ""id"": ""eb156380-4003-4273-9422-4945011d0f0f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
+                    ""interactions"": ""Hold(duration=1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Speed"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6b3af80-9584-4516-94bb-94a2cf6490c9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 }
@@ -172,6 +181,28 @@ namespace Oyung.Input.Unity
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8bd546d6-c59c-4c2c-bb33-433129de01d2"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Speed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e44e298-2862-4159-b6b5-30d55aceaa3a"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Speed"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -215,6 +246,7 @@ namespace Oyung.Input.Unity
             // Cutscene
             m_Cutscene = asset.FindActionMap("Cutscene", throwIfNotFound: true);
             m_Cutscene_Skip = m_Cutscene.FindAction("Skip", throwIfNotFound: true);
+            m_Cutscene_Speed = m_Cutscene.FindAction("Speed", throwIfNotFound: true);
         }
 
         ~@OyungActions()
@@ -404,6 +436,7 @@ namespace Oyung.Input.Unity
         private readonly InputActionMap m_Cutscene;
         private List<ICutsceneActions> m_CutsceneActionsCallbackInterfaces = new List<ICutsceneActions>();
         private readonly InputAction m_Cutscene_Skip;
+        private readonly InputAction m_Cutscene_Speed;
         /// <summary>
         /// Provides access to input actions defined in input action map "Cutscene".
         /// </summary>
@@ -419,6 +452,10 @@ namespace Oyung.Input.Unity
             /// Provides access to the underlying input action "Cutscene/Skip".
             /// </summary>
             public InputAction @Skip => m_Wrapper.m_Cutscene_Skip;
+            /// <summary>
+            /// Provides access to the underlying input action "Cutscene/Speed".
+            /// </summary>
+            public InputAction @Speed => m_Wrapper.m_Cutscene_Speed;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -448,6 +485,9 @@ namespace Oyung.Input.Unity
                 @Skip.started += instance.OnSkip;
                 @Skip.performed += instance.OnSkip;
                 @Skip.canceled += instance.OnSkip;
+                @Speed.started += instance.OnSpeed;
+                @Speed.performed += instance.OnSpeed;
+                @Speed.canceled += instance.OnSpeed;
             }
 
             /// <summary>
@@ -462,6 +502,9 @@ namespace Oyung.Input.Unity
                 @Skip.started -= instance.OnSkip;
                 @Skip.performed -= instance.OnSkip;
                 @Skip.canceled -= instance.OnSkip;
+                @Speed.started -= instance.OnSpeed;
+                @Speed.performed -= instance.OnSpeed;
+                @Speed.canceled -= instance.OnSpeed;
             }
 
             /// <summary>
@@ -557,6 +600,13 @@ namespace Oyung.Input.Unity
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnSkip(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Speed" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnSpeed(InputAction.CallbackContext context);
         }
     }
 }

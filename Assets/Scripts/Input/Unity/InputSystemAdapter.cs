@@ -17,7 +17,8 @@ namespace Oyung.Input.Unity
         private readonly float mouseDegreesPerPixel;
         private readonly float stickDegreesPerSecond;
 
-        public event Action SkipCutsceneRequested;
+        public event Action SkipCutscenePressed;
+        public event Action ToggleCutsceneSpeedPressed;
 
         /// <param name="modes">Decides which map is on.</param>
         /// <param name="mouseDegreesPerPixel">Mouse sensitivity.</param>
@@ -30,6 +31,7 @@ namespace Oyung.Input.Unity
             this.stickDegreesPerSecond = stickDegreesPerSecond;
 
             actions.Cutscene.Skip.performed += OnSkipPerformed;
+            actions.Cutscene.Speed.performed += OnSpeedPerformed;
             modes.ModeChanged += EnableMapFor;
             EnableMapFor(modes.ActiveMode);
         }
@@ -59,6 +61,7 @@ namespace Oyung.Input.Unity
         {
             modes.ModeChanged -= EnableMapFor;
             actions.Cutscene.Skip.performed -= OnSkipPerformed;
+            actions.Cutscene.Speed.performed -= OnSpeedPerformed;
             actions.Disable();
             actions.Dispose();
         }
@@ -77,7 +80,12 @@ namespace Oyung.Input.Unity
 
         private void OnSkipPerformed(InputAction.CallbackContext _)
         {
-            SkipCutsceneRequested?.Invoke();
+            SkipCutscenePressed?.Invoke();
+        }
+
+        private void OnSpeedPerformed(InputAction.CallbackContext _)
+        {
+            ToggleCutsceneSpeedPressed?.Invoke();
         }
     }
 }

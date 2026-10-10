@@ -5,14 +5,14 @@ Module table and everything visible outside its assembly. Internal and private m
 ## Modules
 | Module | Pure C# | Root | Depends on | Used by |
 |---|---|---|---|---|
-| [Oyung.Cutscenes](index/Oyung.Cutscenes.md) | yes | Assets/Scripts/Cutscenes | Oyung.Input | Oyung.Cutscenes.Unity, Oyung.Root |
+| [Oyung.Cutscenes](index/Oyung.Cutscenes.md) | yes | Assets/Scripts/Cutscenes | — | Oyung.Cutscenes.Unity, Oyung.Root |
 | [Oyung.Cutscenes.Unity](index/Oyung.Cutscenes.Unity.md) |  | Assets/Scripts/Cutscenes/Unity | Oyung.Cutscenes, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Timeline, UnityEngine.UI | Oyung.Root |
 | [Oyung.Eyes](index/Oyung.Eyes.md) |  | Assets/Scripts/Eyes | Oyung.Input, Unity.Cinemachine | Oyung.Root |
 | [Oyung.Globals](index/Oyung.Globals.md) | yes | Assets/Scripts/Globals | — | Oyung.Globals.Unity, Oyung.Root |
 | [Oyung.Globals.Unity](index/Oyung.Globals.Unity.md) |  | Assets/Scripts/Globals/Unity | Oyung.Globals, Oyung.SharedKernel, Oyung.SharedKernel.Unity | Oyung.Root |
 | [Oyung.Hints](index/Oyung.Hints.md) | yes | Assets/Scripts/Hints | Oyung.Quests | Oyung.Hud, Oyung.Root |
 | [Oyung.Hud](index/Oyung.Hud.md) |  | Assets/Scripts/Hud | Oyung.Quests, Oyung.Hints, Oyung.Input.Unity | Oyung.Root |
-| [Oyung.Input](index/Oyung.Input.md) | yes | Assets/Scripts/Input | — | Oyung.Cutscenes, Oyung.Eyes, Oyung.Input.Unity, Oyung.Quests, Oyung.Root, Oyung.Scratch |
+| [Oyung.Input](index/Oyung.Input.md) | yes | Assets/Scripts/Input | — | Oyung.Eyes, Oyung.Input.Unity, Oyung.Quests, Oyung.Root, Oyung.Scratch |
 | [Oyung.Input.Unity](index/Oyung.Input.Unity.md) |  | Assets/Scripts/Input/Unity | Oyung.Input, Unity.InputSystem | Oyung.Hud, Oyung.Root |
 | [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.Input | Oyung.Hints, Oyung.Hud, Oyung.Root |
 | [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch | — |
@@ -27,17 +27,40 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Assembly-CSharp](index/Assembly-CSharp.md) |  | Assets | — | — |
 | [Assembly-CSharp-Editor](index/Assembly-CSharp-Editor.md) |  | Assets | — | — |
 
+## Oyung.Cutscenes
+
+### interface ICutsceneInput — Ports/Needed/ICutsceneInput.cs:9
+port for the player's requests while a cutscene plays; implemented outside this module
+Implemented by: CutsceneInputAdapter (Oyung.Root)
+- `event Action SkipPressed` :14 — the player pressed skip
+- `event Action SpeedTogglePressed` :19 — the player pressed the speed toggle
+
+### interface ICutsceneEvents — Ports/Offered/ICutsceneEvents.cs:8
+port for what cutscenes announce to other modules
+Implemented by: TimelineCutscenePlayer (Oyung.Cutscenes.Unity)
+- `event Action Started` :13 — a cutscene began playing
+- `event Action Ended` :18 — the playing cutscene finished or was skipped
+
+### interface ICutsceneSettings — Ports/Offered/ICutsceneSettings.cs:7
+port for reading and changing how cutscenes play, e.g. from a settings menu or the HUD
+Implemented by: CutsceneSettings (Oyung.Cutscenes.Unity)
+- `float FastSpeed { get; set; }` :12 — playback speed when the player switches to fast
+
 ## Oyung.Cutscenes.Unity
 
 ### class CutsceneAsset : ModuleFact<bool> — CutsceneAsset.cs:14
 undocumented
-- `override bool Value { get; }` :23 (override of ModuleFact<T>)
+- `override bool Value { get; }` :24 (override of ModuleFact<T>)
+
+### class CutsceneSettings : MonoBehaviour, ICutsceneSettings — CutsceneSettings.cs:8
+undocumented
+- `float FastSpeed { get; set; }` :13 (implements ICutsceneSettings)
 
 ### class CutscenesInstaller : MonoBehaviour, IDisposable — CutscenesInstaller.cs:10
-Cutscenes: creates the store with the scene's player and binds every catalog cutscene to it. Start lets them play.
-- `void Build()` :15 — undocumented
-- `void StartListening()` :24 — Start phase, after load: cutscenes whose condition is met may play.
-- `void Dispose()` :30 — undocumented
+Cutscenes: creates the store, hands it to the scene's player and binds every catalog cutscene to both. Start lets them play.
+- `ICutsceneEvents Build(ICutsceneInput input)` :18 — undocumented
+- `void StartListening()` :29 — Start phase, after load: cutscenes whose condition is met may play.
+- `void Dispose()` :35 — undocumented
 
 ### class MaterialPropertyBehaviour : PlayableBehaviour — Timeline/MaterialPropertyBehaviour.cs:9
 Runtime stand-in for one MaterialPropertyClip while the timeline plays. Only points at its pose; the mixer reads and blends.
@@ -57,9 +80,11 @@ Every frame: blends the active poses by their weights and writes the result into
 Timeline row that animates a UI image's material: its clips are poses (named shader values); overlapping clips crossfade. Optionally writes the Timeline's time into a shader property, so shader motion follows Speed x2 and scrubbing.
 - `override Playable CreateTrackMixer(PlayableGraph graph, GameObject go, int inputCount)` :23 (override)
 
-### class TimelineCutscenePlayer : MonoBehaviour, ICutscenePlayer — TimelineCutscenePlayer.cs:10
+### class TimelineCutscenePlayer : MonoBehaviour, ICutscenePlayer, ICutsceneEvents — TimelineCutscenePlayer.cs:11
 undocumented
-- `void ICutscenePlayer.Play(string id, Action ended)` :16 — undocumented
+- `event Action Started` :23 (implements ICutsceneEvents)
+- `event Action Ended` :24 (implements ICutsceneEvents)
+- `void ICutscenePlayer.Play(string id)` :35 — undocumented
 
 ## Oyung.Eyes
 
@@ -105,8 +130,9 @@ undocumented
 ### interface IGameInput — Ports/Offered/IGameInput.cs:9
 port for game input
 Implemented by: InputSystemAdapter (Oyung.Input.Unity)
-- `event Action SkipCutsceneRequested` :14 — is triggered during a cutscene if Skip input is pressed
-- `Vector2 LookDelta { get; }` :19 — how fast and in what direction a player moves their look (eyes) by x and y axes per frame
+- `event Action SkipCutscenePressed` :14 — is triggered during a cutscene when Skip is held long enough
+- `event Action ToggleCutsceneSpeedPressed` :19 — is triggered during a cutscene if Speed input is pressed
+- `Vector2 LookDelta { get; }` :24 — how fast and in what direction a player moves their look (eyes) by x and y axes per frame
 
 ### interface IInputModes — Ports/Offered/IInputModes.cs:8
 port for selecting and changing the input modes
@@ -138,7 +164,7 @@ Implemented by: Quests (Oyung.Quests)
 
 ## Oyung.Root
 
-### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:17
+### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:18
 The only place that creates modules and hands them what they need. Startup: create → load → start. Shutdown: reverse order.
 
 ## Oyung.Save

@@ -7,7 +7,7 @@ namespace Oyung.Cutscenes.Unity
 {
     // CLAUDE: class comment (your words). Draft: one cutscene: id,
     // CLAUDE: prefab, Play-when condition. Value = played (proxy to the
-    // CLAUDE: store). While listening, says "play me" to the store when
+    // CLAUDE: store). While listening, asks the player to play when
     // CLAUDE: Play-when is met. Read by other modules via BoolCondition.
     [CreateAssetMenu(menuName = "Oyung/Cutscenes/Cutscene",
         fileName = "NewCutscene")]
@@ -19,15 +19,17 @@ namespace Oyung.Cutscenes.Unity
         [SerializeReference] private Condition playWhen;
 
         private CutsceneStore _store;
+        private ICutscenePlayer _player;
 
         public override bool Value => Store.IsPlayed(Name);
 
         internal GameObject Prefab => prefab;
 
         // CLAUDE: create phase: read + Changed work, nothing plays yet.
-        internal void Bind(CutsceneStore store)
+        internal void Bind(CutsceneStore store, ICutscenePlayer player)
         {
             _store = store;
+            _player = player;
             _store.Subscribe(Name, RaiseChanged);
         }
 
@@ -44,16 +46,21 @@ namespace Oyung.Cutscenes.Unity
             if (playWhen != null) playWhen.Changed -= OnPlayWhenChanged;
             _store?.Unsubscribe(Name, RaiseChanged);
             _store = null;
+            _player = null;
         }
 
         private void OnPlayWhenChanged()
         {
-            if (PlayWhen.IsMet) Store.RequestPlay(Name);
+            if (PlayWhen.IsMet) Player.Play(Name);
         }
 
         private Condition PlayWhen => playWhen ??
             throw new InvalidOperationException(
                 $"Cutscene '{Name}' has no Play-when condition.");
+
+        private ICutscenePlayer Player => _player ??
+            throw new InvalidOperationException(
+                $"Cutscene '{Name}' is not bound. Is it in the catalog?");
 
         private CutsceneStore Store => _store ??
             throw new InvalidOperationException(

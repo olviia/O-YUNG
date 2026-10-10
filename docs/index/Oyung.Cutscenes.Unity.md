@@ -7,13 +7,14 @@ Used by: Oyung.Root
 Internal and private members only; the rest is in INDEX.md.
 
 ### class CutsceneAsset — CutsceneAsset.cs:14
-- `internal GameObject Prefab { get; }` :25 — undocumented
-- `internal void Bind(CutsceneStore store)` :28 — undocumented
-- `internal void StartListening()` :36 — undocumented
-- `internal void Unbind()` :42 — undocumented
-- `private void OnPlayWhenChanged()` :49 — undocumented
-- `private Condition PlayWhen { get; }` :54 — undocumented
-- `private CutsceneStore Store { get; }` :58 — undocumented
+- `internal GameObject Prefab { get; }` :26 — undocumented
+- `internal void Bind(CutsceneStore store, ICutscenePlayer player)` :29 — undocumented
+- `internal void StartListening()` :38 — undocumented
+- `internal void Unbind()` :44 — undocumented
+- `private void OnPlayWhenChanged()` :52 — undocumented
+- `private Condition PlayWhen { get; }` :57 — undocumented
+- `private ICutscenePlayer Player { get; }` :61 — undocumented
+- `private CutsceneStore Store { get; }` :65 — undocumented
 
 ### internal class CutsceneCatalog : ScriptableObject — CutsceneCatalog.cs:12
 undocumented
@@ -50,5 +51,7 @@ undocumented
 - `private Material CopyFor(Graphic graphic)` :78 — undocumented
 - `private void Gather(Playable playable)` :93 — undocumented
 
-### class TimelineCutscenePlayer — TimelineCutscenePlayer.cs:10
-- `internal void Use(CutsceneCatalog catalog)` :14 — undocumented
+### class TimelineCutscenePlayer — TimelineCutscenePlayer.cs:11
+- `internal void Use(CutsceneCatalog catalog, ICutsceneSettings settings, CutsceneStore store, ICutsceneInput input)` :26 — undocumented
+- `private void SkipToEnd()` :71 — undocumented
+- `private void ToggleSpeed()` :73 — undocumented

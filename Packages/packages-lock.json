@@ -17,6 +17,13 @@
       },
       "hash": "63202654d5f9998fe9f583123c08e8cb13a41669"
     },
+    "com.eviltwo.input-glyphs": {
+      "version": "https://github.com/eviltwo/InputGlyphs.git?path=InputGlyphs/Assets/InputGlyphs#1.4.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c0771fc3b1b06cf8ee7d51474745972edbc382a2"
+    },
     "com.olviia.codemap": {
       "version": "file:com.olviia.codemap",
       "depth": 0,

@@ -2,6 +2,7 @@ using Oyung.Cutscenes.Unity;
 using Oyung.Eyes;
 using Oyung.Globals.Unity;
 using Oyung.Input.Unity;
+using Oyung.Root.Adapters;
 using Oyung.Scratch;
 using Oyung.Vision.Unity;
 using UnityEngine;
@@ -27,6 +28,8 @@ namespace Oyung.Root
         [Header("Dev tools")]
         [SerializeField] private VisionTestSlider visionTestSlider;
 
+        private CutsceneInputModeAdapter cutsceneInputMode;
+
         private void Awake()
         {
             // 1. Create, in dependency order.
@@ -34,7 +37,8 @@ namespace Oyung.Root
             var (gameInput, inputModes) = inputInstaller.Build();
             eyesInstaller.Build(gameInput);
             var vision = visionInstaller.Build();
-            cutscenesInstaller.Build();
+            var cutscenes = cutscenesInstaller.Build(new CutsceneInputAdapter(gameInput));
+            cutsceneInputMode = new CutsceneInputModeAdapter(cutscenes, inputModes);
 
             // 2. Load: nothing saved yet.
 
@@ -51,6 +55,7 @@ namespace Oyung.Root
         private void OnDestroy()
         {
             // Reverse order of creation.
+            cutsceneInputMode?.Dispose();
             cutscenesInstaller.Dispose();
             visionInstaller.Dispose();
             eyesInstaller.Dispose();

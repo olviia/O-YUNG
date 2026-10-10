@@ -1,9 +1,7 @@
 {
     "name": "Oyung.Cutscenes",
     "rootNamespace": "Oyung.Cutscenes",
-    "references": [
-        "Oyung.Input"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

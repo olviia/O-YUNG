@@ -6,6 +6,19 @@ Depends on: Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, 
 Used by: —
 Internal and private members only; the rest is in INDEX.md.
 
-### class CompositionRoot — CompositionRoot.cs:17
-- `private void Awake()` :30 — undocumented
-- `private void OnDestroy()` :51 — undocumented
+### internal class CutsceneInputAdapter : ICutsceneInput — Adapters/CutsceneInputAdapter.cs:10
+undocumented
+- `internal CutsceneInputAdapter(IGameInput gameInput)` :14 — undocumented
+- `internal event Action SkipPressed` :16 (implements ICutsceneInput)
+- `internal event Action SpeedTogglePressed` :22 (implements ICutsceneInput)
+
+### internal class CutsceneInputModeAdapter : IDisposable — Adapters/CutsceneInputModeAdapter.cs:10
+undocumented
+- `internal CutsceneInputModeAdapter(ICutsceneEvents cutscenes, IInputModes modes)` :15 — undocumented
+- `internal void Dispose()` :23 — undocumented
+- `private void OnStarted()` :29 — undocumented
+- `private void OnEnded()` :31 — undocumented
+
+### class CompositionRoot — CompositionRoot.cs:18
+- `private void Awake()` :33 — undocumented
+- `private void OnDestroy()` :55 — undocumented

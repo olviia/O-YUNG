@@ -4,26 +4,26 @@ using System.Collections.Generic;
 namespace Oyung.Cutscenes
 {
     // CLAUDE: class comment (your words, CRC). Draft: knows which ids
-    // CLAUDE: have played and which one is playing now. Decides whether
-    // CLAUDE: a "play me" is allowed (once, one at a time) and tells
-    // CLAUDE: ICutscenePlayer to play; marks the id played when it ends.
-    // CLAUDE: Used by CutsceneAsset (proxy) and CutscenesInstaller.
+    // CLAUDE: have played; tells each id's listeners (its fact) when it
+    // CLAUDE: becomes played. Knows nothing about playing.
+    // CLAUDE: Used by CutsceneAsset (fact value) and the player (marks).
     internal sealed class CutsceneStore
     {
-        private readonly ICutscenePlayer _player;
-
         private readonly HashSet<string> _played = new HashSet<string>();
 
         // CLAUDE: same shape as GlobalStore: listeners by id.
         private readonly Dictionary<string, Action> _listeners =
             new Dictionary<string, Action>();
 
-        // CLAUDE: null while nothing plays.
-        private string _playing;
-
-        internal CutsceneStore(ICutscenePlayer player) => _player = player;
-
         internal bool IsPlayed(string id) => _played.Contains(id);
+
+        /// <summary>Remembers the id as played and tells its listeners,
+        /// once; marking it again changes nothing.</summary>
+        internal void MarkPlayed(string id)
+        {
+            if (!_played.Add(id)) return;
+            if (_listeners.TryGetValue(id, out var listeners)) listeners();
+        }
 
         /// <summary>Calls the listener when this id becomes played.
         /// </summary>
@@ -39,25 +39,6 @@ namespace Oyung.Cutscenes
             current -= listener;
             if (current == null) _listeners.Remove(id);
             else _listeners[id] = current;
-        }
-
-        /// <summary>"Play me" from a cutscene. Ignored if it already
-        /// played or another cutscene is playing.</summary>
-        internal void RequestPlay(string id)
-        {
-            // CLAUDE: a request during another cutscene is dropped, not
-            // CLAUDE: queued. Its condition must fire again. Fine for one
-            // CLAUDE: intro; a queue when a story needs it.
-            if (_playing != null || IsPlayed(id)) return;
-            _playing = id;
-            _player.Play(id, () => OnEnded(id));
-        }
-
-        private void OnEnded(string id)
-        {
-            _playing = null;
-            _played.Add(id);
-            if (_listeners.TryGetValue(id, out var listeners)) listeners();
         }
     }
 }

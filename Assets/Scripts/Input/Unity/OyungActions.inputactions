@@ -59,6 +59,15 @@
                     "id": "eb156380-4003-4273-9422-4945011d0f0f",
                     "expectedControlType": "Button",
                     "processors": "",
+                    "interactions": "Hold(duration=1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Speed",
+                    "type": "Button",
+                    "id": "d6b3af80-9584-4516-94bb-94a2cf6490c9",
+                    "expectedControlType": "Button",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 }
@@ -83,6 +92,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8bd546d6-c59c-4c2c-bb33-433129de01d2",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Speed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5e44e298-2862-4159-b6b5-30d55aceaa3a",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Speed",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

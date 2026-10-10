@@ -8,9 +8,11 @@ Internal and private members only; the rest is in INDEX.md.
 
 ### internal class InputSystemAdapter : IGameInput, IDisposable — InputSystemAdapter.cs:13
 Implements IGameInput with Unity's Input System. The only class that knows the Input System exists. Enables the action map named like the active InputMode; Menu has no map yet, so all is off.
-- `internal event Action SkipCutsceneRequested` :20 (implements IGameInput)
-- `internal InputSystemAdapter(IInputModes modes, float mouseDegreesPerPixel, float stickDegreesPerSecond)` :25 — undocumented
-- `internal Vector2 LookDelta { get; }` :43 (implements IGameInput) — Degrees this frame: X = left/right, Y = up/down. Mouse gives pixels, stick gives a -1..1 position; both become degrees here. Zero when the Gameplay map is off (cutscene, menu).
-- `internal void Dispose()` :58 — undocumented
-- `private void EnableMapFor(InputMode mode)` :66 — undocumented
-- `private void OnSkipPerformed(InputAction.CallbackContext _)` :78 — undocumented
+- `internal event Action SkipCutscenePressed` :20 (implements IGameInput)
+- `internal event Action ToggleCutsceneSpeedPressed` :21 (implements IGameInput)
+- `internal InputSystemAdapter(IInputModes modes, float mouseDegreesPerPixel, float stickDegreesPerSecond)` :26 — undocumented
+- `internal Vector2 LookDelta { get; }` :45 (implements IGameInput) — Degrees this frame: X = left/right, Y = up/down. Mouse gives pixels, stick gives a -1..1 position; both become degrees here. Zero when the Gameplay map is off (cutscene, menu).
+- `internal void Dispose()` :60 — undocumented
+- `private void EnableMapFor(InputMode mode)` :69 — undocumented
+- `private void OnSkipPerformed(InputAction.CallbackContext _)` :81 — undocumented
+- `private void OnSpeedPerformed(InputAction.CallbackContext _)` :86 — undocumented
