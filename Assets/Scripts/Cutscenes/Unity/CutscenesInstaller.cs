@@ -12,8 +12,10 @@ namespace Oyung.Cutscenes.Unity
         [SerializeField] private CutsceneCatalog catalog;
         [SerializeField] private TimelineCutscenePlayer player;
        
-        //todo: when settings are implemented, this has to be set up there and removed from here
         [SerializeField] private CutsceneSettings settings;
+
+        [Tooltip("Optional: on-screen Speed/Skip prompts.")]
+        [SerializeField] private CutsceneUI ui;
 
         public ICutsceneEvents Build(ICutsceneInput input)
         {
@@ -21,6 +23,7 @@ namespace Oyung.Cutscenes.Unity
             player.Use(catalog, settings, store, input);
             foreach (var cutscene in catalog.Cutscenes)
                 cutscene.Bind(store, player);
+            if (ui != null) ui.Bind(player);
             return player;
         }
 
@@ -35,6 +38,7 @@ namespace Oyung.Cutscenes.Unity
         public void Dispose()
         {
             foreach (var cutscene in catalog.Cutscenes) cutscene.Unbind();
+            if (ui != null) ui.Unbind();
         }
     }
 }

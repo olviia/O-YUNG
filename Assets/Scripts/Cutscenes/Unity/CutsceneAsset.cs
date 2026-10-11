@@ -51,6 +51,8 @@ namespace Oyung.Cutscenes.Unity
 
         private void OnPlayWhenChanged()
         {
+            // Story cutscenes play once; a met condition never replays.
+            if (Value) return;
             if (PlayWhen.IsMet) Player.Play(Name);
         }
 

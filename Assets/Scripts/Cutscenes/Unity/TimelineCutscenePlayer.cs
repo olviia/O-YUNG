@@ -23,6 +23,12 @@ namespace Oyung.Cutscenes.Unity
         public event Action Started;
         public event Action Ended;
 
+        /// <summary>Whether the playing cutscene runs fast.</summary>
+        internal bool IsFast => _fast;
+
+        /// <summary>The speed was toggled; read IsFast again.</summary>
+        internal event Action SpeedChanged;
+
         internal void Use(CutsceneCatalog catalog, ICutsceneSettings settings,
             CutsceneStore store, ICutsceneInput input)
         {
@@ -34,6 +40,11 @@ namespace Oyung.Cutscenes.Unity
 
         void ICutscenePlayer.Play(string id)
         {
+            // One at a time: two met at once is a design mistake.
+            if (_director != null)
+                throw new InvalidOperationException(
+                    $"Cutscene '{id}' asked to play while another plays.");
+
             var instance = Instantiate(_catalog.Find(id).Prefab);
             var director = instance.GetComponentInChildren<PlayableDirector>();
             if (director == null)
@@ -60,6 +71,11 @@ namespace Oyung.Cutscenes.Unity
                 _input.SkipPressed -= SkipToEnd;
                 _input.SpeedTogglePressed -= ToggleSpeed;
                 _director = null;
+                // Unloading the scene (quit, scene change) stops the
+                // director too. That is not an ending: announce nothing,
+                // mark nothing played. Destruction order is random, so
+                // ask the scene, not our listeners, whether it is going.
+                if (!instance.scene.isLoaded) return;
                 Destroy(instance);
                 Ended?.Invoke();
                 // CLAUDE: last: the fact may start the next cutscene.
@@ -67,8 +83,15 @@ namespace Oyung.Cutscenes.Unity
             }
         }
 
-        // CLAUDE: Stop fires stopped, so the end runs through OnStopped.
-        private void SkipToEnd() => _director.Stop();
+        // Jumps to the end and applies it, as if played through, so the
+        // world ends the same either way. Signals skipped over fire only
+        // if marked Retroactive. Stop fires stopped -> OnStopped.
+        private void SkipToEnd()
+        {
+            _director.time = _director.duration;
+            _director.Evaluate();
+            _director.Stop();
+        }
 
         private void ToggleSpeed()
         {
@@ -77,6 +100,7 @@ namespace Oyung.Cutscenes.Unity
             // CLAUDE: Timeline audio follows it, Time.time does not.
             _director.playableGraph.GetRootPlayable(0)
                 .SetSpeed(_fast ? _settings.FastSpeed : 1f);
+            SpeedChanged?.Invoke();
         }
     }
 }

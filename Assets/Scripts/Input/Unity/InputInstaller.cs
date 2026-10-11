@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Oyung.Input.Unity
 {
@@ -11,6 +12,9 @@ namespace Oyung.Input.Unity
         [SerializeField] private float mouseDegreesPerPixel = 0.1f;
         [SerializeField] private float stickDegreesPerSecond = 120f;
 
+        [Tooltip("OyungActions.inputactions; used as is, never copied.")]
+        [SerializeField] private InputActionAsset actions;
+
         private InputSystemAdapter adapter;   // kept only so Dispose can clean it up
 
         /// Needs nothing from other modules → no parameters.
@@ -18,7 +22,8 @@ namespace Oyung.Input.Unity
         public (IGameInput gameInput, IInputModes modes) Build()
         {
             var modes = new InputModeStack();
-            adapter = new InputSystemAdapter(modes, mouseDegreesPerPixel, stickDegreesPerSecond);
+            adapter = new InputSystemAdapter(modes, actions,
+                mouseDegreesPerPixel, stickDegreesPerSecond);
             return (adapter, modes);
         }
 

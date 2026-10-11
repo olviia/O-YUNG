@@ -6,14 +6,14 @@ Module table and everything visible outside its assembly. Internal and private m
 | Module | Pure C# | Root | Depends on | Used by |
 |---|---|---|---|---|
 | [Oyung.Cutscenes](index/Oyung.Cutscenes.md) | yes | Assets/Scripts/Cutscenes | — | Oyung.Cutscenes.Unity, Oyung.Root |
-| [Oyung.Cutscenes.Unity](index/Oyung.Cutscenes.Unity.md) |  | Assets/Scripts/Cutscenes/Unity | Oyung.Cutscenes, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Timeline, UnityEngine.UI | Oyung.Root |
+| [Oyung.Cutscenes.Unity](index/Oyung.Cutscenes.Unity.md) |  | Assets/Scripts/Cutscenes/Unity | Oyung.Cutscenes, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Timeline, UnityEngine.UI, Unity.Localization | Oyung.Root |
 | [Oyung.Eyes](index/Oyung.Eyes.md) |  | Assets/Scripts/Eyes | Oyung.Input, Unity.Cinemachine | Oyung.Root |
 | [Oyung.Globals](index/Oyung.Globals.md) | yes | Assets/Scripts/Globals | — | Oyung.Globals.Unity, Oyung.Root |
 | [Oyung.Globals.Unity](index/Oyung.Globals.Unity.md) |  | Assets/Scripts/Globals/Unity | Oyung.Globals, Oyung.SharedKernel, Oyung.SharedKernel.Unity | Oyung.Root |
 | [Oyung.Hints](index/Oyung.Hints.md) | yes | Assets/Scripts/Hints | Oyung.Quests | Oyung.Hud, Oyung.Root |
 | [Oyung.Hud](index/Oyung.Hud.md) |  | Assets/Scripts/Hud | Oyung.Quests, Oyung.Hints, Oyung.Input.Unity | Oyung.Root |
 | [Oyung.Input](index/Oyung.Input.md) | yes | Assets/Scripts/Input | — | Oyung.Eyes, Oyung.Input.Unity, Oyung.Quests, Oyung.Root, Oyung.Scratch |
-| [Oyung.Input.Unity](index/Oyung.Input.Unity.md) |  | Assets/Scripts/Input/Unity | Oyung.Input, Unity.InputSystem | Oyung.Hud, Oyung.Root |
+| [Oyung.Input.Unity](index/Oyung.Input.Unity.md) |  | Assets/Scripts/Input/Unity | Oyung.Input, Unity.InputSystem, UnityEngine.UI, InputGlyphs, InputGlyphs.Display | Oyung.Hud, Oyung.Root |
 | [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.Input | Oyung.Hints, Oyung.Hud, Oyung.Root |
 | [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch | — |
 | [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | — | Oyung.Root, Oyung.Save.Unity |
@@ -56,11 +56,14 @@ undocumented
 undocumented
 - `float FastSpeed { get; set; }` :13 (implements ICutsceneSettings)
 
+### class CutsceneUI : MonoBehaviour — CutsceneUI.cs:13
+The on-screen panel while a cutscene plays: Speed and Skip prompts. Shown on start, hidden on end; the speed row says what pressing does next ("Faster" at normal speed, "Slower" when fast). Texts are picked in the Inspector; button icons are InputIcons inside it.
+
 ### class CutscenesInstaller : MonoBehaviour, IDisposable — CutscenesInstaller.cs:10
 Cutscenes: creates the store, hands it to the scene's player and binds every catalog cutscene to both. Start lets them play.
-- `ICutsceneEvents Build(ICutsceneInput input)` :18 — undocumented
-- `void StartListening()` :29 — Start phase, after load: cutscenes whose condition is met may play.
-- `void Dispose()` :35 — undocumented
+- `ICutsceneEvents Build(ICutsceneInput input)` :20 — undocumented
+- `void StartListening()` :32 — Start phase, after load: cutscenes whose condition is met may play.
+- `void Dispose()` :38 — undocumented
 
 ### class MaterialPropertyBehaviour : PlayableBehaviour — Timeline/MaterialPropertyBehaviour.cs:9
 Runtime stand-in for one MaterialPropertyClip while the timeline plays. Only points at its pose; the mixer reads and blends.
@@ -84,7 +87,7 @@ Timeline row that animates a UI image's material: its clips are poses (named sha
 undocumented
 - `event Action Started` :23 (implements ICutsceneEvents)
 - `event Action Ended` :24 (implements ICutsceneEvents)
-- `void ICutscenePlayer.Play(string id)` :35 — undocumented
+- `void ICutscenePlayer.Play(string id)` :41 — undocumented
 
 ## Oyung.Eyes
 
@@ -148,13 +151,18 @@ Gameplay, Cutscene, Menu
 
 ## Oyung.Input.Unity
 
-### class InputGlyphs — InputGlyphs.cs:5
-undocumented
+### class InputIcon : MonoBehaviour — InputIcon.cs:20
+Shows one input action's button for the device the player uses (LastUsedDevice), drawn by the InputGlyphs package; if a fill is given, the button fills left to right while held (Hold). Knows nothing about who shows it or when: its parent turns it on and off. Needs the InputGlyphsSetup prefab once in the scene.
 
-### class InputInstaller : MonoBehaviour, IDisposable — InputInstaller.cs:9
+### class InputInstaller : MonoBehaviour, IDisposable — InputInstaller.cs:10
 Gets Monobehavior references for Input module and hands ports to root
-- `(IGameInput gameInput, IInputModes modes) Build()` :18 — undocumented
-- `void Dispose()` :26 — undocumented
+- `(IGameInput gameInput, IInputModes modes) Build()` :22 — undocumented
+- `void Dispose()` :31 — undocumented
+
+### class LastUsedDevice — LastUsedDevice.cs:14
+Knows which device the player used last (keyboard, mouse, gamepad), so on-screen prompts can show that device's buttons. Shared and static like the Input System itself; mirrors device state only, never game state. Starts by itself, read-only from outside.
+- `static InputDevice Current { get; }` :21 — The device used last; null if none is connected.
+- `static event Action Changed` :25 — Raised when Current changes; read Current again.
 
 ## Oyung.Quests
 

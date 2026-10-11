@@ -17,7 +17,7 @@ namespace Oyung.Input
         /// is triggered during a cutscene if Speed input is pressed
         /// </summary>
         event Action ToggleCutsceneSpeedPressed;
-        
+
         /// <summary>
         /// how fast and in what direction a player moves their look (eyes) by x and y axes per frame
         /// </summary>

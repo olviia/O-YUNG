@@ -3,7 +3,10 @@
     "rootNamespace": "Oyung.Input.Unity",
     "references": [
         "Oyung.Input",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "UnityEngine.UI",
+        "InputGlyphs",
+        "InputGlyphs.Display"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

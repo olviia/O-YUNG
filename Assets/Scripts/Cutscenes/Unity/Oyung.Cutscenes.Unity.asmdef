@@ -6,7 +6,8 @@
         "Oyung.SharedKernel",
         "Oyung.SharedKernel.Unity",
         "Unity.Timeline",
-        "UnityEngine.UI"
+        "UnityEngine.UI",
+        "Unity.Localization"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

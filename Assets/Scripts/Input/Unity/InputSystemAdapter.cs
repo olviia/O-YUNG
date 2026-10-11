@@ -6,13 +6,20 @@ namespace Oyung.Input.Unity
 {
     /// <summary>
     /// Implements IGameInput with Unity's Input System.
-    /// The only class that knows the Input System exists.
+    /// The only game-logic class that knows the Input System
+    /// exists; HUD prompts read actions directly for glyphs.
     /// Enables the action map named like the active
     /// InputMode; Menu has no map yet, so all is off.
     /// </summary>
     internal class InputSystemAdapter : IGameInput, IDisposable
     {
-        private readonly OyungActions actions = new OyungActions();
+        // The project asset itself, not a copy: HUD prompts that pick
+        // actions from it see the same enabled maps and holds.
+        private readonly InputActionAsset asset;
+        private readonly InputAction lookPointer;
+        private readonly InputAction lookStick;
+        private readonly InputAction skip;
+        private readonly InputAction speed;
         private readonly IInputModes modes;
         private readonly float mouseDegreesPerPixel;
         private readonly float stickDegreesPerSecond;
@@ -21,17 +28,25 @@ namespace Oyung.Input.Unity
         public event Action ToggleCutsceneSpeedPressed;
 
         /// <param name="modes">Decides which map is on.</param>
+        /// <param name="asset">OyungActions.inputactions itself.</param>
         /// <param name="mouseDegreesPerPixel">Mouse sensitivity.</param>
         /// <param name="stickDegreesPerSecond">Stick turn speed.</param>
-        public InputSystemAdapter(IInputModes modes,
+        public InputSystemAdapter(IInputModes modes, InputActionAsset asset,
             float mouseDegreesPerPixel, float stickDegreesPerSecond)
         {
             this.modes = modes;
+            this.asset = asset;
             this.mouseDegreesPerPixel = mouseDegreesPerPixel;
             this.stickDegreesPerSecond = stickDegreesPerSecond;
 
-            actions.Cutscene.Skip.performed += OnSkipPerformed;
-            actions.Cutscene.Speed.performed += OnSpeedPerformed;
+            // Every action name lives here; a rename fails at startup.
+            lookPointer = Find("Gameplay/LookPointer");
+            lookStick = Find("Gameplay/LookStick");
+            skip = Find("Cutscene/Skip");
+            speed = Find("Cutscene/Speed");
+
+            skip.performed += OnSkipPerformed;
+            speed.performed += OnSpeedPerformed;
             modes.ModeChanged += EnableMapFor;
             EnableMapFor(modes.ActiveMode);
         }
@@ -47,10 +62,10 @@ namespace Oyung.Input.Unity
             get
             {
                 UnityEngine.Vector2 pointer =
-                    actions.Gameplay.LookPointer.ReadValue<UnityEngine.Vector2>()
+                    lookPointer.ReadValue<UnityEngine.Vector2>()
                     * mouseDegreesPerPixel;
                 UnityEngine.Vector2 stick =
-                    actions.Gameplay.LookStick.ReadValue<UnityEngine.Vector2>()
+                    lookStick.ReadValue<UnityEngine.Vector2>()
                     * (stickDegreesPerSecond * UnityEngine.Time.deltaTime);
                 UnityEngine.Vector2 total = pointer + stick;
                 return new Vector2(total.x, total.y);
@@ -60,22 +75,20 @@ namespace Oyung.Input.Unity
         public void Dispose()
         {
             modes.ModeChanged -= EnableMapFor;
-            actions.Cutscene.Skip.performed -= OnSkipPerformed;
-            actions.Cutscene.Speed.performed -= OnSpeedPerformed;
-            actions.Disable();
-            actions.Dispose();
+            skip.performed -= OnSkipPerformed;
+            speed.performed -= OnSpeedPerformed;
+            // Only disable: the asset belongs to the project, not to us.
+            asset.Disable();
         }
+
+        private InputAction Find(string path) =>
+            asset.FindAction(path, throwIfNotFound: true);
 
         private void EnableMapFor(InputMode mode)
         {
-            actions.Gameplay.Disable();
-            actions.Cutscene.Disable();
-
-            switch (mode)
-            {
-                case InputMode.Gameplay: actions.Gameplay.Enable(); break;
-                case InputMode.Cutscene: actions.Cutscene.Enable(); break;
-            }
+            asset.Disable();
+            // Map named like the mode; Menu has none yet, so all stays off.
+            asset.FindActionMap(mode.ToString())?.Enable();
         }
 
         private void OnSkipPerformed(InputAction.CallbackContext _)
