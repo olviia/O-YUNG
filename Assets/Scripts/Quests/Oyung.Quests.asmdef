@@ -2,7 +2,7 @@
     "name": "Oyung.Quests",
     "rootNamespace": "Oyung.Quests",
     "references": [
-        "Oyung.Input"
+        "Oyung.SharedKernel"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

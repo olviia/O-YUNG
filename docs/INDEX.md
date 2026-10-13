@@ -12,14 +12,14 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Globals.Unity](index/Oyung.Globals.Unity.md) |  | Assets/Scripts/Globals/Unity | Oyung.Globals, Oyung.SharedKernel, Oyung.SharedKernel.Unity | Oyung.Root |
 | [Oyung.Hints](index/Oyung.Hints.md) | yes | Assets/Scripts/Hints | Oyung.Quests | Oyung.Hud, Oyung.Root |
 | [Oyung.Hud](index/Oyung.Hud.md) |  | Assets/Scripts/Hud | Oyung.Quests, Oyung.Hints, Oyung.Input.Unity | Oyung.Root |
-| [Oyung.Input](index/Oyung.Input.md) | yes | Assets/Scripts/Input | — | Oyung.Eyes, Oyung.Input.Unity, Oyung.Quests, Oyung.Root, Oyung.Scratch |
+| [Oyung.Input](index/Oyung.Input.md) | yes | Assets/Scripts/Input | — | Oyung.Eyes, Oyung.Input.Unity, Oyung.Root, Oyung.Scratch |
 | [Oyung.Input.Unity](index/Oyung.Input.Unity.md) |  | Assets/Scripts/Input/Unity | Oyung.Input, Unity.InputSystem, UnityEngine.UI, InputGlyphs, InputGlyphs.Display | Oyung.Hud, Oyung.Root |
-| [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.Input | Oyung.Hints, Oyung.Hud, Oyung.Root |
+| [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.SharedKernel | Oyung.Hints, Oyung.Hud, Oyung.Root |
 | [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch | — |
 | [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | — | Oyung.Root, Oyung.Save.Unity |
 | [Oyung.Save.Unity](index/Oyung.Save.Unity.md) |  | Assets/Scripts/Save/Unity | Oyung.Save | Oyung.Root |
 | [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem | Oyung.Root |
-| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
+| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Quests, Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
 | [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | — |
 | [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Scratch |
 | [Oyung.Vision](index/Oyung.Vision.md) | yes | Assets/Scripts/Vision | — | Oyung.Root, Oyung.Scratch, Oyung.Vision.Unity |
@@ -166,9 +166,31 @@ Knows which device the player used last (keyboard, mouse, gamepad), so on-screen
 
 ## Oyung.Quests
 
-### interface IQuests — Ports/Offered/IQuests.cs:5
-undocumented
+### interface IQuests — Ports/Offered/IQuests.cs:12
+Port for what quests announce and answer to other modules (HUD, Hints). Read-only: quests move only by their own conditions; nobody outside starts or completes them directly. Ids are the quest asset's name and the ids typed in it.
 Implemented by: Quests (Oyung.Quests)
+- `event Action<string> QuestStarted` :15 — A quest started (questId).
+- `event Action<string, string, ObjectiveState> ObjectiveChanged` :19 — An objective changed state (questId, objectiveId, new state: Shown, Done or Failed).
+- `event Action<string, string> QuestClosed` :22 — A quest ended (questId, outcomeId).
+- `IReadOnlyList<string> ActiveQuests { get; }` :26 — Started, not yet closed quests, in start order.
+- `QuestState StateOf(string questId)` :28 — undocumented
+- `string OutcomeOf(string questId)` :32 — The outcome the quest closed with; null until closed.
+- `IReadOnlyList<ObjectiveInfo> ObjectivesOf(string questId)` :36 — All objectives of the quest in designer order, hidden ones included; the reader filters by state.
+
+### struct ObjectiveInfo — Ports/Offered/ObjectiveInfo.cs:7
+What others may know about one objective right now (e.g. the HUD listing a quest's shown objectives).
+- `ObjectiveInfo(string id, bool isOptional, ObjectiveState state)` :9 — undocumented
+- `string Id { get; }` :16 — undocumented
+- `bool IsOptional { get; }` :20 — Optional objectives never hold up the quest's default outcome.
+- `ObjectiveState State { get; }` :22 — undocumented
+
+### enum QuestState — Ports/Offered/QuestState.cs:7
+Where a quest is in its life. Every step is sticky: a quest never goes back.
+NotStarted, Active, Closed
+
+### enum ObjectiveState — Ports/Offered/QuestState.cs:23
+Where one objective of a quest is. Sticky like the quest.
+Hidden, Shown, Done, Failed
 
 ## Oyung.Root
 

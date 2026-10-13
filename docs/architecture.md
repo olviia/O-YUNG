@@ -63,7 +63,7 @@ Modules own and drive their MonoBehaviours; runtime objects are spawned by the m
 | Save | ISaveStorage, SaveSystem | FileSaveStorage | — |
 | Cutscenes | ICutscenePlayer, Cutscenes | TimelineCutscenePlayer | — |
 | Vision | IVision, IBlurDisplay, Vision | DepthOfFieldBlurDisplay | — (driven only through IVision) |
-| Quests | IQuests, Quests, QuestTracker | (later: quest assets → data) | Input |
+| Quests | IQuests, Quests, QuestRun, QuestJournal, QuestDefinition | QuestAsset, QuestCatalog, QuestCondition, QuestTexts, QuestsInstaller; Tests/ (EditMode) | SharedKernel |
 | Hints | IHints, Hints | — | Quests |
 | Hud | — | Hud | Quests, Hints, Input.Unity |
 | Eyes | — | EyesInstaller, LookCamera | Input |

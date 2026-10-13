@@ -1,0 +1,19 @@
+{
+    "name": "Oyung.Quests.Unity",
+    "rootNamespace": "Oyung.Quests.Unity",
+    "references": [
+        "Oyung.Quests",
+        "Oyung.SharedKernel",
+        "Oyung.SharedKernel.Unity",
+        "Unity.Localization"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
