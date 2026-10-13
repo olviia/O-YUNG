@@ -9,5 +9,5 @@ Internal and private members only; the rest is in INDEX.md.
 ### internal class QuestTracker — QuestTracker.cs:5
 undocumented
 
-### internal class Quests : IQuests — Quests.cs:5
+### internal class Quests : IQuests — Quests.cs:42
 undocumented

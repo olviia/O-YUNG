@@ -95,7 +95,7 @@ Theme: at first reflexes happen by themselves; skill turns them into deliberate 
 - An event director schedules events per day and reacts to the baby.
 
 ### 11. Inner voice
-- Short text lines from the adult mind (isekai humour), triggered by events and failures.
+- Short text lines, triggered by events and failures.
 - Cheapest content; carries tone and goals.
 
 ### 12. Day cycle

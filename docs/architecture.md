@@ -18,7 +18,7 @@ Hexagonal modular, level 3 of 4: every module is a small hexagon; the compiler e
 - Adapter → knows its port. Port → knows nothing outside. Inside → talks only to ports.
 - Module → another module: only through that module's **ports**, one direction, no cycles.
 - Nothing inside may reference presentation (HUD, camera). Presentation listens to ports.
-- Unity-side modules may use each other's public API (e.g. HUD uses InputGlyphs).
+- Unity-side modules may use each other's public API.
 - Only `Oyung.Root` references everything; nothing references the root.
 
 ## Layout per module
@@ -59,9 +59,9 @@ Modules own and drive their MonoBehaviours; runtime objects are spawned by the m
 | Module | Inside | Unity side | References |
 |---|---|---|---|
 | Globals | GlobalStore (internal); IFactReader/IFactWriter/FactId to delete | BoolGlobal/IntGlobal assets; planned catalog, GlobalIs/SetGlobal, installer | SharedKernel (planned) |
-| Input | IGameInput, IInputModes, InputModeStack | InputInstaller, InputSystemAdapter, InputGlyphs | — |
+| Input | IGameInput, IInputModes, InputModeStack | InputInstaller, InputSystemAdapter | — |
 | Save | ISaveStorage, SaveSystem | FileSaveStorage | — |
-| Cutscenes | ICutscenePlayer, Cutscenes | TimelineCutscenePlayer | Input |
+| Cutscenes | ICutscenePlayer, Cutscenes | TimelineCutscenePlayer | — |
 | Vision | IVision, IBlurDisplay, Vision | DepthOfFieldBlurDisplay | — (driven only through IVision) |
 | Quests | IQuests, Quests, QuestTracker | (later: quest assets → data) | Input |
 | Hints | IHints, Hints | — | Quests |

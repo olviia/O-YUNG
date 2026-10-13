@@ -3,7 +3,7 @@
 Status: direction, evolving. Rewritten 2026-09-26. Plan only the beginning; the rest grows with content.
 
 ## One line
-Reborn as a fantasy creature baby in a fantasy settlement — a long, funny story of growing up, told through many small quests. Isekai-reincarnation feel.
+Born as a fantasy creature baby in a fantasy settlement — a long, funny story of growing up, told through many small quests.
 
 ## Pillars
 - **Growth is the progression.** Stages (baby → … → adult). Each stage ends with a milestone quest; completing it = you grow.
@@ -81,6 +81,6 @@ New content extends the top (a new stage or area) or works at any stage — neve
 ## Open questions
 - Does the player shape growth (Spore-like choices at milestones) or is it fixed?
 - Where does the creature come from, and who is the family / settlement?
-- Does the baby have an inner voice (previous-life memories, isekai humour)?
+- Does the baby have an inner voice?
 - Camera: baby's-eye view (cheap: parent = hands and face) or third person?
 - Art cost per stage: one rig with changing proportions?
