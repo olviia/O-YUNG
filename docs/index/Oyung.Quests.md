@@ -3,7 +3,7 @@
 Root: Assets/Scripts/Quests
 Pure C#: yes
 Depends on: Oyung.SharedKernel
-Used by: Oyung.Hints, Oyung.Hud, Oyung.Root
+Used by: Oyung.Hints, Oyung.Hud, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root
 Internal and private members only; the rest is in INDEX.md.
 
 ### internal class QuestDefinition — QuestDefinition.cs:13
@@ -36,7 +36,7 @@ undocumented
 - `internal Condition ReachedWhen { get; }` :122 — Null: reached when every required objective is done.
 - `internal IReadOnlyList<Instruction> OnReached { get; }` :124 — undocumented
 
-### internal class Instructions — QuestDefinition.cs:127
+### internal class QuestInstructions — QuestDefinition.cs:127
 undocumented
 - `internal static IReadOnlyList<Instruction> Check(IEnumerable<Instruction> instructions, string where)` :131 — undocumented
 - `internal static void ExecuteAll(IReadOnlyList<Instruction> list)` :142 — undocumented

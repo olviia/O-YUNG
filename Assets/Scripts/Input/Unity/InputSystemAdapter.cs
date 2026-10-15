@@ -20,12 +20,14 @@ namespace Oyung.Input.Unity
         private readonly InputAction lookStick;
         private readonly InputAction skip;
         private readonly InputAction speed;
+        private readonly InputAction interact;
         private readonly IInputModes modes;
         private readonly float mouseDegreesPerPixel;
         private readonly float stickDegreesPerSecond;
 
         public event Action SkipCutscenePressed;
         public event Action ToggleCutsceneSpeedPressed;
+        public event Action InteractPressed;
 
         /// <param name="modes">Decides which map is on.</param>
         /// <param name="asset">OyungActions.inputactions itself.</param>
@@ -44,9 +46,11 @@ namespace Oyung.Input.Unity
             lookStick = Find("Gameplay/LookStick");
             skip = Find("Cutscene/Skip");
             speed = Find("Cutscene/Speed");
+            interact = Find("Gameplay/Interact");
 
             skip.performed += OnSkipPerformed;
             speed.performed += OnSpeedPerformed;
+            interact.performed += OnInteractPerformed;
             modes.ModeChanged += EnableMapFor;
             EnableMapFor(modes.ActiveMode);
         }
@@ -77,6 +81,7 @@ namespace Oyung.Input.Unity
             modes.ModeChanged -= EnableMapFor;
             skip.performed -= OnSkipPerformed;
             speed.performed -= OnSpeedPerformed;
+            interact.performed -= OnInteractPerformed;
             // Only disable: the asset belongs to the project, not to us.
             asset.Disable();
         }
@@ -99,6 +104,11 @@ namespace Oyung.Input.Unity
         private void OnSpeedPerformed(InputAction.CallbackContext _)
         {
             ToggleCutsceneSpeedPressed?.Invoke();
+        }
+
+        private void OnInteractPerformed(InputAction.CallbackContext _)
+        {
+            InteractPressed?.Invoke();
         }
     }
 }

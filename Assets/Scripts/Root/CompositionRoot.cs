@@ -2,6 +2,7 @@ using Oyung.Cutscenes.Unity;
 using Oyung.Eyes;
 using Oyung.Globals.Unity;
 using Oyung.Input.Unity;
+using Oyung.Interaction.Unity;
 using Oyung.Quests.Unity;
 using Oyung.Root.Adapters;
 using Oyung.Scratch;
@@ -25,6 +26,7 @@ namespace Oyung.Root
         [SerializeField] private VisionInstaller visionInstaller;
         [SerializeField] private CutscenesInstaller cutscenesInstaller;
         [SerializeField] private QuestsInstaller questsInstaller;
+        [SerializeField] private InteractionInstaller interactionInstaller;
 
         // CLAUDE: dev tools: optional, stand in for modules that don't exist yet.
         [Header("Dev tools")]
@@ -43,6 +45,8 @@ namespace Oyung.Root
             cutsceneInputMode = new CutsceneInputModeAdapter(cutscenes, inputModes);
             // CLAUDE: quests and texts go to Hints and Hud once they exist.
             var (quests, questTexts) = questsInstaller.Build();
+            interactionInstaller.Build(
+                new InteractionInputAdapter(gameInput, inputModes));
 
             // 2. Load: nothing saved yet.
 
@@ -60,6 +64,7 @@ namespace Oyung.Root
         private void OnDestroy()
         {
             // Reverse order of creation.
+            interactionInstaller.Dispose();
             questsInstaller.Dispose();
             cutsceneInputMode?.Dispose();
             cutscenesInstaller.Dispose();

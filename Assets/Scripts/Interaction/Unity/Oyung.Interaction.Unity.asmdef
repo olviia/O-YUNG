@@ -1,0 +1,19 @@
+{
+    "name": "Oyung.Interaction.Unity",
+    "rootNamespace": "Oyung.Interaction.Unity",
+    "references": [
+        "Oyung.Interaction",
+        "Oyung.SharedKernel",
+        "Oyung.SharedKernel.Unity",
+        "Unity.Localization"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

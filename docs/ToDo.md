@@ -16,3 +16,17 @@
     owned by CompositionRoot. Today TimelineCutscenePlayer guesses it
     from scene.isLoaded so quitting mid-cutscene isn't an ending; any
     module reacting to "stopped/ended" events will hit the same trap.
+12. first quest: teaches moving the head without saying "look around".
+    Objective 1 done when the player focuses the parents' voices;
+    objective 2 "Eavesdrop your name"; quest done when the name is
+    chosen. One slice per session:
+    A. gaze + focus: Eyes knows what it looks at, Focus input (single
+       press), prompt that shows/hides with the gaze.
+    B. name: letters pop up in the parents' speech bubbles, the player
+       pops them to build the name; must be clear that this IS
+       choosing your name. Plus a string fact for the name.
+    C. NPC stub: hardcoded parents walking to the crib, marked as a
+       temporary file to be replaced by a real NPC module. Muffled
+       voices, sound waves at the voice source. No Timeline.
+    D. the quest asset tying it together; quest runs invisibly at
+       first, minimal Hud later.

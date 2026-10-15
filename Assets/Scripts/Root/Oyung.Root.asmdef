@@ -14,6 +14,8 @@
         "Oyung.Vision.Unity",
         "Oyung.Quests",
         "Oyung.Quests.Unity",
+        "Oyung.Interaction",
+        "Oyung.Interaction.Unity",
         "Oyung.Hints",
         "Oyung.Hud",
         "Oyung.Eyes",

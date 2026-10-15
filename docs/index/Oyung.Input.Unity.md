@@ -19,15 +19,17 @@ Internal and private members only; the rest is in INDEX.md.
 
 ### internal class InputSystemAdapter : IGameInput, IDisposable — InputSystemAdapter.cs:14
 Implements IGameInput with Unity's Input System. The only game-logic class that knows the Input System exists; HUD prompts read actions directly for glyphs. Enables the action map named like the active InputMode; Menu has no map yet, so all is off.
-- `internal event Action SkipCutscenePressed` :27 (implements IGameInput)
-- `internal event Action ToggleCutsceneSpeedPressed` :28 (implements IGameInput)
-- `internal InputSystemAdapter(IInputModes modes, InputActionAsset asset, float mouseDegreesPerPixel, float stickDegreesPerSecond)` :34 — undocumented
-- `internal Vector2 LookDelta { get; }` :60 (implements IGameInput) — Degrees this frame: X = left/right, Y = up/down. Mouse gives pixels, stick gives a -1..1 position; both become degrees here. Zero when the Gameplay map is off (cutscene, menu).
-- `internal void Dispose()` :75 — undocumented
-- `private InputAction Find(string path)` :84 — undocumented
-- `private void EnableMapFor(InputMode mode)` :87 — undocumented
-- `private void OnSkipPerformed(InputAction.CallbackContext _)` :94 — undocumented
-- `private void OnSpeedPerformed(InputAction.CallbackContext _)` :99 — undocumented
+- `internal event Action SkipCutscenePressed` :28 (implements IGameInput)
+- `internal event Action ToggleCutsceneSpeedPressed` :29 (implements IGameInput)
+- `internal event Action InteractPressed` :30 (implements IGameInput)
+- `internal InputSystemAdapter(IInputModes modes, InputActionAsset asset, float mouseDegreesPerPixel, float stickDegreesPerSecond)` :36 — undocumented
+- `internal Vector2 LookDelta { get; }` :64 (implements IGameInput) — Degrees this frame: X = left/right, Y = up/down. Mouse gives pixels, stick gives a -1..1 position; both become degrees here. Zero when the Gameplay map is off (cutscene, menu).
+- `internal void Dispose()` :79 — undocumented
+- `private InputAction Find(string path)` :89 — undocumented
+- `private void EnableMapFor(InputMode mode)` :92 — undocumented
+- `private void OnSkipPerformed(InputAction.CallbackContext _)` :99 — undocumented
+- `private void OnSpeedPerformed(InputAction.CallbackContext _)` :104 — undocumented
+- `private void OnInteractPerformed(InputAction.CallbackContext _)` :109 — undocumented
 
 ### class LastUsedDevice — LastUsedDevice.cs:14
 - `private static void Start()` :31 — undocumented

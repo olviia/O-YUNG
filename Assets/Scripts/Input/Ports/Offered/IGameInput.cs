@@ -19,6 +19,11 @@ namespace Oyung.Input
         event Action ToggleCutsceneSpeedPressed;
 
         /// <summary>
+        /// is triggered during gameplay when Interact is pressed
+        /// </summary>
+        event Action InteractPressed;
+
+        /// <summary>
         /// how fast and in what direction a player moves their look (eyes) by x and y axes per frame
         /// </summary>
         Vector2 LookDelta { get; }

@@ -14,14 +14,19 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Hud](index/Oyung.Hud.md) |  | Assets/Scripts/Hud | Oyung.Quests, Oyung.Hints, Oyung.Input.Unity | Oyung.Root |
 | [Oyung.Input](index/Oyung.Input.md) | yes | Assets/Scripts/Input | — | Oyung.Eyes, Oyung.Input.Unity, Oyung.Root, Oyung.Scratch |
 | [Oyung.Input.Unity](index/Oyung.Input.Unity.md) |  | Assets/Scripts/Input/Unity | Oyung.Input, Unity.InputSystem, UnityEngine.UI, InputGlyphs, InputGlyphs.Display | Oyung.Hud, Oyung.Root |
-| [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.SharedKernel | Oyung.Hints, Oyung.Hud, Oyung.Root |
-| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch | — |
+| [Oyung.Interaction](index/Oyung.Interaction.md) | yes | Assets/Scripts/Interaction | Oyung.SharedKernel | Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Root |
+| [Oyung.Interaction.Tests](index/Oyung.Interaction.Tests.md) |  | Assets/Scripts/Interaction/Tests | Oyung.Interaction, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
+| [Oyung.Interaction.Unity](index/Oyung.Interaction.Unity.md) |  | Assets/Scripts/Interaction/Unity | Oyung.Interaction, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
+| [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.SharedKernel | Oyung.Hints, Oyung.Hud, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root |
+| [Oyung.Quests.Tests](index/Oyung.Quests.Tests.md) |  | Assets/Scripts/Quests/Tests | Oyung.Quests, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
+| [Oyung.Quests.Unity](index/Oyung.Quests.Unity.md) |  | Assets/Scripts/Quests/Unity | Oyung.Quests, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
+| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Quests.Unity, Oyung.Interaction, Oyung.Interaction.Unity, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch | — |
 | [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | — | Oyung.Root, Oyung.Save.Unity |
 | [Oyung.Save.Unity](index/Oyung.Save.Unity.md) |  | Assets/Scripts/Save/Unity | Oyung.Save | Oyung.Root |
 | [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem | Oyung.Root |
-| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Quests, Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
+| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
 | [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | — |
-| [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Scratch |
+| [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Quests.Unity, Oyung.Scratch |
 | [Oyung.Vision](index/Oyung.Vision.md) | yes | Assets/Scripts/Vision | — | Oyung.Root, Oyung.Scratch, Oyung.Vision.Unity |
 | [Oyung.Vision.Unity](index/Oyung.Vision.Unity.md) |  | Assets/Scripts/Vision/Unity | Oyung.Vision, Unity.RenderPipelines.Core.Runtime, Unity.RenderPipelines.Universal.Runtime | Oyung.Root |
 | [Assembly-CSharp](index/Assembly-CSharp.md) |  | Assets | — | — |
@@ -117,6 +122,10 @@ Globals: needs nothing from other modules. Creates the store and gives it to eve
 undocumented
 - `override void Execute()` :19 (override of Instruction)
 
+### class SetGlobalBool : Instruction — Instructions/SetGlobalBool.cs:12
+undocumented
+- `override void Execute()` :17 (override of Instruction)
+
 ## Oyung.Hints
 
 ### interface IHints — Ports/Offered/IHints.cs:4
@@ -135,7 +144,8 @@ port for game input
 Implemented by: InputSystemAdapter (Oyung.Input.Unity)
 - `event Action SkipCutscenePressed` :14 — is triggered during a cutscene when Skip is held long enough
 - `event Action ToggleCutsceneSpeedPressed` :19 — is triggered during a cutscene if Speed input is pressed
-- `Vector2 LookDelta { get; }` :24 — how fast and in what direction a player moves their look (eyes) by x and y axes per frame
+- `event Action InteractPressed` :24 — is triggered during gameplay when Interact is pressed
+- `Vector2 LookDelta { get; }` :29 — how fast and in what direction a player moves their look (eyes) by x and y axes per frame
 
 ### interface IInputModes — Ports/Offered/IInputModes.cs:8
 port for selecting and changing the input modes
@@ -163,6 +173,25 @@ Gets Monobehavior references for Input module and hands ports to root
 Knows which device the player used last (keyboard, mouse, gamepad), so on-screen prompts can show that device's buttons. Shared and static like the Input System itself; mirrors device state only, never game state. Starts by itself, read-only from outside.
 - `static InputDevice Current { get; }` :21 — The device used last; null if none is connected.
 - `static event Action Changed` :25 — Raised when Current changes; read Current again.
+
+## Oyung.Interaction
+
+### interface IInteractionInput — Ports/Needed/IInteractionInput.cs:9
+port for the player's interact press; implemented outside this module
+Implemented by: InteractionInputAdapter (Oyung.Root)
+- `event Action InteractPressed` :14 — the player pressed Interact
+- `bool CanInteract { get; }` :20 — false while the player can't interact (cutscene, menu): no target, no prompt
+
+## Oyung.Interaction.Unity
+
+### class Interactable : MonoBehaviour, IInteractable — Interactable.cs:18
+undocumented
+- `IReadOnlyList<IInteraction> IInteractable.Interactions { get; }` :30 — undocumented
+
+### class InteractionInstaller : MonoBehaviour, IDisposable — InteractionInstaller.cs:11
+Interaction: needs the interact press. Interactables reach other modules through their conditions and instructions; offers nothing yet.
+- `void Build(IInteractionInput input)` :15 — undocumented
+- `void Dispose()` :18 — undocumented
 
 ## Oyung.Quests
 
@@ -192,9 +221,65 @@ NotStarted, Active, Closed
 Where one objective of a quest is. Sticky like the quest.
 Hidden, Shown, Done, Failed
 
+## Oyung.Quests.Tests
+
+### class QuestsTests — QuestsTests.cs:9
+undocumented
+- `void TearDown()` :14 — undocumented
+- `void Starts_only_when_start_condition_met()` :19 — undocumented
+- `void Nothing_happens_before_Start()` :31 — undocumented
+- `void Start_condition_turning_false_does_not_unstart()` :43 — undocumented
+- `void Objectives_appear_one_after_another_by_default()` :55 — undocumented
+- `void Objective_with_own_appears_when_shows_in_parallel()` :69 — undocumented
+- `void Objective_done_before_asked_completes_on_appearing()` :82 — undocumented
+- `void Objective_fails_when_fail_condition_met()` :99 — undocumented
+- `void Done_wins_when_done_and_failed_hold_together()` :108 — undocumented
+- `void Failed_objective_lets_the_next_one_appear()` :117 — undocumented
+- `void Done_condition_turning_false_keeps_it_done()` :127 — undocumented
+- `void Default_outcome_closes_when_required_objectives_done()` :140 — undocumented
+- `void First_reached_outcome_in_order_wins()` :158 — undocumented
+- `void Failure_is_an_outcome_reached_by_a_failed_objective()` :168 — undocumented
+- `void Closed_quest_stops_listening()` :184 — undocumented
+- `void Listens_only_to_what_can_move_it_next()` :203 — undocumented
+- `void Dispose_unsubscribes_everything()` :217 — undocumented
+- `void Instructions_run_once_at_each_step()` :230 — undocumented
+- `void Instruction_of_one_quest_can_start_another()` :258 — undocumented
+- `void Own_instruction_meeting_own_condition_is_not_missed()` :277 — undocumented
+- `void Evaluations_do_not_nest()` :295 — undocumented
+- `void Events_report_every_step()` :324 — undocumented
+- `void ObjectivesOf_lists_all_in_order_with_state()` :343 — undocumented
+- `void Bad_definitions_throw()` :357 — undocumented
+- `void Unknown_quest_id_throws()` :382 — undocumented
+
+## Oyung.Quests.Unity
+
+### class QuestAsset : ModuleFact<QuestState> — QuestAsset.cs:18
+undocumented
+- `override QuestState Value { get; }` :38 (override of ModuleFact<T>)
+
+### class QuestCondition : Condition — QuestCondition.cs:14
+A question about a quest, for any decider (another quest, a cutscene, an NPC): "has it started?", "did it end as 'failed'?", "is objective 'find_mum' done?". Knows the quest asset, what to ask and, if needed, the objective or outcome id.
+- `override bool IsMet { get; }` :40 (override of Condition)
+- `override event Action Changed` :72 (override of Condition)
+
+### enum QuestCondition.Question — QuestCondition.cs:16
+undocumented
+Started, Active, Closed, EndedWith, ObjectiveAppeared, ObjectiveDone, ObjectiveFailed
+
+### class QuestTexts — QuestTexts.cs:9
+The player-facing texts of quests, by the ids IQuests announces. For presentation (HUD); the core knows no texts.
+- `LocalizedString Title(string questId)` :15 — undocumented
+- `LocalizedString Objective(string questId, string objectiveId)` :18 — undocumented
+
+### class QuestsInstaller : MonoBehaviour, IDisposable — QuestsInstaller.cs:13
+Quests: needs nothing from other modules (they reach it through conditions and instructions). Creates the journal, binds every catalog quest to it and builds the core from their definitions. Start lets quests move.
+- `(IQuests quests, QuestTexts texts) Build()` :19 — undocumented
+- `void StartListening()` :30 — Start phase, after load: quests check their conditions and listen from now on.
+- `void Dispose()` :32 — undocumented
+
 ## Oyung.Root
 
-### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:18
+### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:20
 The only place that creates modules and hands them what they need. Startup: create → load → start. Shutdown: reverse order.
 
 ## Oyung.Save

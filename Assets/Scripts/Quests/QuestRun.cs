@@ -45,7 +45,7 @@ namespace Oyung.Quests
                     return;
                 }
                 _journal.Start(Id);
-                Instructions.ExecuteAll(_definition.OnStart);
+                QuestInstructions.ExecuteAll(_definition.OnStart);
             }
 
             if (State != QuestState.Active) return;
@@ -58,7 +58,7 @@ namespace Oyung.Quests
             if (reached != null)
             {
                 _journal.Close(Id, reached.Id);
-                Instructions.ExecuteAll(reached.OnReached);
+                QuestInstructions.ExecuteAll(reached.OnReached);
                 return;
             }
 
@@ -128,7 +128,7 @@ namespace Oyung.Quests
             IReadOnlyList<Instruction> instructions)
         {
             _journal.SetObjective(Id, objective.Id, state);
-            Instructions.ExecuteAll(instructions);
+            QuestInstructions.ExecuteAll(instructions);
         }
 
         private ObjectiveState StateOf(ObjectiveDefinition objective) =>

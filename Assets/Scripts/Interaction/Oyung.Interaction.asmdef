@@ -1,0 +1,16 @@
+{
+    "name": "Oyung.Interaction",
+    "rootNamespace": "Oyung.Interaction",
+    "references": [
+        "Oyung.SharedKernel"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

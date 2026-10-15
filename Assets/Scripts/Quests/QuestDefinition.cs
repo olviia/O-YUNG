@@ -21,7 +21,7 @@ namespace Oyung.Quests
                 ? throw new ArgumentException("A quest has no id.")
                 : id;
             StartWhen = startWhen ?? throw Invalid("has no Start-when.");
-            OnStart = Instructions.Check(onStart, $"Quest '{id}' On-start");
+            OnStart = QuestInstructions.Check(onStart, $"Quest '{id}' On-start");
             Objectives = (objectives ?? Enumerable.Empty<ObjectiveDefinition>())
                 .ToList();
             Outcomes = (outcomes ?? Enumerable.Empty<OutcomeDefinition>())
@@ -77,9 +77,9 @@ namespace Oyung.Quests
             DoneWhen = doneWhen ?? throw new InvalidOperationException(
                 $"Objective '{id}' has no Done-when.");
             FailsWhen = failsWhen;
-            OnShown = Instructions.Check(onShown, $"Objective '{id}' On-shown");
-            OnDone = Instructions.Check(onDone, $"Objective '{id}' On-done");
-            OnFailed = Instructions.Check(onFailed,
+            OnShown = QuestInstructions.Check(onShown, $"Objective '{id}' On-shown");
+            OnDone = QuestInstructions.Check(onDone, $"Objective '{id}' On-done");
+            OnFailed = QuestInstructions.Check(onFailed,
                 $"Objective '{id}' On-failed");
         }
 
@@ -111,7 +111,7 @@ namespace Oyung.Quests
                 ? throw new ArgumentException("An outcome has no id.")
                 : id;
             ReachedWhen = reachedWhen;
-            OnReached = Instructions.Check(onReached,
+            OnReached = QuestInstructions.Check(onReached,
                 $"Outcome '{id}' On-reached");
         }
 
@@ -124,7 +124,7 @@ namespace Oyung.Quests
         internal IReadOnlyList<Instruction> OnReached { get; }
     }
 
-    internal static class Instructions
+    internal static class QuestInstructions
     {
         // CLAUDE: an empty slot in an instruction list is a designer
         // CLAUDE: mistake: fail fast. A missing list is just "none".

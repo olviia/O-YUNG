@@ -67,4 +67,5 @@ Modules own and drive their MonoBehaviours; runtime objects are spawned by the m
 | Hints | IHints, Hints | — | Quests |
 | Hud | — | Hud | Quests, Hints, Input.Unity |
 | Eyes | — | EyesInstaller, LookCamera | Input |
+| Interaction | IInteractionInput, IInteractable, Interactor, Sighting | Interactable, GazeInteractor, InteractPrompt, InteractionInstaller; Tests/ (EditMode) | SharedKernel |
 | Root | — | CompositionRoot | installers' assemblies + ports |

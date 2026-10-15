@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: GlobalCatalog
   m_EditorClassIdentifier: Oyung.Globals.Unity::Oyung.Globals.Unity.GlobalCatalog
   facts:
+  - {fileID: 11400000, guid: a7d0e01f09195d84198e2fc27364c81a, type: 2}
   - {fileID: 11400000, guid: e6f14bc534f72924387c9b04a368328a, type: 2}
