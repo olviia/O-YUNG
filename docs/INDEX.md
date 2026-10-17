@@ -17,13 +17,14 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Interaction](index/Oyung.Interaction.md) | yes | Assets/Scripts/Interaction | Oyung.SharedKernel | Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Root |
 | [Oyung.Interaction.Tests](index/Oyung.Interaction.Tests.md) |  | Assets/Scripts/Interaction/Tests | Oyung.Interaction, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Interaction.Unity](index/Oyung.Interaction.Unity.md) |  | Assets/Scripts/Interaction/Unity | Oyung.Interaction, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
+| [Oyung.Locomotion](index/Oyung.Locomotion.md) |  | Assets/Scripts/Locomotion | Unity.Animation.Rigging | Oyung.Scratch |
 | [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.SharedKernel | Oyung.Hints, Oyung.Hud, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root |
 | [Oyung.Quests.Tests](index/Oyung.Quests.Tests.md) |  | Assets/Scripts/Quests/Tests | Oyung.Quests, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Quests.Unity](index/Oyung.Quests.Unity.md) |  | Assets/Scripts/Quests/Unity | Oyung.Quests, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
 | [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Quests.Unity, Oyung.Interaction, Oyung.Interaction.Unity, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch | — |
 | [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | — | Oyung.Root, Oyung.Save.Unity |
 | [Oyung.Save.Unity](index/Oyung.Save.Unity.md) |  | Assets/Scripts/Save/Unity | Oyung.Save | Oyung.Root |
-| [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem | Oyung.Root |
+| [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem, Oyung.Locomotion | Oyung.Root |
 | [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
 | [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | — |
 | [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Quests.Unity, Oyung.Scratch |
@@ -193,6 +194,20 @@ Interaction: needs the interact press. Interactables reach other modules through
 - `void Build(IInteractionInput input)` :15 — undocumented
 - `void Dispose()` :18 — undocumented
 
+## Oyung.Locomotion
+
+### class Gait : MonoBehaviour — Gait.cs:18
+Procedural legs: steps the feet under a moving body and lets it bob, waddle, lean and swing its arms. Reads only how the body moved since last frame, so anything that moves the body gets legs (Walker, a script, a teleport). Moves IK targets; the Animation Rigging constraints on the model bend the limbs. Where the targets sit in the prefab is the resting stance: feet and hands return there when still.
+- `void ResetFeet()` :93 — Plants both feet on their spots at once. Called on its own after a teleport.
+
+### class Walker : MonoBehaviour — Walker.cs:15
+Takes its body to a destination over the NavMesh at a calm pace: turns towards where it goes, slows down before arriving, optionally turns to a final facing, then reports Arrived. Moves only the body's transform; legs are Gait's job, which reads the motion.
+- `event Action Arrived` :35 — Raised once the body stands at the destination, facing as asked.
+- `bool IsWalking { get; }` :37 — undocumented
+- `void WalkTo(Vector3 destination, Quaternion? finalFacing = null)` :51 — Starts walking; replaces any walk in progress. Throws if the NavMesh has no path there.
+- `void FinishNow()` :69 — Puts the body where the current walk would end, at once (skips, loading a save). Gait sees the jump and resets the feet.
+- `void Stop()` :80 — Stops where it is, without Arrived.
+
 ## Oyung.Quests
 
 ### interface IQuests — Ports/Offered/IQuests.cs:12
@@ -302,6 +317,9 @@ undocumented
 ### class VisionTestSlider : MonoBehaviour — VisionTestSlider.cs:11
 undocumented
 - `void Use(IVision vision, IInputModes inputModes)` :23 — Called by the root, like a module receiving its required ports.
+
+### class WalkLoop : MonoBehaviour — WalkLoop.cs:11
+undocumented
 
 ## Oyung.SharedKernel
 

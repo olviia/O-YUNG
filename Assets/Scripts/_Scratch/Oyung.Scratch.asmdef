@@ -6,7 +6,8 @@
         "Oyung.SharedKernel.Unity",
         "Oyung.Vision",
         "Oyung.Input",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "Oyung.Locomotion"
     ],
     "autoReferenced": false,
     "noEngineReferences": false

@@ -27,6 +27,16 @@
        choosing your name. Plus a string fact for the name.
     C. NPC stub: hardcoded parents walking to the crib, marked as a
        temporary file to be replaced by a real NPC module. Muffled
-       voices, sound waves at the voice source. No Timeline.
+       voices, sound waves at the voice source. No Timeline. Steps:
+       1. parent models: blob-like shapes after the orange figure in
+          docs/art/images/nursery.jpeg; mother warm orange, father
+          darkish soft red. Find models, download the fitting ones,
+          reshape them towards the reference.
+       2. find an existing rig and skin it to the models.
+       3. walk stub: start by a Condition, waypoints door -> crib,
+          sets "parents arrived"; Listen available after arrival.
+       4. muffled voices: 3D AudioSource + AudioLowPassFilter; voice
+          source still to choose (Sonniss walla, recording, gibberish).
+       5. sound waves at each mouth, readable through the blur.
     D. the quest asset tying it together; quest runs invisibly at
        first, minimal Hud later.
