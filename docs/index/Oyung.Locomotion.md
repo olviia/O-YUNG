@@ -6,33 +6,27 @@ Depends on: Unity.Animation.Rigging
 Used by: Oyung.Scratch
 Internal and private members only; the rest is in INDEX.md.
 
-### class Gait — Gait.cs:18
-- `private void Awake()` :72 — undocumented
-- `private void OnEnable()` :85 — undocumented
-- `private static void CaptureHome(Limb limb, Transform space)` :103 — undocumented
-- `private void Update()` :110 — undocumented
-- `private void StepFeet(Vector3 velocity, float dt)` :134 — undocumented
-- `private float Behind(Limb foot)` :177 — undocumented
-- `private (float arc, float side) Swing()` :181 — undocumented
-- `private void MoveBody()` :188 — undocumented
-- `private void SwingArms()` :200 — undocumented
+### class Gait — Gait.cs:19
+- `private void Awake()` :69 — undocumented
+- `private void OnEnable()` :74 — undocumented
+- `private void Update()` :79 — undocumented
+- `private void DriveWalk(float dt)` :88 — undocumented
+- `private void FitGround(float dt)` :103 — undocumented
+- `private void Probe(Foot foot, float k)` :120 — undocumented
+- `private void Place(Foot foot)` :150 — undocumented
 
-### private class Gait.Limb — Gait.cs:21
+### private class Gait.Foot — Gait.cs:25
 undocumented
-- `private Transform target` :23 — undocumented
-- `private float side` :25 — undocumented
-- `private Vector3 homePosition` :26 — undocumented
-- `private Quaternion homeRotation` :27 — undocumented
-- `private Vector3 planted` :28 — undocumented
-- `private Vector3 from` :29 — undocumented
-- `private float t` :30 — undocumented
-- `private bool stepping` :31 — undocumented
+- `private Transform animated` :28 — undocumented
+- `private Transform target` :30 — undocumented
+- `private float rise` :31 — undocumented
+- `private Vector3 normal` :32 — undocumented
 
 ### class Walker — Walker.cs:15
-- `private void Awake()` :39 — undocumented
-- `private void Update()` :86 — undocumented
-- `private void MoveAlongPath(float dt)` :97 — undocumented
-- `private void TurnToFacing(float dt)` :133 — undocumented
-- `private void Arrive()` :145 — undocumented
-- `private float Remaining(Vector3 pos)` :152 — undocumented
-- `private static Vector3 Flat(Vector3 v)` :160 — undocumented
+- `private void Awake()` :42 — undocumented
+- `private void Update()` :89 — undocumented
+- `private void MoveAlongPath(float dt)` :100 — undocumented
+- `private void TurnToFacing(float dt)` :141 — undocumented
+- `private void Arrive()` :153 — undocumented
+- `private float Remaining(Vector3 pos)` :160 — undocumented
+- `private static Vector3 Flat(Vector3 v)` :168 — undocumented

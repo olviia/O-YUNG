@@ -5,106 +5,75 @@ using UnityEngine.Animations.Rigging;
 namespace Oyung.Locomotion
 {
     /// <summary>
-    /// Procedural legs: steps the feet under a moving body
-    /// and lets it bob, waddle, lean and swing its arms.
-    /// Reads only how the body moved since last frame, so
-    /// anything that moves the body gets legs (Walker, a
-    /// script, a teleport). Moves IK targets; the Animation
-    /// Rigging constraints on the model bend the limbs.
-    /// Where the targets sit in the prefab is the resting
-    /// stance: feet and hands return there when still.
+    /// Makes a body's authored walk fit how it really moves and the
+    /// ground under it. Reads only how the body moved since last frame
+    /// (Walker, a script, a teleport) and drives the Animator: Speed
+    /// blends stand into walk, WalkRate plays the walk at the pace the
+    /// body travels, so the feet don't slide. Then fits each foot to
+    /// the ground under it: lifted or lowered onto it and tilted to its
+    /// slope, and the body sinks when a foot has to reach down. The
+    /// walk animates control bones (one per foot) that say where each
+    /// foot means to be; the leg IK reaches for a target under each.
     /// </summary>
     [DefaultExecutionOrder(10)]
     public class Gait : MonoBehaviour
     {
+        private static readonly int SpeedId = Animator.StringToHash("Speed");
+        private static readonly int RateId = Animator.StringToHash("WalkRate");
+
         [Serializable]
-        private class Limb
+        private class Foot
         {
+            [Tooltip("Animated control bone: where the walk puts the foot.")]
+            public Transform animated;
+            [Tooltip("Leg IK target, a child of the animated bone.")]
             public Transform target;
-            [Tooltip("+1 right, -1 left.")]
-            public float side = 1f;
-            [NonSerialized] public Vector3 homePosition;
-            [NonSerialized] public Quaternion homeRotation;
-            [NonSerialized] public Vector3 planted;
-            [NonSerialized] public Vector3 from;
-            [NonSerialized] public float t;
-            [NonSerialized] public bool stepping;
+            [NonSerialized] public float rise;
+            [NonSerialized] public Vector3 normal = Vector3.up;
         }
 
-        [Tooltip("The animated child; bob, waddle and lean move it.")]
+        [Tooltip("The animated child; it sinks when a foot reaches down.")]
         [SerializeField] private Transform model;
-        [SerializeField] private Limb leftFoot = new() { side = -1f };
-        [SerializeField] private Limb rightFoot = new() { side = 1f };
-        [SerializeField] private Limb leftHand = new() { side = -1f };
-        [SerializeField] private Limb rightHand = new() { side = 1f };
-        [Tooltip("Fades out when still, so poses own the arms.")]
-        [SerializeField] private Rig armsRig;
+        [SerializeField] private Animator animator;
+        [SerializeField] private Foot leftFoot = new();
+        [SerializeField] private Foot rightFoot = new();
 
-        [Header("Steps")]
-        [Tooltip("A foot this far from its spot steps.")]
-        [SerializeField] private float stepDistance = 0.16f;
-        [Tooltip("Same, when the body is nearly still.")]
-        [SerializeField] private float settleDistance = 0.03f;
-        [SerializeField] private float stepDuration = 0.42f;
-        [SerializeField] private float stepHeight = 0.07f;
-        [Tooltip("Speed that counts as a full walk (m/s).")]
-        [SerializeField] private float fullSpeed = 0.7f;
-        [Tooltip("A jump bigger than this resets the feet.")]
+        [Header("Walk")]
+        [Tooltip("Speed the walk animation travels at (m/s), from its "
+                 + "stride and step time. Walker should use the same.")]
+        [SerializeField] private float walkSpeed = 0.3f;
+        [Tooltip("Slowest playback while speeding up or slowing down, "
+                 + "so the walk doesn't crawl in slow motion.")]
+        [SerializeField] private float minRate = 0.6f;
+        [Tooltip("How fast the walk blend follows speed changes.")]
+        [SerializeField] private float blendSpeed = 4f;
+        [Tooltip("A jump bigger than this is a teleport, not a walk.")]
         [SerializeField] private float teleportDistance = 0.5f;
 
-        [Header("Body")]
-        [SerializeField] private float bob = 0.03f;
-        [Tooltip("Degrees of side-to-side roll per step.")]
-        [SerializeField] private float waddle = 5f;
-        [Tooltip("Degrees of forward lean at full speed.")]
-        [SerializeField] private float lean = 4f;
-        [SerializeField] private float armSwing = 0.07f;
-        [Tooltip("How fast walk-ness follows speed changes.")]
-        [SerializeField] private float blendSpeed = 3f;
+        [Header("Ground")]
+        [SerializeField] private LayerMask ground = ~0;
+        [Tooltip("How far above and below the body a foot looks for "
+                 + "ground: the tallest step it takes up or down.")]
+        [SerializeField] private float reach = 0.35f;
+        [Tooltip("How fast feet and body follow the ground (1/s).")]
+        [SerializeField] private float follow = 14f;
+        [Tooltip("Most a foot tilts to match a slope (degrees).")]
+        [SerializeField] private float maxTilt = 30f;
 
-        private Limb[] feet;
-        private Limb[] hands;
-        private Vector3 modelRestPosition;
-        private Quaternion modelRestRotation;
+        private readonly RaycastHit[] hits = new RaycastHit[8];
+        private Vector3 modelRest;
         private Vector3 lastPosition;
-        private float walkness;
+        private float speed01;
+        private float drop;
 
         private void Awake()
         {
-            modelRestPosition = model.localPosition;
-            modelRestRotation = model.localRotation;
-            feet = new[] { leftFoot, rightFoot };
-            hands = new[] { leftHand, rightHand };
-            CaptureHome(leftFoot, transform);
-            CaptureHome(rightFoot, transform);
-            CaptureHome(leftHand, model);
-            CaptureHome(rightHand, model);
-            ResetFeet();
+            modelRest = model.localPosition;
         }
 
         private void OnEnable()
         {
             lastPosition = transform.position;
-            ResetFeet();
-        }
-
-        /// <summary>Plants both feet on their spots at once.
-        /// Called on its own after a teleport.</summary>
-        public void ResetFeet()
-        {
-            foreach (var foot in feet)
-            {
-                foot.planted = transform.TransformPoint(foot.homePosition);
-                foot.stepping = false;
-            }
-            lastPosition = transform.position;
-        }
-
-        private static void CaptureHome(Limb limb, Transform space)
-        {
-            limb.homePosition = space.InverseTransformPoint(limb.target.position);
-            limb.homeRotation =
-                Quaternion.Inverse(space.rotation) * limb.target.rotation;
         }
 
         private void Update()
@@ -112,106 +81,80 @@ namespace Oyung.Locomotion
             var dt = Time.deltaTime;
             if (dt <= 0f)
                 return;
+            DriveWalk(dt);
+            FitGround(dt);
+        }
 
+        private void DriveWalk(float dt)
+        {
             var moved = transform.position - lastPosition;
             lastPosition = transform.position;
             if (moved.magnitude > teleportDistance)
-            {
-                ResetFeet();
-                return;
-            }
+                moved = Vector3.zero;
+            moved.y = 0f;
 
-            var velocity = moved / dt;
-            velocity.y = 0f;
-            var target01 = Mathf.Clamp01(velocity.magnitude / fullSpeed);
-            walkness = Mathf.MoveTowards(walkness, target01, blendSpeed * dt);
-
-            StepFeet(velocity, dt);
-            MoveBody();
-            SwingArms();
+            var relative = moved.magnitude / dt / walkSpeed;
+            speed01 = Mathf.MoveTowards(speed01, Mathf.Min(relative, 1f),
+                blendSpeed * dt);
+            animator.SetFloat(SpeedId, speed01);
+            animator.SetFloat(RateId, Mathf.Max(relative, minRate));
         }
 
-        private void StepFeet(Vector3 velocity, float dt)
+        private void FitGround(float dt)
         {
-            // Lands a little ahead, so the foot isn't left
-            // behind by the time it's down.
-            var lead = velocity * (stepDuration * 0.5f);
+            var k = 1f - Mathf.Exp(-follow * dt);
+            Probe(leftFoot, k);
+            Probe(rightFoot, k);
 
-            // One foot at a time: start a step only when
-            // both are down, with the one furthest behind.
-            if (!leftFoot.stepping && !rightFoot.stepping)
-            {
-                var threshold = walkness > 0.05f ? stepDistance : settleDistance;
-                var dl = Behind(leftFoot);
-                var dr = Behind(rightFoot);
-                var foot = dl >= dr ? leftFoot : rightFoot;
-                if (Mathf.Max(dl, dr) > threshold)
-                {
-                    foot.stepping = true;
-                    foot.from = foot.planted;
-                    foot.t = 0f;
-                }
-            }
+            // The body sinks by the lower foot's reach, so neither leg
+            // has to stretch past its length.
+            var wanted = Mathf.Min(0f, Mathf.Min(leftFoot.rise, rightFoot.rise));
+            drop = Mathf.Lerp(drop, wanted, k);
+            model.localPosition = modelRest + Vector3.up * drop;
 
-            foreach (var foot in feet)
-            {
-                if (foot.stepping)
-                {
-                    foot.t = Mathf.Min(1f, foot.t + dt / stepDuration);
-                    var to = transform.TransformPoint(foot.homePosition) + lead;
-                    var eased = Mathf.SmoothStep(0f, 1f, foot.t);
-                    foot.planted = Vector3.Lerp(foot.from, to, eased);
-                    if (foot.t >= 1f)
-                        foot.stepping = false;
-                }
-
-                var lift = foot.stepping
-                    ? Mathf.Sin(foot.t * Mathf.PI) * stepHeight
-                    : 0f;
-                foot.target.SetPositionAndRotation(
-                    foot.planted + Vector3.up * lift,
-                    transform.rotation * foot.homeRotation);
-            }
+            Place(leftFoot);
+            Place(rightFoot);
         }
 
-        private float Behind(Limb foot) =>
-            Vector3.Distance(foot.planted, transform.TransformPoint(foot.homePosition));
-
-        // Phase of the step in flight (0..1..0) and its side.
-        private (float arc, float side) Swing()
+        // Finds the ground under where the walk last put the foot.
+        private void Probe(Foot foot, float k)
         {
-            var foot = leftFoot.stepping ? leftFoot
-                : rightFoot.stepping ? rightFoot : null;
-            return foot == null ? (0f, 0f) : (Mathf.Sin(foot.t * Mathf.PI), foot.side);
-        }
+            var p = foot.animated.position;
+            var from = new Vector3(p.x, transform.position.y + reach, p.z);
+            var count = Physics.RaycastNonAlloc(from, Vector3.down, hits,
+                2f * reach, ground, QueryTriggerInteraction.Ignore);
 
-        private void MoveBody()
-        {
-            var (arc, side) = Swing();
-            var up = arc * bob * walkness;
-            // Rolls over the foot that stays down.
-            var roll = -side * arc * waddle * walkness;
-            var pitch = lean * walkness;
-            model.localPosition = modelRestPosition + Vector3.up * up;
-            model.localRotation =
-                modelRestRotation * Quaternion.Euler(pitch, 0f, roll);
-        }
-
-        private void SwingArms()
-        {
-            var (arc, side) = Swing();
-            foreach (var hand in hands)
+            var best = float.MaxValue;
+            var rise = 0f;
+            var normal = Vector3.up;
+            for (var i = 0; i < count; i++)
             {
-                // The hand opposite the stepping foot goes forward.
-                var forward = side == 0f ? 0f : -side * hand.side * arc;
-                var local = hand.homePosition
-                    + Vector3.forward * (forward * armSwing * walkness);
-                hand.target.SetPositionAndRotation(
-                    model.TransformPoint(local),
-                    model.rotation * hand.homeRotation);
+                var hit = hits[i];
+                if (hit.transform.IsChildOf(transform) || hit.distance >= best)
+                    continue;
+                best = hit.distance;
+                rise = hit.point.y - transform.position.y;
+                normal = hit.normal;
             }
-            if (armsRig != null)
-                armsRig.weight = walkness;
+
+            foot.rise = Mathf.Lerp(foot.rise, rise, k);
+            var tilt = Vector3.RotateTowards(Vector3.up, normal,
+                maxTilt * Mathf.Deg2Rad, 0f);
+            foot.normal = Vector3.Slerp(foot.normal, tilt, k);
+        }
+
+        // Moves the IK target off the animated foot by the ground's
+        // rise (less what the body already sank) and tilts it to the
+        // slope. Set in the animated bone's space, so it rides on this
+        // frame's animation.
+        private void Place(Foot foot)
+        {
+            var bone = foot.animated;
+            var offset = Vector3.up * (foot.rise - drop);
+            foot.target.localPosition = bone.InverseTransformVector(offset);
+            var tilt = Quaternion.FromToRotation(Vector3.up, foot.normal);
+            foot.target.localRotation =
+                Quaternion.Inverse(bone.rotation) * tilt * bone.rotation;
         }
     }
 }

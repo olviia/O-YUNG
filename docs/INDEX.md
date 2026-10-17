@@ -196,17 +196,16 @@ Interaction: needs the interact press. Interactables reach other modules through
 
 ## Oyung.Locomotion
 
-### class Gait : MonoBehaviour — Gait.cs:18
-Procedural legs: steps the feet under a moving body and lets it bob, waddle, lean and swing its arms. Reads only how the body moved since last frame, so anything that moves the body gets legs (Walker, a script, a teleport). Moves IK targets; the Animation Rigging constraints on the model bend the limbs. Where the targets sit in the prefab is the resting stance: feet and hands return there when still.
-- `void ResetFeet()` :93 — Plants both feet on their spots at once. Called on its own after a teleport.
+### class Gait : MonoBehaviour — Gait.cs:19
+Makes a body's authored walk fit how it really moves and the ground under it. Reads only how the body moved since last frame (Walker, a script, a teleport) and drives the Animator: Speed blends stand into walk, WalkRate plays the walk at the pace the body travels, so the feet don't slide. Then fits each foot to the ground under it: lifted or lowered onto it and tilted to its slope, and the body sinks when a foot has to reach down. The walk animates control bones (one per foot) that say where each foot means to be; the leg IK reaches for a target under each.
 
 ### class Walker : MonoBehaviour — Walker.cs:15
 Takes its body to a destination over the NavMesh at a calm pace: turns towards where it goes, slows down before arriving, optionally turns to a final facing, then reports Arrived. Moves only the body's transform; legs are Gait's job, which reads the motion.
-- `event Action Arrived` :35 — Raised once the body stands at the destination, facing as asked.
-- `bool IsWalking { get; }` :37 — undocumented
-- `void WalkTo(Vector3 destination, Quaternion? finalFacing = null)` :51 — Starts walking; replaces any walk in progress. Throws if the NavMesh has no path there.
-- `void FinishNow()` :69 — Puts the body where the current walk would end, at once (skips, loading a save). Gait sees the jump and resets the feet.
-- `void Stop()` :80 — Stops where it is, without Arrived.
+- `event Action Arrived` :38 — Raised once the body stands at the destination, facing as asked.
+- `bool IsWalking { get; }` :40 — undocumented
+- `void WalkTo(Vector3 destination, Quaternion? finalFacing = null)` :54 — Starts walking; replaces any walk in progress. Throws if the NavMesh has no path there.
+- `void FinishNow()` :72 — Puts the body where the current walk would end, at once (skips, loading a save). Gait sees the jump and resets the feet.
+- `void Stop()` :83 — Stops where it is, without Arrived.
 
 ## Oyung.Quests
 

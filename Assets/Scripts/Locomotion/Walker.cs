@@ -20,6 +20,9 @@ namespace Oyung.Locomotion
         [SerializeField] private float turnSpeed = 140f;
         [Tooltip("How close counts as there, in metres.")]
         [SerializeField] private float arriveDistance = 0.02f;
+        [Tooltip("How far up or down it looks for the NavMesh to stand "
+                 + "on. Exact on a surface built with a height mesh.")]
+        [SerializeField] private float groundSnap = 0.5f;
 
         // Native object: Unity forbids creating it in a
         // field initializer, so Awake does.
@@ -127,6 +130,11 @@ namespace Oyung.Locomotion
             var step = Mathf.Min(currentSpeed * align * dt, distance);
             var next = pos + dir * step;
             next.y = Mathf.Lerp(pos.y, target.y, step / distance);
+            // Path corners only mark turns; between them the ground can
+            // rise and fall (bumps, stairs), so stand on the NavMesh.
+            if (NavMesh.SamplePosition(next, out var hit, groundSnap,
+                    NavMesh.AllAreas))
+                next.y = hit.position.y;
             transform.position = next;
         }
 
