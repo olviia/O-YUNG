@@ -202,6 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Oyung.Locomotion::Oyung.Locomotion.Gait
   model: {fileID: 1062364387059765615}
   animator: {fileID: 6367643594018573077}
+  skin: {fileID: 7010054941006696106}
   leftLeg:
     root: {fileID: 6041446017944162453}
     foot: {fileID: 8081438395305359406}
@@ -217,7 +218,11 @@ MonoBehaviour:
     m_Bits: 4294967295
   reach: 0.35
   follow: 14
+  bodyFollow: 10
   maxTilt: 30
+  lookAhead: 0.25
+  clearance: 0.04
+  swingFollow: 40
   maxBow: 70
 --- !u!1 &6592240219402160005
 GameObject:
@@ -779,6 +784,11 @@ Transform:
 --- !u!95 &6367643594018573077 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 77beebe8ba448f342b070d98069c6671, type: 3}
+  m_PrefabInstance: {fileID: 663436199964472964}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7010054941006696106 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7528972282139080750, guid: 77beebe8ba448f342b070d98069c6671, type: 3}
   m_PrefabInstance: {fileID: 663436199964472964}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8081438395305359406 stripped

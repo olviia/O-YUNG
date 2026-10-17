@@ -7,17 +7,17 @@ Used by: Oyung.Scratch
 Internal and private members only; the rest is in INDEX.md.
 
 ### class Gait — Gait.cs:20
-- `private void Awake()` :75 — undocumented
-- `private void OnEnable()` :82 — undocumented
-- `private static void Prepare(Leg leg)` :87 — undocumented
-- `private void Update()` :100 — undocumented
-- `private void LateUpdate()` :119 — undocumented
-- `private void Probe(Leg leg, float k)` :141 — undocumented
-- `private void Reach(Leg leg, float lift)` :170 — undocumented
-- `private float SolveBow(Leg leg, Vector3 axis, Vector3 chord, float wanted)` :208 — undocumented
-- `private float ChordAt(Leg leg, Vector3 axis, float bow)` :226 — undocumented
-- `private static float Turn(float bow, int i, int n)` :241 — undocumented
-- `private static void Bend(Leg leg, Vector3 axis, float bow)` :244 — undocumented
+- `private void Awake()` :82 — undocumented
+- `private void OnEnable()` :89 — undocumented
+- `private static void Prepare(Leg leg)` :95 — undocumented
+- `private void Update()` :108 — undocumented
+- `private void LateUpdate()` :130 — undocumented
+- `private void Probe(Leg leg, float k)` :159 — undocumented
+- `private void Reach(Leg leg, float lift)` :188 — undocumented
+- `private float SolveBow(Leg leg, Vector3 axis, Vector3 chord, float wanted)` :226 — undocumented
+- `private float ChordAt(Leg leg, Vector3 axis, float bow)` :244 — undocumented
+- `private static float Turn(float bow, int i, int n)` :259 — undocumented
+- `private static void Bend(Leg leg, Vector3 axis, float bow)` :262 — undocumented
 
 ### private class Gait.Leg — Gait.cs:26
 undocumented
@@ -25,7 +25,7 @@ undocumented
 - `private Transform foot` :31 — undocumented
 - `private Transform[] chain` :32 — undocumented
 - `private Quaternion[] rotations` :33 — undocumented
-- `private float rise` :34 — undocumented
+- `private float groundY` :34 — undocumented
 - `private Vector3 normal` :35 — undocumented
 
 ### class Walker — Walker.cs:15
