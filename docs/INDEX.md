@@ -17,7 +17,7 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Interaction](index/Oyung.Interaction.md) | yes | Assets/Scripts/Interaction | Oyung.SharedKernel | Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Root |
 | [Oyung.Interaction.Tests](index/Oyung.Interaction.Tests.md) |  | Assets/Scripts/Interaction/Tests | Oyung.Interaction, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Interaction.Unity](index/Oyung.Interaction.Unity.md) |  | Assets/Scripts/Interaction/Unity | Oyung.Interaction, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
-| [Oyung.Locomotion](index/Oyung.Locomotion.md) |  | Assets/Scripts/Locomotion | Unity.Animation.Rigging | Oyung.Scratch |
+| [Oyung.Locomotion](index/Oyung.Locomotion.md) |  | Assets/Scripts/Locomotion | — | Oyung.Scratch |
 | [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.SharedKernel | Oyung.Hints, Oyung.Hud, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root |
 | [Oyung.Quests.Tests](index/Oyung.Quests.Tests.md) |  | Assets/Scripts/Quests/Tests | Oyung.Quests, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Quests.Unity](index/Oyung.Quests.Unity.md) |  | Assets/Scripts/Quests/Unity | Oyung.Quests, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
@@ -196,8 +196,8 @@ Interaction: needs the interact press. Interactables reach other modules through
 
 ## Oyung.Locomotion
 
-### class Gait : MonoBehaviour — Gait.cs:19
-Makes a body's authored walk fit how it really moves and the ground under it. Reads only how the body moved since last frame (Walker, a script, a teleport) and drives the Animator: Speed blends stand into walk, WalkRate plays the walk at the pace the body travels, so the feet don't slide. Then fits each foot to the ground under it: lifted or lowered onto it and tilted to its slope, and the body sinks when a foot has to reach down. The walk animates control bones (one per foot) that say where each foot means to be; the leg IK reaches for a target under each.
+### class Gait : MonoBehaviour — Gait.cs:20
+Makes a body's authored walk fit how it really moves and the ground under it. Reads only how the body moved since last frame (Walker, a script, a teleport) and drives the Animator: Speed blends stand into walk, WalkRate plays the walk at the pace the body travels, so the feet don't slide. Then fits the feet to the ground the way action games do (a trace per foot, the foot offset by the ground's height, the body lowered to the lower foot, all smoothed), with one difference: our legs are soft bendy tubes, not two bones, so a leg reaches a nearer foot by bowing more and a farther one by straightening, solved directly each frame (no iterations, so no jitter).
 
 ### class Walker : MonoBehaviour — Walker.cs:15
 Takes its body to a destination over the NavMesh at a calm pace: turns towards where it goes, slows down before arriving, optionally turns to a final facing, then reports Arrived. Moves only the body's transform; legs are Gait's job, which reads the motion.

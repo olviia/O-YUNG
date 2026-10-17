@@ -1,9 +1,7 @@
 {
     "name": "Oyung.Locomotion",
     "rootNamespace": "Oyung.Locomotion",
-    "references": [
-        "Unity.Animation.Rigging"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
