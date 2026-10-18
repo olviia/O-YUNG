@@ -196,8 +196,8 @@ Interaction: needs the interact press. Interactables reach other modules through
 
 ## Oyung.Locomotion
 
-### class Gait : MonoBehaviour — Gait.cs:20
-Makes a body's authored walk fit how it really moves and the ground under it. Reads only how the body moved since last frame (Walker, a script, a teleport) and drives the Animator: Speed blends stand into walk, WalkRate plays the walk at the pace the body travels, so the feet don't slide. Then fits the feet to the ground the way action games do (a trace per foot, the foot offset by the ground's height, the body lowered to the lower foot, all smoothed), with one difference: our legs are soft bendy tubes, not two bones, so a leg reaches a nearer foot by bowing more and a farther one by straightening, solved directly each frame (no iterations, so no jitter).
+### class Gait : MonoBehaviour — Gait.cs:25
+Makes a body's authored walk fit how it really moves and the ground under it. Reads only how the body moved since last frame (Walker, a script, a teleport) and drives the Animator: Speed blends stand into walk, WalkRate plays the walk at the pace the body travels, so the feet don't slide. Then fits the feet to the ground the way action games do (a trace per foot, the foot offset by the ground's height, the body lowered to the lower foot, all smoothed), with one difference: our legs are soft bendy tubes, not two bones, so a leg reaches a nearer foot by bowing more and a farther one by straightening, solved directly each frame (no iterations, so no jitter). A planted foot is locked where it stands, whatever the body does (foot locking); a lifting foot plans its landing so the whole foot lands on flat ground (stride fitting). When the walk isn't stepping, as when the body turns on the spot, feet left behind step back under it on their own, one at a time.
 
 ### class Walker : MonoBehaviour — Walker.cs:15
 Takes its body to a destination over the NavMesh at a calm pace: turns towards where it goes, slows down before arriving, optionally turns to a final facing, then reports Arrived. Moves only the body's transform; legs are Gait's job, which reads the motion.

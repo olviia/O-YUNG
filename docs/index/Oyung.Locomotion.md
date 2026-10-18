@@ -6,37 +6,63 @@ Depends on: —
 Used by: Oyung.Scratch
 Internal and private members only; the rest is in INDEX.md.
 
-### class Gait — Gait.cs:20
-- `private void Awake()` :114 — undocumented
-- `private void OnEnable()` :123 — undocumented
-- `private static void Prepare(Leg leg)` :129 — undocumented
-- `private void FindSole(Leg leg)` :145 — undocumented
-- `private static float Weight(BoneWeight w, int bone)` :178 — undocumented
-- `private void Update()` :184 — undocumented
-- `private void LateUpdate()` :206 — undocumented
-- `private void Probe(Leg leg, float k, float dt)` :248 — undocumented
-- `private float GroundAt(Vector3 point, out Vector3 normal)` :307 — undocumented
-- `private void Reach(Leg leg, float lift)` :331 — undocumented
-- `private float SolveBow(Leg leg, Vector3 axis, Vector3 chord, float wanted)` :373 — undocumented
-- `private float ChordAt(Leg leg, Vector3 axis, float bow)` :391 — undocumented
-- `private static float Turn(float bow, int i, int n)` :406 — undocumented
-- `private static void Bend(Leg leg, Vector3 axis, float bow)` :409 — undocumented
+### class Gait — Gait.cs:25
+- `private void Awake()` :175 — undocumented
+- `private void OnEnable()` :184 — undocumented
+- `private static void Prepare(Leg leg)` :191 — undocumented
+- `private void FindSole(Leg leg)` :208 — undocumented
+- `private static float Weight(BoneWeight w, int bone)` :260 — undocumented
+- `private void Update()` :266 — undocumented
+- `private void LateUpdate()` :296 — undocumented
+- `private void Probe(Leg leg, Leg other, float k, float dt)` :350 — undocumented
+- `private float Expected(Leg leg)` :493 — undocumented
+- `private float Progress(Leg leg)` :496 — undocumented
+- `private void Lift(Leg leg, Vector3 landing, Vector3 ahead, Quaternion rotation, Vector3 baseShift, float landTwist)` :504 — undocumented
+- `private float FitLanding(Leg leg, Vector3 ankle, Vector3 ahead, Quaternion rotation)` :518 — undocumented
+- `private bool IsFlat(Leg leg, Vector3 ankle, Quaternion rotation)` :533 — undocumented
+- `private void TryStep()` :553 — undocumented
+- `private float Need(Leg leg)` :578 — undocumented
+- `private Vector3 Facing(Leg leg)` :583 — undocumented
+- `private float GroundAt(Vector3 point, out Vector3 normal)` :594 — undocumented
+- `private void Reach(Leg leg, float lift)` :619 — undocumented
+- `private float SolveBow(Leg leg, Vector3 axis, Vector3 chord, float wanted)` :662 — undocumented
+- `private float ChordAt(Leg leg, Vector3 axis, float bow)` :680 — undocumented
+- `private static float Turn(float bow, int i, int n)` :695 — undocumented
+- `private static void Bend(Leg leg, Vector3 axis, float bow)` :698 — undocumented
+- `private static Vector3 Flat(Vector3 v)` :707 — undocumented
 
-### private class Gait.Leg — Gait.cs:26
+### private class Gait.Leg — Gait.cs:31
 undocumented
-- `private Transform root` :29 — undocumented
-- `private Transform foot` :31 — undocumented
-- `private Transform[] chain` :32 — undocumented
-- `private Quaternion[] rotations` :33 — undocumented
-- `private float groundY` :34 — undocumented
-- `private Vector3 normal` :35 — undocumented
-- `private Vector3 lastFoot` :36 — undocumented
-- `private Vector3 heel` :38 — undocumented
-- `private Vector3 toe` :39 — undocumented
-- `private float restSole` :42 — undocumented
-- `private float swing` :44 — undocumented
-- `private float swung` :47 — undocumented
-- `private float lastSwing` :48 — undocumented
+- `private Transform root` :34 — undocumented
+- `private Transform foot` :36 — undocumented
+- `private Transform[] chain` :37 — undocumented
+- `private Quaternion[] rotations` :38 — undocumented
+- `private float groundY` :39 — undocumented
+- `private Vector3 normal` :40 — undocumented
+- `private Vector3[] sole` :44 — undocumented
+- `private Vector3[] print` :45 — undocumented
+- `private float restSole` :48 — undocumented
+- `private Vector3 ankle` :52 — undocumented
+- `private Vector3 walkFacing` :53 — undocumented
+- `private Vector3 lastLocal` :54 — undocumented
+- `private float walkSwing` :57 — undocumented
+- `private float swing` :58 — undocumented
+- `private float swung` :61 — undocumented
+- `private float lastSwing` :62 — undocumented
+- `private Vector3 plant` :67 — undocumented
+- `private Vector3 facing` :68 — undocumented
+- `private Vector3 offset` :69 — undocumented
+- `private float twist` :70 — undocumented
+- `private Vector3 liftOffset` :71 — undocumented
+- `private float liftTwist` :72 — undocumented
+- `private Vector3 shift` :73 — undocumented
+- `private float landTwist` :74 — undocumented
+- `private Vector3 landing` :75 — undocumented
+- `private Vector3 landFacing` :76 — undocumented
+- `private Quaternion landRotation` :77 — undocumented
+- `private bool stepping` :80 — undocumented
+- `private float stepClock` :81 — undocumented
+- `private bool Planted { get; }` :83 — undocumented
 
 ### class Walker — Walker.cs:15
 - `private void Awake()` :42 — undocumented
