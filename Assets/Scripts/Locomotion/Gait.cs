@@ -15,6 +15,11 @@ namespace Oyung.Locomotion
     /// our legs are soft bendy tubes, not two bones, so a leg reaches a
     /// nearer foot by bowing more and a farther one by straightening,
     /// solved directly each frame (no iterations, so no jitter).
+    /// A planted foot is locked where it stands, whatever the body does
+    /// (foot locking); a lifting foot plans its landing so the whole
+    /// foot lands on flat ground (stride fitting). When the walk isn't
+    /// stepping, as when the body turns on the spot, feet left behind
+    /// step back under it on their own, one at a time.
     /// </summary>
     [DefaultExecutionOrder(10)]
     public class Gait : MonoBehaviour
@@ -33,19 +38,49 @@ namespace Oyung.Locomotion
             [NonSerialized] public Quaternion[] rotations;
             [NonSerialized] public float groundY;
             [NonSerialized] public Vector3 normal = Vector3.up;
-            [NonSerialized] public Vector3 lastFoot;
-            // Heel and toe of the sole, in the foot bone's space.
-            [NonSerialized] public Vector3 heel;
-            [NonSerialized] public Vector3 toe;
+            // Heel, toe and the two sides of the sole, in the foot
+            // bone's space; and the same, flat, from the ankle in the
+            // body's space, a little bigger: the spot a landing needs.
+            [NonSerialized] public Vector3[] sole;
+            [NonSerialized] public Vector3[] print;
             // How high the sole sits above the body's ground at rest;
             // the model may stand a little above it.
             [NonSerialized] public float restSole;
-            // 0 planted .. 1 swinging, read from how the walk moves it.
+            // Where the walk put the ankle this frame, before fitting,
+            // and the way it pointed the foot; the ankle in the body's
+            // space last frame.
+            [NonSerialized] public Vector3 ankle;
+            [NonSerialized] public Vector3 walkFacing;
+            [NonSerialized] public Vector3 lastLocal;
+            // 0 planted .. 1 swinging: walkSwing as the walk moves the
+            // foot, swing also counting a step of Gait's own.
+            [NonSerialized] public float walkSwing;
             [NonSerialized] public float swing;
             // How far this swing has carried the foot, and how far the
             // last whole swing did: the rest is where it will land.
             [NonSerialized] public float swung;
             [NonSerialized] public float lastSwing = -1f;
+            // Where the foot stands in the world while planted, and the
+            // way it points; offset and twist take the walk's ankle
+            // there. A swing carries them from what they were at lift
+            // to shift and landTwist, which fit where it lands.
+            [NonSerialized] public Vector3 plant;
+            [NonSerialized] public Vector3 facing;
+            [NonSerialized] public Vector3 offset;
+            [NonSerialized] public float twist;
+            [NonSerialized] public Vector3 liftOffset;
+            [NonSerialized] public float liftTwist;
+            [NonSerialized] public Vector3 shift;
+            [NonSerialized] public float landTwist;
+            [NonSerialized] public Vector3 landing;
+            [NonSerialized] public Vector3 landFacing;
+            [NonSerialized] public Quaternion landRotation;
+            // A step Gait takes itself, when the body turns or shuffles
+            // with no walk to carry the foot.
+            [NonSerialized] public bool stepping;
+            [NonSerialized] public float stepClock;
+
+            public bool Planted => !stepping && walkSwing < 0.5f;
         }
 
         [Tooltip("The animated child; it sinks or rises to fit the feet.")]
@@ -81,14 +116,21 @@ namespace Oyung.Locomotion
         [Tooltip("Most a foot tilts to match a slope (degrees).")]
         [SerializeField] private float maxTilt = 30f;
         [Header("Stepping")]
-        [Tooltip("Most a swinging foot looks ahead for ground to lift "
-                 + "over and land on (m); it looks only as far as it "
-                 + "will land, learnt from its last swing.")]
+        [Tooltip("How far a swing carries the foot (m) until Gait has "
+                 + "measured one; it then expects what the last did.")]
         [SerializeField] private float lookAhead = 0.25f;
         [Tooltip("Extra lift of a swinging foot over what it passes (m).")]
         [SerializeField] private float clearance = 0.04f;
         [Tooltip("How fast a swinging foot follows the ground (1/s).")]
         [SerializeField] private float swingFollow = 40f;
+        [Tooltip("Most a foot lands farther or nearer than the walk "
+                 + "would put it, to land whole on a step or slab (m).")]
+        [SerializeField] private float maxShift = 0.08f;
+        [Tooltip("Most the ground under a whole foot may rise and fall "
+                 + "and still be a place to land (m).")]
+        [SerializeField] private float flatness = 0.015f;
+        [Tooltip("Room kept around the foot from an edge (m).")]
+        [SerializeField] private float margin = 0.015f;
         [Tooltip("Most a leg shortens by bowing (m); for a higher foot "
                  + "beyond that, the body rises.")]
         [SerializeField] private float maxShorten = 0.05f;
@@ -99,9 +141,28 @@ namespace Oyung.Locomotion
                  + "(degrees at the hip).")]
         [SerializeField] private float maxBow = 70f;
 
+        [Header("Turning")]
+        [Tooltip("Below this share of the walk, feet step on their own "
+                 + "when the body turns or shuffles away from them.")]
+        [SerializeField] private float stepBelow = 0.25f;
+        [Tooltip("How far a planted foot is left behind before it steps.")]
+        [SerializeField] private float stepDistance = 0.06f;
+        [Tooltip("How far a planted foot is turned before it steps "
+                 + "(degrees).")]
+        [SerializeField] private float stepTwist = 25f;
+        [Tooltip("Most a planted foot stays turned; past it, it pivots "
+                 + "on the spot (degrees).")]
+        [SerializeField] private float maxTwist = 40f;
+        [Tooltip("How long one step takes (s).")]
+        [SerializeField] private float stepTime = 0.35f;
+
         private readonly RaycastHit[] hits = new RaycastHit[8];
         private Vector3 modelRest;
         private Vector3 lastPosition;
+        private Vector3 lastForward;
+        private Vector3 bodyVelocity;
+        // Degrees per second the body turns, smoothed.
+        private float turnRate;
         private float speed01;
         // How far the body sits below (or above) its height to fit
         // the feet.
@@ -123,6 +184,7 @@ namespace Oyung.Locomotion
         private void OnEnable()
         {
             lastPosition = transform.position;
+            lastForward = Flat(transform.forward);
             snap = true;
         }
 
@@ -139,9 +201,10 @@ namespace Oyung.Locomotion
             leg.rotations = new Quaternion[leg.chain.Length];
         }
 
-        // Heel and toe: the back- and front-most points of the foot, at
-        // its sole, from the skin's vertices that follow the foot.
-        // Read in the body's space, where up and forward are known.
+        // Heel, toe and sides: the back-, front- and side-most points of
+        // the foot, at its sole, from the skin's vertices that follow
+        // the foot. Read in the body's space, where up and forward are
+        // known.
         private void FindSole(Leg leg)
         {
             var mesh = skin.sharedMesh;
@@ -162,17 +225,36 @@ namespace Oyung.Locomotion
             foreach (var p in points)
                 bottom = Mathf.Min(bottom, p.y);
             // A round foot bulges past its sole: take the whole foot's
-            // front and back, at the height of the sole.
-            Vector3 heel = Vector3.positiveInfinity, toe = Vector3.negativeInfinity;
+            // front, back and sides, at the height of the sole.
+            var edge = new[]
+            {
+                Vector3.positiveInfinity, Vector3.negativeInfinity,
+                Vector3.positiveInfinity, Vector3.negativeInfinity,
+            };
             foreach (var p in points)
             {
-                if (p.z < heel.z) heel = p;
-                if (p.z > toe.z) toe = p;
+                if (p.z < edge[0].z) edge[0] = p;
+                if (p.z > edge[1].z) edge[1] = p;
+                if (p.x < edge[2].x) edge[2] = p;
+                if (p.x > edge[3].x) edge[3] = p;
             }
-            heel.y = toe.y = bottom;
             leg.restSole = bottom;
-            leg.heel = leg.foot.InverseTransformPoint(transform.TransformPoint(heel));
-            leg.toe = leg.foot.InverseTransformPoint(transform.TransformPoint(toe));
+            var ankle = transform.InverseTransformPoint(leg.foot.position);
+            var grow = new[]
+            {
+                Vector3.back, Vector3.forward, Vector3.left, Vector3.right,
+            };
+            leg.sole = new Vector3[4];
+            leg.print = new Vector3[4];
+            for (var i = 0; i < 4; i++)
+            {
+                edge[i].y = bottom;
+                leg.sole[i] = leg.foot.InverseTransformPoint(
+                    transform.TransformPoint(edge[i]));
+                var flat = edge[i] - ankle + grow[i] * margin;
+                flat.y = 0f;
+                leg.print[i] = flat;
+            }
         }
 
         private static float Weight(BoneWeight w, int bone) =>
@@ -194,6 +276,14 @@ namespace Oyung.Locomotion
                 snap = true;
             }
             moved.y = 0f;
+            bodyVelocity = moved / dt;
+
+            var forward = Flat(transform.forward);
+            var yaw = snap ? 0f
+                : Vector3.SignedAngle(lastForward, forward, Vector3.up);
+            lastForward = forward;
+            turnRate = snap ? 0f
+                : Mathf.Lerp(turnRate, yaw / dt, 1f - Mathf.Exp(-10f * dt));
 
             var relative = moved.magnitude / dt / walkSpeed;
             speed01 = Mathf.MoveTowards(speed01, Mathf.Min(relative, 1f),
@@ -208,12 +298,21 @@ namespace Oyung.Locomotion
             var dt = Time.deltaTime;
             if (dt <= 0f)
                 return;
+            // Unseen, the Animator may skip posing the body to save time;
+            // fitting last frame's fit again would compound it. Skip too,
+            // and start the feet afresh when seen again.
+            if (animator.cullingMode != AnimatorCullingMode.AlwaysAnimate
+                && !skin.isVisible)
+            {
+                snap = true;
+                return;
+            }
             var k = snap ? 1f : 1f - Mathf.Exp(-follow * dt);
             var kBody = snap ? 1f : 1f - Mathf.Exp(-bodyFollow * dt);
             var y = transform.position.y;
             bodyY = Mathf.Lerp(bodyY, y, kBody);
-            Probe(leftLeg, k, dt);
-            Probe(rightLeg, k, dt);
+            Probe(leftLeg, rightLeg, k, dt);
+            Probe(rightLeg, leftLeg, k, dt);
             snap = false;
 
             // Each foot's ground, measured from the smoothed body. The
@@ -237,58 +336,146 @@ namespace Oyung.Locomotion
             // rest height, so the sole touches the ground.
             Reach(leftLeg, riseL - leftLeg.restSole - bodyOffset);
             Reach(rightLeg, riseR - rightLeg.restSole - bodyOffset);
+
+            TryStep();
         }
 
-        // Finds the ground a foot should stand on, as a smoothed world
+        // Keeps a planted foot where it stands in the world, whatever
+        // the body does, and carries a swinging one to where it lands;
+        // then finds the ground it should stand on, as a smoothed world
         // height (a jump of the body doesn't move it). A planted foot
         // stands on the ground under it. A swinging foot rises to the
-        // highest ground on its way ahead, plus clearance, so it steps
-        // over edges and onto steps instead of through them, and lands
-        // on what it found there.
-        private void Probe(Leg leg, float k, float dt)
+        // highest ground on its way to its landing, plus clearance, so
+        // it steps over edges and onto steps instead of through them.
+        private void Probe(Leg leg, Leg other, float k, float dt)
         {
-            var p = leg.foot.position;
-            var velocity = snap ? Vector3.zero : (p - leg.lastFoot) / dt;
-            leg.lastFoot = p;
+            var a = leg.foot.position;
+            leg.ankle = a;
+            var local = transform.InverseTransformPoint(a);
+            // The foot's own motion plus the body's travel, but not the
+            // body's turning: a turn swings every foot around the body,
+            // and that is no step.
+            var velocity = snap ? Vector3.zero
+                : bodyVelocity + transform.TransformVector(
+                    (local - leg.lastLocal) / dt);
+            leg.lastLocal = local;
             velocity.y = 0f;
+            var facing = Facing(leg);
+            leg.walkFacing = facing;
+            if (snap)
+            {
+                leg.plant = a;
+                leg.facing = facing;
+                leg.offset = leg.shift = Vector3.zero;
+                leg.twist = leg.landTwist = 0f;
+                leg.stepping = false;
+            }
 
             // The walk keeps a planted foot still in the world (its pace
             // matches the body's) and swings the other at about twice
             // the body's speed.
+            // Barely walking, feet move with the blend between stand and
+            // walk (both at once, no step): Gait's own steps take over.
             var pace = Mathf.Max(walkSpeed * speed01, 0.05f);
             var swinging = Mathf.InverseLerp(0.4f * pace, 1.2f * pace,
-                velocity.magnitude);
-            var was = leg.swing;
-            leg.swing = snap ? swinging
-                : Mathf.MoveTowards(leg.swing, swinging, 20f * dt);
-            if (leg.swing >= 0.5f)
+                    velocity.magnitude)
+                * Mathf.InverseLerp(0.5f * stepBelow, stepBelow, speed01);
+            // Nor does a walk swing both feet at once: one waits for the
+            // other to land.
+            if (leg.walkSwing < 0.5f && other.walkSwing >= 0.5f)
+                swinging = 0f;
+            var was = leg.walkSwing;
+            leg.walkSwing = snap ? swinging
+                : Mathf.MoveTowards(leg.walkSwing, swinging, 20f * dt);
+            var landed = false;
+            if (leg.walkSwing >= 0.5f)
+            {
+                if (was < 0.5f)
+                {
+                    // The walk takes over from a step of Gait's own.
+                    leg.stepping = false;
+                    var ahead = velocity.sqrMagnitude > 1e-6f
+                        ? velocity.normalized
+                        : Flat(transform.forward);
+                    Lift(leg, a + ahead * Expected(leg), ahead,
+                        transform.rotation, Vector3.zero, 0f);
+                }
                 leg.swung += velocity.magnitude * dt;
+            }
             else if (was >= 0.5f)
             {
                 leg.lastSwing = leg.swung;
                 leg.swung = 0f;
+                landed = true;
+            }
+            if (leg.stepping)
+            {
+                leg.stepClock += dt;
+                if (leg.stepClock >= stepTime)
+                {
+                    leg.stepping = false;
+                    landed = true;
+                }
+            }
+            var stepSwing = leg.stepping
+                ? Mathf.Sin(Mathf.PI * leg.stepClock / stepTime)
+                : 0f;
+            leg.swing = Mathf.Max(leg.walkSwing, stepSwing);
+
+            if (leg.Planted)
+            {
+                if (landed)
+                {
+                    leg.plant = a + leg.offset;
+                    leg.facing = Quaternion.AngleAxis(leg.twist, Vector3.up)
+                        * facing;
+                }
+                leg.offset = Flat(leg.plant - a);
+                leg.twist = Vector3.SignedAngle(facing, leg.facing,
+                    Vector3.up);
+                // Turned too far, a planted foot pivots on the spot.
+                if (Mathf.Abs(leg.twist) > maxTwist)
+                {
+                    leg.twist = Mathf.Clamp(leg.twist, -maxTwist, maxTwist);
+                    leg.facing = Quaternion.AngleAxis(leg.twist, Vector3.up)
+                        * facing;
+                }
+            }
+            else if (leg.stepping)
+            {
+                // A step of Gait's own goes from where the foot stood to
+                // where it lands, in the world, easing in and out: the
+                // body turning meanwhile doesn't drag it.
+                var e = Mathf.SmoothStep(0f, 1f, Progress(leg));
+                leg.offset = Flat(Vector3.Lerp(leg.plant, leg.landing, e) - a);
+                leg.twist = Vector3.SignedAngle(facing,
+                    Vector3.Slerp(leg.facing, leg.landFacing, e), Vector3.up);
+            }
+            else
+            {
+                // The walk carries a swinging foot; it only moves where
+                // the swing ends.
+                var e = Mathf.SmoothStep(0f, 1f, Progress(leg));
+                leg.offset = Vector3.Lerp(leg.liftOffset, leg.shift, e);
+                leg.twist = Mathf.Lerp(leg.liftTwist, leg.landTwist, e);
             }
 
             // The foot stands on the highest ground under its sole, so
             // a toe over the next step doesn't sink into it.
-            var heel = leg.foot.TransformPoint(leg.heel);
-            var toe = leg.foot.TransformPoint(leg.toe);
-            var under = Mathf.Max(GroundAt((heel + toe) * 0.5f, out var normal),
-                Mathf.Max(GroundAt(heel, out _), GroundAt(toe, out _)));
+            var heel = leg.foot.TransformPoint(leg.sole[0]) + leg.offset;
+            var toe = leg.foot.TransformPoint(leg.sole[1]) + leg.offset;
+            var under = GroundAt((heel + toe) * 0.5f, out var normal);
+            for (var i = 0; i < 4; i++)
+                under = Mathf.Max(under, GroundAt(
+                    leg.foot.TransformPoint(leg.sole[i]) + leg.offset,
+                    out _));
             var highest = under;
             if (leg.swing > 0f)
             {
-                var ahead = velocity.sqrMagnitude > 1e-6f
-                    ? velocity.normalized
-                    : transform.forward;
-                var left = leg.lastSwing < 0f
-                    ? lookAhead
-                    : Mathf.Clamp(leg.lastSwing - leg.swung, 0f, lookAhead);
+                var landToe = leg.landing + leg.landRotation * leg.print[1];
                 for (var i = 1; i <= 4; i++)
-                {
-                    var q = toe + ahead * (left * i / 4f);
-                    highest = Mathf.Max(highest, GroundAt(q, out _));
-                }
+                    highest = Mathf.Max(highest,
+                        GroundAt(Vector3.Lerp(toe, landToe, i / 4f), out _));
             }
             var target = under
                 + (highest - under + clearance) * leg.swing;
@@ -300,6 +487,106 @@ namespace Oyung.Locomotion
                 maxTilt * Mathf.Deg2Rad, 0f);
             tilt = Vector3.Slerp(tilt, Vector3.up, leg.swing);
             leg.normal = Vector3.Slerp(leg.normal, tilt, k);
+        }
+
+        // How far a walk swing carries the foot, as far as Gait knows.
+        private float Expected(Leg leg) =>
+            leg.lastSwing > 0f ? leg.lastSwing : lookAhead;
+
+        private float Progress(Leg leg) => leg.stepping
+            ? leg.stepClock / stepTime
+            : Mathf.Clamp01(leg.swung / Expected(leg));
+
+        // A foot lifts: plans where it lands. The walk (or a step) would
+        // put the ankle at landing, pointing as rotation; it lands
+        // nearer or farther along ahead if that puts the whole foot on
+        // flat ground, the way action games fit strides to stairs.
+        private void Lift(Leg leg, Vector3 landing, Vector3 ahead,
+            Quaternion rotation, Vector3 baseShift, float landTwist)
+        {
+            leg.liftOffset = leg.offset;
+            leg.liftTwist = leg.twist;
+            var along = FitLanding(leg, landing + baseShift, ahead, rotation);
+            leg.shift = baseShift + ahead * along;
+            leg.landTwist = landTwist;
+            leg.landing = landing + leg.shift;
+            leg.landRotation = rotation;
+        }
+
+        // The smallest move along ahead, up to maxShift, that lands the
+        // foot's whole print on flat ground; none if there's no such.
+        private float FitLanding(Leg leg, Vector3 ankle, Vector3 ahead,
+            Quaternion rotation)
+        {
+            const float step = 0.01f;
+            var tries = Mathf.FloorToInt(maxShift / step);
+            for (var i = 0; i <= 2 * tries; i++)
+            {
+                // 0, +1, -1, +2, -2 ... steps: forward first, onto a step.
+                var along = (i % 2 == 1 ? 1f : -1f) * ((i + 1) / 2) * step;
+                if (IsFlat(leg, ankle + ahead * along, rotation))
+                    return along;
+            }
+            return 0f;
+        }
+
+        private bool IsFlat(Leg leg, Vector3 ankle, Quaternion rotation)
+        {
+            float low = float.MaxValue, high = float.MinValue;
+            for (var i = 0; i <= 4; i++)
+            {
+                var point = i < 4
+                    ? leg.print[i]
+                    : (leg.print[0] + leg.print[1]) * 0.5f;
+                var y = GroundAt(ankle + rotation * point, out _);
+                low = Mathf.Min(low, y);
+                high = Mathf.Max(high, y);
+            }
+            return high - low <= flatness;
+        }
+
+        // When the walk isn't stepping, a foot left behind or turned
+        // away by the body steps back under it: one foot at a time, the
+        // one most out of place, while the other stands. A turning body
+        // keeps turning during the step, so the foot lands ahead of the
+        // turn, as people step into a turn.
+        private void TryStep()
+        {
+            if (speed01 >= stepBelow || leftLeg.stepping || rightLeg.stepping
+                || !leftLeg.Planted || !rightLeg.Planted)
+                return;
+            var needL = Need(leftLeg);
+            var needR = Need(rightLeg);
+            if (Mathf.Max(needL, needR) < 1f)
+                return;
+            var leg = needL >= needR ? leftLeg : rightLeg;
+
+            var turn = turnRate * stepTime;
+            var lead = Mathf.Clamp(0.5f * turn, -stepTwist, stepTwist);
+            var end = Quaternion.AngleAxis(turn, Vector3.up);
+            var land = Quaternion.AngleAxis(turn + lead, Vector3.up);
+            var c = transform.position;
+            var d = Flat(leg.ankle - c);
+            leg.stepping = true;
+            leg.stepClock = 0f;
+            leg.landFacing = land * leg.walkFacing;
+            Lift(leg, c + end * d, end * Flat(transform.forward),
+                end * transform.rotation, land * d - end * d, lead);
+        }
+
+        // How out of place a planted foot is: 1 is time to step.
+        private float Need(Leg leg) => Mathf.Max(
+            (leg.offset - leg.shift).magnitude / stepDistance,
+            Mathf.Abs(leg.twist - leg.landTwist) / stepTwist);
+
+        // The way the walk points the foot, flat: heel to toe.
+        private Vector3 Facing(Leg leg)
+        {
+            var along = Flat(leg.foot.TransformPoint(leg.sole[1])
+                - leg.foot.TransformPoint(leg.sole[0]));
+            return along.sqrMagnitude > 1e-6f
+                ? along.normalized
+                : Flat(transform.forward);
         }
 
         // Height of the ground under a point, looking within reach of
@@ -325,15 +612,16 @@ namespace Oyung.Locomotion
             return y;
         }
 
-        // Moves the ankle up by lift (down if negative) from where the
-        // walk put it: bows or straightens the leg to change its reach,
-        // turns the whole leg to aim at the goal, tilts the foot.
+        // Moves the ankle up by lift (down if negative), and by the
+        // leg's offset along the ground, from where the walk put it:
+        // bows or straightens the leg to change its reach, turns the
+        // whole leg to aim at the goal, tilts and twists the foot.
         private void Reach(Leg leg, float lift)
         {
             var footRotation = leg.foot.rotation;
             var hip = leg.root.position;
             var ankle = leg.foot.position;
-            var goal = ankle + Vector3.up * lift;
+            var goal = ankle + Vector3.up * lift + leg.offset;
             var chord = ankle - hip;
             var wanted = (goal - hip).magnitude;
 
@@ -362,7 +650,8 @@ namespace Oyung.Locomotion
             }
 
             var tilt = Quaternion.FromToRotation(Vector3.up, leg.normal);
-            leg.foot.rotation = tilt * footRotation;
+            var twist = Quaternion.AngleAxis(leg.twist, Vector3.up);
+            leg.foot.rotation = twist * tilt * footRotation;
         }
 
         // Bow angle (degrees at the hip) that shortens the chord between
@@ -414,5 +703,7 @@ namespace Oyung.Locomotion
                     Quaternion.AngleAxis(Turn(bow, i, n), axis)
                     * leg.rotations[i];
         }
+
+        private static Vector3 Flat(Vector3 v) => new(v.x, 0f, v.z);
     }
 }

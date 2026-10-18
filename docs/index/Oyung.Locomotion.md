@@ -7,17 +7,20 @@ Used by: Oyung.Scratch
 Internal and private members only; the rest is in INDEX.md.
 
 ### class Gait — Gait.cs:20
-- `private void Awake()` :82 — undocumented
-- `private void OnEnable()` :89 — undocumented
-- `private static void Prepare(Leg leg)` :95 — undocumented
-- `private void Update()` :108 — undocumented
-- `private void LateUpdate()` :130 — undocumented
-- `private void Probe(Leg leg, float k)` :159 — undocumented
-- `private void Reach(Leg leg, float lift)` :188 — undocumented
-- `private float SolveBow(Leg leg, Vector3 axis, Vector3 chord, float wanted)` :226 — undocumented
-- `private float ChordAt(Leg leg, Vector3 axis, float bow)` :244 — undocumented
-- `private static float Turn(float bow, int i, int n)` :259 — undocumented
-- `private static void Bend(Leg leg, Vector3 axis, float bow)` :262 — undocumented
+- `private void Awake()` :114 — undocumented
+- `private void OnEnable()` :123 — undocumented
+- `private static void Prepare(Leg leg)` :129 — undocumented
+- `private void FindSole(Leg leg)` :145 — undocumented
+- `private static float Weight(BoneWeight w, int bone)` :178 — undocumented
+- `private void Update()` :184 — undocumented
+- `private void LateUpdate()` :206 — undocumented
+- `private void Probe(Leg leg, float k, float dt)` :248 — undocumented
+- `private float GroundAt(Vector3 point, out Vector3 normal)` :307 — undocumented
+- `private void Reach(Leg leg, float lift)` :331 — undocumented
+- `private float SolveBow(Leg leg, Vector3 axis, Vector3 chord, float wanted)` :373 — undocumented
+- `private float ChordAt(Leg leg, Vector3 axis, float bow)` :391 — undocumented
+- `private static float Turn(float bow, int i, int n)` :406 — undocumented
+- `private static void Bend(Leg leg, Vector3 axis, float bow)` :409 — undocumented
 
 ### private class Gait.Leg — Gait.cs:26
 undocumented
@@ -27,6 +30,13 @@ undocumented
 - `private Quaternion[] rotations` :33 — undocumented
 - `private float groundY` :34 — undocumented
 - `private Vector3 normal` :35 — undocumented
+- `private Vector3 lastFoot` :36 — undocumented
+- `private Vector3 heel` :38 — undocumented
+- `private Vector3 toe` :39 — undocumented
+- `private float restSole` :42 — undocumented
+- `private float swing` :44 — undocumented
+- `private float swung` :47 — undocumented
+- `private float lastSwing` :48 — undocumented
 
 ### class Walker — Walker.cs:15
 - `private void Awake()` :42 — undocumented
