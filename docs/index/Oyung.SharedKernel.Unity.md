@@ -3,7 +3,7 @@
 Root: Assets/Scripts/SharedKernel/Unity
 Pure C#: no
 Depends on: Oyung.SharedKernel
-Used by: Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity
+Used by: Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Locations.Editor, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity
 Internal and private members only; the rest is in INDEX.md.
 
 ### class `Catalog<T>` — Catalog.cs:12

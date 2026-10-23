@@ -23,5 +23,5 @@ undocumented
 - `private float ClearDistance()` :60 — undocumented
 - `private float Strength()` :62 — undocumented
 
-### class WalkLoop — WalkLoop.cs:11
-- `private IEnumerator Start()` :20 — undocumented
+### class WalkLoop — WalkLoop.cs:12
+- `private IEnumerator Start()` :21 — undocumented

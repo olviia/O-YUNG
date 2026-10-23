@@ -1,0 +1,19 @@
+{
+    "name": "Oyung.Locations.Editor",
+    "rootNamespace": "Oyung.Locations.Editor",
+    "references": [
+        "Oyung.Locations",
+        "Oyung.SharedKernel.Unity"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

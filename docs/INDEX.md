@@ -18,7 +18,8 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Interaction](index/Oyung.Interaction.md) | yes | Assets/Scripts/Interaction | Oyung.SharedKernel | Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Root |
 | [Oyung.Interaction.Tests](index/Oyung.Interaction.Tests.md) |  | Assets/Scripts/Interaction/Tests | Oyung.Interaction, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Interaction.Unity](index/Oyung.Interaction.Unity.md) |  | Assets/Scripts/Interaction/Unity | Oyung.Interaction, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
-| [Oyung.Locations](index/Oyung.Locations.md) |  | Assets/Scripts/Locations | Oyung.SharedKernel.Unity | Oyung.Sequences.Unity |
+| [Oyung.Locations](index/Oyung.Locations.md) |  | Assets/Scripts/Locations | Oyung.SharedKernel.Unity | Oyung.Locations.Editor, Oyung.Sequences.Unity |
+| [Oyung.Locations.Editor](index/Oyung.Locations.Editor.md) |  | Assets/Scripts/Locations/Editor | Oyung.Locations, Oyung.SharedKernel.Unity | — |
 | [Oyung.Locomotion](index/Oyung.Locomotion.md) |  | Assets/Scripts/Locomotion | — | Oyung.Actors, Oyung.Scratch |
 | [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.SharedKernel | Oyung.Hints, Oyung.Hud, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root |
 | [Oyung.Quests.Tests](index/Oyung.Quests.Tests.md) |  | Assets/Scripts/Quests/Tests | Oyung.Quests, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
@@ -32,7 +33,7 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Sequences.Unity](index/Oyung.Sequences.Unity.md) |  | Assets/Scripts/Sequences/Unity | Oyung.Sequences, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Actors, Oyung.Locations | Oyung.Root, Oyung.Sequences.Editor |
 | [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Cutscenes.Unity, Oyung.Globals, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
 | [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | Oyung.Sequences.Editor |
-| [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
+| [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Locations.Editor, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
 | [Oyung.Vision](index/Oyung.Vision.md) | yes | Assets/Scripts/Vision | — | Oyung.Root, Oyung.Scratch, Oyung.Vision.Unity |
 | [Oyung.Vision.Unity](index/Oyung.Vision.Unity.md) |  | Assets/Scripts/Vision/Unity | Oyung.Vision, Unity.RenderPipelines.Core.Runtime, Unity.RenderPipelines.Universal.Runtime | Oyung.Root |
 | [Assembly-CSharp](index/Assembly-CSharp.md) |  | Assets | — | — |
@@ -371,7 +372,7 @@ undocumented
 undocumented
 - `void Use(IVision vision, IInputModes inputModes)` :23 — Called by the root, like a module receiving its required ports.
 
-### class WalkLoop : MonoBehaviour — WalkLoop.cs:11
+### class WalkLoop : MonoBehaviour — WalkLoop.cs:12
 undocumented
 
 ## Oyung.Sequences.Unity
