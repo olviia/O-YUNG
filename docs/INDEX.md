@@ -259,8 +259,7 @@ Takes its body to a destination over the NavMesh at a calm pace: turns towards w
 - `event Action Arrived` :38 — Raised once the body stands at the destination, facing as asked.
 - `bool IsWalking { get; }` :40 — undocumented
 - `void WalkTo(Vector3 destination, Quaternion? finalFacing = null)` :54 — Starts walking; replaces any walk in progress. Throws if the NavMesh has no path there.
-- `void JumpToEnd()` :72 — Puts the body where the current walk would end, at once (skips, loading a save). Gait sees the jump and resets the feet.
-- `void Stop()` :83 — Stops where it is, without Arrived.
+- `void Stop()` :70 — Stops where it is, without Arrived.
 
 ## Oyung.Quests
 

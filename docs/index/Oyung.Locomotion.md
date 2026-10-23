@@ -66,9 +66,9 @@ undocumented
 
 ### class Walker — Walker.cs:15
 - `private void Awake()` :42 — undocumented
-- `private void Update()` :89 — undocumented
-- `private void MoveAlongPath(float dt)` :100 — undocumented
-- `private void TurnToFacing(float dt)` :141 — undocumented
-- `private void Arrive()` :153 — undocumented
-- `private float Remaining(Vector3 pos)` :160 — undocumented
-- `private static Vector3 Flat(Vector3 v)` :168 — undocumented
+- `private void Update()` :76 — undocumented
+- `private void MoveAlongPath(float dt)` :87 — undocumented
+- `private void TurnToFacing(float dt)` :128 — undocumented
+- `private void Arrive()` :140 — undocumented
+- `private float Remaining(Vector3 pos)` :147 — undocumented
+- `private static Vector3 Flat(Vector3 v)` :155 — undocumented
