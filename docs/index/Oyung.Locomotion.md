@@ -3,7 +3,7 @@
 Root: Assets/Scripts/Locomotion
 Pure C#: no
 Depends on: —
-Used by: Oyung.Scratch
+Used by: Oyung.Actors, Oyung.Scratch
 Internal and private members only; the rest is in INDEX.md.
 
 ### class Gait — Gait.cs:25

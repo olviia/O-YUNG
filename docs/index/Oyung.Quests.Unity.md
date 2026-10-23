@@ -32,12 +32,8 @@ undocumented
 - `private string Id { get; }` :153 — undocumented
 - `private OutcomeDefinition ToDefinition()` :155 — undocumented
 
-### internal class QuestCatalog : ScriptableObject — QuestCatalog.cs:12
+### internal class QuestCatalog : Catalog<QuestAsset> — QuestCatalog.cs:10
 undocumented
-- `internal IReadOnlyList<QuestAsset> Quests { get; }` :17 — undocumented
-- `internal QuestAsset Find(string id)` :20 — The quest with this id; throws if none.
-- `private void OnValidate()` :27 — undocumented
-- `private void Refresh()` :31 — undocumented
 
 ### class QuestCondition — QuestCondition.cs:14
 - `private ObjectiveState Objective(QuestAsset asset)` :78 — undocumented

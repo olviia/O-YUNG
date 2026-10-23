@@ -6,6 +6,7 @@ using Oyung.Interaction.Unity;
 using Oyung.Quests.Unity;
 using Oyung.Root.Adapters;
 using Oyung.Scratch;
+using Oyung.Sequences.Unity;
 using Oyung.Vision.Unity;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ namespace Oyung.Root
         [SerializeField] private CutscenesInstaller cutscenesInstaller;
         [SerializeField] private QuestsInstaller questsInstaller;
         [SerializeField] private InteractionInstaller interactionInstaller;
+        [SerializeField] private SequencesInstaller sequencesInstaller;
 
         // CLAUDE: dev tools: optional, stand in for modules that don't exist yet.
         [Header("Dev tools")]
@@ -47,12 +49,14 @@ namespace Oyung.Root
             var (quests, questTexts) = questsInstaller.Build();
             interactionInstaller.Build(
                 new InteractionInputAdapter(gameInput, inputModes));
+            sequencesInstaller.Build();
 
             // 2. Load: nothing saved yet.
 
             // 3. Start.
             cutscenesInstaller.StartListening();
             questsInstaller.StartListening();
+            sequencesInstaller.StartListening();
             if (visionTestSlider != null) visionTestSlider.Use(vision, inputModes);
 
             // CLAUDE: temporary, so the mouse stays in
@@ -64,6 +68,7 @@ namespace Oyung.Root
         private void OnDestroy()
         {
             // Reverse order of creation.
+            sequencesInstaller.Dispose();
             interactionInstaller.Dispose();
             questsInstaller.Dispose();
             cutsceneInputMode?.Dispose();

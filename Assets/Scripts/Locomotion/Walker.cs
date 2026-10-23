@@ -69,7 +69,7 @@ namespace Oyung.Locomotion
         /// <summary>Puts the body where the current walk
         /// would end, at once (skips, loading a save).
         /// Gait sees the jump and resets the feet.</summary>
-        public void FinishNow()
+        public void JumpToEnd()
         {
             if (!walking)
                 return;

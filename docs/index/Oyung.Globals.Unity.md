@@ -17,8 +17,5 @@ undocumented
 undocumented
 - `internal void Add(int amount)` :13 — undocumented
 
-### internal class GlobalCatalog : ScriptableObject — GlobalCatalog.cs:13
+### internal class GlobalCatalog : Catalog<IGlobalFact> — GlobalCatalog.cs:10
 undocumented
-- `internal IEnumerable<IGlobalFact> Facts { get; }` :20 — undocumented
-- `private void OnValidate()` :26 — undocumented
-- `private void Refresh()` :30 — undocumented

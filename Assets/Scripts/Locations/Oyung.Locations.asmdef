@@ -1,0 +1,16 @@
+{
+    "name": "Oyung.Locations",
+    "rootNamespace": "Oyung.Locations",
+    "references": [
+        "Oyung.SharedKernel.Unity"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -3,16 +3,13 @@
 Root: Assets/Scripts/SharedKernel/Editor
 Pure C#: no
 Depends on: Oyung.SharedKernel
-Used by: —
+Used by: Oyung.Sequences.Editor
 Internal and private members only; the rest is in INDEX.md.
 
-### internal class TypePickerDrawer : PropertyDrawer — TypePickerDrawer.cs:21
-Inspector for [SerializeReference] fields of the kernel contracts listed below (Condition, Instruction), in any module: a dropdown to pick the concrete type, then its fields. Applies only to those contracts, not to every [SerializeReference] field. Knows: every non-abstract subclass of the field's type (TypeCache). Does: creates / replaces / clears the inline instance. Used by: Unity, automatically; deciders only write [SerializeReference] and never reference this assembly.
-- `internal override void OnGUI(Rect position, SerializedProperty property, GUIContent label)` :25 (override)
-- `internal override float GetPropertyHeight(SerializedProperty property, GUIContent label)` :70 (override)
-- `private static IEnumerable<SerializedProperty> VisibleChildren(SerializedProperty property)` :85 — undocumented
-- `private void ShowTypeMenu(SerializedProperty property, Type current)` :98 — undocumented
-- `private static void Assign(SerializedObject target, string path, Type type)` :115 — undocumented
-- `private Type BaseType()` :128 — undocumented
-- `private static IEnumerable<Type> ConcreteTypes(Type baseType)` :137 — undocumented
-- `private static string MenuPath(Type type)` :149 — undocumented
+### class TypePickerDrawer — TypePickerDrawer.cs:23
+- `private static IEnumerable<SerializedProperty> VisibleChildren(SerializedProperty property)` :87 — undocumented
+- `private void ShowTypeMenu(SerializedProperty property, Type current)` :100 — undocumented
+- `private static void Assign(SerializedObject target, string path, Type type)` :117 — undocumented
+- `private Type BaseType()` :130 — undocumented
+- `private static IEnumerable<Type> ConcreteTypes(Type baseType)` :139 — undocumented
+- `private static string MenuPath(Type type)` :151 — undocumented

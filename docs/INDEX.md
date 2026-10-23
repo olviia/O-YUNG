@@ -5,10 +5,11 @@ Module table and everything visible outside its assembly. Internal and private m
 ## Modules
 | Module | Pure C# | Root | Depends on | Used by |
 |---|---|---|---|---|
+| [Oyung.Actors](index/Oyung.Actors.md) |  | Assets/Scripts/Actors | Oyung.Locomotion, Oyung.SharedKernel.Unity | Oyung.Sequences.Editor, Oyung.Sequences.Unity |
 | [Oyung.Cutscenes](index/Oyung.Cutscenes.md) | yes | Assets/Scripts/Cutscenes | — | Oyung.Cutscenes.Unity, Oyung.Root |
 | [Oyung.Cutscenes.Unity](index/Oyung.Cutscenes.Unity.md) |  | Assets/Scripts/Cutscenes/Unity | Oyung.Cutscenes, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Timeline, UnityEngine.UI, Unity.Localization | Oyung.Root |
 | [Oyung.Eyes](index/Oyung.Eyes.md) |  | Assets/Scripts/Eyes | Oyung.Input, Unity.Cinemachine | Oyung.Root |
-| [Oyung.Globals](index/Oyung.Globals.md) | yes | Assets/Scripts/Globals | — | Oyung.Globals.Unity, Oyung.Root |
+| [Oyung.Globals](index/Oyung.Globals.md) | yes | Assets/Scripts/Globals | Oyung.SharedKernel | Oyung.Globals.Unity, Oyung.Root |
 | [Oyung.Globals.Unity](index/Oyung.Globals.Unity.md) |  | Assets/Scripts/Globals/Unity | Oyung.Globals, Oyung.SharedKernel, Oyung.SharedKernel.Unity | Oyung.Root |
 | [Oyung.Hints](index/Oyung.Hints.md) | yes | Assets/Scripts/Hints | Oyung.Quests | Oyung.Hud, Oyung.Root |
 | [Oyung.Hud](index/Oyung.Hud.md) |  | Assets/Scripts/Hud | Oyung.Quests, Oyung.Hints, Oyung.Input.Unity | Oyung.Root |
@@ -17,21 +18,57 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Interaction](index/Oyung.Interaction.md) | yes | Assets/Scripts/Interaction | Oyung.SharedKernel | Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Root |
 | [Oyung.Interaction.Tests](index/Oyung.Interaction.Tests.md) |  | Assets/Scripts/Interaction/Tests | Oyung.Interaction, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Interaction.Unity](index/Oyung.Interaction.Unity.md) |  | Assets/Scripts/Interaction/Unity | Oyung.Interaction, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
-| [Oyung.Locomotion](index/Oyung.Locomotion.md) |  | Assets/Scripts/Locomotion | — | Oyung.Scratch |
+| [Oyung.Locations](index/Oyung.Locations.md) |  | Assets/Scripts/Locations | Oyung.SharedKernel.Unity | Oyung.Sequences.Unity |
+| [Oyung.Locomotion](index/Oyung.Locomotion.md) |  | Assets/Scripts/Locomotion | — | Oyung.Actors, Oyung.Scratch |
 | [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.SharedKernel | Oyung.Hints, Oyung.Hud, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root |
 | [Oyung.Quests.Tests](index/Oyung.Quests.Tests.md) |  | Assets/Scripts/Quests/Tests | Oyung.Quests, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Quests.Unity](index/Oyung.Quests.Unity.md) |  | Assets/Scripts/Quests/Unity | Oyung.Quests, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
-| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Quests.Unity, Oyung.Interaction, Oyung.Interaction.Unity, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch | — |
+| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Quests.Unity, Oyung.Interaction, Oyung.Interaction.Unity, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Unity | — |
 | [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | — | Oyung.Root, Oyung.Save.Unity |
 | [Oyung.Save.Unity](index/Oyung.Save.Unity.md) |  | Assets/Scripts/Save/Unity | Oyung.Save | Oyung.Root |
 | [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem, Oyung.Locomotion | Oyung.Root |
-| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
-| [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | — |
-| [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Quests.Unity, Oyung.Scratch |
+| [Oyung.Sequences](index/Oyung.Sequences.md) | yes | Assets/Scripts/Sequences | — | Oyung.Root, Oyung.Sequences.Unity |
+| [Oyung.Sequences.Editor](index/Oyung.Sequences.Editor.md) |  | Assets/Scripts/Sequences/Editor | Oyung.Sequences.Unity, Oyung.SharedKernel, Oyung.SharedKernel.Editor, Oyung.Actors, Oyung.SharedKernel.Unity | — |
+| [Oyung.Sequences.Unity](index/Oyung.Sequences.Unity.md) |  | Assets/Scripts/Sequences/Unity | Oyung.Sequences, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Actors, Oyung.Locations | Oyung.Root, Oyung.Sequences.Editor |
+| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Cutscenes.Unity, Oyung.Globals, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
+| [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | Oyung.Sequences.Editor |
+| [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
 | [Oyung.Vision](index/Oyung.Vision.md) | yes | Assets/Scripts/Vision | — | Oyung.Root, Oyung.Scratch, Oyung.Vision.Unity |
 | [Oyung.Vision.Unity](index/Oyung.Vision.Unity.md) |  | Assets/Scripts/Vision/Unity | Oyung.Vision, Unity.RenderPipelines.Core.Runtime, Unity.RenderPipelines.Universal.Runtime | Oyung.Root |
 | [Assembly-CSharp](index/Assembly-CSharp.md) |  | Assets | — | — |
 | [Assembly-CSharp-Editor](index/Assembly-CSharp-Editor.md) |  | Assets | — | — |
+
+## Oyung.Actors
+
+### class Actor : MonoBehaviour, IMovableActor, IAnimatedActor — Actor.cs:15
+undocumented
+- `ActorId Id { get; }` :33 (implements IActor)
+- `IReadOnlyList<string> Poses { get; }` :35 (implements IAnimatedActor)
+- `void WalkTo(Vector3 position, Quaternion facing, Action arrived)` :56 (implements IMovableActor)
+- `void JumpTo(Vector3 position, Quaternion facing)` :66 (implements IMovableActor)
+- `void Pose(string pose, float fade, Action done)` :73 (implements IAnimatedActor)
+- `void JumpToPose(string pose)` :80 (implements IAnimatedActor)
+
+### class ActorId : SceneElementId<IActor> — Ports/Offered/ActorId.cs:12
+Offered port: an actor's id. Whoever directs actors holds the id and finds the live actor through it (Current, Changed).
+
+### interface IActor — Ports/Offered/IActor.cs:8
+Offered port: something in the world that can be directed. Says only who it is; what it can do comes from the capability ports it also implements (IMovableActor, IAnimatedActor).
+Implemented by: IAnimatedActor (Oyung.Actors), IMovableActor (Oyung.Actors)
+- `ActorId Id { get; }` :11 — The id it is found by.
+
+### interface IAnimatedActor : IActor — Ports/Offered/IAnimatedActor.cs:9
+Offered port: an actor that can hold authored poses ("Hug").
+Implemented by: Actor (Oyung.Actors)
+- `IReadOnlyList<string> Poses { get; }` :12 — Names of every pose this actor has.
+- `void Pose(string pose, float fade, Action done)` :16 — Blends into the pose over fade seconds, then calls done once. Throws if the actor has no such pose.
+- `void JumpToPose(string pose)` :19 — Holds the pose at once, without blending.
+
+### interface IMovableActor : IActor — Ports/Offered/IMovableActor.cs:10
+Offered port: an actor that can go places. How it gets there (walking, rolling) is its own business.
+Implemented by: Actor (Oyung.Actors)
+- `void WalkTo(Vector3 position, Quaternion facing, Action arrived)` :15 — Goes to the position, ends facing as given, then calls arrived once. A new order replaces the old one, whose arrived is never called.
+- `void JumpTo(Vector3 position, Quaternion facing)` :19 — Stands at the position at once, facing as given.
 
 ## Oyung.Cutscenes
 
@@ -194,6 +231,24 @@ Interaction: needs the interact press. Interactables reach other modules through
 - `void Build(IInteractionInput input)` :15 — undocumented
 - `void Dispose()` :18 — undocumented
 
+## Oyung.Locations
+
+### class Location : MonoBehaviour, ILocation — Location.cs:11
+undocumented
+- `LocationId Id { get; }` :15 (implements ILocation)
+- `Vector3 Position { get; }` :17 (implements ILocation)
+- `Quaternion Facing { get; }` :19 (implements ILocation)
+
+### interface ILocation — Ports/Offered/ILocation.cs:9
+Offered port: a named spot in the world, with the way to face when standing there.
+Implemented by: Location (Oyung.Locations)
+- `LocationId Id { get; }` :11 — undocumented
+- `Vector3 Position { get; }` :13 — undocumented
+- `Quaternion Facing { get; }` :15 — undocumented
+
+### class LocationId : SceneElementId<ILocation> — Ports/Offered/LocationId.cs:12
+Offered port: a place's id. Whoever needs the place holds the id and finds the live location through it (Current).
+
 ## Oyung.Locomotion
 
 ### class Gait : MonoBehaviour — Gait.cs:25
@@ -204,7 +259,7 @@ Takes its body to a destination over the NavMesh at a calm pace: turns towards w
 - `event Action Arrived` :38 — Raised once the body stands at the destination, facing as asked.
 - `bool IsWalking { get; }` :40 — undocumented
 - `void WalkTo(Vector3 destination, Quaternion? finalFacing = null)` :54 — Starts walking; replaces any walk in progress. Throws if the NavMesh has no path there.
-- `void FinishNow()` :72 — Puts the body where the current walk would end, at once (skips, loading a save). Gait sees the jump and resets the feet.
+- `void JumpToEnd()` :72 — Puts the body where the current walk would end, at once (skips, loading a save). Gait sees the jump and resets the feet.
 - `void Stop()` :83 — Stops where it is, without Arrived.
 
 ## Oyung.Quests
@@ -293,7 +348,7 @@ Quests: needs nothing from other modules (they reach it through conditions and i
 
 ## Oyung.Root
 
-### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:20
+### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:21
 The only place that creates modules and hands them what they need. Startup: create → load → start. Shutdown: reverse order.
 
 ## Oyung.Save
@@ -320,6 +375,37 @@ undocumented
 ### class WalkLoop : MonoBehaviour — WalkLoop.cs:11
 undocumented
 
+## Oyung.Sequences.Unity
+
+### class PoseNameAttribute : PropertyAttribute — PoseNameAttribute.cs:9
+On a step's string field: picks from the poses the sequence's actor has, found in the open scene.
+
+### class SequenceAsset : ModuleFact<bool> — SequenceAsset.cs:18
+undocumented
+- `override bool Value { get; }` :36 (override of ModuleFact<T>)
+
+### class SequenceStep — SequenceStep.cs:14
+undocumented
+- `abstract void Execute(IActor actor, Action done)` :17 — Plays the step out, then calls done once.
+- `abstract void JumpToEnd(IActor actor)` :21 — Leaves the actor as the step would, at once.
+- `protected T Require<T>(IActor actor)` :25 — The actor as the capability this step needs; throws naming both if it lacks it.
+
+### class SequencesInstaller : MonoBehaviour, IDisposable — SequencesInstaller.cs:11
+Sequences: needs nothing from other modules (actors meet their sequences through ActorId). Creates the store and binds every catalog sequence to it. Start lets them run.
+- `void Build()` :15 — undocumented
+- `void StartListening()` :23 — Start phase, after load: sequences whose condition is met, or that a save left halfway, run.
+- `void Dispose()` :29 — undocumented
+
+### class Pose : SequenceStep — Steps/Pose.cs:10
+The actor blends into an authored pose and holds it.
+- `override void Execute(IActor actor, Action done)` :18 (override of SequenceStep)
+- `override void JumpToEnd(IActor actor)` :21 (override of SequenceStep)
+
+### class WalkTo : SequenceStep — Steps/WalkTo.cs:11
+The actor goes to a location and ends facing its way.
+- `override void Execute(IActor actor, Action done)` :15 (override of SequenceStep)
+- `override void JumpToEnd(IActor actor)` :22 (override of SequenceStep)
+
 ## Oyung.SharedKernel
 
 ### class Condition — Condition.cs:13
@@ -327,11 +413,28 @@ Shared Kernel contract: a question about some module's state ("is the intro seen
 - `abstract bool IsMet { get; }` :17 — True when the condition holds right now. Cheap, no side effects. Throws if the provider isn't bound.
 - `abstract event Action Changed` :24 — Raised when a value the condition reads has changed; ask IsMet again. The answer itself may stay the same. Subscribe with a method, not a lambda, so you can unsubscribe (-=) when you stop caring.
 
+### interface ICataloguedItem — ICataloguedItem.cs:9
+Shared Kernel contract: an asset a catalog holds and finds by its stable name; saves and dialogue use the same name. Unique within its catalog.
+Implemented by: IGlobalFact (Oyung.Globals), ModuleFact<T> (Oyung.SharedKernel.Unity)
+- `string Name { get; }` :11 — undocumented
+
 ### class Instruction — Instruction.cs:13
 Shared Kernel contract: an order to change some module's state ("set intro_seen", "remove 5 flowers"). Knows nothing itself; each state owner subclasses it in its own .Unity side. Used by deciders (Story, NPC AI), which hold it inline and never know which module carries it out.
 - `abstract void Execute()` :18 — Carries out the order. Strict: if it can't be done (precondition broken), throws naming the asset. To check first, the designer pairs it with a Condition.
 
+## Oyung.SharedKernel.Editor
+
+### class TypePickerDrawer : PropertyDrawer — TypePickerDrawer.cs:23
+Inspector for [SerializeReference] fields of the kernel contracts listed below (Condition, Instruction), in any module: a dropdown to pick the concrete type, then its fields. Applies only to those contracts, not to every [SerializeReference] field. A module adds its own contract by subclassing it in its Editor assembly with its own [CustomPropertyDrawer]. Knows: every non-abstract subclass of the field's type (TypeCache). Does: creates / replaces / clears the inline instance. Used by: Unity, automatically; deciders only write [SerializeReference] and never reference this assembly.
+- `override void OnGUI(Rect position, SerializedProperty property, GUIContent label)` :27 (override)
+- `override float GetPropertyHeight(SerializedProperty property, GUIContent label)` :72 (override)
+
 ## Oyung.SharedKernel.Unity
+
+### class `Catalog<T>` : ScriptableObject — Catalog.cs:12
+undocumented
+- `IEnumerable<T> Items { get; }` :20 — undocumented
+- `T Find(string id)` :23 — The item with this name; throws if none.
 
 ### class AllOf : Condition — Conditions/AllOf.cs:14
 Composite condition: met when every child is met. Knows only its children (any Condition, from any module). Lets designers combine conditions inline instead of every decider writing its own AND / OR.
@@ -373,12 +476,19 @@ Equal, NotEqual, Less, LessOrEqual, Greater, GreaterOrEqual
 Met when a string fact equals the target exactly (case matters). For "not equal", wrap it in Not.
 - `override bool IsMet { get; }` :15 (override of Condition)
 
-### class `ModuleFact<T>` : ScriptableObject — ModuleFact.cs:10
+### class `ModuleFact<T>` : ScriptableObject, ICataloguedItem — ModuleFact.cs:10
 undocumented
-- `string Name { get; }` :18 — Stable name; the module's store keys values by it.
+- `string Name { get; }` :18 (implements ICataloguedItem) — Stable name; the module's store keys values by it.
 - `abstract T Value { get; }` :22 — Current value, read from the owning module's store.
 - `event Action Changed` :27 — Raised when this fact's value really changes; read Value again.
 - `protected void RaiseChanged()` :31 — undocumented
+
+### class `SceneElementId<T>` : ScriptableObject — SceneElementId.cs:14
+undocumented
+- `T Current { get; }` :21 — The object holding this id now; null if none is loaded.
+- `event Action Changed` :25 — Raised when an object takes or leaves this id.
+- `void Bind(T element)` :29 — The object holds this id from now on. Throws if another one already holds it.
+- `void Unbind(T element)` :42 — The object gives the id up; ignored if it doesn't hold it.
 
 ## Oyung.Vision
 
@@ -397,6 +507,12 @@ Vision: needs nothing from other modules, offers IVision.
 ## Assembly-CSharp
 
 ### class NewMonoBehaviourScript : MonoBehaviour — Scripts/NewMonoBehaviourScript.cs:3
+undocumented
+
+### class CubeController : MonoBehaviour — TempForVideo/CubeController.cs:12
+undocumented
+
+### class LegsWalk : MonoBehaviour — TempForVideo/LegsWalk.cs:8
 undocumented
 
 ### class Readme : ScriptableObject — TutorialInfo/Readme.cs:5

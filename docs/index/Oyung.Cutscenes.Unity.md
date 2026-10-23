@@ -16,12 +16,8 @@ Internal and private members only; the rest is in INDEX.md.
 - `private ICutscenePlayer Player { get; }` :63 — undocumented
 - `private CutsceneStore Store { get; }` :67 — undocumented
 
-### internal class CutsceneCatalog : ScriptableObject — CutsceneCatalog.cs:12
+### internal class CutsceneCatalog : Catalog<CutsceneAsset> — CutsceneCatalog.cs:10
 undocumented
-- `internal IReadOnlyList<CutsceneAsset> Cutscenes { get; }` :17 — undocumented
-- `internal CutsceneAsset Find(string id)` :20 — The cutscene with this id; throws if none.
-- `private void OnValidate()` :27 — undocumented
-- `private void Refresh()` :31 — undocumented
 
 ### class CutsceneUI — CutsceneUI.cs:13
 - `internal void Bind(TimelineCutscenePlayer player)` :28 — undocumented

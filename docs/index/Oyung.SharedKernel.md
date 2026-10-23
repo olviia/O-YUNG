@@ -3,5 +3,5 @@
 Root: Assets/Scripts/SharedKernel
 Pure C#: yes
 Depends on: —
-Used by: Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Scratch, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity
+Used by: Oyung.Cutscenes.Unity, Oyung.Globals, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity
 Internal and private members only; the rest is in INDEX.md.

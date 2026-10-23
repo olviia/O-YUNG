@@ -10,7 +10,9 @@ namespace Oyung.SharedKernel.Editor
     /// Inspector for [SerializeReference] fields of the kernel contracts
     /// listed below (Condition, Instruction), in any module: a dropdown
     /// to pick the concrete type, then its fields. Applies only to those
-    /// contracts, not to every [SerializeReference] field.
+    /// contracts, not to every [SerializeReference] field. A module adds
+    /// its own contract by subclassing it in its Editor assembly with
+    /// its own [CustomPropertyDrawer].
     /// Knows: every non-abstract subclass of the field's type (TypeCache).
     /// Does: creates / replaces / clears the inline instance.
     /// Used by: Unity, automatically; deciders only write
@@ -18,7 +20,7 @@ namespace Oyung.SharedKernel.Editor
     /// </summary>
     [CustomPropertyDrawer(typeof(Condition), true)]
     [CustomPropertyDrawer(typeof(Instruction), true)]
-    internal sealed class TypePickerDrawer : PropertyDrawer
+    public class TypePickerDrawer : PropertyDrawer
     {
         private const string NoneLabel = "None";
 

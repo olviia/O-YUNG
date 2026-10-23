@@ -19,7 +19,9 @@
         "Oyung.Hints",
         "Oyung.Hud",
         "Oyung.Eyes",
-        "Oyung.Scratch"
+        "Oyung.Scratch",
+        "Oyung.Sequences",
+        "Oyung.Sequences.Unity"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

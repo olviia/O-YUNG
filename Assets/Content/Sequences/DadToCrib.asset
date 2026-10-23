@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 385f3204a7d92284b8c82493ff713600, type: 3}
+  m_Name: DadToCrib
+  m_EditorClassIdentifier: Oyung.Sequences.Unity::Oyung.Sequences.Unity.SequenceAsset
+  factName: DadToCrib
+  actor: {fileID: 11400000, guid: 49352840de04bbe47a7a94d5fe1e3279, type: 2}
+  startWhen:
+    rid: 8669410027373330519
+  steps:
+  - rid: 8669410027373330520
+  - rid: 8669410027373330521
+  references:
+    version: 2
+    RefIds:
+    - rid: 8669410027373330519
+      type: {class: BoolCondition, ns: Oyung.SharedKernel.Unity, asm: Oyung.SharedKernel.Unity}
+      data:
+        fact: {fileID: 11400000, guid: 15e74d2202d506d4b9331fecd4f1c88e, type: 2}
+        expected: 1
+    - rid: 8669410027373330520
+      type: {class: WalkTo, ns: Oyung.Sequences.Unity, asm: Oyung.Sequences.Unity}
+      data:
+        to: {fileID: 11400000, guid: 3e286529b7d3e364cbabdeea9a3e4eb0, type: 2}
+    - rid: 8669410027373330521
+      type: {class: Pose, ns: Oyung.Sequences.Unity, asm: Oyung.Sequences.Unity}
+      data:
+        pose: Hug
+        fade: 0.6

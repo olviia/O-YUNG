@@ -1,0 +1,22 @@
+{
+    "name": "Oyung.Sequences.Editor",
+    "rootNamespace": "Oyung.Sequences.Editor",
+    "references": [
+        "Oyung.Sequences.Unity",
+        "Oyung.SharedKernel",
+        "Oyung.SharedKernel.Editor",
+        "Oyung.Actors",
+        "Oyung.SharedKernel.Unity"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

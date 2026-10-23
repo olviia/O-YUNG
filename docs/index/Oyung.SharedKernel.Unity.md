@@ -3,8 +3,12 @@
 Root: Assets/Scripts/SharedKernel/Unity
 Pure C#: no
 Depends on: Oyung.SharedKernel
-Used by: Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Quests.Unity, Oyung.Scratch
+Used by: Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity
 Internal and private members only; the rest is in INDEX.md.
+
+### class `Catalog<T>` — Catalog.cs:12
+- `private void OnValidate()` :32 — undocumented
+- `private void Refresh()` :36 — undocumented
 
 ### class AllOf — Conditions/AllOf.cs:14
 - `private void ThrowIfIncomplete()` :47 — undocumented
@@ -24,3 +28,6 @@ undocumented
 
 ### class `ModuleFact<T>` — ModuleFact.cs:10
 - `private void OnValidate()` :37 — undocumented
+
+### class `SceneElementId<T>` — SceneElementId.cs:14
+- `private static string NameOf(T element)` :49 — undocumented
