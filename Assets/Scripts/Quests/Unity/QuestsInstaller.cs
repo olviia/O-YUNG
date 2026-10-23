@@ -19,9 +19,9 @@ namespace Oyung.Quests.Unity
         public (IQuests quests, QuestTexts texts) Build()
         {
             var journal = new QuestJournal();
-            foreach (var quest in catalog.Quests) quest.Bind(journal);
+            foreach (var quest in catalog.Items) quest.Bind(journal);
             _quests = new Quests(
-                catalog.Quests.Select(q => q.ToDefinition()), journal);
+                catalog.Items.Select(q => q.ToDefinition()), journal);
             return (_quests, new QuestTexts(catalog));
         }
 
@@ -33,7 +33,7 @@ namespace Oyung.Quests.Unity
         {
             _quests?.Dispose();
             _quests = null;
-            foreach (var quest in catalog.Quests) quest.Unbind();
+            foreach (var quest in catalog.Items) quest.Unbind();
         }
     }
 }

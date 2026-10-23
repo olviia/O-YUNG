@@ -1,3 +1,5 @@
+using Oyung.SharedKernel;
+
 namespace Oyung.Globals
 {
     /// <summary>
@@ -5,10 +7,8 @@ namespace Oyung.Globals
     /// type: one list can hold GlobalFact&lt;bool&gt; and
     /// GlobalFact&lt;int&gt; through it.
     /// </summary>
-    internal interface IGlobalFact
+    internal interface IGlobalFact : INamed
     {
-        string Name { get; }
-
         /// <summary>Starts reading values from and listening to the
         /// store.</summary>
         void Bind(GlobalStore store);

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5042e74de8bbe246883e0a93d75dd21, type: 3}
   m_Name: GlobalCatalog
   m_EditorClassIdentifier: Oyung.Globals.Unity::Oyung.Globals.Unity.GlobalCatalog
-  facts:
+  items:
   - {fileID: 11400000, guid: a7d0e01f09195d84198e2fc27364c81a, type: 2}
   - {fileID: 11400000, guid: e6f14bc534f72924387c9b04a368328a, type: 2}

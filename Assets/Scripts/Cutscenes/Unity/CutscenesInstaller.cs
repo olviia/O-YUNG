@@ -21,7 +21,7 @@ namespace Oyung.Cutscenes.Unity
         {
             var store = new CutsceneStore();
             player.Use(catalog, settings, store, input);
-            foreach (var cutscene in catalog.Cutscenes)
+            foreach (var cutscene in catalog.Items)
                 cutscene.Bind(store, player);
             if (ui != null) ui.Bind(player);
             return player;
@@ -31,13 +31,13 @@ namespace Oyung.Cutscenes.Unity
         /// is met may play.</summary>
         public void StartListening()
         {
-            foreach (var cutscene in catalog.Cutscenes)
+            foreach (var cutscene in catalog.Items)
                 cutscene.StartListening();
         }
 
         public void Dispose()
         {
-            foreach (var cutscene in catalog.Cutscenes) cutscene.Unbind();
+            foreach (var cutscene in catalog.Items) cutscene.Unbind();
             if (ui != null) ui.Unbind();
         }
     }

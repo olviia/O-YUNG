@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec96465c39dc37d4886f2cd313f2e270, type: 3}
   m_Name: CutsceneCatalog
   m_EditorClassIdentifier: Oyung.Cutscenes.Unity::Oyung.Cutscenes.Unity.CutsceneCatalog
-  cutscenes:
+  items:
   - {fileID: 11400000, guid: 15e74d2202d506d4b9331fecd4f1c88e, type: 2}

@@ -1,7 +1,9 @@
 {
     "name": "Oyung.Globals",
     "rootNamespace": "Oyung.Globals",
-    "references": [],
+    "references": [
+        "Oyung.SharedKernel"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

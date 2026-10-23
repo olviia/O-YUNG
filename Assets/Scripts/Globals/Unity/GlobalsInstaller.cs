@@ -14,12 +14,12 @@ namespace Oyung.Globals.Unity
         public void Build()
         {
             var store = new GlobalStore();
-            foreach (var fact in catalog.Facts) fact.Bind(store);
+            foreach (var fact in catalog.Items) fact.Bind(store);
         }
 
         public void Dispose()
         {
-            foreach (var fact in catalog.Facts) fact.Unbind();
+            foreach (var fact in catalog.Items) fact.Unbind();
         }
     }
 }
