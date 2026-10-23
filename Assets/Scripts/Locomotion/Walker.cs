@@ -66,19 +66,6 @@ namespace Oyung.Locomotion
             walking = true;
         }
 
-        /// <summary>Puts the body where the current walk
-        /// would end, at once (skips, loading a save).
-        /// Gait sees the jump and resets the feet.</summary>
-        public void JumpToEnd()
-        {
-            if (!walking)
-                return;
-            transform.position = corners[^1];
-            if (facing.HasValue)
-                transform.rotation = facing.Value;
-            Arrive();
-        }
-
         /// <summary>Stops where it is, without Arrived.</summary>
         public void Stop()
         {
