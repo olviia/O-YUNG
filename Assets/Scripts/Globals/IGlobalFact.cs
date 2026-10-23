@@ -7,7 +7,7 @@ namespace Oyung.Globals
     /// type: one list can hold GlobalFact&lt;bool&gt; and
     /// GlobalFact&lt;int&gt; through it.
     /// </summary>
-    internal interface IGlobalFact : INamed
+    internal interface IGlobalFact : ICataloguedItem
     {
         /// <summary>Starts reading values from and listening to the
         /// store.</summary>

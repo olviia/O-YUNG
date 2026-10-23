@@ -10,7 +10,7 @@ namespace Oyung.SharedKernel.Unity
     // CLAUDE: line (Unity can't make an asset of an open generic type).
     // CLAUDE: Used by the module's installer (bind) and lookups by name.
     public abstract class Catalog<T> : ScriptableObject
-        where T : class, INamed
+        where T : class, ICataloguedItem
     {
         // CLAUDE: ScriptableObject because Unity can't serialize a list
         // CLAUDE: of an interface; every item is a T.

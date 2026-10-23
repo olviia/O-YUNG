@@ -7,7 +7,7 @@ namespace Oyung.SharedKernel.Unity
     // CLAUDE: draft: a named piece of some module's state, as an asset
     // CLAUDE: designers drag into conditions. Holds no value: each module
     // CLAUDE: subclasses it and reads Value from its own store.
-    public abstract class ModuleFact<T> : ScriptableObject, INamed
+    public abstract class ModuleFact<T> : ScriptableObject, ICataloguedItem
     {
         [Tooltip("Stable name used by saves and dialogue. Filled from " +
                  "the file name once; renaming the file doesn't change it.")]
