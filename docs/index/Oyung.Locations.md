@@ -3,7 +3,7 @@
 Root: Assets/Scripts/Locations
 Pure C#: no
 Depends on: Oyung.SharedKernel.Unity
-Used by: Oyung.Locations.Editor, Oyung.Sequences.Unity
+Used by: Oyung.Actors, Oyung.Locations.Editor, Oyung.Sequences.Unity
 Internal and private members only; the rest is in INDEX.md.
 
 ### class Location — Location.cs:11

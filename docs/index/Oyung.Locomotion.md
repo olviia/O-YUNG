@@ -6,7 +6,7 @@ Depends on: —
 Used by: Oyung.Actors, Oyung.Scratch
 Internal and private members only; the rest is in INDEX.md.
 
-### class Gait — Gait.cs:25
+### class WalkMotion — WalkMotion.cs:25
 - `private void Awake()` :175 — undocumented
 - `private void OnEnable()` :184 — undocumented
 - `private static void Prepare(Leg leg)` :191 — undocumented
@@ -31,7 +31,7 @@ Internal and private members only; the rest is in INDEX.md.
 - `private static void Bend(Leg leg, Vector3 axis, float bow)` :698 — undocumented
 - `private static Vector3 Flat(Vector3 v)` :707 — undocumented
 
-### private class Gait.Leg — Gait.cs:31
+### private class WalkMotion.Leg — WalkMotion.cs:31
 undocumented
 - `private Transform root` :34 — undocumented
 - `private Transform foot` :36 — undocumented

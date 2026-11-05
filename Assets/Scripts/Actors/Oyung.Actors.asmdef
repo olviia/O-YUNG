@@ -2,8 +2,10 @@
     "name": "Oyung.Actors",
     "rootNamespace": "Oyung.Actors",
     "references": [
+        "Oyung.Locations",
         "Oyung.Locomotion",
-        "Oyung.SharedKernel.Unity"
+        "Oyung.SharedKernel.Unity",
+        "Oyung.Speech.Unity"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

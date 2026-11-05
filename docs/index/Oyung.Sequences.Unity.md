@@ -24,4 +24,4 @@ Internal and private members only; the rest is in INDEX.md.
 undocumented
 
 ### class WalkTo — Steps/WalkTo.cs:11
-- `private ILocation Spot()` :28 — undocumented
+- `private LocationId To { get; }` :22 — undocumented

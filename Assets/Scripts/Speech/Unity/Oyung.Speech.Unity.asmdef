@@ -1,0 +1,16 @@
+{
+    "name": "Oyung.Speech.Unity",
+    "rootNamespace": "Oyung.Speech.Unity",
+    "references": [
+        "Oyung.Speech"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

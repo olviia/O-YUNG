@@ -22,7 +22,7 @@ namespace Oyung.Locomotion
     /// step back under it on their own, one at a time.
     /// </summary>
     [DefaultExecutionOrder(10)]
-    public class Gait : MonoBehaviour
+    public class WalkMotion : MonoBehaviour
     {
         private static readonly int SpeedId = Animator.StringToHash("Speed");
         private static readonly int RateId = Animator.StringToHash("WalkRate");
@@ -53,7 +53,7 @@ namespace Oyung.Locomotion
             [NonSerialized] public Vector3 walkFacing;
             [NonSerialized] public Vector3 lastLocal;
             // 0 planted .. 1 swinging: walkSwing as the walk moves the
-            // foot, swing also counting a step of Gait's own.
+            // foot, swing also counting a step of WalkMotion's own.
             [NonSerialized] public float walkSwing;
             [NonSerialized] public float swing;
             // How far this swing has carried the foot, and how far the
@@ -75,7 +75,7 @@ namespace Oyung.Locomotion
             [NonSerialized] public Vector3 landing;
             [NonSerialized] public Vector3 landFacing;
             [NonSerialized] public Quaternion landRotation;
-            // A step Gait takes itself, when the body turns or shuffles
+            // A step WalkMotion takes itself, when the body turns or shuffles
             // with no walk to carry the foot.
             [NonSerialized] public bool stepping;
             [NonSerialized] public float stepClock;
@@ -116,7 +116,7 @@ namespace Oyung.Locomotion
         [Tooltip("Most a foot tilts to match a slope (degrees).")]
         [SerializeField] private float maxTilt = 30f;
         [Header("Stepping")]
-        [Tooltip("How far a swing carries the foot (m) until Gait has "
+        [Tooltip("How far a swing carries the foot (m) until WalkMotion has "
                  + "measured one; it then expects what the last did.")]
         [SerializeField] private float lookAhead = 0.25f;
         [Tooltip("Extra lift of a swinging foot over what it passes (m).")]
@@ -375,7 +375,7 @@ namespace Oyung.Locomotion
             // matches the body's) and swings the other at about twice
             // the body's speed.
             // Barely walking, feet move with the blend between stand and
-            // walk (both at once, no step): Gait's own steps take over.
+            // walk (both at once, no step): WalkMotion's own steps take over.
             var pace = Mathf.Max(walkSpeed * speed01, 0.05f);
             var swinging = Mathf.InverseLerp(0.4f * pace, 1.2f * pace,
                     velocity.magnitude)
@@ -392,7 +392,7 @@ namespace Oyung.Locomotion
             {
                 if (was < 0.5f)
                 {
-                    // The walk takes over from a step of Gait's own.
+                    // The walk takes over from a step of WalkMotion's own.
                     leg.stepping = false;
                     var ahead = velocity.sqrMagnitude > 1e-6f
                         ? velocity.normalized
@@ -443,7 +443,7 @@ namespace Oyung.Locomotion
             }
             else if (leg.stepping)
             {
-                // A step of Gait's own goes from where the foot stood to
+                // A step of WalkMotion's own goes from where the foot stood to
                 // where it lands, in the world, easing in and out: the
                 // body turning meanwhile doesn't drag it.
                 var e = Mathf.SmoothStep(0f, 1f, Progress(leg));
@@ -489,7 +489,7 @@ namespace Oyung.Locomotion
             leg.normal = Vector3.Slerp(leg.normal, tilt, k);
         }
 
-        // How far a walk swing carries the foot, as far as Gait knows.
+        // How far a walk swing carries the foot, as far as WalkMotion knows.
         private float Expected(Leg leg) =>
             leg.lastSwing > 0f ? leg.lastSwing : lookAhead;
 

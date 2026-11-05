@@ -3,9 +3,9 @@ namespace Oyung.Speech
     /// <summary>One spoken syllable of a planned line: when it sounds, which
     /// syllable it is and how its pitch moves. Playback, talk motion and
     /// letters all read the same events, so they stay in sync.</summary>
-    public readonly struct SyllableEvent
+    internal readonly struct SyllableEvent
     {
-        public SyllableEvent(float start, float duration, string syllable,
+        internal SyllableEvent(float start, float duration, string syllable,
             float pitchFrom, float pitchTo, bool stressed, int word)
         {
             Start = start;
@@ -18,26 +18,26 @@ namespace Oyung.Speech
         }
 
         /// <summary>Seconds from the start of the line.</summary>
-        public float Start { get; }
+        internal float Start { get; }
 
         /// <summary>Seconds until the next syllable may start.</summary>
-        public float Duration { get; }
+        internal float Duration { get; }
 
         /// <summary>Syllable id, e.g. "mo"; names the sound to play.</summary>
-        public string Syllable { get; }
+        internal string Syllable { get; }
 
         /// <summary>Pitch at the start, as a ratio of the voice's base pitch.
         /// </summary>
-        public float PitchFrom { get; }
+        internal float PitchFrom { get; }
 
         /// <summary>Pitch at the end; differs from PitchFrom on glides
         /// (a question rising, an exclamation falling).</summary>
-        public float PitchTo { get; }
+        internal float PitchTo { get; }
 
         /// <summary>First syllable of a content word: louder, higher.</summary>
-        public bool Stressed { get; }
+        internal bool Stressed { get; }
 
         /// <summary>Index of the English word in the line, from 0.</summary>
-        public int Word { get; }
+        internal int Word { get; }
     }
 }

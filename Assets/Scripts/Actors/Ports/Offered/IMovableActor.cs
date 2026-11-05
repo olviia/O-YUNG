@@ -1,5 +1,5 @@
 using System;
-using UnityEngine;
+using Oyung.Locations;
 
 namespace Oyung.Actors
 {
@@ -9,13 +9,14 @@ namespace Oyung.Actors
     /// </summary>
     public interface IMovableActor : IActor
     {
-        /// <summary>Goes to the position, ends facing as given, then
+        /// <summary>Goes to the location, ends facing its way, then
         /// calls arrived once. A new order replaces the old one, whose
-        /// arrived is never called.</summary>
-        void WalkTo(Vector3 position, Quaternion facing, Action arrived);
-
-        /// <summary>Stands at the position at once, facing as given.
+        /// arrived is never called. Throws if the location isn't loaded.
         /// </summary>
-        void JumpTo(Vector3 position, Quaternion facing);
+        void WalkTo(LocationId to, Action arrived);
+
+        /// <summary>Stands at the location at once, facing its way.
+        /// Throws if the location isn't loaded.</summary>
+        void JumpTo(LocationId to);
     }
 }

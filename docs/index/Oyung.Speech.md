@@ -3,7 +3,7 @@
 Root: Assets/Scripts/Speech
 Pure C#: yes
 Depends on: —
-Used by: Oyung.Speech.Tests
+Used by: Oyung.Speech.Tests, Oyung.Speech.Unity
 Internal and private members only; the rest is in INDEX.md.
 
 ### internal class Language — Language.cs:12
@@ -32,3 +32,14 @@ Turns an English line into the syllable events of the made-up language. The same
 - `internal static int CountSyllables(string word)` :59 — Rough English syllable count: vowel groups, minus a silent final e ("name" = 1). Good enough for rhythm.
 - `internal static uint Fnv1a(string text)` :68 — 32-bit FNV-1a over UTF-8. string.GetHashCode is not stable across runtimes, and the bake script must agree.
 - `private float PlanPhrase(List<string> words, string mark, int wordsBefore, float time, List<SyllableEvent> events)` :76 — undocumented
+
+### internal struct SyllableEvent — SyllableEvent.cs:6
+One spoken syllable of a planned line: when it sounds, which syllable it is and how its pitch moves. Playback, talk motion and letters all read the same events, so they stay in sync.
+- `internal SyllableEvent(float start, float duration, string syllable, float pitchFrom, float pitchTo, bool stressed, int word)` :8 — undocumented
+- `internal float Start { get; }` :21 — Seconds from the start of the line.
+- `internal float Duration { get; }` :24 — Seconds until the next syllable may start.
+- `internal string Syllable { get; }` :27 — Syllable id, e.g. "mo"; names the sound to play.
+- `internal float PitchFrom { get; }` :31 — Pitch at the start, as a ratio of the voice's base pitch.
+- `internal float PitchTo { get; }` :35 — Pitch at the end; differs from PitchFrom on glides (a question rising, an exclamation falling).
+- `internal bool Stressed { get; }` :38 — First syllable of a content word: louder, higher.
+- `internal int Word { get; }` :41 — Index of the English word in the line, from 0.

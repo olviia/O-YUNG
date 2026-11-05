@@ -5,7 +5,7 @@ Module table and everything visible outside its assembly. Internal and private m
 ## Modules
 | Module | Pure C# | Root | Depends on | Used by |
 |---|---|---|---|---|
-| [Oyung.Actors](index/Oyung.Actors.md) |  | Assets/Scripts/Actors | Oyung.Locomotion, Oyung.SharedKernel.Unity | Oyung.Sequences.Editor, Oyung.Sequences.Unity |
+| [Oyung.Actors](index/Oyung.Actors.md) |  | Assets/Scripts/Actors | Oyung.Locations, Oyung.Locomotion, Oyung.SharedKernel.Unity, Oyung.Speech.Unity | Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
 | [Oyung.Cutscenes](index/Oyung.Cutscenes.md) | yes | Assets/Scripts/Cutscenes | — | Oyung.Cutscenes.Unity, Oyung.Root |
 | [Oyung.Cutscenes.Unity](index/Oyung.Cutscenes.Unity.md) |  | Assets/Scripts/Cutscenes/Unity | Oyung.Cutscenes, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Timeline, UnityEngine.UI, Unity.Localization | Oyung.Root |
 | [Oyung.Eyes](index/Oyung.Eyes.md) |  | Assets/Scripts/Eyes | Oyung.Input, Unity.Cinemachine | Oyung.Root |
@@ -18,7 +18,7 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Interaction](index/Oyung.Interaction.md) | yes | Assets/Scripts/Interaction | Oyung.SharedKernel | Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Root |
 | [Oyung.Interaction.Tests](index/Oyung.Interaction.Tests.md) |  | Assets/Scripts/Interaction/Tests | Oyung.Interaction, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Interaction.Unity](index/Oyung.Interaction.Unity.md) |  | Assets/Scripts/Interaction/Unity | Oyung.Interaction, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
-| [Oyung.Locations](index/Oyung.Locations.md) |  | Assets/Scripts/Locations | Oyung.SharedKernel.Unity | Oyung.Locations.Editor, Oyung.Sequences.Unity |
+| [Oyung.Locations](index/Oyung.Locations.md) |  | Assets/Scripts/Locations | Oyung.SharedKernel.Unity | Oyung.Actors, Oyung.Locations.Editor, Oyung.Sequences.Unity |
 | [Oyung.Locations.Editor](index/Oyung.Locations.Editor.md) |  | Assets/Scripts/Locations/Editor | Oyung.Locations, Oyung.SharedKernel.Unity | — |
 | [Oyung.Locomotion](index/Oyung.Locomotion.md) |  | Assets/Scripts/Locomotion | — | Oyung.Actors, Oyung.Scratch |
 | [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.SharedKernel | Oyung.Hints, Oyung.Hud, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root |
@@ -27,13 +27,16 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Quests.Unity, Oyung.Interaction, Oyung.Interaction.Unity, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Unity | — |
 | [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | — | Oyung.Root, Oyung.Save.Unity |
 | [Oyung.Save.Unity](index/Oyung.Save.Unity.md) |  | Assets/Scripts/Save/Unity | Oyung.Save | Oyung.Root |
-| [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem, Oyung.Locomotion | Oyung.Root |
+| [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem, Oyung.Locomotion, Oyung.Actors | Oyung.Root |
 | [Oyung.Sequences](index/Oyung.Sequences.md) | yes | Assets/Scripts/Sequences | — | Oyung.Root, Oyung.Sequences.Unity |
 | [Oyung.Sequences.Editor](index/Oyung.Sequences.Editor.md) |  | Assets/Scripts/Sequences/Editor | Oyung.Sequences.Unity, Oyung.SharedKernel, Oyung.SharedKernel.Editor, Oyung.Actors, Oyung.SharedKernel.Unity | — |
 | [Oyung.Sequences.Unity](index/Oyung.Sequences.Unity.md) |  | Assets/Scripts/Sequences/Unity | Oyung.Sequences, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Actors, Oyung.Locations | Oyung.Root, Oyung.Sequences.Editor |
 | [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Cutscenes.Unity, Oyung.Globals, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
 | [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | Oyung.Sequences.Editor |
 | [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Locations.Editor, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
+| [Oyung.Speech](index/Oyung.Speech.md) | yes | Assets/Scripts/Speech | — | Oyung.Speech.Tests, Oyung.Speech.Unity |
+| [Oyung.Speech.Tests](index/Oyung.Speech.Tests.md) |  | Assets/Scripts/Speech/Tests | Oyung.Speech, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
+| [Oyung.Speech.Unity](index/Oyung.Speech.Unity.md) |  | Assets/Scripts/Speech/Unity | Oyung.Speech | Oyung.Actors |
 | [Oyung.Vision](index/Oyung.Vision.md) | yes | Assets/Scripts/Vision | — | Oyung.Root, Oyung.Scratch, Oyung.Vision.Unity |
 | [Oyung.Vision.Unity](index/Oyung.Vision.Unity.md) |  | Assets/Scripts/Vision/Unity | Oyung.Vision, Unity.RenderPipelines.Core.Runtime, Unity.RenderPipelines.Universal.Runtime | Oyung.Root |
 | [Assembly-CSharp](index/Assembly-CSharp.md) |  | Assets | — | — |
@@ -41,21 +44,22 @@ Module table and everything visible outside its assembly. Internal and private m
 
 ## Oyung.Actors
 
-### class Actor : MonoBehaviour, IMovableActor, IAnimatedActor — Actor.cs:15
+### class Actor : MonoBehaviour, IMovableActor, IAnimatedActor, ISpeakingActor — Actor.cs:18
 undocumented
-- `ActorId Id { get; }` :33 (implements IActor)
-- `IReadOnlyList<string> Poses { get; }` :35 (implements IAnimatedActor)
-- `void WalkTo(Vector3 position, Quaternion facing, Action arrived)` :56 (implements IMovableActor)
-- `void JumpTo(Vector3 position, Quaternion facing)` :66 (implements IMovableActor)
-- `void Pose(string pose, float fade, Action done)` :73 (implements IAnimatedActor)
-- `void JumpToPose(string pose)` :80 (implements IAnimatedActor)
+- `ActorId Id { get; }` :38 (implements IActor)
+- `IReadOnlyList<string> Poses { get; }` :40 (implements IAnimatedActor)
+- `void WalkTo(LocationId to, Action arrived)` :62 (implements IMovableActor)
+- `void JumpTo(LocationId to)` :72 (implements IMovableActor)
+- `void Pose(string pose, float fade, Action done)` :80 (implements IAnimatedActor)
+- `void JumpToPose(string pose)` :87 (implements IAnimatedActor)
+- `void Say(string text, Action done)` :93 (implements ISpeakingActor)
 
 ### class ActorId : SceneElementId<IActor> — Ports/Offered/ActorId.cs:12
 Offered port: an actor's id. Whoever directs actors holds the id and finds the live actor through it (Current, Changed).
 
 ### interface IActor — Ports/Offered/IActor.cs:8
 Offered port: something in the world that can be directed. Says only who it is; what it can do comes from the capability ports it also implements (IMovableActor, IAnimatedActor).
-Implemented by: IAnimatedActor (Oyung.Actors), IMovableActor (Oyung.Actors)
+Implemented by: IAnimatedActor (Oyung.Actors), IMovableActor (Oyung.Actors), ISpeakingActor (Oyung.Actors)
 - `ActorId Id { get; }` :11 — The id it is found by.
 
 ### interface IAnimatedActor : IActor — Ports/Offered/IAnimatedActor.cs:9
@@ -68,8 +72,13 @@ Implemented by: Actor (Oyung.Actors)
 ### interface IMovableActor : IActor — Ports/Offered/IMovableActor.cs:10
 Offered port: an actor that can go places. How it gets there (walking, rolling) is its own business.
 Implemented by: Actor (Oyung.Actors)
-- `void WalkTo(Vector3 position, Quaternion facing, Action arrived)` :15 — Goes to the position, ends facing as given, then calls arrived once. A new order replaces the old one, whose arrived is never called.
-- `void JumpTo(Vector3 position, Quaternion facing)` :19 — Stands at the position at once, facing as given.
+- `void WalkTo(LocationId to, Action arrived)` :16 — Goes to the location, ends facing its way, then calls arrived once. A new order replaces the old one, whose arrived is never called. Throws if the location isn't loaded.
+- `void JumpTo(LocationId to)` :20 — Stands at the location at once, facing its way. Throws if the location isn't loaded.
+
+### interface ISpeakingActor : IActor — Ports/Offered/ISpeakingActor.cs:9
+Offered port: an actor that can speak. How it sounds is its own business.
+Implemented by: Actor (Oyung.Actors)
+- `void Say(string text, Action done)` :14 — Speaks the line, then calls done (may be null) once. A new line replaces the old one, whose done is never called. A line with no sayable words is done at once.
 
 ## Oyung.Cutscenes
 
@@ -252,11 +261,11 @@ Offered port: a place's id. Whoever needs the place holds the id and finds the l
 
 ## Oyung.Locomotion
 
-### class Gait : MonoBehaviour — Gait.cs:25
+### class WalkMotion : MonoBehaviour — WalkMotion.cs:25
 Makes a body's authored walk fit how it really moves and the ground under it. Reads only how the body moved since last frame (Walker, a script, a teleport) and drives the Animator: Speed blends stand into walk, WalkRate plays the walk at the pace the body travels, so the feet don't slide. Then fits the feet to the ground the way action games do (a trace per foot, the foot offset by the ground's height, the body lowered to the lower foot, all smoothed), with one difference: our legs are soft bendy tubes, not two bones, so a leg reaches a nearer foot by bowing more and a farther one by straightening, solved directly each frame (no iterations, so no jitter). A planted foot is locked where it stands, whatever the body does (foot locking); a lifting foot plans its landing so the whole foot lands on flat ground (stride fitting). When the walk isn't stepping, as when the body turns on the spot, feet left behind step back under it on their own, one at a time.
 
 ### class Walker : MonoBehaviour — Walker.cs:15
-Takes its body to a destination over the NavMesh at a calm pace: turns towards where it goes, slows down before arriving, optionally turns to a final facing, then reports Arrived. Moves only the body's transform; legs are Gait's job, which reads the motion.
+Takes its body to a destination over the NavMesh at a calm pace: turns towards where it goes, slows down before arriving, optionally turns to a final facing, then reports Arrived. Moves only the body's transform; legs are WalkMotion's job, which reads the motion.
 - `event Action Arrived` :38 — Raised once the body stands at the destination, facing as asked.
 - `bool IsWalking { get; }` :40 — undocumented
 - `void WalkTo(Vector3 destination, Quaternion? finalFacing = null)` :54 — Starts walking; replaces any walk in progress. Throws if the NavMesh has no path there.
@@ -368,6 +377,10 @@ undocumented
 undocumented
 - `void Press()` :42 — undocumented
 
+### class SayTest : MonoBehaviour — SayTest.cs:8
+undocumented
+- `void Say()` :15 — undocumented
+
 ### class VisionTestSlider : MonoBehaviour — VisionTestSlider.cs:11
 undocumented
 - `void Use(IVision vision, IInputModes inputModes)` :23 — Called by the root, like a module receiving its required ports.
@@ -404,7 +417,7 @@ The actor blends into an authored pose and holds it.
 ### class WalkTo : SequenceStep — Steps/WalkTo.cs:11
 The actor goes to a location and ends facing its way.
 - `override void Execute(IActor actor, Action done)` :15 (override of SequenceStep)
-- `override void JumpToEnd(IActor actor)` :22 (override of SequenceStep)
+- `override void JumpToEnd(IActor actor)` :18 (override of SequenceStep)
 
 ## Oyung.SharedKernel
 
@@ -489,6 +502,12 @@ undocumented
 - `event Action Changed` :25 — Raised when an object takes or leaves this id.
 - `void Bind(T element)` :29 — The object holds this id from now on. Throws if another one already holds it.
 - `void Unbind(T element)` :42 — The object gives the id up; ignored if it doesn't hold it.
+
+## Oyung.Speech.Unity
+
+### class Speaker : MonoBehaviour — Speaker.cs:14
+undocumented
+- `void Say(string text, Action done)` :50 — Speaks the line, then calls done (may be null) once. A new line replaces the old one, whose done is never called. A line with no sayable words is done at once.
 
 ## Oyung.Vision
 

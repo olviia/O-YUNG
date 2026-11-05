@@ -12,26 +12,16 @@ namespace Oyung.Sequences.Unity
     {
         [SerializeField] private LocationId to;
 
-        public override void Execute(IActor actor, Action done)
-        {
-            var spot = Spot();
-            Require<IMovableActor>(actor)
-                .WalkTo(spot.Position, spot.Facing, done);
-        }
+        public override void Execute(IActor actor, Action done) =>
+            Require<IMovableActor>(actor).WalkTo(To, done);
 
-        public override void JumpToEnd(IActor actor)
-        {
-            var spot = Spot();
-            Require<IMovableActor>(actor).JumpTo(spot.Position, spot.Facing);
-        }
+        public override void JumpToEnd(IActor actor) =>
+            Require<IMovableActor>(actor).JumpTo(To);
 
-        private ILocation Spot()
-        {
-            if (to == null)
-                throw new InvalidOperationException(
-                    "WalkTo has no location to walk to.");
-            return to.Current ?? throw new InvalidOperationException(
-                $"Location '{to.name}' is not in any loaded scene.");
-        }
+        // CLAUDE: an empty slot is a designer mistake: fail fast.
+        private LocationId To => to != null
+            ? to
+            : throw new InvalidOperationException(
+                "WalkTo has no location to walk to.");
     }
 }

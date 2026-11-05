@@ -9,7 +9,7 @@ namespace Oyung.Locomotion
     /// a calm pace: turns towards where it goes, slows down
     /// before arriving, optionally turns to a final facing,
     /// then reports Arrived. Moves only the body's transform;
-    /// legs are Gait's job, which reads the motion.
+    /// legs are WalkMotion's job, which reads the motion.
     /// </summary>
     [DefaultExecutionOrder(-10)]
     public class Walker : MonoBehaviour

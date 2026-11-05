@@ -6,7 +6,7 @@ namespace Oyung.Scratch
 {
     // CLAUDE: dev-only: walks a body back and forth between points so
     // CLAUDE: the gait can be watched and tuned live in Play mode (edit
-    // CLAUDE: Gait / Walker values in the Inspector while it walks).
+    // CLAUDE: WalkMotion / Walker values in the Inspector while it walks).
     // CLAUDE: Used by the WalkTest scene. Sequences don't replace it:
     // CLAUDE: they run once and don't loop.
     public class WalkLoop : MonoBehaviour

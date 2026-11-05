@@ -1,25 +1,30 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Oyung.Locations;
 using Oyung.Locomotion;
+using Oyung.Speech.Unity;
 using UnityEngine;
 
 namespace Oyung.Actors
 {
     // CLAUDE: class comment (your words). Draft: a character in the world
     // CLAUDE: that sequences can direct. Knows its id, its Walker (how it
-    // CLAUDE: moves) and its Animator (its poses). Registers on its id while
-    // CLAUDE: enabled, so a sequence finds it the moment its chunk loads.
+    // CLAUDE: moves), its Animator (its poses) and its Speaker (how it
+    // CLAUDE: talks). Registers on its id while enabled, so a sequence
+    // CLAUDE: finds it the moment its chunk loads.
     // CLAUDE: Poses are the states in the controller's "Poses" sub-state
     // CLAUDE: machine; walking crosses back to the locomotion state.
-    public sealed class Actor : MonoBehaviour, IMovableActor, IAnimatedActor
+    public sealed class Actor : MonoBehaviour, IMovableActor, IAnimatedActor,
+        ISpeakingActor
     {
         private const string PosesMachine = "Poses";
 
         [SerializeField] private ActorId id;
         [SerializeField] private Walker walker;
         [SerializeField] private Animator animator;
-        [Tooltip("The state Gait drives: stand and walk.")]
+        [SerializeField] private Speaker speaker;
+        [Tooltip("The state WalkMotion drives: stand and walk.")]
         [SerializeField] private string locomotionState = "Locomotion";
         [Tooltip("Seconds to blend from a pose back into walking.")]
         [SerializeField] private float unposeFade = 0.5f;
@@ -41,6 +46,7 @@ namespace Oyung.Actors
             Require(id, nameof(id));
             Require(walker, nameof(walker));
             Require(animator, nameof(animator));
+            Require(speaker, nameof(speaker));
             walker.Arrived += OnArrived;
             id.Bind(this);
         }
@@ -53,21 +59,22 @@ namespace Oyung.Actors
             _arrived = null;
         }
 
-        public void WalkTo(Vector3 position, Quaternion facing,
-            Action arrived)
+        public void WalkTo(LocationId to, Action arrived)
         {
+            var spot = Loaded(to);
             StopPosing();
             if (!InState(locomotionState))
                 animator.CrossFadeInFixedTime(locomotionState, unposeFade);
             _arrived = arrived;
-            walker.WalkTo(position, facing);
+            walker.WalkTo(spot.Position, spot.Facing);
         }
 
-        public void JumpTo(Vector3 position, Quaternion facing)
+        public void JumpTo(LocationId to)
         {
+            var spot = Loaded(to);
             _arrived = null;
             walker.Stop();
-            transform.SetPositionAndRotation(position, facing);
+            transform.SetPositionAndRotation(spot.Position, spot.Facing);
         }
 
         public void Pose(string pose, float fade, Action done)
@@ -82,6 +89,9 @@ namespace Oyung.Actors
             StopPosing();
             animator.Play(PoseHash(pose));
         }
+
+        public void Say(string text, Action done) =>
+            speaker.Say(text, done);
 
         private void OnArrived()
         {
@@ -111,6 +121,17 @@ namespace Oyung.Actors
                        == hash
                    || animator.GetNextAnimatorStateInfo(0).shortNameHash
                        == hash;
+        }
+
+        // Checked before anything changes, so a bad order leaves the
+        // actor doing what it did.
+        private ILocation Loaded(LocationId to)
+        {
+            if (to == null)
+                throw new ArgumentNullException(nameof(to),
+                    $"Actor '{name}' was sent to no location.");
+            return to.Current ?? throw new InvalidOperationException(
+                $"Location '{to.name}' is not in any loaded scene.");
         }
 
         private void Require(UnityEngine.Object part, string field)

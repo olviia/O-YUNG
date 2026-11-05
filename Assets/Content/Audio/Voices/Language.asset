@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f89dd71b506db5044a1c61d41dd6b7fb, type: 3}
+  m_Name: Language
+  m_EditorClassIdentifier: Oyung.Speech.Unity::Oyung.Speech.Unity.LanguageAsset
+  syllables:
+  - ma
+  - mo
+  - mu
+  - me
+  - mi
+  - ba
+  - bo
+  - bu
+  - be
+  - bi
+  - la
+  - lo
+  - lu
+  - le
+  - li
+  - na
+  - no
+  - nu
+  - ne
+  - ni
+  - wa
+  - wo
+  - wu
+  - we
+  - wi
+  functionWords:
+  - a
+  - an
+  - the
+  - this
+  - that
+  - is
+  - are
+  - was
+  - our
+  - my
+  - your
+  - his
+  - her
+  - him
+  - we
+  - you
+  - i
+  - it
+  - so
+  - to
+  - of
+  - and
+  - what
+  - will
