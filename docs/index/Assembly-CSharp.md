@@ -9,3 +9,16 @@ Internal and private members only; the rest is in INDEX.md.
 ### class NewMonoBehaviourScript — Scripts/NewMonoBehaviourScript.cs:3
 - `private void Start()` :6 — undocumented
 - `private void Update()` :12 — undocumented
+
+### class CubeController — TempForVideo/CubeController.cs:12
+- `private void Awake()` :26 — undocumented
+- `private void OnEnable()` :32 — undocumented
+- `private void Update()` :34 — undocumented
+- `private static Vector2 ReadMove()` :59 — undocumented
+- `private static Vector2 ReadLook()` :69 — undocumented
+- `private static bool JumpPressed()` :73 — undocumented
+- `private static bool EscapePressed()` :76 — undocumented
+
+### class LegsWalk — TempForVideo/LegsWalk.cs:8
+- `private void OnEnable()` :21 — undocumented
+- `private void Update()` :23 — undocumented

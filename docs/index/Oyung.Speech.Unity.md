@@ -15,22 +15,33 @@ undocumented
 - `internal LinePlanner Planner { get; }` :20 — undocumented
 
 ### class Speaker — Speaker.cs:14
-- `private void Awake()` :66 — undocumented
-- `private void OnDisable()` :85 — undocumented
-- `private void Update()` :87 — undocumented
-- `private void Schedule(int index)` :103 — undocumented
-- `private double SyllableTime(int index)` :121 — undocumented
-- `private double LineEnd()` :124 — undocumented
-- `private void FinishLine()` :127 — undocumented
-- `private void StopLine()` :135 — undocumented
-- `private Exception Missing(string field)` :144 — undocumented
+- `internal event Action<SyllableEvent> SyllableStarted` :50 — A syllable has just started to sound. For whatever moves along with the voice; must not call Say.
+- `private void Awake()` :72 — undocumented
+- `private void OnDisable()` :91 — undocumented
+- `private void Update()` :93 — undocumented
+- `private void Schedule(int index)` :113 — undocumented
+- `private double SyllableTime(int index)` :131 — undocumented
+- `private double LineEnd()` :134 — undocumented
+- `private void FinishLine()` :137 — undocumented
+- `private void StopLine()` :145 — undocumented
+- `private Exception Missing(string field)` :154 — undocumented
 
-### private class Speaker.Sound — Speaker.cs:150
+### private class Speaker.Sound — Speaker.cs:160
 undocumented
-- `private Sound(AudioSource source)` :158 — undocumented
-- `private void Play(AudioClip clip, float volume, double at, SyllableEvent syllable, float basePitch)` :160 — undocumented
-- `private void Glide(double now, float basePitch)` :173 — undocumented
-- `private void Stop()` :181 — undocumented
+- `private Sound(AudioSource source)` :168 — undocumented
+- `private void Play(AudioClip clip, float volume, double at, SyllableEvent syllable, float basePitch)` :170 — undocumented
+- `private void Glide(double now, float basePitch)` :183 — undocumented
+- `private void Stop()` :191 — undocumented
+
+### internal class TalkMotion : MonoBehaviour — TalkMotion.cs:17
+undocumented
+- `private void Awake()` :52 — undocumented
+- `private void OnDestroy()` :63 — undocumented
+- `private void OnSyllableStarted(SyllableEvent syllable)` :69 — undocumented
+- `private void LateUpdate()` :76 — undocumented
+- `private void Squash()` :100 — undocumented
+- `private float AngularFrequency { get; }` :111 — undocumented
+- `private void Require(Object part, string field)` :113 — undocumented
 
 ### internal class VoiceAsset : ScriptableObject — VoiceAsset.cs:11
 undocumented

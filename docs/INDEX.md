@@ -507,7 +507,7 @@ undocumented
 
 ### class Speaker : MonoBehaviour — Speaker.cs:14
 undocumented
-- `void Say(string text, Action done)` :50 — Speaks the line, then calls done (may be null) once. A new line replaces the old one, whose done is never called. A line with no sayable words is done at once.
+- `void Say(string text, Action done)` :55 — Speaks the line, then calls done (may be null) once. A new line replaces the old one, whose done is never called. A line with no sayable words is done at once.
 
 ## Oyung.Vision
 

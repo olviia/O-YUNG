@@ -1,5 +1,7 @@
 # Architecture conventions
 
+A blend of three architectures: hexagonal, DDD and ScriptableObject architecture.
+
 Hexagonal modular, level 3 of 4: every module is a small hexagon; the compiler enforces the boundaries.
 
 ## Terms

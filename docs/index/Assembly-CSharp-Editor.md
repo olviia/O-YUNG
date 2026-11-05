@@ -6,6 +6,12 @@ Depends on: —
 Used by: —
 Internal and private members only; the rest is in INDEX.md.
 
+### internal class TempSceneBuilder — TempForVideo/Editor/TempSceneBuilder.cs:10
+undocumented
+- `private static void Build()` :15 — undocumented
+- `private static void Box(string name, Vector3 position, Vector3 scale)` :64 — undocumented
+- `private static Material RedMaterial(Material source)` :72 — undocumented
+
 ### internal class ReadmeEditor : Editor — TutorialInfo/Editor/ReadmeEditor.cs:8
 undocumented
 - `private ReadmeEditor()` :13 — undocumented

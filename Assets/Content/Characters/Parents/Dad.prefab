@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 4022620629800573690}
   - component: {fileID: 4545261974148703568}
   - component: {fileID: 5525444507371322407}
+  - component: {fileID: 7668574135423037328}
   m_Layer: 0
   m_Name: Dad
   m_TagString: Untagged
@@ -304,6 +305,26 @@ MonoBehaviour:
   voice: {fileID: 11400000, guid: 64cab8e6677452c46981818f7fa98c89, type: 2}
   mouth: {fileID: 5836622681034433757}
   overlap: 6
+--- !u!114 &7668574135423037328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4696557030959430384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 545b398b283a66a4eb732facc5245fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oyung.Speech.Unity::Oyung.Speech.Unity.TalkMotion
+  speaker: {fileID: 5525444507371322407}
+  chest: {fileID: 5837947660596233668}
+  head: {fileID: 1721528995687667841}
+  squash: 0.06
+  nod: 6
+  plainStrength: 0.55
+  frequency: 3
+  damping: 0.4
 --- !u!1 &5461842811415948176
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,6 +922,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: c3848bbea07b5c5459ced1275895da91, type: 3}
   m_PrefabInstance: {fileID: 6648669958475510017}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1721528995687667841 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5449579411366078848, guid: c3848bbea07b5c5459ced1275895da91, type: 3}
+  m_PrefabInstance: {fileID: 6648669958475510017}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4868021242512391498 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6932590554920268725, guid: c3848bbea07b5c5459ced1275895da91, type: 3}
@@ -932,6 +958,11 @@ MonoBehaviour:
   - m_Rig: {fileID: 269018208549700597}
     m_Active: 1
   m_Effectors: []
+--- !u!4 &5837947660596233668 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 954864751481402565, guid: c3848bbea07b5c5459ced1275895da91, type: 3}
+  m_PrefabInstance: {fileID: 6648669958475510017}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6615342982596073194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c3848bbea07b5c5459ced1275895da91, type: 3}

@@ -40,9 +40,14 @@ namespace Oyung.Speech.Unity
 
         private IReadOnlyList<SyllableEvent> _line;
         private int _nextSyllable;
+        private int _nextHeard;
         private double _lineStart;
         private double _silentAt;
         private Action _done;
+
+        /// <summary>A syllable has just started to sound. For whatever
+        /// moves along with the voice; must not call Say.</summary>
+        internal event Action<SyllableEvent> SyllableStarted;
 
         /// <summary>Speaks the line, then calls done (may be null) once.
         /// A new line replaces the old one, whose done is never called.
@@ -58,6 +63,7 @@ namespace Oyung.Speech.Unity
             }
             _line = line;
             _nextSyllable = 0;
+            _nextHeard = 0;
             _lineStart = AudioSettings.dspTime + StartDelay;
             _done = done;
             enabled = true;
@@ -91,6 +97,10 @@ namespace Oyung.Speech.Unity
                 while (_nextSyllable < _line.Count && SyllableTime(_nextSyllable)
                        <= now + ScheduleAhead)
                     Schedule(_nextSyllable++);
+            if (_line != null)
+                while (_nextHeard < _nextSyllable
+                       && SyllableTime(_nextHeard) <= now)
+                    SyllableStarted?.Invoke(_line[_nextHeard++]);
             // Keeps gliding after the line is done: tails still ring.
             foreach (var sound in _sounds) sound.Glide(now, voice.BasePitch);
             if (_line != null && _nextSyllable == _line.Count

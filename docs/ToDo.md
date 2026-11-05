@@ -1,6 +1,4 @@
-6. cutscenes: two buttons while a cutscene plays: Skip, and Speed x2
-   (like Crimson Desert). Speed = director playback speed; anything
-   timed (shader pulse, audio) must follow the director's time.
+
 7. game music after the intro: a blend of white noise, fantasy bard
    melody, forest sounds and a lullaby. Plays when the eyes open.
    Belongs to a future audio/music piece, not to cutscenes.
