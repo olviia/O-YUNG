@@ -27,7 +27,7 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Quests.Unity, Oyung.Interaction, Oyung.Interaction.Unity, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Unity | — |
 | [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | — | Oyung.Root, Oyung.Save.Unity |
 | [Oyung.Save.Unity](index/Oyung.Save.Unity.md) |  | Assets/Scripts/Save/Unity | Oyung.Save | Oyung.Root |
-| [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem, Oyung.Locomotion, Oyung.Actors | Oyung.Root |
+| [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem, Oyung.Locomotion, Oyung.Actors, Oyung.Speech.Unity | Oyung.Root |
 | [Oyung.Sequences](index/Oyung.Sequences.md) | yes | Assets/Scripts/Sequences | — | Oyung.Root, Oyung.Sequences.Unity |
 | [Oyung.Sequences.Editor](index/Oyung.Sequences.Editor.md) |  | Assets/Scripts/Sequences/Editor | Oyung.Sequences.Unity, Oyung.SharedKernel, Oyung.SharedKernel.Editor, Oyung.Actors, Oyung.SharedKernel.Unity | — |
 | [Oyung.Sequences.Unity](index/Oyung.Sequences.Unity.md) |  | Assets/Scripts/Sequences/Unity | Oyung.Sequences, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Actors, Oyung.Locations | Oyung.Root, Oyung.Sequences.Editor |
@@ -36,7 +36,7 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Locations.Editor, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
 | [Oyung.Speech](index/Oyung.Speech.md) | yes | Assets/Scripts/Speech | — | Oyung.Speech.Tests, Oyung.Speech.Unity |
 | [Oyung.Speech.Tests](index/Oyung.Speech.Tests.md) |  | Assets/Scripts/Speech/Tests | Oyung.Speech, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
-| [Oyung.Speech.Unity](index/Oyung.Speech.Unity.md) |  | Assets/Scripts/Speech/Unity | Oyung.Speech | Oyung.Actors |
+| [Oyung.Speech.Unity](index/Oyung.Speech.Unity.md) |  | Assets/Scripts/Speech/Unity | Oyung.Speech | Oyung.Actors, Oyung.Scratch |
 | [Oyung.Vision](index/Oyung.Vision.md) | yes | Assets/Scripts/Vision | — | Oyung.Root, Oyung.Scratch, Oyung.Vision.Unity |
 | [Oyung.Vision.Unity](index/Oyung.Vision.Unity.md) |  | Assets/Scripts/Vision/Unity | Oyung.Vision, Unity.RenderPipelines.Core.Runtime, Unity.RenderPipelines.Universal.Runtime | Oyung.Root |
 | [Assembly-CSharp](index/Assembly-CSharp.md) |  | Assets | — | — |
@@ -380,6 +380,9 @@ undocumented
 ### class SayTest : MonoBehaviour — SayTest.cs:8
 undocumented
 - `void Say()` :15 — undocumented
+
+### class TalkLoop : MonoBehaviour — TalkLoop.cs:10
+undocumented
 
 ### class VisionTestSlider : MonoBehaviour — VisionTestSlider.cs:11
 undocumented
