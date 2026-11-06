@@ -5,7 +5,8 @@ Module table and everything visible outside its assembly. Internal and private m
 ## Modules
 | Module | Pure C# | Root | Depends on | Used by |
 |---|---|---|---|---|
-| [Oyung.Actors](index/Oyung.Actors.md) |  | Assets/Scripts/Actors | Oyung.Locations, Oyung.Locomotion, Oyung.SharedKernel.Unity, Oyung.Speech.Unity | Oyung.Dialogues.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
+| [Oyung.Actors](index/Oyung.Actors.md) |  | Assets/Scripts/Actors | Oyung.Locations, Oyung.Locomotion, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Speech.Unity | Oyung.Actors.Tests, Oyung.Dialogues.Unity, Oyung.Root, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
+| [Oyung.Actors.Tests](index/Oyung.Actors.Tests.md) |  | Assets/Scripts/Actors/Tests | Oyung.Actors, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Cutscenes](index/Oyung.Cutscenes.md) | yes | Assets/Scripts/Cutscenes | Oyung.SharedKernel | Oyung.Cutscenes.Tests, Oyung.Cutscenes.Unity, Oyung.Root |
 | [Oyung.Cutscenes.Tests](index/Oyung.Cutscenes.Tests.md) |  | Assets/Scripts/Cutscenes/Tests | Oyung.Cutscenes, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Cutscenes.Unity](index/Oyung.Cutscenes.Unity.md) |  | Assets/Scripts/Cutscenes/Unity | Oyung.Cutscenes, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Timeline, UnityEngine.UI, Unity.Localization | Oyung.Root |
@@ -29,7 +30,7 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.SharedKernel | Oyung.Hints, Oyung.Hud, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root |
 | [Oyung.Quests.Tests](index/Oyung.Quests.Tests.md) |  | Assets/Scripts/Quests/Tests | Oyung.Quests, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Quests.Unity](index/Oyung.Quests.Unity.md) |  | Assets/Scripts/Quests/Unity | Oyung.Quests, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
-| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.SharedKernel, Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Quests.Unity, Oyung.Interaction, Oyung.Interaction.Unity, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Unity | — |
+| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.SharedKernel, Oyung.Actors, Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Quests.Unity, Oyung.Interaction, Oyung.Interaction.Unity, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Unity | — |
 | [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | Oyung.SharedKernel | Oyung.Root, Oyung.Save.Adapters, Oyung.Save.Tests, Oyung.Save.Unity |
 | [Oyung.Save.Adapters](index/Oyung.Save.Adapters.md) | yes | Assets/Scripts/Save/Adapters | Oyung.Save | Oyung.Save.Tests, Oyung.Save.Unity |
 | [Oyung.Save.Tests](index/Oyung.Save.Tests.md) |  | Assets/Scripts/Save/Tests | Oyung.Save, Oyung.Save.Adapters, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
@@ -39,7 +40,7 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Sequences.Editor](index/Oyung.Sequences.Editor.md) |  | Assets/Scripts/Sequences/Editor | Oyung.Sequences.Unity, Oyung.SharedKernel, Oyung.SharedKernel.Editor, Oyung.Actors, Oyung.SharedKernel.Unity | — |
 | [Oyung.Sequences.Tests](index/Oyung.Sequences.Tests.md) |  | Assets/Scripts/Sequences/Tests | Oyung.Sequences, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Sequences.Unity](index/Oyung.Sequences.Unity.md) |  | Assets/Scripts/Sequences/Unity | Oyung.Sequences, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Actors, Oyung.Locations | Oyung.Root, Oyung.Sequences.Editor |
-| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Cutscenes, Oyung.Cutscenes.Tests, Oyung.Cutscenes.Unity, Oyung.Dialogues.Unity, Oyung.Globals, Oyung.Globals.Tests, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root, Oyung.Save, Oyung.Save.Tests, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Editor, Oyung.Sequences.Tests, Oyung.Sequences.Unity, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
+| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Actors, Oyung.Actors.Tests, Oyung.Cutscenes, Oyung.Cutscenes.Tests, Oyung.Cutscenes.Unity, Oyung.Dialogues.Unity, Oyung.Globals, Oyung.Globals.Tests, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root, Oyung.Save, Oyung.Save.Tests, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Editor, Oyung.Sequences.Tests, Oyung.Sequences.Unity, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
 | [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | Oyung.Sequences.Editor |
 | [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Dialogues.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Locations.Editor, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
 | [Oyung.Speech](index/Oyung.Speech.md) | yes | Assets/Scripts/Speech | — | Oyung.Speech.Tests, Oyung.Speech.Unity |
@@ -52,18 +53,23 @@ Module table and everything visible outside its assembly. Internal and private m
 
 ## Oyung.Actors
 
-### class Actor : MonoBehaviour, IMovableActor, IAnimatedActor, ISpeakingActor — Actor.cs:18
+### class Actor : MonoBehaviour, IMovableActor, IAnimatedActor, ISpeakingActor — Actor.cs:20
 undocumented
-- `ActorId Id { get; }` :38 (implements IActor)
-- `IReadOnlyList<string> Poses { get; }` :40 (implements IAnimatedActor)
-- `void WalkTo(LocationId to, Action arrived)` :62 (implements IMovableActor)
-- `void JumpTo(LocationId to)` :72 (implements IMovableActor)
-- `void Pose(string pose, float fade, Action done)` :80 (implements IAnimatedActor)
-- `void JumpToPose(string pose)` :87 (implements IAnimatedActor)
-- `void Say(string text, Action done)` :93 (implements ISpeakingActor)
+- `ActorId Id { get; }` :41 (implements IActor)
+- `IReadOnlyList<string> Poses { get; }` :43 (implements IAnimatedActor)
+- `void WalkTo(LocationId to, Action arrived)` :72 (implements IMovableActor)
+- `void Pose(string pose, float fade, Action done)` :83 (implements IAnimatedActor)
+- `void Say(string text, Action done)` :92 (implements ISpeakingActor)
 
-### class ActorId : SceneElementId<IActor> — Ports/Offered/ActorId.cs:12
+### class ActorsInstaller : MonoBehaviour, IDisposable — ActorsInstaller.cs:11
+Actors: needs nothing from other modules. Creates the store and gives it to every actor id, so an actor can place itself from it.
+- `ISaveable Build()` :17 — undocumented
+- `void PlaceActors()` :27 — After load: places the actors that are already here. Whichever arrives second does the placing, whatever order Unity woke things in; one enabling later places itself.
+- `void Dispose()` :33 — undocumented
+
+### class ActorId : SceneElementId<IActor>, ICataloguedItem — Ports/Offered/ActorId.cs:14
 Offered port: an actor's id. Whoever directs actors holds the id and finds the live actor through it (Current, Changed).
+- `string Name { get; }` :19 (implements ICataloguedItem)
 
 ### interface IActor — Ports/Offered/IActor.cs:8
 Offered port: something in the world that can be directed. Says only who it is; what it can do comes from the capability ports it also implements (IMovableActor, IAnimatedActor).
@@ -75,18 +81,26 @@ Offered port: an actor that can hold authored poses ("Hug").
 Implemented by: Actor (Oyung.Actors)
 - `IReadOnlyList<string> Poses { get; }` :12 — Names of every pose this actor has.
 - `void Pose(string pose, float fade, Action done)` :16 — Blends into the pose over fade seconds, then calls done once. Throws if the actor has no such pose.
-- `void JumpToPose(string pose)` :19 — Holds the pose at once, without blending.
 
 ### interface IMovableActor : IActor — Ports/Offered/IMovableActor.cs:10
 Offered port: an actor that can go places. How it gets there (walking, rolling) is its own business.
 Implemented by: Actor (Oyung.Actors)
 - `void WalkTo(LocationId to, Action arrived)` :16 — Goes to the location, ends facing its way, then calls arrived once. A new order replaces the old one, whose arrived is never called. Throws if the location isn't loaded.
-- `void JumpTo(LocationId to)` :20 — Stands at the location at once, facing its way. Throws if the location isn't loaded.
 
 ### interface ISpeakingActor : IActor — Ports/Offered/ISpeakingActor.cs:9
 Offered port: an actor that can speak. How it sounds is its own business.
 Implemented by: Actor (Oyung.Actors)
 - `void Say(string text, Action done)` :14 — Speaks the line, then calls done (may be null) once. A new line replaces the old one, whose done is never called. A line with no sayable words is done at once.
+
+## Oyung.Actors.Tests
+
+### class ActorStoreSaveTests — ActorStoreSaveTests.cs:7
+undocumented
+- `void State_comes_back()` :16 — undocumented
+- `void Numbers_as_a_save_returns_them_are_read()` :31 — undocumented
+- `void An_actor_never_seen_has_no_state()` :52 — undocumented
+- `void Give_asks_for_the_live_actors_first()` :58 — undocumented
+- `void Take_replaces_what_was_there()` :67 — undocumented
 
 ## Oyung.Cutscenes
 
@@ -393,7 +407,7 @@ Quests: needs nothing from other modules (they reach it through conditions and i
 
 ## Oyung.Root
 
-### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:21
+### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:22
 The only place that creates modules and hands them what they need. Startup: create → load → start. Shutdown: reverse order.
 
 ## Oyung.Save
@@ -478,15 +492,14 @@ undocumented
 ### class PoseNameAttribute : PropertyAttribute — PoseNameAttribute.cs:9
 On a step's string field: picks from the poses the sequence's actor has, found in the open scene.
 
-### class SequenceAsset : ModuleFact<bool> — SequenceAsset.cs:18
+### class SequenceAsset : ModuleFact<bool> — SequenceAsset.cs:19
 undocumented
-- `override bool Value { get; }` :36 (override of ModuleFact<T>)
+- `override bool Value { get; }` :37 (override of ModuleFact<T>)
 
-### class SequenceStep — SequenceStep.cs:14
+### class SequenceStep — SequenceStep.cs:13
 undocumented
-- `abstract void Execute(IActor actor, Action done)` :17 — Plays the step out, then calls done once.
-- `abstract void JumpToEnd(IActor actor)` :21 — Leaves the actor as the step would, at once.
-- `protected T Require<T>(IActor actor)` :25 — The actor as the capability this step needs; throws naming both if it lacks it.
+- `abstract void Execute(IActor actor, Action done)` :16 — Plays the step out, then calls done once.
+- `protected T Require<T>(IActor actor)` :20 — The actor as the capability this step needs; throws naming both if it lacks it.
 
 ### class SequencesInstaller : MonoBehaviour, IDisposable — SequencesInstaller.cs:12
 Sequences: needs nothing from other modules (actors meet their sequences through ActorId). Creates the store and binds every catalog sequence to it. Start lets them run.
@@ -497,12 +510,10 @@ Sequences: needs nothing from other modules (actors meet their sequences through
 ### class Pose : SequenceStep — Steps/Pose.cs:10
 The actor blends into an authored pose and holds it.
 - `override void Execute(IActor actor, Action done)` :18 (override of SequenceStep)
-- `override void JumpToEnd(IActor actor)` :21 (override of SequenceStep)
 
 ### class WalkTo : SequenceStep — Steps/WalkTo.cs:11
 The actor goes to a location and ends facing its way.
 - `override void Execute(IActor actor, Action done)` :15 (override of SequenceStep)
-- `override void JumpToEnd(IActor actor)` :18 (override of SequenceStep)
 
 ## Oyung.SharedKernel
 
@@ -513,7 +524,7 @@ Shared Kernel contract: a question about some module's state ("is the intro seen
 
 ### interface ICataloguedItem — ICataloguedItem.cs:9
 Shared Kernel contract: an asset a catalog holds and finds by its stable name; saves and dialogue use the same name. Unique within its catalog.
-Implemented by: IGlobalFact (Oyung.Globals), ModuleFact<T> (Oyung.SharedKernel.Unity)
+Implemented by: ActorId (Oyung.Actors), IGlobalFact (Oyung.Globals), ModuleFact<T> (Oyung.SharedKernel.Unity)
 - `string Name { get; }` :11 — undocumented
 
 ### interface ISaveBlocker — ISaveBlocker.cs:9
@@ -524,7 +535,7 @@ Implemented by: SaveSystem (Oyung.Save)
 
 ### interface ISaveable — ISaveable.cs:12
 Shared Kernel contract: a module that keeps state across saves. A section is a dictionary of plain values: bool, int, long, float, double, string, a nested section, or a list of those. Anything else (an enum: write its name) throws on save. Numbers come back wider than they went in: whole numbers as long, decimals as double.
-Implemented by: CutsceneStore (Oyung.Cutscenes), GlobalStore (Oyung.Globals), QuestJournal (Oyung.Quests), SaveSystemTests.FakeSaveable (Oyung.Save.Tests), SequenceStore (Oyung.Sequences)
+Implemented by: ActorStore (Oyung.Actors), CutsceneStore (Oyung.Cutscenes), GlobalStore (Oyung.Globals), QuestJournal (Oyung.Quests), SaveSystemTests.FakeSaveable (Oyung.Save.Tests), SequenceStore (Oyung.Sequences)
 - `string Section { get; }` :15 — The section's stable name in the save.
 - `IReadOnlyDictionary<string, object> Give()` :18 — The module's current state.
 - `void Take(IReadOnlyDictionary<string, object> section)` :23 — Puts back what Give returned, silently: runs in the load phase, before anything listens. Not called if the save has no such section; the module then simply starts fresh.

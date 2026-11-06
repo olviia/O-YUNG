@@ -29,8 +29,8 @@ undocumented
 undocumented
 - `private override void OnGUI(Rect position, UnityEditor.SerializedProperty property, GUIContent label)` :68 (override)
 
-### internal class ChatterPlayer : MonoBehaviour — ChatterPlayer.cs:19
+### internal class ChatterPlayer : MonoBehaviour — ChatterPlayer.cs:21
 undocumented
-- `private bool ShouldStart { get; }` :31 — undocumented
-- `private bool ShouldStop { get; }` :32 — undocumented
-- `private IEnumerator Start()` :35 — undocumented
+- `private bool ShouldStart { get; }` :33 — undocumented
+- `private bool ShouldStop { get; }` :34 — undocumented
+- `private IEnumerator Start()` :37 — undocumented

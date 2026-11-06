@@ -4,6 +4,7 @@
     "references": [
         "Oyung.Locations",
         "Oyung.Locomotion",
+        "Oyung.SharedKernel",
         "Oyung.SharedKernel.Unity",
         "Oyung.Speech.Unity"
     ],

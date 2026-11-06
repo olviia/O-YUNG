@@ -12,7 +12,9 @@ namespace Oyung.Actors
     // CLAUDE: that sequences can direct. Knows its id, its Walker (how it
     // CLAUDE: moves), its Animator (its poses) and its Speaker (how it
     // CLAUDE: talks). Registers on its id while enabled, so a sequence
-    // CLAUDE: finds it the moment its chunk loads.
+    // CLAUDE: finds it the moment its chunk loads. Owns where it stands:
+    // CLAUDE: places itself from the store and writes itself down on
+    // CLAUDE: leaving, so no sequence has to put it back.
     // CLAUDE: Poses are the states in the controller's "Poses" sub-state
     // CLAUDE: machine; walking crosses back to the locomotion state.
     public sealed class Actor : MonoBehaviour, IMovableActor, IAnimatedActor,
@@ -34,6 +36,7 @@ namespace Oyung.Actors
 
         private Action _arrived;
         private Coroutine _posing;
+        private string _pose;
 
         public ActorId Id => id;
 
@@ -48,12 +51,19 @@ namespace Oyung.Actors
             Require(animator, nameof(animator));
             Require(speaker, nameof(speaker));
             walker.Arrived += OnArrived;
+            // Before binding, so no sequence ever sees it unplaced. With no
+            // store yet, the installer pings it once the store is ready.
+            if (id.Store != null) Place();
             id.Bind(this);
         }
 
         private void OnDisable()
         {
-            if (id != null) id.Unbind(this);
+            if (id != null)
+            {
+                id.Store?.Set(id.name, State);
+                id.Unbind(this);
+            }
             if (walker != null) walker.Arrived -= OnArrived;
             StopPosing();
             _arrived = null;
@@ -63,35 +73,38 @@ namespace Oyung.Actors
         {
             var spot = Loaded(to);
             StopPosing();
+            _pose = null;
             if (!InState(locomotionState))
                 animator.CrossFadeInFixedTime(locomotionState, unposeFade);
             _arrived = arrived;
             walker.WalkTo(spot.Position, spot.Facing);
         }
 
-        public void JumpTo(LocationId to)
-        {
-            var spot = Loaded(to);
-            _arrived = null;
-            walker.Stop();
-            transform.SetPositionAndRotation(spot.Position, spot.Facing);
-        }
-
         public void Pose(string pose, float fade, Action done)
         {
+            var hash = PoseHash(pose);
             StopPosing();
-            animator.CrossFadeInFixedTime(PoseHash(pose), fade);
+            _pose = pose;
+            animator.CrossFadeInFixedTime(hash, fade);
             _posing = StartCoroutine(AfterFade(fade, done));
-        }
-
-        public void JumpToPose(string pose)
-        {
-            StopPosing();
-            animator.Play(PoseHash(pose));
         }
 
         public void Say(string text, Action done) =>
             speaker.Say(text, done);
+
+        /// <summary>Where it stands and how, right now.</summary>
+        internal ActorState State => new ActorState(
+            transform.position, transform.rotation, _pose);
+
+        /// <summary>Stands as the store remembers, at once. With nothing
+        /// remembered it stays where the scene put it.</summary>
+        internal void Place()
+        {
+            if (!id.Store.TryGet(id.name, out var state)) return;
+            transform.SetPositionAndRotation(state.Position, state.Rotation);
+            _pose = state.Pose;
+            if (_pose != null) animator.Play(PoseHash(_pose));
+        }
 
         private void OnArrived()
         {

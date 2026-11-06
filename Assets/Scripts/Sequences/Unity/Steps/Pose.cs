@@ -17,8 +17,5 @@ namespace Oyung.Sequences.Unity
 
         public override void Execute(IActor actor, Action done) =>
             Require<IAnimatedActor>(actor).Pose(pose, fade, done);
-
-        public override void JumpToEnd(IActor actor) =>
-            Require<IAnimatedActor>(actor).JumpToPose(pose);
     }
 }

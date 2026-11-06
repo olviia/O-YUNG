@@ -15,9 +15,6 @@ namespace Oyung.Sequences.Unity
         public override void Execute(IActor actor, Action done) =>
             Require<IMovableActor>(actor).WalkTo(To, done);
 
-        public override void JumpToEnd(IActor actor) =>
-            Require<IMovableActor>(actor).JumpTo(To);
-
         // CLAUDE: an empty slot is a designer mistake: fail fast.
         private LocationId To => to != null
             ? to

@@ -11,8 +11,9 @@ namespace Oyung.Sequences.Unity
     // CLAUDE: which actor, when it starts, its steps in order. Value =
     // CLAUDE: finished (proxy to the store), read by others through
     // CLAUDE: BoolCondition. Starts once its condition is met, then runs
-    // CLAUDE: whenever its actor is loaded: steps already done jump to
-    // CLAUDE: their end, the current one plays. The player can't stop it.
+    // CLAUDE: whenever its actor is loaded: the unfinished step plays from
+    // CLAUDE: wherever the actor stands. Placing the actor is the actor's
+    // CLAUDE: own business. The player can't stop it.
     [CreateAssetMenu(menuName = "Oyung/Sequences/Sequence",
         fileName = "NewSequence")]
     public sealed class SequenceAsset : ModuleFact<bool>
@@ -66,19 +67,13 @@ namespace Oyung.Sequences.Unity
         }
 
         // CLAUDE: runs when the actor streams in or out. Out: the step
-        // CLAUDE: in progress is dropped; in: catch up and play on.
-        // CLAUDE: Known gap: a finished sequence puts its actor back at
-        // CLAUDE: its end each time the actor streams in, even if a later
-        // CLAUDE: sequence moved it on. Saved actor state will own this.
+        // CLAUDE: in progress is dropped; in: that step starts again.
         private void OnActorChanged()
         {
             _run++;
             var current = Actor.Current;
             if (current == null) return;
-            var at = Store.StepOf(Name);
-            for (var i = 0; i < at && i < steps.Count; i++)
-                Step(i).JumpToEnd(current);
-            Run(current, at);
+            Run(current, Store.StepOf(Name));
         }
 
         private void Run(IActor current, int index)

@@ -6,22 +6,22 @@ Depends on: Oyung.Sequences, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung
 Used by: Oyung.Root, Oyung.Sequences.Editor
 Internal and private members only; the rest is in INDEX.md.
 
-### class SequenceAsset — SequenceAsset.cs:18
-- `internal const string ActorField = nameof(actor)` :21 — undocumented
-- `internal void Bind(SequenceStore store)` :39 — undocumented
-- `internal void StartListening()` :43 — undocumented
-- `internal void Unbind()` :49 — undocumented
-- `private void OnStartWhenChanged()` :58 — undocumented
-- `private void OnActorChanged()` :73 — undocumented
-- `private void Run(IActor current, int index)` :84 — undocumented
-- `private void OnStepDone(IActor current, int index, int run)` :92 — undocumented
-- `private SequenceStep Step(int index)` :100 — undocumented
-- `private Condition StartWhen { get; }` :104 — undocumented
-- `private ActorId Actor { get; }` :108 — undocumented
-- `private SequenceStore Store { get; }` :112 — undocumented
+### class SequenceAsset — SequenceAsset.cs:19
+- `internal const string ActorField = nameof(actor)` :22 — undocumented
+- `internal void Bind(SequenceStore store)` :40 — undocumented
+- `internal void StartListening()` :44 — undocumented
+- `internal void Unbind()` :50 — undocumented
+- `private void OnStartWhenChanged()` :59 — undocumented
+- `private void OnActorChanged()` :71 — undocumented
+- `private void Run(IActor current, int index)` :79 — undocumented
+- `private void OnStepDone(IActor current, int index, int run)` :87 — undocumented
+- `private SequenceStep Step(int index)` :95 — undocumented
+- `private Condition StartWhen { get; }` :99 — undocumented
+- `private ActorId Actor { get; }` :103 — undocumented
+- `private SequenceStore Store { get; }` :107 — undocumented
 
 ### internal class SequenceCatalog : Catalog<SequenceAsset> — SequenceCatalog.cs:9
 undocumented
 
 ### class WalkTo — Steps/WalkTo.cs:11
-- `private LocationId To { get; }` :22 — undocumented
+- `private LocationId To { get; }` :19 — undocumented

@@ -16,6 +16,8 @@ namespace Oyung.Dialogues.Unity
     // CLAUDE: Known gap: if something else makes the speaker Say while a
     // CLAUDE: line plays, its done never comes and the chatter waits for
     // CLAUDE: good. Nothing else speaks yet; reactions will have to.
+    // CLAUDE: Wrong on purpose for now: reads its conditions from Unity's
+    // CLAUDE: Start. The full tool must start in the root's start phase.
     internal sealed class ChatterPlayer : MonoBehaviour
     {
         // The voice always speaks this locale; subtitles are another matter.

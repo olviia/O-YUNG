@@ -444,6 +444,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 986015837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &186538230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 186538232}
+  - component: {fileID: 186538231}
+  m_Layer: 0
+  m_Name: ActorsInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &186538231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186538230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2024b18ec7a5bd1408ee34b67a4ff3e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oyung.Actors::Oyung.Actors.ActorsInstaller
+  catalog: {fileID: 11400000, guid: 758fb10cc29679741b8150ad14d8353d, type: 2}
+--- !u!4 &186538232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186538230}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1347315721}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &212819518
 GameObject:
   m_ObjectHideFlags: 0
@@ -3017,6 +3062,7 @@ Transform:
   - {fileID: 499319163}
   - {fileID: 1777000003}
   - {fileID: 2038817108}
+  - {fileID: 186538232}
   - {fileID: 846055042}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3039,6 +3085,7 @@ MonoBehaviour:
   cutscenesInstaller: {fileID: 499319161}
   questsInstaller: {fileID: 1777000002}
   interactionInstaller: {fileID: 2038817106}
+  actorsInstaller: {fileID: 186538231}
   sequencesInstaller: {fileID: 846055041}
   visionTestSlider: {fileID: 1933133465}
 --- !u!1 &1359552090

@@ -4,21 +4,16 @@ using Oyung.Actors;
 namespace Oyung.Sequences.Unity
 {
     // CLAUDE: class comment (your words). Draft: one thing a sequence
-    // CLAUDE: asks its actor to do. Knows its own data. Does it two ways:
-    // CLAUDE: Execute plays it out and calls done; JumpToEnd leaves the
-    // CLAUDE: actor at once as the step would (loading a save, an actor
-    // CLAUDE: streaming back in). Execute must work from wherever the
-    // CLAUDE: actor stands, so a step can resume halfway.
+    // CLAUDE: asks its actor to do. Knows its own data. Execute plays it
+    // CLAUDE: out and calls done. It must work from wherever the actor
+    // CLAUDE: stands: a step cut off by a save or a chunk unloading simply
+    // CLAUDE: starts again.
     // CLAUDE: Each step asks for the capability it needs (Require).
     [Serializable]
     public abstract class SequenceStep
     {
         /// <summary>Plays the step out, then calls done once.</summary>
         public abstract void Execute(IActor actor, Action done);
-
-        /// <summary>Leaves the actor as the step would, at once.
-        /// </summary>
-        public abstract void JumpToEnd(IActor actor);
 
         /// <summary>The actor as the capability this step needs; throws
         /// naming both if it lacks it.</summary>

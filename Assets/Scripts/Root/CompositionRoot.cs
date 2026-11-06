@@ -1,3 +1,4 @@
+using Oyung.Actors;
 using Oyung.Cutscenes.Unity;
 using Oyung.Eyes;
 using Oyung.Globals.Unity;
@@ -28,6 +29,7 @@ namespace Oyung.Root
         [SerializeField] private CutscenesInstaller cutscenesInstaller;
         [SerializeField] private QuestsInstaller questsInstaller;
         [SerializeField] private InteractionInstaller interactionInstaller;
+        [SerializeField] private ActorsInstaller actorsInstaller;
         [SerializeField] private SequencesInstaller sequencesInstaller;
 
         // CLAUDE: dev tools: optional, stand in for modules that don't exist yet.
@@ -49,9 +51,11 @@ namespace Oyung.Root
             var (quests, questTexts, _) = questsInstaller.Build();
             interactionInstaller.Build(
                 new InteractionInputAdapter(gameInput, inputModes));
+            actorsInstaller.Build();
             sequencesInstaller.Build();
 
             // 2. Load: nothing saved yet.
+            actorsInstaller.PlaceActors();
 
             // 3. Start.
             cutscenesInstaller.StartListening();
@@ -69,6 +73,7 @@ namespace Oyung.Root
         {
             // Reverse order of creation.
             sequencesInstaller.Dispose();
+            actorsInstaller.Dispose();
             interactionInstaller.Dispose();
             questsInstaller.Dispose();
             cutsceneInputMode?.Dispose();

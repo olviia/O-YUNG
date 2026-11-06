@@ -14,8 +14,5 @@ namespace Oyung.Actors
         /// <summary>Blends into the pose over fade seconds, then calls
         /// done once. Throws if the actor has no such pose.</summary>
         void Pose(string pose, float fade, Action done);
-
-        /// <summary>Holds the pose at once, without blending.</summary>
-        void JumpToPose(string pose);
     }
 }

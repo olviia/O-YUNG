@@ -14,9 +14,5 @@ namespace Oyung.Actors
         /// arrived is never called. Throws if the location isn't loaded.
         /// </summary>
         void WalkTo(LocationId to, Action arrived);
-
-        /// <summary>Stands at the location at once, facing its way.
-        /// Throws if the location isn't loaded.</summary>
-        void JumpTo(LocationId to);
     }
 }
