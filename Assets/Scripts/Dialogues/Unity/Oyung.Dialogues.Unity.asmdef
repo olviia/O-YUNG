@@ -1,0 +1,21 @@
+{
+    "name": "Oyung.Dialogues.Unity",
+    "rootNamespace": "Oyung.Dialogues.Unity",
+    "references": [
+        "Oyung.Dialogues",
+        "Oyung.Actors",
+        "Oyung.SharedKernel",
+        "Oyung.SharedKernel.Unity",
+        "Unity.Localization",
+        "Unity.ResourceManager"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

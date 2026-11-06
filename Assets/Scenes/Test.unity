@@ -187,17 +187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642ba16314565784ea8d8f6d9f895a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Oyung.Locomotion::Oyung.Locomotion.Walker
---- !u!114 &19814672 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5525444507371322407, guid: 9dd2f167dc31444448537a16c0d5ad59, type: 3}
-  m_PrefabInstance: {fileID: 19814670}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b6358b4e9ff7674f9dced1465495f27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Oyung.Speech.Unity::Oyung.Speech.Unity.Speaker
 --- !u!1 &71761702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1713,17 +1702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642ba16314565784ea8d8f6d9f895a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Oyung.Locomotion::Oyung.Locomotion.Walker
---- !u!114 &658480226 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6942525794810003646, guid: e585b5dba65ff684ba1c204c24972c59, type: 3}
-  m_PrefabInstance: {fileID: 658480224}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b6358b4e9ff7674f9dced1465495f27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Oyung.Speech.Unity::Oyung.Speech.Unity.Speaker
 --- !u!1 &704046486
 GameObject:
   m_ObjectHideFlags: 0
@@ -3130,54 +3108,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1190315206}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1200073425
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1200073427}
-  - component: {fileID: 1200073426}
-  m_Layer: 0
-  m_Name: TalkLoop
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1200073426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1200073425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 498c9dc182e4b5d42a6f949f2a397ccd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Oyung.Scratch::Oyung.Scratch.TalkLoop
-  speakers:
-  - {fileID: 658480226}
-  - {fileID: 19814672}
-  pause: 0.6
---- !u!4 &1200073427
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1200073425}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1202666152
 GameObject:
   m_ObjectHideFlags: 0
@@ -3658,6 +3588,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510586811}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1562656773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1562656775}
+  - component: {fileID: 1562656774}
+  m_Layer: 0
+  m_Name: Chatter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1562656774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562656773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971792ff2dc8d604f8c7b31c72b2bdfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oyung.Dialogues.Unity::Oyung.Dialogues.Unity.ChatterPlayer
+  chatter: {fileID: 11400000, guid: 563b2804baadbf0419b59116b4749041, type: 2}
+--- !u!4 &1562656775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562656773}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1611470326
 GameObject:
   m_ObjectHideFlags: 0
@@ -4410,4 +4385,4 @@ SceneRoots:
   - {fileID: 757698537}
   - {fileID: 19814670}
   - {fileID: 1186635596}
-  - {fileID: 1200073427}
+  - {fileID: 1562656775}

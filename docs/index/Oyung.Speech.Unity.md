@@ -3,7 +3,7 @@
 Root: Assets/Scripts/Speech/Unity
 Pure C#: no
 Depends on: Oyung.Speech
-Used by: Oyung.Actors, Oyung.Scratch
+Used by: Oyung.Actors
 Internal and private members only; the rest is in INDEX.md.
 
 ### internal class BupBank : ScriptableObject — BupBank.cs:12

@@ -707,6 +707,7 @@ Transform:
   m_Children:
   - {fileID: 332953170}
   - {fileID: 1292945548}
+  - {fileID: 420094711}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
@@ -1310,27 +1311,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3864785870345842295, guid: e585b5dba65ff684ba1c204c24972c59, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1101044049}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e585b5dba65ff684ba1c204c24972c59, type: 3}
 --- !u!4 &332953170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7244188178519439104, guid: e585b5dba65ff684ba1c204c24972c59, type: 3}
   m_PrefabInstance: {fileID: 332953169}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &332953171 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6942525794810003646, guid: e585b5dba65ff684ba1c204c24972c59, type: 3}
-  m_PrefabInstance: {fileID: 332953169}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414920780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b6358b4e9ff7674f9dced1465495f27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Oyung.Speech.Unity::Oyung.Speech.Unity.Speaker
 --- !u!1 &395627620
 GameObject:
   m_ObjectHideFlags: 0
@@ -1557,11 +1544,65 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &414920780 stripped
+--- !u!1 &420094710
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 3864785870345842295, guid: e585b5dba65ff684ba1c204c24972c59, type: 3}
-  m_PrefabInstance: {fileID: 332953169}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 420094711}
+  - component: {fileID: 420094712}
+  m_Layer: 0
+  m_Name: Chatter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &420094711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420094710}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 304970411}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &420094712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420094710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971792ff2dc8d604f8c7b31c72b2bdfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oyung.Dialogues.Unity::Oyung.Dialogues.Unity.ChatterPlayer
+  chatter: {fileID: 11400000, guid: 563b2804baadbf0419b59116b4749041, type: 2}
+  startWhen:
+    rid: 6652056472777916505
+  stopWhen:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6652056472777916505
+      type: {class: BoolCondition, ns: Oyung.SharedKernel.Unity, asm: Oyung.SharedKernel.Unity}
+      data:
+        fact: {fileID: 11400000, guid: 15e74d2202d506d4b9331fecd4f1c88e, type: 2}
+        expected: 1
 --- !u!1 &443779576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,11 +1856,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Oyung.Cutscenes.Unity::Oyung.Cutscenes.Unity.CutsceneSettings
   fastSpeed: 2
---- !u!95 &652851235 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 949775393273859216, guid: 9dd2f167dc31444448537a16c0d5ad59, type: 3}
-  m_PrefabInstance: {fileID: 1292945547}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &660435154
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,11 +2045,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 986015837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &704461012 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6367643594018573077, guid: e585b5dba65ff684ba1c204c24972c59, type: 3}
-  m_PrefabInstance: {fileID: 332953169}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2359,37 +2390,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1101044048 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1160699607793447239, guid: e585b5dba65ff684ba1c204c24972c59, type: 3}
-  m_PrefabInstance: {fileID: 332953169}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414920780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 642ba16314565784ea8d8f6d9f895a25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Oyung.Locomotion::Oyung.Locomotion.Walker
---- !u!114 &1101044049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414920780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fd7fe469b8d5e64d9ee28cb293e0f4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Oyung.Actors::Oyung.Actors.Actor
-  id: {fileID: 11400000, guid: 31915fa0e66a6f94ea765af47ff387bb, type: 2}
-  walker: {fileID: 1101044048}
-  animator: {fileID: 704461012}
-  speaker: {fileID: 332953171}
-  locomotionState: Locomotion
-  unposeFade: 0.5
-  poses:
-  - Aww
 --- !u!1 &1178177902
 GameObject:
   m_ObjectHideFlags: 0
@@ -2898,27 +2898,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4696557030959430384, guid: 9dd2f167dc31444448537a16c0d5ad59, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1931935650}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dd2f167dc31444448537a16c0d5ad59, type: 3}
 --- !u!4 &1292945548 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6328871549653833484, guid: 9dd2f167dc31444448537a16c0d5ad59, type: 3}
   m_PrefabInstance: {fileID: 1292945547}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1292945549 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5525444507371322407, guid: 9dd2f167dc31444448537a16c0d5ad59, type: 3}
-  m_PrefabInstance: {fileID: 1292945547}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931935649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b6358b4e9ff7674f9dced1465495f27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Oyung.Speech.Unity::Oyung.Speech.Unity.Speaker
 --- !u!1 &1315953185
 GameObject:
   m_ObjectHideFlags: 0
@@ -4254,42 +4240,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901410800}
   m_CullTransparentMesh: 1
---- !u!1 &1931935649 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4696557030959430384, guid: 9dd2f167dc31444448537a16c0d5ad59, type: 3}
-  m_PrefabInstance: {fileID: 1292945547}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1931935650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931935649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fd7fe469b8d5e64d9ee28cb293e0f4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Oyung.Actors::Oyung.Actors.Actor
-  id: {fileID: 11400000, guid: 49352840de04bbe47a7a94d5fe1e3279, type: 2}
-  walker: {fileID: 1931935652}
-  animator: {fileID: 652851235}
-  speaker: {fileID: 1292945549}
-  locomotionState: Locomotion
-  unposeFade: 0.5
-  poses:
-  - Hug
---- !u!114 &1931935652 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4022620629800573690, guid: 9dd2f167dc31444448537a16c0d5ad59, type: 3}
-  m_PrefabInstance: {fileID: 1292945547}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931935649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 642ba16314565784ea8d8f6d9f895a25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Oyung.Locomotion::Oyung.Locomotion.Walker
 --- !u!1 &1933133464
 GameObject:
   m_ObjectHideFlags: 0

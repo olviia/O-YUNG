@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 8840980440325461841}
   - component: {fileID: 6942525794810003646}
   - component: {fileID: 2874806531330031876}
+  - component: {fileID: 8222181593163143855}
   m_Layer: 0
   m_Name: Mum
   m_TagString: Untagged
@@ -401,6 +402,26 @@ MonoBehaviour:
   plainStrength: 0.55
   frequency: 3
   damping: 0.4
+--- !u!114 &8222181593163143855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864785870345842295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd7fe469b8d5e64d9ee28cb293e0f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oyung.Actors::Oyung.Actors.Actor
+  id: {fileID: 11400000, guid: 31915fa0e66a6f94ea765af47ff387bb, type: 2}
+  walker: {fileID: 1160699607793447239}
+  animator: {fileID: 6367643594018573077}
+  speaker: {fileID: 6942525794810003646}
+  locomotionState: Locomotion
+  unposeFade: 0.5
+  poses:
+  - Aww
 --- !u!1 &6592240219402160005
 GameObject:
   m_ObjectHideFlags: 0

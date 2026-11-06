@@ -3,7 +3,7 @@
 Root: Assets/Scripts/Actors
 Pure C#: no
 Depends on: Oyung.Locations, Oyung.Locomotion, Oyung.SharedKernel.Unity, Oyung.Speech.Unity
-Used by: Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity
+Used by: Oyung.Dialogues.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity
 Internal and private members only; the rest is in INDEX.md.
 
 ### class Actor — Actor.cs:18

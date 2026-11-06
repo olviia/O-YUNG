@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 4545261974148703568}
   - component: {fileID: 5525444507371322407}
   - component: {fileID: 7668574135423037328}
+  - component: {fileID: 4078946371927283181}
   m_Layer: 0
   m_Name: Dad
   m_TagString: Untagged
@@ -325,6 +326,26 @@ MonoBehaviour:
   plainStrength: 0.55
   frequency: 3
   damping: 0.4
+--- !u!114 &4078946371927283181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4696557030959430384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd7fe469b8d5e64d9ee28cb293e0f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oyung.Actors::Oyung.Actors.Actor
+  id: {fileID: 11400000, guid: 49352840de04bbe47a7a94d5fe1e3279, type: 2}
+  walker: {fileID: 4022620629800573690}
+  animator: {fileID: 949775393273859216}
+  speaker: {fileID: 5525444507371322407}
+  locomotionState: Locomotion
+  unposeFade: 0.5
+  poses:
+  - Hug
 --- !u!1 &5461842811415948176
 GameObject:
   m_ObjectHideFlags: 0

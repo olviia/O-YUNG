@@ -8,8 +8,7 @@
         "Oyung.Input",
         "Unity.InputSystem",
         "Oyung.Locomotion",
-        "Oyung.Actors",
-        "Oyung.Speech.Unity"
+        "Oyung.Actors"
     ],
     "autoReferenced": false,
     "noEngineReferences": false

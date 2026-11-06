@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: ParentsChat Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: ParentsChat
+  m_TableCollectionNameGuidString: 215eba5e3776fb6459f436f5df41337e
+  m_Entries:
+  - m_Id: 1079783424
+    m_Key: chat_01_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1125920768
+    m_Key: chat_01_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1130115072
+    m_Key: chat_02_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1130115073
+    m_Key: chat_02_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1130115074
+    m_Key: chat_02_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1130115075
+    m_Key: chat_03_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1130115076
+    m_Key: chat_03_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1130115077
+    m_Key: chat_04_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1130115078
+    m_Key: chat_04_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1130115079
+    m_Key: chat_04_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1134309376
+    m_Key: chat_04_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1134309377
+    m_Key: chat_05_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1134309378
+    m_Key: chat_05_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1134309379
+    m_Key: chat_05_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1134309380
+    m_Key: chat_06_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1134309381
+    m_Key: chat_06_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1134309382
+    m_Key: chat_06_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1138503680
+    m_Key: chat_07_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1138503681
+    m_Key: chat_07_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1138503682
+    m_Key: chat_07_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1138503683
+    m_Key: chat_07_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1138503684
+    m_Key: chat_08_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1138503685
+    m_Key: chat_08_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1138503686
+    m_Key: chat_09_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1138503687
+    m_Key: chat_09_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1138503688
+    m_Key: chat_09_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1138503689
+    m_Key: chat_09_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1138503690
+    m_Key: chat_09_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1138503691
+    m_Key: chat_10_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1142697984
+    m_Key: chat_10_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1142697985
+    m_Key: chat_10_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1142697986
+    m_Key: chat_11_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1142697987
+    m_Key: chat_11_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1142697988
+    m_Key: chat_11_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1142697989
+    m_Key: chat_12_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1142697990
+    m_Key: chat_12_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1142697991
+    m_Key: chat_12_3
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6652056472777916500
+  references:
+    version: 2
+    RefIds:
+    - rid: 6652056472777916500
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1793904689883
