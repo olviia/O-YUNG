@@ -3,16 +3,20 @@
 Root: Assets/Scripts/Globals
 Pure C#: yes
 Depends on: Oyung.SharedKernel
-Used by: Oyung.Globals.Unity, Oyung.Root
+Used by: Oyung.Globals.Tests, Oyung.Globals.Unity, Oyung.Root
 Internal and private members only; the rest is in INDEX.md.
 
-### internal class GlobalStore — GlobalStore.cs:9
+### internal class GlobalStore : ISaveable — GlobalStore.cs:10
 Leftover memory store that does not belong to any other modules
-- `internal void Subscribe(string name, Action listener)` :24 — Calls the listener whenever this name's value really changes.
-- `internal void Unsubscribe(string name, Action listener)` :30 — undocumented
-- `internal T Get<T>(string name)` :40 — Current value; a name never set reads default (false / 0).
-- `internal void Set<T>(string name, T value)` :45 — undocumented
-- `internal void Add(string name, int amount)` :55 — undocumented
+- `internal void Subscribe(string name, Action listener)` :25 — Calls the listener whenever this name's value really changes.
+- `internal void Unsubscribe(string name, Action listener)` :31 — undocumented
+- `internal T Get<T>(string name)` :41 — Current value; a name never set reads default (false / 0 / null).
+- `internal void Set<T>(string name, T value)` :46 — undocumented
+- `internal void Add(string name, int amount)` :56 — undocumented
+- `internal string Section { get; }` :59 (implements ISaveable)
+- `internal IReadOnlyDictionary<string, object> Give()` :61 (implements ISaveable)
+- `internal void Take(IReadOnlyDictionary<string, object> section)` :64 (implements ISaveable)
+- `private static object Narrowed(object value)` :74 — undocumented
 
 ### internal interface IGlobalFact : ICataloguedItem — IGlobalFact.cs:10
 What the installer needs from any global fact, whatever its value type: one list can hold GlobalFact&lt;bool&gt; and GlobalFact&lt;int&gt; through it.

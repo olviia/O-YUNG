@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Oyung.SharedKernel;
 using UnityEngine;
 
 namespace Oyung.Quests.Unity
@@ -16,13 +17,13 @@ namespace Oyung.Quests.Unity
 
         private Quests _quests;
 
-        public (IQuests quests, QuestTexts texts) Build()
+        public (IQuests quests, QuestTexts texts, ISaveable saveable) Build()
         {
             var journal = new QuestJournal();
             foreach (var quest in catalog.Items) quest.Bind(journal);
             _quests = new Quests(
                 catalog.Items.Select(q => q.ToDefinition()), journal);
-            return (_quests, new QuestTexts(catalog));
+            return (_quests, new QuestTexts(catalog), journal);
         }
 
         /// <summary>Start phase, after load: quests check their

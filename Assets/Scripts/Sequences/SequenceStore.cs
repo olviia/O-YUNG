@@ -1,13 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
+using Oyung.SharedKernel;
 
 namespace Oyung.Sequences
 {
     // CLAUDE: class comment (your words, CRC). Draft: knows how far each
     // CLAUDE: sequence got: the index of the step it is on, by sequence
     // CLAUDE: name. Past the last step means finished. Knows nothing
-    // CLAUDE: about steps or actors. Used by SequenceAsset (and later
-    // CLAUDE: Save, so a reload resumes at the same step).
-    internal sealed class SequenceStore
+    // CLAUDE: about steps or actors. Used by SequenceAsset, and by Save so
+    // CLAUDE: a reload resumes at the same step.
+    internal sealed class SequenceStore : ISaveable
     {
         private readonly Dictionary<string, int> _steps =
             new Dictionary<string, int>();
@@ -18,5 +20,17 @@ namespace Oyung.Sequences
             _steps.TryGetValue(id, out var step) ? step : 0;
 
         internal void SetStep(string id, int step) => _steps[id] = step;
+
+        public string Section => "sequences";
+
+        public IReadOnlyDictionary<string, object> Give() =>
+            _steps.ToDictionary(s => s.Key, s => (object)s.Value);
+
+        public void Take(IReadOnlyDictionary<string, object> section)
+        {
+            _steps.Clear();
+            foreach (var entry in section)
+                _steps[entry.Key] = checked((int)(long)entry.Value);
+        }
     }
 }

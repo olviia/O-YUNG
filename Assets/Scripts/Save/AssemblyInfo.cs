@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
 
-// Only the composition root may see this module's internals, so it can create them.
-[assembly: InternalsVisibleTo("Oyung.Root")]
+// Only the module's own Unity side and tests may see its internals.
+[assembly: InternalsVisibleTo("Oyung.Save.Unity")]
+[assembly: InternalsVisibleTo("Oyung.Save.Tests")]

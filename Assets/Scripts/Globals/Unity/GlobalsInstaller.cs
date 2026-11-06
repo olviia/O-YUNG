@@ -1,4 +1,5 @@
 using System;
+using Oyung.SharedKernel;
 using UnityEngine;
 
 namespace Oyung.Globals.Unity
@@ -11,10 +12,11 @@ namespace Oyung.Globals.Unity
     {
         [SerializeField] private GlobalCatalog catalog;
 
-        public void Build()
+        public ISaveable Build()
         {
             var store = new GlobalStore();
             foreach (var fact in catalog.Items) fact.Bind(store);
+            return store;
         }
 
         public void Dispose()

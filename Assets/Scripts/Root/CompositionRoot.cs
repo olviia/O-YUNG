@@ -43,10 +43,10 @@ namespace Oyung.Root
             var (gameInput, inputModes) = inputInstaller.Build();
             eyesInstaller.Build(gameInput);
             var vision = visionInstaller.Build();
-            var cutscenes = cutscenesInstaller.Build(new CutsceneInputAdapter(gameInput));
+            var (cutscenes, _) = cutscenesInstaller.Build(new CutsceneInputAdapter(gameInput));
             cutsceneInputMode = new CutsceneInputModeAdapter(cutscenes, inputModes);
             // CLAUDE: quests and texts go to Hints and Hud once they exist.
-            var (quests, questTexts) = questsInstaller.Build();
+            var (quests, questTexts, _) = questsInstaller.Build();
             interactionInstaller.Build(
                 new InteractionInputAdapter(gameInput, inputModes));
             sequencesInstaller.Build();

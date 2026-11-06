@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Oyung.SharedKernel;
 
 namespace Oyung.Quests
 {
@@ -8,10 +10,13 @@ namespace Oyung.Quests
     // CLAUDE: announces them (events for IQuests; per-quest listeners for
     // CLAUDE: quest assets, same shape as CutsceneStore). Knows no rules:
     // CLAUDE: QuestRun decides, the journal only remembers.
-    // CLAUDE: Still missing: give/take the save section. Designed together
-    // CLAUDE: with Save (participant port), as for GlobalStore.
-    internal sealed class QuestJournal
+    internal sealed class QuestJournal : ISaveable
     {
+        private const string QuestsKey = "quests";
+        private const string OutcomesKey = "outcomes";
+        private const string ObjectivesKey = "objectives";
+        private const string ActiveKey = "active";
+
         private readonly Dictionary<string, QuestState> _quests =
             new Dictionary<string, QuestState>();
 
@@ -106,6 +111,57 @@ namespace Oyung.Quests
             if (_listeners.TryGetValue(questId, out var listeners))
                 listeners();
         }
+
+        public string Section => "quests";
+
+        // CLAUDE: states by name, not number: a save stays readable and
+        // CLAUDE: survives reordering the enums.
+        public IReadOnlyDictionary<string, object> Give() =>
+            new Dictionary<string, object>
+            {
+                [QuestsKey] = _quests.ToDictionary(
+                    q => q.Key, q => (object)q.Value.ToString()),
+                [OutcomesKey] = _outcomes.ToDictionary(
+                    o => o.Key, o => (object)o.Value),
+                [ObjectivesKey] = _objectives
+                    .GroupBy(o => o.Key.Item1)
+                    .ToDictionary(quest => quest.Key,
+                        quest => (object)quest.ToDictionary(
+                            o => o.Key.Item2,
+                            o => (object)o.Value.ToString())),
+                [ActiveKey] = _active.ToList<object>()
+            };
+
+        // CLAUDE: silent, no events: runs in the load phase. Quests then
+        // CLAUDE: carry on from these states in Start, without rerunning
+        // CLAUDE: the instructions of steps already passed.
+        public void Take(IReadOnlyDictionary<string, object> section)
+        {
+            _quests.Clear();
+            foreach (var quest in Nested(section, QuestsKey))
+                _quests[quest.Key] = (QuestState)Enum.Parse(
+                    typeof(QuestState), (string)quest.Value);
+
+            _outcomes.Clear();
+            foreach (var outcome in Nested(section, OutcomesKey))
+                _outcomes[outcome.Key] = (string)outcome.Value;
+
+            _objectives.Clear();
+            foreach (var quest in Nested(section, ObjectivesKey))
+            foreach (var objective in
+                     (IReadOnlyDictionary<string, object>)quest.Value)
+                _objectives[(quest.Key, objective.Key)] =
+                    (ObjectiveState)Enum.Parse(typeof(ObjectiveState),
+                        (string)objective.Value);
+
+            _active.Clear();
+            foreach (var id in (IEnumerable<object>)section[ActiveKey])
+                _active.Add((string)id);
+        }
+
+        private static IReadOnlyDictionary<string, object> Nested(
+            IReadOnlyDictionary<string, object> section, string key) =>
+            (IReadOnlyDictionary<string, object>)section[key];
 
         // CLAUDE: QuestRun never breaks these; if it does, it's our bug.
         private static void Require(bool holds, string problem)

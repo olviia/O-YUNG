@@ -31,9 +31,12 @@ X/                    assembly Oyung.X        (inside, no Unity)
     Required/         what must be plugged in: "what I need" (adapters implement these)
   *.cs                internal implementation
   AssemblyInfo.cs     [InternalsVisibleTo("Oyung.X.Unity")] — only the module's installer may create internals
-  Unity/              assembly Oyung.X.Unity  (adapters; references Oyung.X + the technology)
+  Adapters/           assembly Oyung.X.Adapters (adapters that don't rely on Unity; noEngineReferences: true)
+  Unity/              assembly Oyung.X.Unity  (adapters that rely on Unity; references Oyung.X + the technology)
     XInstaller.cs     public; the only public class here besides cross-module Unity APIs (adapters are internal)
 ```
+A module has two outer sides. An adapter that needs no MonoBehaviour or other Unity element goes in `Adapters/`, not `Unity/`. Add the folder only when such an adapter exists. Modules created before this rule are refactored when a session touches them.
+
 Presentation-only modules (Hud, Eyes) have just a Unity assembly.
 
 ## Wiring: installers

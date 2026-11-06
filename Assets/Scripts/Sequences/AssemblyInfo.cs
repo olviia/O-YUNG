@@ -4,3 +4,5 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Oyung.Root")]
 // The Unity side (assets, installer) reaches the internal store.
 [assembly: InternalsVisibleTo("Oyung.Sequences.Unity")]
+// EditMode tests drive the store directly.
+[assembly: InternalsVisibleTo("Oyung.Sequences.Tests")]

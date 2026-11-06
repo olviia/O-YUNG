@@ -1,4 +1,5 @@
 using System;
+using Oyung.SharedKernel;
 using UnityEngine;
 
 namespace Oyung.Sequences.Unity
@@ -12,10 +13,11 @@ namespace Oyung.Sequences.Unity
     {
         [SerializeField] private SequenceCatalog catalog;
 
-        public void Build()
+        public ISaveable Build()
         {
             var store = new SequenceStore();
             foreach (var sequence in catalog.Items) sequence.Bind(store);
+            return store;
         }
 
         /// <summary>Start phase, after load: sequences whose condition

@@ -1,0 +1,18 @@
+{
+    "name": "Oyung.Save.Adapters",
+    "rootNamespace": "Oyung.Save.Adapters",
+    "references": [
+        "Oyung.Save"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

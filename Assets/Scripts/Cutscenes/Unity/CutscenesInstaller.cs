@@ -1,4 +1,5 @@
 using System;
+using Oyung.SharedKernel;
 using UnityEngine;
 
 namespace Oyung.Cutscenes.Unity
@@ -17,14 +18,15 @@ namespace Oyung.Cutscenes.Unity
         [Tooltip("Optional: on-screen Speed/Skip prompts.")]
         [SerializeField] private CutsceneUI ui;
 
-        public ICutsceneEvents Build(ICutsceneInput input)
+        public (ICutsceneEvents events, ISaveable saveable) Build(
+            ICutsceneInput input)
         {
             var store = new CutsceneStore();
             player.Use(catalog, settings, store, input);
             foreach (var cutscene in catalog.Items)
                 cutscene.Bind(store, player);
             if (ui != null) ui.Bind(player);
-            return player;
+            return (player, store);
         }
 
         /// <summary>Start phase, after load: cutscenes whose condition

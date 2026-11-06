@@ -5,11 +5,16 @@ Module table and everything visible outside its assembly. Internal and private m
 ## Modules
 | Module | Pure C# | Root | Depends on | Used by |
 |---|---|---|---|---|
-| [Oyung.Actors](index/Oyung.Actors.md) |  | Assets/Scripts/Actors | Oyung.Locations, Oyung.Locomotion, Oyung.SharedKernel.Unity, Oyung.Speech.Unity | Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
-| [Oyung.Cutscenes](index/Oyung.Cutscenes.md) | yes | Assets/Scripts/Cutscenes | — | Oyung.Cutscenes.Unity, Oyung.Root |
+| [Oyung.Actors](index/Oyung.Actors.md) |  | Assets/Scripts/Actors | Oyung.Locations, Oyung.Locomotion, Oyung.SharedKernel.Unity, Oyung.Speech.Unity | Oyung.Dialogues.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
+| [Oyung.Cutscenes](index/Oyung.Cutscenes.md) | yes | Assets/Scripts/Cutscenes | Oyung.SharedKernel | Oyung.Cutscenes.Tests, Oyung.Cutscenes.Unity, Oyung.Root |
+| [Oyung.Cutscenes.Tests](index/Oyung.Cutscenes.Tests.md) |  | Assets/Scripts/Cutscenes/Tests | Oyung.Cutscenes, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Cutscenes.Unity](index/Oyung.Cutscenes.Unity.md) |  | Assets/Scripts/Cutscenes/Unity | Oyung.Cutscenes, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Timeline, UnityEngine.UI, Unity.Localization | Oyung.Root |
+| [Oyung.Dialogues](index/Oyung.Dialogues.md) | yes | Assets/Scripts/Dialogues | — | Oyung.Dialogues.Tests, Oyung.Dialogues.Unity |
+| [Oyung.Dialogues.Tests](index/Oyung.Dialogues.Tests.md) |  | Assets/Scripts/Dialogues/Tests | Oyung.Dialogues, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
+| [Oyung.Dialogues.Unity](index/Oyung.Dialogues.Unity.md) |  | Assets/Scripts/Dialogues/Unity | Oyung.Dialogues, Oyung.Actors, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization, Unity.ResourceManager | — |
 | [Oyung.Eyes](index/Oyung.Eyes.md) |  | Assets/Scripts/Eyes | Oyung.Input, Unity.Cinemachine | Oyung.Root |
-| [Oyung.Globals](index/Oyung.Globals.md) | yes | Assets/Scripts/Globals | Oyung.SharedKernel | Oyung.Globals.Unity, Oyung.Root |
+| [Oyung.Globals](index/Oyung.Globals.md) | yes | Assets/Scripts/Globals | Oyung.SharedKernel | Oyung.Globals.Tests, Oyung.Globals.Unity, Oyung.Root |
+| [Oyung.Globals.Tests](index/Oyung.Globals.Tests.md) |  | Assets/Scripts/Globals/Tests | Oyung.Globals, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Globals.Unity](index/Oyung.Globals.Unity.md) |  | Assets/Scripts/Globals/Unity | Oyung.Globals, Oyung.SharedKernel, Oyung.SharedKernel.Unity | Oyung.Root |
 | [Oyung.Hints](index/Oyung.Hints.md) | yes | Assets/Scripts/Hints | Oyung.Quests | Oyung.Hud, Oyung.Root |
 | [Oyung.Hud](index/Oyung.Hud.md) |  | Assets/Scripts/Hud | Oyung.Quests, Oyung.Hints, Oyung.Input.Unity | Oyung.Root |
@@ -24,19 +29,22 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.SharedKernel | Oyung.Hints, Oyung.Hud, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root |
 | [Oyung.Quests.Tests](index/Oyung.Quests.Tests.md) |  | Assets/Scripts/Quests/Tests | Oyung.Quests, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Quests.Unity](index/Oyung.Quests.Unity.md) |  | Assets/Scripts/Quests/Unity | Oyung.Quests, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
-| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Quests.Unity, Oyung.Interaction, Oyung.Interaction.Unity, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Unity | — |
-| [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | — | Oyung.Root, Oyung.Save.Unity |
-| [Oyung.Save.Unity](index/Oyung.Save.Unity.md) |  | Assets/Scripts/Save/Unity | Oyung.Save | Oyung.Root |
-| [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem, Oyung.Locomotion, Oyung.Actors, Oyung.Speech.Unity | Oyung.Root |
-| [Oyung.Sequences](index/Oyung.Sequences.md) | yes | Assets/Scripts/Sequences | — | Oyung.Root, Oyung.Sequences.Unity |
+| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.SharedKernel, Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Quests.Unity, Oyung.Interaction, Oyung.Interaction.Unity, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Unity | — |
+| [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | Oyung.SharedKernel | Oyung.Root, Oyung.Save.Adapters, Oyung.Save.Tests, Oyung.Save.Unity |
+| [Oyung.Save.Adapters](index/Oyung.Save.Adapters.md) | yes | Assets/Scripts/Save/Adapters | Oyung.Save | Oyung.Save.Tests, Oyung.Save.Unity |
+| [Oyung.Save.Tests](index/Oyung.Save.Tests.md) |  | Assets/Scripts/Save/Tests | Oyung.Save, Oyung.Save.Adapters, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
+| Oyung.Save.Unity |  | Assets/Scripts/Save/Unity | Oyung.Save, Oyung.Save.Adapters | Oyung.Root |
+| [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem, Oyung.Locomotion, Oyung.Actors | Oyung.Root |
+| [Oyung.Sequences](index/Oyung.Sequences.md) | yes | Assets/Scripts/Sequences | Oyung.SharedKernel | Oyung.Root, Oyung.Sequences.Tests, Oyung.Sequences.Unity |
 | [Oyung.Sequences.Editor](index/Oyung.Sequences.Editor.md) |  | Assets/Scripts/Sequences/Editor | Oyung.Sequences.Unity, Oyung.SharedKernel, Oyung.SharedKernel.Editor, Oyung.Actors, Oyung.SharedKernel.Unity | — |
+| [Oyung.Sequences.Tests](index/Oyung.Sequences.Tests.md) |  | Assets/Scripts/Sequences/Tests | Oyung.Sequences, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Sequences.Unity](index/Oyung.Sequences.Unity.md) |  | Assets/Scripts/Sequences/Unity | Oyung.Sequences, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Actors, Oyung.Locations | Oyung.Root, Oyung.Sequences.Editor |
-| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Cutscenes.Unity, Oyung.Globals, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
+| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Cutscenes, Oyung.Cutscenes.Tests, Oyung.Cutscenes.Unity, Oyung.Dialogues.Unity, Oyung.Globals, Oyung.Globals.Tests, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root, Oyung.Save, Oyung.Save.Tests, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Editor, Oyung.Sequences.Tests, Oyung.Sequences.Unity, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
 | [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | Oyung.Sequences.Editor |
-| [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Locations.Editor, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
+| [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Dialogues.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Locations.Editor, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
 | [Oyung.Speech](index/Oyung.Speech.md) | yes | Assets/Scripts/Speech | — | Oyung.Speech.Tests, Oyung.Speech.Unity |
 | [Oyung.Speech.Tests](index/Oyung.Speech.Tests.md) |  | Assets/Scripts/Speech/Tests | Oyung.Speech, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
-| [Oyung.Speech.Unity](index/Oyung.Speech.Unity.md) |  | Assets/Scripts/Speech/Unity | Oyung.Speech | Oyung.Actors, Oyung.Scratch |
+| [Oyung.Speech.Unity](index/Oyung.Speech.Unity.md) |  | Assets/Scripts/Speech/Unity | Oyung.Speech | Oyung.Actors |
 | [Oyung.Vision](index/Oyung.Vision.md) | yes | Assets/Scripts/Vision | — | Oyung.Root, Oyung.Scratch, Oyung.Vision.Unity |
 | [Oyung.Vision.Unity](index/Oyung.Vision.Unity.md) |  | Assets/Scripts/Vision/Unity | Oyung.Vision, Unity.RenderPipelines.Core.Runtime, Unity.RenderPipelines.Universal.Runtime | Oyung.Root |
 | [Assembly-CSharp](index/Assembly-CSharp.md) |  | Assets | — | — |
@@ -99,6 +107,15 @@ port for reading and changing how cutscenes play, e.g. from a settings menu or t
 Implemented by: CutsceneSettings (Oyung.Cutscenes.Unity)
 - `float FastSpeed { get; set; }` :12 — playback speed when the player switches to fast
 
+## Oyung.Cutscenes.Tests
+
+### class CutsceneStoreSaveTests — CutsceneStoreSaveTests.cs:6
+undocumented
+- `void Played_cutscenes_come_back()` :9 — undocumented
+- `void Take_reads_a_list_as_a_save_returns_it()` :22 — undocumented
+- `void Take_is_silent()` :35 — undocumented
+- `void Take_replaces_what_was_there()` :49 — undocumented
+
 ## Oyung.Cutscenes.Unity
 
 ### class CutsceneAsset : ModuleFact<bool> — CutsceneAsset.cs:14
@@ -112,11 +129,11 @@ undocumented
 ### class CutsceneUI : MonoBehaviour — CutsceneUI.cs:13
 The on-screen panel while a cutscene plays: Speed and Skip prompts. Shown on start, hidden on end; the speed row says what pressing does next ("Faster" at normal speed, "Slower" when fast). Texts are picked in the Inspector; button icons are InputIcons inside it.
 
-### class CutscenesInstaller : MonoBehaviour, IDisposable — CutscenesInstaller.cs:10
+### class CutscenesInstaller : MonoBehaviour, IDisposable — CutscenesInstaller.cs:11
 Cutscenes: creates the store, hands it to the scene's player and binds every catalog cutscene to both. Start lets them play.
-- `ICutsceneEvents Build(ICutsceneInput input)` :20 — undocumented
-- `void StartListening()` :32 — Start phase, after load: cutscenes whose condition is met may play.
-- `void Dispose()` :38 — undocumented
+- `(ICutsceneEvents events, ISaveable saveable) Build(ICutsceneInput input)` :21 — undocumented
+- `void StartListening()` :34 — Start phase, after load: cutscenes whose condition is met may play.
+- `void Dispose()` :40 — undocumented
 
 ### class MaterialPropertyBehaviour : PlayableBehaviour — Timeline/MaterialPropertyBehaviour.cs:9
 Runtime stand-in for one MaterialPropertyClip while the timeline plays. Only points at its pose; the mixer reads and blends.
@@ -153,6 +170,17 @@ undocumented
 The baby's eyes. Turns strictly with LookDelta, only within the eyes' range. No sway, no smoothing (motion sickness). The rotation the object has in the scene is the resting gaze.
 - `void Init(IGameInput input)` :25 — Given by EyesInstaller.
 
+## Oyung.Globals.Tests
+
+### class GlobalStoreSaveTests — GlobalStoreSaveTests.cs:6
+undocumented
+- `void Give_holds_every_kind_of_value()` :9 — undocumented
+- `void A_whole_number_back_from_a_save_reads_as_an_int()` :24 — undocumented
+- `void Bool_and_string_come_back()` :34 — undocumented
+- `void Take_is_silent()` :49 — undocumented
+- `void Take_replaces_what_was_there()` :61 — undocumented
+- `void A_name_never_set_reads_null_as_a_string()` :72 — undocumented
+
 ## Oyung.Globals.Unity
 
 ### class `GlobalFact<T>` : ModuleFact<T>, IGlobalFact — Facts/GlobalFact.cs:9
@@ -161,10 +189,10 @@ undocumented
 - `void IGlobalFact.Bind(GlobalStore store)` :23 — undocumented
 - `void IGlobalFact.Unbind()` :29 — undocumented
 
-### class GlobalsInstaller : MonoBehaviour, IDisposable — GlobalsInstaller.cs:10
+### class GlobalsInstaller : MonoBehaviour, IDisposable — GlobalsInstaller.cs:11
 Globals: needs nothing from other modules. Creates the store and gives it to every fact in the catalog.
-- `void Build()` :14 — undocumented
-- `void Dispose()` :20 — undocumented
+- `ISaveable Build()` :15 — undocumented
+- `void Dispose()` :22 — undocumented
 
 ### class AddToGlobalInt : Instruction — Instructions/AddToGlobalInt.cs:13
 undocumented
@@ -301,6 +329,14 @@ Hidden, Shown, Done, Failed
 
 ## Oyung.Quests.Tests
 
+### class QuestJournalSaveTests — QuestJournalSaveTests.cs:7
+undocumented
+- `void Every_state_comes_back()` :17 — undocumented
+- `void Active_quests_keep_their_start_order()` :38 — undocumented
+- `void States_are_saved_by_name()` :50 — undocumented
+- `void Take_is_silent()` :62 — undocumented
+- `void A_restored_quest_runs_no_instruction_twice_and_carries_on()` :77 — undocumented
+
 ### class QuestsTests — QuestsTests.cs:9
 undocumented
 - `void TearDown()` :14 — undocumented
@@ -349,11 +385,11 @@ The player-facing texts of quests, by the ids IQuests announces. For presentatio
 - `LocalizedString Title(string questId)` :15 — undocumented
 - `LocalizedString Objective(string questId, string objectiveId)` :18 — undocumented
 
-### class QuestsInstaller : MonoBehaviour, IDisposable — QuestsInstaller.cs:13
+### class QuestsInstaller : MonoBehaviour, IDisposable — QuestsInstaller.cs:14
 Quests: needs nothing from other modules (they reach it through conditions and instructions). Creates the journal, binds every catalog quest to it and builds the core from their definitions. Start lets quests move.
-- `(IQuests quests, QuestTexts texts) Build()` :19 — undocumented
-- `void StartListening()` :30 — Start phase, after load: quests check their conditions and listen from now on.
-- `void Dispose()` :32 — undocumented
+- `(IQuests quests, QuestTexts texts, ISaveable saveable) Build()` :20 — undocumented
+- `void StartListening()` :31 — Start phase, after load: quests check their conditions and listen from now on.
+- `void Dispose()` :33 — undocumented
 
 ## Oyung.Root
 
@@ -362,14 +398,55 @@ The only place that creates modules and hands them what they need. Startup: crea
 
 ## Oyung.Save
 
-### interface ISaveStorage — Ports/Required/ISaveStorage.cs:5
-undocumented
-Implemented by: FileSaveStorage (Oyung.Save.Unity)
+### interface ISaveGame — Ports/Offered/ISaveGame.cs:11
+Offered port: commands a save and announces how it went. Knows nothing about when a good moment is; callers decide (a key, a menu button, sleep).
+Implemented by: SaveSystem (Oyung.Save)
+- `void Save()` :16 — Writes the game now, or refuses if something holds a block. Always answers through exactly one of the events.
+- `event Action Saved` :19 — The game was written.
+- `event Action<IReadOnlyList<string>> Blocked` :22 — Refused: these reasons hold a block.
+- `event Action<string> WriteFailed` :25 — Storage could not write; says why.
 
-## Oyung.Save.Unity
+### interface ISaveStorage — Ports/Required/ISaveStorage.cs:9
+Required port: keeps a save somewhere. Save knows THAT data is stored, not HOW.
+Implemented by: FileSaveStorage (Oyung.Save.Adapters), SaveSystemTests.FakeStorage (Oyung.Save.Tests)
+- `void Write(IReadOnlyDictionary<string, IReadOnlyDictionary<string, object>> sections)` :15 — Stores the sections by name, replacing the previous save whole. Throws IOException or UnauthorizedAccessException if the outside world prevents it, leaving the previous save intact.
 
-### class FileSaveStorage : ISaveStorage — FileSaveStorage.cs:4
+## Oyung.Save.Tests
+
+### class SaveFileTests — SaveFileTests.cs:11
 undocumented
+- `void SetUp()` :18 — undocumented
+- `void TearDown()` :22 — undocumented
+- `void Bool_and_string_come_back_as_they_went_in()` :38 — undocumented
+- `void Whole_numbers_come_back_as_long()` :45 — undocumented
+- `void A_decimal_comes_back_as_double_that_fits_its_float()` :52 — undocumented
+- `void A_whole_valued_decimal_stays_a_decimal()` :61 — undocumented
+- `void Nested_sections_and_lists_round_trip()` :67 — undocumented
+- `void A_list_of_strings_is_a_list()` :80 — undocumented
+- `void A_value_that_looks_like_a_date_stays_as_it_was()` :88 — undocumented
+- `void A_value_a_save_cant_hold_throws_naming_its_type()` :96 — undocumented
+- `void File_is_nested_json_a_person_can_read()` :105 — undocumented
+- `void Text_that_is_not_a_save_throws(string text)` :119 — undocumented
+- `void A_save_from_a_newer_build_throws()` :125 — undocumented
+- `void Storage_creates_the_folder_and_replaces_the_old_save()` :132 — undocumented
+- `void A_bad_value_leaves_the_old_save_untouched()` :146 — undocumented
+
+### class SaveSystemTests — SaveSystemTests.cs:11
+undocumented
+- `void SetUp()` :58 — undocumented
+- `void Save_writes_every_saveables_section()` :71 — undocumented
+- `void Block_refuses_and_names_every_reason()` :84 — undocumented
+- `void One_unblock_does_not_cancel_another_reason()` :98 — undocumented
+- `void Same_reason_held_twice_needs_two_unblocks()` :111 — undocumented
+- `void Unblock_not_held_throws()` :125 — undocumented
+- `void Block_without_a_reason_throws()` :132 — undocumented
+- `void Disk_failure_is_announced_not_thrown()` :139 — undocumented
+- `void No_permission_is_announced_not_thrown()` :150 — undocumented
+- `void A_bug_stays_loud_instead_of_looking_like_a_disk_problem()` :160 — undocumented
+- `void Load_gives_each_saveable_its_section()` :169 — undocumented
+- `void Saveable_missing_from_the_save_starts_fresh()` :183 — undocumented
+- `void Load_reports_sections_nobody_claimed()` :196 — undocumented
+- `void Same_section_twice_throws()` :210 — undocumented
 
 ## Oyung.Scratch
 
@@ -381,15 +458,20 @@ undocumented
 undocumented
 - `void Say()` :15 — undocumented
 
-### class TalkLoop : MonoBehaviour — TalkLoop.cs:10
-undocumented
-
 ### class VisionTestSlider : MonoBehaviour — VisionTestSlider.cs:11
 undocumented
 - `void Use(IVision vision, IInputModes inputModes)` :23 — Called by the root, like a module receiving its required ports.
 
 ### class WalkLoop : MonoBehaviour — WalkLoop.cs:12
 undocumented
+
+## Oyung.Sequences.Tests
+
+### class SequenceStoreSaveTests — SequenceStoreSaveTests.cs:6
+undocumented
+- `void Give_holds_each_sequences_step()` :9 — undocumented
+- `void A_step_back_from_a_save_is_read_from_its_long()` :18 — undocumented
+- `void Take_replaces_what_was_there()` :31 — undocumented
 
 ## Oyung.Sequences.Unity
 
@@ -406,11 +488,11 @@ undocumented
 - `abstract void JumpToEnd(IActor actor)` :21 — Leaves the actor as the step would, at once.
 - `protected T Require<T>(IActor actor)` :25 — The actor as the capability this step needs; throws naming both if it lacks it.
 
-### class SequencesInstaller : MonoBehaviour, IDisposable — SequencesInstaller.cs:11
+### class SequencesInstaller : MonoBehaviour, IDisposable — SequencesInstaller.cs:12
 Sequences: needs nothing from other modules (actors meet their sequences through ActorId). Creates the store and binds every catalog sequence to it. Start lets them run.
-- `void Build()` :15 — undocumented
-- `void StartListening()` :23 — Start phase, after load: sequences whose condition is met, or that a save left halfway, run.
-- `void Dispose()` :29 — undocumented
+- `ISaveable Build()` :16 — undocumented
+- `void StartListening()` :25 — Start phase, after load: sequences whose condition is met, or that a save left halfway, run.
+- `void Dispose()` :31 — undocumented
 
 ### class Pose : SequenceStep — Steps/Pose.cs:10
 The actor blends into an authored pose and holds it.
@@ -433,6 +515,19 @@ Shared Kernel contract: a question about some module's state ("is the intro seen
 Shared Kernel contract: an asset a catalog holds and finds by its stable name; saves and dialogue use the same name. Unique within its catalog.
 Implemented by: IGlobalFact (Oyung.Globals), ModuleFact<T> (Oyung.SharedKernel.Unity)
 - `string Name { get; }` :11 — undocumented
+
+### interface ISaveBlocker — ISaveBlocker.cs:9
+Shared Kernel contract: lets any module say "saving is not possible right now" without knowing the save module. Named locks: saving is allowed only while no reason is held, and one module's Unblock never cancels another's Block.
+Implemented by: SaveSystem (Oyung.Save)
+- `void Block(string reason)` :13 — Holds a block under this reason, e.g. "cutscene". The same reason may be held more than once.
+- `void Unblock(string reason)` :17 — Releases one block held under this reason. Throws if none is held: an unbalanced pair is a bug.
+
+### interface ISaveable — ISaveable.cs:12
+Shared Kernel contract: a module that keeps state across saves. A section is a dictionary of plain values: bool, int, long, float, double, string, a nested section, or a list of those. Anything else (an enum: write its name) throws on save. Numbers come back wider than they went in: whole numbers as long, decimals as double.
+Implemented by: CutsceneStore (Oyung.Cutscenes), GlobalStore (Oyung.Globals), QuestJournal (Oyung.Quests), SaveSystemTests.FakeSaveable (Oyung.Save.Tests), SequenceStore (Oyung.Sequences)
+- `string Section { get; }` :15 — The section's stable name in the save.
+- `IReadOnlyDictionary<string, object> Give()` :18 — The module's current state.
+- `void Take(IReadOnlyDictionary<string, object> section)` :23 — Puts back what Give returned, silently: runs in the load phase, before anything listens. Not called if the save has no such section; the module then simply starts fresh.
 
 ### class Instruction — Instruction.cs:13
 Shared Kernel contract: an order to change some module's state ("set intro_seen", "remove 5 flowers"). Knows nothing itself; each state owner subclasses it in its own .Unity side. Used by deciders (Story, NPC AI), which hold it inline and never know which module carries it out.

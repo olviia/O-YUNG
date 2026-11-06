@@ -4,3 +4,5 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Oyung.Root")]
 // The Unity side (catalog) reaches the internal store.
 [assembly: InternalsVisibleTo("Oyung.Globals.Unity")]
+// EditMode tests drive the store directly.
+[assembly: InternalsVisibleTo("Oyung.Globals.Tests")]

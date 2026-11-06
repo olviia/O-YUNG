@@ -20,6 +20,9 @@ undocumented
 - `internal int Count { get; }` :40 — undocumented
 - `internal override void Execute()` :42 (override of Instruction)
 
+### class QuestJournalSaveTests — QuestJournalSaveTests.cs:7
+- `private static QuestJournal Restored(QuestJournal saved)` :9 — undocumented
+
 ### class QuestsTests — QuestsTests.cs:9
 - `private void Build(QuestDefinition quest, bool startNow = true)` :391 — undocumented
 - `private void Build(IEnumerable<QuestDefinition> quests, bool startNow = true)` :394 — undocumented

@@ -17,5 +17,8 @@ undocumented
 undocumented
 - `internal void Add(int amount)` :13 — undocumented
 
+### internal class GlobalStringFact : GlobalFact<string> — Facts/GlobalStringFact.cs:9
+undocumented
+
 ### internal class GlobalCatalog : Catalog<IGlobalFact> — GlobalCatalog.cs:10
 undocumented

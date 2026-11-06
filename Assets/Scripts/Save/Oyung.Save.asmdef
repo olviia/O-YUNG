@@ -2,6 +2,7 @@
     "name": "Oyung.Save",
     "rootNamespace": "Oyung.Save",
     "references": [
+        "Oyung.SharedKernel"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

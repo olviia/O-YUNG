@@ -18,23 +18,41 @@
     Objective 1 done when the player focuses the parents' voices;
     objective 2 "Eavesdrop your name"; quest done when the name is
     chosen. One slice per session:
-    A. gaze + focus: Eyes knows what it looks at, Focus input (single
-       press), prompt that shows/hides with the gaze.
-    B. name: letters pop up in the parents' speech bubbles, the player
-       pops them to build the name; must be clear that this IS
-       choosing your name. Plus a string fact for the name.
-    C. NPC stub: hardcoded parents walking to the crib, marked as a
-       temporary file to be replaced by a real NPC module. Muffled
-       voices, sound waves at the voice source. No Timeline. Steps:
-       1. parent models: blob-like shapes after the orange figure in
-          docs/art/images/nursery.jpeg; mother warm orange, father
-          darkish soft red. Find models, download the fitting ones,
-          reshape them towards the reference.
-       2. find an existing rig and skin it to the models.
-       3. walk stub: start by a Condition, waypoints door -> crib,
-          sets "parents arrived"; Listen available after arrival.
-       4. muffled voices: 3D AudioSource + AudioLowPassFilter; voice
-          source still to choose (Sonniss walla, recording, gibberish).
+    B. name: letter bubbles float out of the parents' mouths and drift
+       around the name; the player aims with the head and pops them to
+       build the name. All 26 letters stay alive (a popped one comes
+       back from a mouth, each loosely in its own zone), so up to 20
+       letters take under a minute. Remove and done bubbles are always
+       reachable; at the maximum length letters stop attaching. Must be
+       clear that this IS choosing your name. Plus a string fact.
+    C. parents' voices at the crib:
+       4. muffled voices: AudioLowPassFilter on the speakers.
        5. sound waves at each mouth, readable through the blur.
     D. the quest asset tying it together; quest runs invisibly at
        first, minimal Hud later.
+13. what characters say: a module for the phrases and the conditions
+    they play under. Each line is one string table key: the voice always
+    speaks its English entry, the display shows the localized one. One
+    step per session:
+    2. first quest: pressing E stops the parents' chat and opens the
+       name minigame.
+    3. reactions: an event picks the most specific matching line by
+       conditions; a row can play its lines in order, one per event
+       (pinch mum: first, second, later). Built with the first real
+       event. Reactions outrank chatter, which carries on afterwards.
+    4. display: per conversation none, subtitles or dialogue box.
+    5. graph: when a conversation really branches or offers choices.
+       The full dialogue tool; ChatterAsset and ChatterPlayer are
+       temporary and get deleted once it exists.
+14. guard for starting activities (cutscene, minigame, dialogue): one
+    exclusive activity slot. A met condition becomes a pending request
+    that runs once, when the slot is free. Today two cutscenes meeting
+    their condition at once throw in TimelineCutscenePlayer. Do it when
+    the minigame arrives as the second activity.
+15. main menu on Esc (gamepad: Start), action already in the always-on
+    System map. In gameplay: stops the game and opens the menu. In the
+    menu: closes it and resumes. In another menu: closes it, back to
+    gameplay. In a cutscene: pauses it and opens the menu. Has a quick
+    save button, the only way to save on a gamepad.
+16. title screen in its own scene: New Game, Continue, and a dev-only
+    list of test points.

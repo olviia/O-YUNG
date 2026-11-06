@@ -41,22 +41,26 @@ undocumented
 - `internal static IReadOnlyList<Instruction> Check(IEnumerable<Instruction> instructions, string where)` :131 — undocumented
 - `internal static void ExecuteAll(IReadOnlyList<Instruction> list)` :142 — undocumented
 
-### internal class QuestJournal — QuestJournal.cs:13
+### internal class QuestJournal : ISaveable — QuestJournal.cs:13
 undocumented
-- `internal event Action<string> QuestStarted` :29 — undocumented
-- `internal event Action<string, string, ObjectiveState> ObjectiveChanged` :30 — undocumented
-- `internal event Action<string, string> QuestClosed` :31 — undocumented
-- `internal IReadOnlyList<string> ActiveQuests { get; }` :33 — undocumented
-- `internal QuestState StateOf(string questId)` :36 — A quest never seen reads NotStarted.
-- `internal string OutcomeOf(string questId)` :41 — undocumented
-- `internal ObjectiveState StateOf(string questId, string objectiveId)` :45 — An objective never seen reads Hidden.
-- `internal void Start(string questId)` :50 — undocumented
-- `internal void SetObjective(string questId, string objectiveId, ObjectiveState state)` :60 — undocumented
-- `internal void Close(string questId, string outcomeId)` :77 — undocumented
-- `internal void Subscribe(string questId, Action listener)` :90 — Calls the listener on any change of this quest: its own state or one of its objectives.
-- `internal void Unsubscribe(string questId, Action listener)` :96 — undocumented
-- `private void Notify(string questId)` :104 — undocumented
-- `private static void Require(bool holds, string problem)` :111 — undocumented
+- `internal event Action<string> QuestStarted` :34 — undocumented
+- `internal event Action<string, string, ObjectiveState> ObjectiveChanged` :35 — undocumented
+- `internal event Action<string, string> QuestClosed` :36 — undocumented
+- `internal IReadOnlyList<string> ActiveQuests { get; }` :38 — undocumented
+- `internal QuestState StateOf(string questId)` :41 — A quest never seen reads NotStarted.
+- `internal string OutcomeOf(string questId)` :46 — undocumented
+- `internal ObjectiveState StateOf(string questId, string objectiveId)` :50 — An objective never seen reads Hidden.
+- `internal void Start(string questId)` :55 — undocumented
+- `internal void SetObjective(string questId, string objectiveId, ObjectiveState state)` :65 — undocumented
+- `internal void Close(string questId, string outcomeId)` :82 — undocumented
+- `internal void Subscribe(string questId, Action listener)` :95 — Calls the listener on any change of this quest: its own state or one of its objectives.
+- `internal void Unsubscribe(string questId, Action listener)` :101 — undocumented
+- `private void Notify(string questId)` :109 — undocumented
+- `internal string Section { get; }` :115 (implements ISaveable)
+- `internal IReadOnlyDictionary<string, object> Give()` :119 (implements ISaveable)
+- `internal void Take(IReadOnlyDictionary<string, object> section)` :138 (implements ISaveable)
+- `private static IReadOnlyDictionary<string, object> Nested(IReadOnlyDictionary<string, object> section, string key)` :162 — undocumented
+- `private static void Require(bool holds, string problem)` :167 — undocumented
 
 ### internal class QuestRun — QuestRun.cs:15
 undocumented

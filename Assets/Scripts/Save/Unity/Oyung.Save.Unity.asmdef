@@ -2,7 +2,8 @@
     "name": "Oyung.Save.Unity",
     "rootNamespace": "Oyung.Save.Unity",
     "references": [
-        "Oyung.Save"
+        "Oyung.Save",
+        "Oyung.Save.Adapters"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,7 +1,9 @@
 {
     "name": "Oyung.Sequences",
     "rootNamespace": "Oyung.Sequences",
-    "references": [],
+    "references": [
+        "Oyung.SharedKernel"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
