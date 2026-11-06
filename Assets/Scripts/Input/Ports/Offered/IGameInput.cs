@@ -9,6 +9,11 @@ namespace Oyung.Input
     public interface IGameInput
     {
         /// <summary>
+        /// is triggered in any mode when Quick Save is pressed
+        /// </summary>
+        event Action QuickSavePressed;
+
+        /// <summary>
         /// is triggered during a cutscene when Skip is held long enough 
         /// </summary>
         event Action SkipCutscenePressed;

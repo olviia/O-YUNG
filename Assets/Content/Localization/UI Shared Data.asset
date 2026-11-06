@@ -31,6 +31,18 @@ MonoBehaviour:
     m_Key: interact.listen
     m_Metadata:
       m_Items: []
+  - m_Id: 9448269140471808
+    m_Key: save.saved
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9448269186609152
+    m_Key: save.unavailable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9448269186609153
+    m_Key: save.failed
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

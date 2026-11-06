@@ -1,4 +1,5 @@
 using System;
+using Oyung.SharedKernel;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -8,9 +9,13 @@ namespace Oyung.Cutscenes.Unity
     // CLAUDE: Unity Timeline. Takes the id's prefab from the catalog,
     // CLAUDE: plays it, hears skip/speed while playing, announces start
     // CLAUDE: and end, marks the id played in the store, removes it.
+    // CLAUDE: No saving while one plays.
     public class TimelineCutscenePlayer : MonoBehaviour,
         ICutscenePlayer, ICutsceneEvents
     {
+        private const string SaveBlockReason = "cutscene";
+
+        private ISaveBlocker _saveBlocker;
         private CutsceneCatalog _catalog;
         private ICutsceneSettings _settings;
         private CutsceneStore _store;
@@ -30,8 +35,10 @@ namespace Oyung.Cutscenes.Unity
         internal event Action SpeedChanged;
 
         internal void Use(CutsceneCatalog catalog, ICutsceneSettings settings,
-            CutsceneStore store, ICutsceneInput input)
+            CutsceneStore store, ICutsceneInput input,
+            ISaveBlocker saveBlocker)
         {
+            _saveBlocker = saveBlocker;
             _catalog = catalog;
             _settings = settings;
             _store = store;
@@ -59,6 +66,7 @@ namespace Oyung.Cutscenes.Unity
             director.stopped += OnStopped;
             _director = director;
             _fast = false;
+            _saveBlocker.Block(SaveBlockReason);
             director.Play();
 
             _input.SkipPressed += SkipToEnd;
@@ -76,6 +84,7 @@ namespace Oyung.Cutscenes.Unity
                 // mark nothing played. Destruction order is random, so
                 // ask the scene, not our listeners, whether it is going.
                 if (!instance.scene.isLoaded) return;
+                _saveBlocker.Unblock(SaveBlockReason);
                 Destroy(instance);
                 Ended?.Invoke();
                 // CLAUDE: last: the fact may start the next cutscene.

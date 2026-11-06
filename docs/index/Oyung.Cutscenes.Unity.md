@@ -54,9 +54,9 @@ undocumented
 - `private Material CopyFor(Graphic graphic)` :78 — undocumented
 - `private void Gather(Playable playable)` :93 — undocumented
 
-### class TimelineCutscenePlayer — TimelineCutscenePlayer.cs:11
-- `internal bool IsFast { get; }` :27 — Whether the playing cutscene runs fast.
-- `internal event Action SpeedChanged` :30 — The speed was toggled; read IsFast again.
-- `internal void Use(CutsceneCatalog catalog, ICutsceneSettings settings, CutsceneStore store, ICutsceneInput input)` :32 — undocumented
-- `private void SkipToEnd()` :89 — undocumented
-- `private void ToggleSpeed()` :96 — undocumented
+### class TimelineCutscenePlayer — TimelineCutscenePlayer.cs:13
+- `internal bool IsFast { get; }` :32 — Whether the playing cutscene runs fast.
+- `internal event Action SpeedChanged` :35 — The speed was toggled; read IsFast again.
+- `internal void Use(CutsceneCatalog catalog, ICutsceneSettings settings, CutsceneStore store, ICutsceneInput input, ISaveBlocker saveBlocker)` :37 — undocumented
+- `private void SkipToEnd()` :98 — undocumented
+- `private void ToggleSpeed()` :105 — undocumented

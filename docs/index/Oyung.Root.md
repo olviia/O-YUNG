@@ -25,6 +25,12 @@ undocumented
 - `internal event Action InteractPressed` :22 (implements IInteractionInput)
 - `internal bool CanInteract { get; }` :28 (implements IInteractionInput)
 
-### class CompositionRoot — CompositionRoot.cs:22
-- `private void Awake()` :41 — undocumented
-- `private void OnDestroy()` :72 — undocumented
+### internal class QuickSaveAdapter : IDisposable — Adapters/QuickSaveAdapter.cs:10
+undocumented
+- `internal QuickSaveAdapter(IGameInput gameInput, ISaveGame saveGame)` :15 — undocumented
+- `internal void Dispose()` :22 — undocumented
+
+### class CompositionRoot — CompositionRoot.cs:25
+- `private void Awake()` :48 — undocumented
+- `private void Start()` :78 — undocumented
+- `private void OnDestroy()` :92 — undocumented

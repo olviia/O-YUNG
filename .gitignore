@@ -116,6 +116,9 @@ InitTestScene*.unity*
 # Raw downloaded art sources (third-party licenses)
 /art-src/
 
+# Latest F5 save; renamed copies are the test points we keep
+/[Aa]ssets/[Cc]ontent/[Tt]est[Pp]oints/save_quick.json*
+
 # Python bytecode
 __pycache__/
 *.pyc

@@ -34,6 +34,18 @@ MonoBehaviour:
     m_Localized: Listen
     m_Metadata:
       m_Items: []
+  - m_Id: 9448269140471808
+    m_Localized: Saved
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9448269186609152
+    m_Localized: Save unavailable mid-action
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9448269186609153
+    m_Localized: Couldn't save
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -9,7 +9,8 @@ namespace Oyung.Input.Unity
     /// The only game-logic class that knows the Input System
     /// exists; HUD prompts read actions directly for glyphs.
     /// Enables the action map named like the active
-    /// InputMode; Menu has no map yet, so all is off.
+    /// InputMode; Menu has no map yet, so only System stays on.
+    /// The System map is always on, in every mode.
     /// </summary>
     internal class InputSystemAdapter : IGameInput, IDisposable
     {
@@ -21,6 +22,8 @@ namespace Oyung.Input.Unity
         private readonly InputAction skip;
         private readonly InputAction speed;
         private readonly InputAction interact;
+        private readonly InputAction quickSave;
+        private readonly InputActionMap systemMap;
         private readonly IInputModes modes;
         private readonly float mouseDegreesPerPixel;
         private readonly float stickDegreesPerSecond;
@@ -28,6 +31,7 @@ namespace Oyung.Input.Unity
         public event Action SkipCutscenePressed;
         public event Action ToggleCutsceneSpeedPressed;
         public event Action InteractPressed;
+        public event Action QuickSavePressed;
 
         /// <param name="modes">Decides which map is on.</param>
         /// <param name="asset">OyungActions.inputactions itself.</param>
@@ -47,10 +51,13 @@ namespace Oyung.Input.Unity
             skip = Find("Cutscene/Skip");
             speed = Find("Cutscene/Speed");
             interact = Find("Gameplay/Interact");
+            quickSave = Find("System/QuickSave");
+            systemMap = asset.FindActionMap("System", throwIfNotFound: true);
 
             skip.performed += OnSkipPerformed;
             speed.performed += OnSpeedPerformed;
             interact.performed += OnInteractPerformed;
+            quickSave.performed += OnQuickSavePerformed;
             modes.ModeChanged += EnableMapFor;
             EnableMapFor(modes.ActiveMode);
         }
@@ -82,6 +89,7 @@ namespace Oyung.Input.Unity
             skip.performed -= OnSkipPerformed;
             speed.performed -= OnSpeedPerformed;
             interact.performed -= OnInteractPerformed;
+            quickSave.performed -= OnQuickSavePerformed;
             // Only disable: the asset belongs to the project, not to us.
             asset.Disable();
         }
@@ -92,8 +100,14 @@ namespace Oyung.Input.Unity
         private void EnableMapFor(InputMode mode)
         {
             asset.Disable();
-            // Map named like the mode; Menu has none yet, so all stays off.
+            // Map named like the mode; Menu has none yet.
             asset.FindActionMap(mode.ToString())?.Enable();
+            systemMap.Enable();
+        }
+
+        private void OnQuickSavePerformed(InputAction.CallbackContext _)
+        {
+            QuickSavePressed?.Invoke();
         }
 
         private void OnSkipPerformed(InputAction.CallbackContext _)

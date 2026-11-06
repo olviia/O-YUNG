@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "sections": {
+    "globals": {},
+    "cutscenes": {
+      "played": [
+        "intro"
+      ]
+    },
+    "quests": {
+      "quests": {},
+      "outcomes": {},
+      "objectives": {},
+      "active": []
+    },
+    "actors": {
+      "Dad": {
+        "position": [
+          0.7428134,
+          0.02,
+          -0.665931344
+        ],
+        "rotation": [
+          0.0,
+          -0.264826864,
+          0.0,
+          0.964296
+        ],
+        "pose": "Hug"
+      },
+      "Mum": {
+        "position": [
+          1.04432452,
+          0.02,
+          0.180363566
+        ],
+        "rotation": [
+          0.0,
+          -0.722547,
+          0.0,
+          0.6913218
+        ],
+        "pose": "Aww"
+      }
+    },
+    "sequences": {
+      "DadToCrib": 2,
+      "MumToCrib": 2
+    }
+  }
+}

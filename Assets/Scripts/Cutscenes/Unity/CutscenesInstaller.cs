@@ -19,10 +19,10 @@ namespace Oyung.Cutscenes.Unity
         [SerializeField] private CutsceneUI ui;
 
         public (ICutsceneEvents events, ISaveable saveable) Build(
-            ICutsceneInput input)
+            ICutsceneInput input, ISaveBlocker saveBlocker)
         {
             var store = new CutsceneStore();
-            player.Use(catalog, settings, store, input);
+            player.Use(catalog, settings, store, input, saveBlocker);
             foreach (var cutscene in catalog.Items)
                 cutscene.Bind(store, player);
             if (ui != null) ui.Bind(player);

@@ -34,13 +34,13 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | Oyung.SharedKernel | Oyung.Root, Oyung.Save.Adapters, Oyung.Save.Tests, Oyung.Save.Unity |
 | [Oyung.Save.Adapters](index/Oyung.Save.Adapters.md) | yes | Assets/Scripts/Save/Adapters | Oyung.Save | Oyung.Save.Tests, Oyung.Save.Unity |
 | [Oyung.Save.Tests](index/Oyung.Save.Tests.md) |  | Assets/Scripts/Save/Tests | Oyung.Save, Oyung.Save.Adapters, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
-| Oyung.Save.Unity |  | Assets/Scripts/Save/Unity | Oyung.Save, Oyung.Save.Adapters | Oyung.Root |
+| [Oyung.Save.Unity](index/Oyung.Save.Unity.md) |  | Assets/Scripts/Save/Unity | Oyung.Save, Oyung.Save.Adapters, Oyung.SharedKernel, Unity.Localization | Oyung.Root |
 | [Oyung.Scratch](index/Oyung.Scratch.md) |  | Assets/Scripts/_Scratch | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Vision, Oyung.Input, Unity.InputSystem, Oyung.Locomotion, Oyung.Actors | Oyung.Root |
 | [Oyung.Sequences](index/Oyung.Sequences.md) | yes | Assets/Scripts/Sequences | Oyung.SharedKernel | Oyung.Root, Oyung.Sequences.Tests, Oyung.Sequences.Unity |
 | [Oyung.Sequences.Editor](index/Oyung.Sequences.Editor.md) |  | Assets/Scripts/Sequences/Editor | Oyung.Sequences.Unity, Oyung.SharedKernel, Oyung.SharedKernel.Editor, Oyung.Actors, Oyung.SharedKernel.Unity | — |
 | [Oyung.Sequences.Tests](index/Oyung.Sequences.Tests.md) |  | Assets/Scripts/Sequences/Tests | Oyung.Sequences, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Sequences.Unity](index/Oyung.Sequences.Unity.md) |  | Assets/Scripts/Sequences/Unity | Oyung.Sequences, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Actors, Oyung.Locations | Oyung.Root, Oyung.Sequences.Editor |
-| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Actors, Oyung.Actors.Tests, Oyung.Cutscenes, Oyung.Cutscenes.Tests, Oyung.Cutscenes.Unity, Oyung.Dialogues.Unity, Oyung.Globals, Oyung.Globals.Tests, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root, Oyung.Save, Oyung.Save.Tests, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Editor, Oyung.Sequences.Tests, Oyung.Sequences.Unity, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
+| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Actors, Oyung.Actors.Tests, Oyung.Cutscenes, Oyung.Cutscenes.Tests, Oyung.Cutscenes.Unity, Oyung.Dialogues.Unity, Oyung.Globals, Oyung.Globals.Tests, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root, Oyung.Save, Oyung.Save.Tests, Oyung.Save.Unity, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Editor, Oyung.Sequences.Tests, Oyung.Sequences.Unity, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
 | [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | Oyung.Sequences.Editor |
 | [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Dialogues.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Locations.Editor, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
 | [Oyung.Speech](index/Oyung.Speech.md) | yes | Assets/Scripts/Speech | — | Oyung.Speech.Tests, Oyung.Speech.Unity |
@@ -145,7 +145,7 @@ The on-screen panel while a cutscene plays: Speed and Skip prompts. Shown on sta
 
 ### class CutscenesInstaller : MonoBehaviour, IDisposable — CutscenesInstaller.cs:11
 Cutscenes: creates the store, hands it to the scene's player and binds every catalog cutscene to both. Start lets them play.
-- `(ICutsceneEvents events, ISaveable saveable) Build(ICutsceneInput input)` :21 — undocumented
+- `(ICutsceneEvents events, ISaveable saveable) Build(ICutsceneInput input, ISaveBlocker saveBlocker)` :21 — undocumented
 - `void StartListening()` :34 — Start phase, after load: cutscenes whose condition is met may play.
 - `void Dispose()` :40 — undocumented
 
@@ -167,11 +167,11 @@ Every frame: blends the active poses by their weights and writes the result into
 Timeline row that animates a UI image's material: its clips are poses (named shader values); overlapping clips crossfade. Optionally writes the Timeline's time into a shader property, so shader motion follows Speed x2 and scrubbing.
 - `override Playable CreateTrackMixer(PlayableGraph graph, GameObject go, int inputCount)` :23 (override)
 
-### class TimelineCutscenePlayer : MonoBehaviour, ICutscenePlayer, ICutsceneEvents — TimelineCutscenePlayer.cs:11
+### class TimelineCutscenePlayer : MonoBehaviour, ICutscenePlayer, ICutsceneEvents — TimelineCutscenePlayer.cs:13
 undocumented
-- `event Action Started` :23 (implements ICutsceneEvents)
-- `event Action Ended` :24 (implements ICutsceneEvents)
-- `void ICutscenePlayer.Play(string id)` :41 — undocumented
+- `event Action Started` :28 (implements ICutsceneEvents)
+- `event Action Ended` :29 (implements ICutsceneEvents)
+- `void ICutscenePlayer.Play(string id)` :48 — undocumented
 
 ## Oyung.Eyes
 
@@ -232,10 +232,11 @@ undocumented
 ### interface IGameInput — Ports/Offered/IGameInput.cs:9
 port for game input
 Implemented by: InputSystemAdapter (Oyung.Input.Unity)
-- `event Action SkipCutscenePressed` :14 — is triggered during a cutscene when Skip is held long enough
-- `event Action ToggleCutsceneSpeedPressed` :19 — is triggered during a cutscene if Speed input is pressed
-- `event Action InteractPressed` :24 — is triggered during gameplay when Interact is pressed
-- `Vector2 LookDelta { get; }` :29 — how fast and in what direction a player moves their look (eyes) by x and y axes per frame
+- `event Action QuickSavePressed` :14 — is triggered in any mode when Quick Save is pressed
+- `event Action SkipCutscenePressed` :19 — is triggered during a cutscene when Skip is held long enough
+- `event Action ToggleCutsceneSpeedPressed` :24 — is triggered during a cutscene if Speed input is pressed
+- `event Action InteractPressed` :29 — is triggered during gameplay when Interact is pressed
+- `Vector2 LookDelta { get; }` :34 — how fast and in what direction a player moves their look (eyes) by x and y axes per frame
 
 ### interface IInputModes — Ports/Offered/IInputModes.cs:8
 port for selecting and changing the input modes
@@ -407,7 +408,7 @@ Quests: needs nothing from other modules (they reach it through conditions and i
 
 ## Oyung.Root
 
-### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:22
+### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:25
 The only place that creates modules and hands them what they need. Startup: create → load → start. Shutdown: reverse order.
 
 ## Oyung.Save
@@ -461,6 +462,21 @@ undocumented
 - `void Saveable_missing_from_the_save_starts_fresh()` :183 — undocumented
 - `void Load_reports_sections_nobody_claimed()` :196 — undocumented
 - `void Same_section_twice_throws()` :210 — undocumented
+
+## Oyung.Save.Unity
+
+### class SaveInstaller : MonoBehaviour, IDisposable — SaveInstaller.cs:15
+Save: needs nothing from other modules. Creates the save system on a file, offers saving and blocking; the root hands it every module that keeps state, and asks it to load between create and start.
+- `(ISaveGame saveGame, ISaveBlocker blocker) Build()` :26 — undocumented
+- `void Add(params ISaveable[] saveables)` :35 — undocumented
+- `void Load()` :42 — Load phase: gives every module its section from the test point, if one is picked. Does nothing otherwise.
+- `void Dispose()` :56 — undocumented
+
+### class SaveNotice : MonoBehaviour — SaveNotice.cs:14
+The small note on the HUD after a save was asked for: saved, unavailable mid-action, or failed. Shown briefly, then hides itself. Texts are picked in the Inspector.
+
+### class TestStart : MonoBehaviour — TestStart.cs:9
+Dev tool: pick a test point here and Play starts from it. Empty starts a new game. Works in the editor only.
 
 ## Oyung.Scratch
 
