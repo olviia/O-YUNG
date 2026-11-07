@@ -18,7 +18,7 @@ namespace Oyung.Actors
     // CLAUDE: Poses are the states in the controller's "Poses" sub-state
     // CLAUDE: machine; walking crosses back to the locomotion state.
     public sealed class Actor : MonoBehaviour, IMovableActor, IAnimatedActor,
-        ISpeakingActor
+        ISpeakingActor, IPhysicalActor
     {
         private const string PosesMachine = "Poses";
 
@@ -41,6 +41,21 @@ namespace Oyung.Actors
         public ActorId Id => id;
 
         public IReadOnlyList<string> Poses => poses;
+
+        public Vector3 Position => transform.position;
+
+        // CLAUDE: the top of the body's capsule, which poses don't change.
+        public float Height
+        {
+            get
+            {
+                var body = GetComponent<CapsuleCollider>();
+                if (body == null)
+                    throw new InvalidOperationException(
+                        $"Actor '{name}' has no CapsuleCollider to measure.");
+                return body.bounds.max.y - transform.position.y;
+            }
+        }
 
         private void OnEnable()
         {

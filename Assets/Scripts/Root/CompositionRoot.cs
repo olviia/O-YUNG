@@ -5,6 +5,7 @@ using Oyung.Globals.Unity;
 using Oyung.Input;
 using Oyung.Input.Unity;
 using Oyung.Interaction.Unity;
+using Oyung.Minigames.NamePop;
 using Oyung.Quests.Unity;
 using Oyung.Root.Adapters;
 using Oyung.Save.Unity;
@@ -35,6 +36,7 @@ namespace Oyung.Root
         [SerializeField] private InteractionInstaller interactionInstaller;
         [SerializeField] private ActorsInstaller actorsInstaller;
         [SerializeField] private SequencesInstaller sequencesInstaller;
+        [SerializeField] private NamePopInstaller namePopInstaller;
 
         // CLAUDE: dev tools: optional, stand in for modules that don't exist yet.
         [Header("Dev tools")]
@@ -64,6 +66,7 @@ namespace Oyung.Root
                 new InteractionInputAdapter(gameInput, inputModes));
             var actorsSave = actorsInstaller.Build();
             var sequencesSave = sequencesInstaller.Build();
+            namePopInstaller.Build(saveBlocker);
             saveInstaller.Add(globalsSave, cutscenesSave, questsSave,
                 actorsSave, sequencesSave);
 

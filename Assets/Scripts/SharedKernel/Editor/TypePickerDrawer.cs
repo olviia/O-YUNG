@@ -20,6 +20,7 @@ namespace Oyung.SharedKernel.Editor
     /// </summary>
     [CustomPropertyDrawer(typeof(Condition), true)]
     [CustomPropertyDrawer(typeof(Instruction), true)]
+    [CustomPropertyDrawer(typeof(StringInstruction), true)]
     public class TypePickerDrawer : PropertyDrawer
     {
         private const string NoneLabel = "None";

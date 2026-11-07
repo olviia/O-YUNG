@@ -5,7 +5,8 @@ namespace Oyung.SharedKernel.Unity
 {
     /// <summary>
     /// Met when a string fact equals the target exactly (case matters).
-    /// For "not equal", wrap it in Not.
+    /// For "not equal", wrap it in Not. A fact never set counts as empty,
+    /// so Not(equals "") means "this text has been given".
     /// </summary>
     [Serializable]
     public sealed class StringCondition : FactCondition<string>
@@ -13,6 +14,7 @@ namespace Oyung.SharedKernel.Unity
         [SerializeField] private string target;
 
         public override bool IsMet =>
-            string.Equals(Value, target, StringComparison.Ordinal);
+            string.Equals(Value ?? "", target ?? "",
+                StringComparison.Ordinal);
     }
 }

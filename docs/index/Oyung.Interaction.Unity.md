@@ -3,20 +3,21 @@
 Root: Assets/Scripts/Interaction/Unity
 Pure C#: no
 Depends on: Oyung.Interaction, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization
-Used by: Oyung.Root
+Used by: Oyung.Minigames.NamePop, Oyung.Root
 Internal and private members only; the rest is in INDEX.md.
 
 ### internal class GazeInteractor : MonoBehaviour — GazeInteractor.cs:14
 undocumented
-- `internal void Init(IInteractionInput input)` :51 — undocumented
-- `internal void Release()` :59 — undocumented
-- `private void OnValidate()` :67 — undocumented
-- `private void Update()` :75 — undocumented
-- `private void OnInteractPressed()` :83 — undocumented
-- `private void Collect()` :90 — undocumented
-- `private bool Measure(Interactable interactable, out float bestAngle, out Vector3 bestPoint)` :119 — undocumented
-- `private bool InSight(Interactable interactable, Vector3 origin, Vector3 point)` :149 — undocumented
-- `private void ShowPrompt()` :159 — undocumented
+- `internal void Init(IInteractionInput input)` :52 — undocumented
+- `internal void Release()` :61 — undocumented
+- `private void TellFocus()` :71 — undocumented
+- `private void OnValidate()` :79 — undocumented
+- `private void Update()` :87 — undocumented
+- `private void OnInteractPressed()` :95 — undocumented
+- `private void Collect()` :102 — undocumented
+- `private bool Measure(Interactable interactable, out float bestAngle, out Vector3 bestPoint)` :131 — undocumented
+- `private bool InSight(Interactable interactable, Vector3 origin, Vector3 point)` :161 — undocumented
+- `private void ShowPrompt()` :171 — undocumented
 
 ### internal class InteractPrompt : MonoBehaviour — InteractPrompt.cs:17
 The "[button] Listen" prompt on the HUD canvas, pinned to a point in the world (the target's point nearest to the gaze) and kept on screen. The button icon is an InputIcon inside it; the verb comes from the offered interaction. Shown and hidden by GazeInteractor.
@@ -25,14 +26,16 @@ The "[button] Listen" prompt on the HUD canvas, pinned to a point in the world (
 - `private void LateUpdate()` :50 — undocumented
 
 ### class Interactable — Interactable.cs:18
-- `internal float Range { get; }` :33 — undocumented
-- `internal IReadOnlyList<Collider> Colliders { get; }` :35 — undocumented
-- `private void Awake()` :38 — undocumented
-- `private InvalidOperationException Invalid(string problem)` :49 — undocumented
+- `internal void SetFocused(bool focused)` :34 — undocumented
+- `internal float Range { get; }` :40 — undocumented
+- `internal IReadOnlyList<Collider> Colliders { get; }` :42 — undocumented
+- `private void Awake()` :45 — undocumented
+- `private InvalidOperationException Invalid(string problem)` :56 — undocumented
 
-### internal class Interactable.InteractionData : IInteraction — Interactable.cs:53
+### internal class Interactable.InteractionData : IInteraction — Interactable.cs:60
 undocumented
-- `internal LocalizedString Verb { get; }` :64 — undocumented
-- `internal Condition AvailableWhen { get; }` :66 (implements IInteraction)
-- `internal IReadOnlyList<Instruction> OnUse { get; }` :68 (implements IInteraction)
-- `internal void Check(Interactable owner)` :70 — undocumented
+- `internal LocalizedString Verb { get; }` :75 — undocumented
+- `internal bool Silent { get; }` :77 — undocumented
+- `internal Condition AvailableWhen { get; }` :79 (implements IInteraction)
+- `internal IReadOnlyList<Instruction> OnUse { get; }` :81 (implements IInteraction)
+- `internal void Check(Interactable owner)` :83 — undocumented

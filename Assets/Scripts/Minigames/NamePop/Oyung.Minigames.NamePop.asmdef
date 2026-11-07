@@ -1,0 +1,20 @@
+{
+    "name": "Oyung.Minigames.NamePop",
+    "rootNamespace": "Oyung.Minigames.NamePop",
+    "references": [
+        "Oyung.SharedKernel",
+        "Oyung.SharedKernel.Unity",
+        "Oyung.Actors",
+        "Oyung.Interaction",
+        "Oyung.Interaction.Unity"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

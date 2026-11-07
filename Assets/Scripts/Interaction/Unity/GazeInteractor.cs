@@ -38,7 +38,7 @@ namespace Oyung.Interaction.Unity
 
         [SerializeField] private InteractPrompt prompt;
 
-        private readonly Collider[] _nearby = new Collider[64];
+        private readonly Collider[] _nearby = new Collider[256];
         private readonly HashSet<Interactable> _measured =
             new HashSet<Interactable>();
         private readonly List<Sighting> _sightings = new List<Sighting>();
@@ -47,10 +47,12 @@ namespace Oyung.Interaction.Unity
 
         private Interactor _interactor;
         private IInteractionInput _input;
+        private Interactable _focused;
 
         internal void Init(IInteractionInput input)
         {
             _interactor = new Interactor(enterAngle, leaveAngle, stickiness);
+            _interactor.TargetChanged += TellFocus;
             _input = input;
             _input.InteractPressed += OnInteractPressed;
             prompt.Hide();
@@ -59,8 +61,18 @@ namespace Oyung.Interaction.Unity
         internal void Release()
         {
             if (_input != null) _input.InteractPressed -= OnInteractPressed;
+            if (_interactor != null) _interactor.TargetChanged -= TellFocus;
             _input = null;
             _interactor = null;
+            _focused = null;
+        }
+
+        // CLAUDE: the old target may be gone already, hence Unity's null.
+        private void TellFocus()
+        {
+            if (_focused != null) _focused.SetFocused(false);
+            _focused = _interactor.Target as Interactable;
+            if (_focused != null) _focused.SetFocused(true);
         }
 
         // CLAUDE: angles are tunable while playing.
@@ -159,6 +171,7 @@ namespace Oyung.Interaction.Unity
         private void ShowPrompt()
         {
             if (_interactor.Offer is Interactable.InteractionData offer &&
+                !offer.Silent &&
                 _points.TryGetValue(_interactor.Target, out var point))
                 prompt.Show(offer.Verb, point);
             else

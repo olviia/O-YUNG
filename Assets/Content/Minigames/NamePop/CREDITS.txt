@@ -1,0 +1,4 @@
+Letter meshes in Letters.fbx (A-Z):
+"Simple alphabet" by Naira, licensed under CC BY 4.0.
+https://sketchfab.com/3d-models/simple-alphabet-86bc96d947054d9398402069c02f96fc
+Changed: centred, scaled, made thinner. Must appear in the game's credits.

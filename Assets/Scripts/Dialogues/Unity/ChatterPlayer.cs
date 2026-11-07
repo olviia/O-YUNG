@@ -60,7 +60,11 @@ namespace Oyung.Dialogues.Unity
                 {
                     if (ShouldStop) yield break;
                     if (i > 0)
+                    {
                         yield return new WaitForSeconds(chatter.LineGap);
+                        // Stop may have come during the gap.
+                        if (ShouldStop) yield break;
+                    }
 
                     var line = exchange.Lines[i];
                     var id = chatter.SpeakerOf(line);

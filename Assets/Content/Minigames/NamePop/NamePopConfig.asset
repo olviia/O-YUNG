@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b108ff9fe123c084687e5f803a0094b3, type: 3}
+  m_Name: NamePopConfig
+  m_EditorClassIdentifier: Oyung.Minigames.NamePop::Oyung.Minigames.NamePop.NamePopConfig
+  maxLength: 12
+  onNamed:
+    rid: 6652056498509709412
+  letterMeshes:
+  - {fileID: 6157117880141131119, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: -4909277789374002350, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: 8939266724133516769, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: 281315202980364329, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: -7746497135072881621, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: -1644355878584749679, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: 1907795020790290496, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: -6048717895273133781, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: -6425600238377421303, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: -1434902202865794022, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: -6612916564974270675, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: 2658800326358589857, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: -3214572557560747977, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: 1670262680622686082, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: 8379677281609801307, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: 1731728394525301911, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: 7429288146537312290, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: -4693480790355496552, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: -9074724860412756288, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: -2020707242700487084, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: 6856768601106367328, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: -4161497618794897476, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: 8826643962087455625, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: -496058992349931718, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: 1464361123701606782, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  - {fileID: 3141120828048097299, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  removeMesh: {fileID: -5066601597302687073, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  doneMesh: {fileID: -7022173408655630176, guid: 1c579cf0b62404243941cdd8044554dc, type: 3}
+  letterColours:
+  - {r: 0.91, g: 0.26, b: 0.24, a: 1}
+  - {r: 0.98, g: 0.6, b: 0.15, a: 1}
+  - {r: 0.98, g: 0.82, b: 0.2, a: 1}
+  - {r: 0.36, g: 0.73, b: 0.33, a: 1}
+  - {r: 0.2, g: 0.56, b: 0.9, a: 1}
+  - {r: 0.56, g: 0.36, b: 0.85, a: 1}
+  - {r: 0.94, g: 0.42, b: 0.67, a: 1}
+  removeColour: {r: 0.9, g: 0.3, b: 0.3, a: 1}
+  doneColour: {r: 0.3, g: 0.8, b: 0.4, a: 1}
+  rows:
+  - QWERTYUIOP
+  - ASDFGHJKL
+  - ZXCVBNM
+  keySpacing: 0.07
+  rowSpacing: 0.0665
+  bubbleDiameter: 0.06
+  letterHeightInBubble: 0.032
+  actionKeysOffset: 4
+  arrivalSeconds: 1.4
+  firstWaveSeconds: 2.5
+  flightArc: 0.12
+  speakingHeight: 0.6666667
+  spawnScatter: 0.08
+  actionKeyGrowSeconds: 0.25
+  bobHeight: 0.0015
+  bobSpeed: 1.3
+  focusScale: 1.9
+  focusForward: 0.03
+  focusSeconds: 0.1
+  nameLetterHeight: 0.03
+  nameLetterGap: 0.004
+  landingDrop: 0.012
+  landingSeconds: 0.35
+  popPitch: 0.95
+  popPitchStep: 0.03
+  finishedHoldSeconds: 1.5
+  references:
+    version: 2
+    RefIds:
+    - rid: 6652056498509709412
+      type: {class: SetGlobalString, ns: Oyung.Globals.Unity, asm: Oyung.Globals.Unity}
+      data:
+        _fact: {fileID: 11400000, guid: 94b0b95b9d473c944ae96650017de240, type: 2}

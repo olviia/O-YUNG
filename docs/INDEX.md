@@ -5,7 +5,7 @@ Module table and everything visible outside its assembly. Internal and private m
 ## Modules
 | Module | Pure C# | Root | Depends on | Used by |
 |---|---|---|---|---|
-| [Oyung.Actors](index/Oyung.Actors.md) |  | Assets/Scripts/Actors | Oyung.Locations, Oyung.Locomotion, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Speech.Unity | Oyung.Actors.Tests, Oyung.Dialogues.Unity, Oyung.Root, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
+| [Oyung.Actors](index/Oyung.Actors.md) |  | Assets/Scripts/Actors | Oyung.Locations, Oyung.Locomotion, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Speech.Unity | Oyung.Actors.Tests, Oyung.Dialogues.Unity, Oyung.Minigames.NamePop, Oyung.Root, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
 | [Oyung.Actors.Tests](index/Oyung.Actors.Tests.md) |  | Assets/Scripts/Actors/Tests | Oyung.Actors, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Cutscenes](index/Oyung.Cutscenes.md) | yes | Assets/Scripts/Cutscenes | Oyung.SharedKernel | Oyung.Cutscenes.Tests, Oyung.Cutscenes.Unity, Oyung.Root |
 | [Oyung.Cutscenes.Tests](index/Oyung.Cutscenes.Tests.md) |  | Assets/Scripts/Cutscenes/Tests | Oyung.Cutscenes, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
@@ -21,16 +21,18 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Hud](index/Oyung.Hud.md) |  | Assets/Scripts/Hud | Oyung.Quests, Oyung.Hints, Oyung.Input.Unity | Oyung.Root |
 | [Oyung.Input](index/Oyung.Input.md) | yes | Assets/Scripts/Input | — | Oyung.Eyes, Oyung.Input.Unity, Oyung.Root, Oyung.Scratch |
 | [Oyung.Input.Unity](index/Oyung.Input.Unity.md) |  | Assets/Scripts/Input/Unity | Oyung.Input, Unity.InputSystem, UnityEngine.UI, InputGlyphs, InputGlyphs.Display | Oyung.Hud, Oyung.Root |
-| [Oyung.Interaction](index/Oyung.Interaction.md) | yes | Assets/Scripts/Interaction | Oyung.SharedKernel | Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Root |
+| [Oyung.Interaction](index/Oyung.Interaction.md) | yes | Assets/Scripts/Interaction | Oyung.SharedKernel | Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Minigames.NamePop, Oyung.Root |
 | [Oyung.Interaction.Tests](index/Oyung.Interaction.Tests.md) |  | Assets/Scripts/Interaction/Tests | Oyung.Interaction, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
-| [Oyung.Interaction.Unity](index/Oyung.Interaction.Unity.md) |  | Assets/Scripts/Interaction/Unity | Oyung.Interaction, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
+| [Oyung.Interaction.Unity](index/Oyung.Interaction.Unity.md) |  | Assets/Scripts/Interaction/Unity | Oyung.Interaction, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Minigames.NamePop, Oyung.Root |
 | [Oyung.Locations](index/Oyung.Locations.md) |  | Assets/Scripts/Locations | Oyung.SharedKernel.Unity | Oyung.Actors, Oyung.Locations.Editor, Oyung.Sequences.Unity |
 | [Oyung.Locations.Editor](index/Oyung.Locations.Editor.md) |  | Assets/Scripts/Locations/Editor | Oyung.Locations, Oyung.SharedKernel.Unity | — |
 | [Oyung.Locomotion](index/Oyung.Locomotion.md) |  | Assets/Scripts/Locomotion | — | Oyung.Actors, Oyung.Scratch |
+| [Oyung.Minigames.NamePop](index/Oyung.Minigames.NamePop.md) |  | Assets/Scripts/Minigames/NamePop | Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Actors, Oyung.Interaction, Oyung.Interaction.Unity | Oyung.Minigames.NamePop.Tests, Oyung.Root |
+| [Oyung.Minigames.NamePop.Tests](index/Oyung.Minigames.NamePop.Tests.md) |  | Assets/Scripts/Minigames/NamePop/Tests | Oyung.Minigames.NamePop, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Quests](index/Oyung.Quests.md) | yes | Assets/Scripts/Quests | Oyung.SharedKernel | Oyung.Hints, Oyung.Hud, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root |
 | [Oyung.Quests.Tests](index/Oyung.Quests.Tests.md) |  | Assets/Scripts/Quests/Tests | Oyung.Quests, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Quests.Unity](index/Oyung.Quests.Unity.md) |  | Assets/Scripts/Quests/Unity | Oyung.Quests, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Unity.Localization | Oyung.Root |
-| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.SharedKernel, Oyung.Actors, Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Quests.Unity, Oyung.Interaction, Oyung.Interaction.Unity, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Unity | — |
+| [Oyung.Root](index/Oyung.Root.md) |  | Assets/Scripts/Root | Oyung.SharedKernel, Oyung.Actors, Oyung.Globals, Oyung.Globals.Unity, Oyung.Input, Oyung.Input.Unity, Oyung.Save, Oyung.Save.Unity, Oyung.Cutscenes, Oyung.Cutscenes.Unity, Oyung.Vision, Oyung.Vision.Unity, Oyung.Quests, Oyung.Quests.Unity, Oyung.Interaction, Oyung.Interaction.Unity, Oyung.Minigames.NamePop, Oyung.Hints, Oyung.Hud, Oyung.Eyes, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Unity | — |
 | [Oyung.Save](index/Oyung.Save.md) | yes | Assets/Scripts/Save | Oyung.SharedKernel | Oyung.Root, Oyung.Save.Adapters, Oyung.Save.Tests, Oyung.Save.Unity |
 | [Oyung.Save.Adapters](index/Oyung.Save.Adapters.md) | yes | Assets/Scripts/Save/Adapters | Oyung.Save | Oyung.Save.Tests, Oyung.Save.Unity |
 | [Oyung.Save.Tests](index/Oyung.Save.Tests.md) |  | Assets/Scripts/Save/Tests | Oyung.Save, Oyung.Save.Adapters, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
@@ -40,9 +42,9 @@ Module table and everything visible outside its assembly. Internal and private m
 | [Oyung.Sequences.Editor](index/Oyung.Sequences.Editor.md) |  | Assets/Scripts/Sequences/Editor | Oyung.Sequences.Unity, Oyung.SharedKernel, Oyung.SharedKernel.Editor, Oyung.Actors, Oyung.SharedKernel.Unity | — |
 | [Oyung.Sequences.Tests](index/Oyung.Sequences.Tests.md) |  | Assets/Scripts/Sequences/Tests | Oyung.Sequences, Oyung.SharedKernel, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Sequences.Unity](index/Oyung.Sequences.Unity.md) |  | Assets/Scripts/Sequences/Unity | Oyung.Sequences, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Actors, Oyung.Locations | Oyung.Root, Oyung.Sequences.Editor |
-| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Actors, Oyung.Actors.Tests, Oyung.Cutscenes, Oyung.Cutscenes.Tests, Oyung.Cutscenes.Unity, Oyung.Dialogues.Unity, Oyung.Globals, Oyung.Globals.Tests, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root, Oyung.Save, Oyung.Save.Tests, Oyung.Save.Unity, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Editor, Oyung.Sequences.Tests, Oyung.Sequences.Unity, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
+| [Oyung.SharedKernel](index/Oyung.SharedKernel.md) | yes | Assets/Scripts/SharedKernel | — | Oyung.Actors, Oyung.Actors.Tests, Oyung.Cutscenes, Oyung.Cutscenes.Tests, Oyung.Cutscenes.Unity, Oyung.Dialogues.Unity, Oyung.Globals, Oyung.Globals.Tests, Oyung.Globals.Unity, Oyung.Interaction, Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Minigames.NamePop, Oyung.Quests, Oyung.Quests.Tests, Oyung.Quests.Unity, Oyung.Root, Oyung.Save, Oyung.Save.Tests, Oyung.Save.Unity, Oyung.Scratch, Oyung.Sequences, Oyung.Sequences.Editor, Oyung.Sequences.Tests, Oyung.Sequences.Unity, Oyung.SharedKernel.Editor, Oyung.SharedKernel.Unity |
 | [Oyung.SharedKernel.Editor](index/Oyung.SharedKernel.Editor.md) |  | Assets/Scripts/SharedKernel/Editor | Oyung.SharedKernel | Oyung.Sequences.Editor |
-| [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Dialogues.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Locations.Editor, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
+| [Oyung.SharedKernel.Unity](index/Oyung.SharedKernel.Unity.md) |  | Assets/Scripts/SharedKernel/Unity | Oyung.SharedKernel | Oyung.Actors, Oyung.Cutscenes.Unity, Oyung.Dialogues.Unity, Oyung.Globals.Unity, Oyung.Interaction.Unity, Oyung.Locations, Oyung.Locations.Editor, Oyung.Minigames.NamePop, Oyung.Quests.Unity, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity |
 | [Oyung.Speech](index/Oyung.Speech.md) | yes | Assets/Scripts/Speech | — | Oyung.Speech.Tests, Oyung.Speech.Unity |
 | [Oyung.Speech.Tests](index/Oyung.Speech.Tests.md) |  | Assets/Scripts/Speech/Tests | Oyung.Speech, UnityEngine.TestRunner, UnityEditor.TestRunner | — |
 | [Oyung.Speech.Unity](index/Oyung.Speech.Unity.md) |  | Assets/Scripts/Speech/Unity | Oyung.Speech | Oyung.Actors |
@@ -53,13 +55,15 @@ Module table and everything visible outside its assembly. Internal and private m
 
 ## Oyung.Actors
 
-### class Actor : MonoBehaviour, IMovableActor, IAnimatedActor, ISpeakingActor — Actor.cs:20
+### class Actor : MonoBehaviour, IMovableActor, IAnimatedActor, ISpeakingActor, IPhysicalActor — Actor.cs:20
 undocumented
 - `ActorId Id { get; }` :41 (implements IActor)
 - `IReadOnlyList<string> Poses { get; }` :43 (implements IAnimatedActor)
-- `void WalkTo(LocationId to, Action arrived)` :72 (implements IMovableActor)
-- `void Pose(string pose, float fade, Action done)` :83 (implements IAnimatedActor)
-- `void Say(string text, Action done)` :92 (implements ISpeakingActor)
+- `Vector3 Position { get; }` :45 (implements IPhysicalActor)
+- `float Height { get; }` :48 (implements IPhysicalActor)
+- `void WalkTo(LocationId to, Action arrived)` :87 (implements IMovableActor)
+- `void Pose(string pose, float fade, Action done)` :98 (implements IAnimatedActor)
+- `void Say(string text, Action done)` :107 (implements ISpeakingActor)
 
 ### class ActorsInstaller : MonoBehaviour, IDisposable — ActorsInstaller.cs:11
 Actors: needs nothing from other modules. Creates the store and gives it to every actor id, so an actor can place itself from it.
@@ -73,7 +77,7 @@ Offered port: an actor's id. Whoever directs actors holds the id and finds the l
 
 ### interface IActor — Ports/Offered/IActor.cs:8
 Offered port: something in the world that can be directed. Says only who it is; what it can do comes from the capability ports it also implements (IMovableActor, IAnimatedActor).
-Implemented by: IAnimatedActor (Oyung.Actors), IMovableActor (Oyung.Actors), ISpeakingActor (Oyung.Actors)
+Implemented by: IAnimatedActor (Oyung.Actors), IMovableActor (Oyung.Actors), IPhysicalActor (Oyung.Actors), ISpeakingActor (Oyung.Actors)
 - `ActorId Id { get; }` :11 — The id it is found by.
 
 ### interface IAnimatedActor : IActor — Ports/Offered/IAnimatedActor.cs:9
@@ -86,6 +90,12 @@ Implemented by: Actor (Oyung.Actors)
 Offered port: an actor that can go places. How it gets there (walking, rolling) is its own business.
 Implemented by: Actor (Oyung.Actors)
 - `void WalkTo(LocationId to, Action arrived)` :16 — Goes to the location, ends facing its way, then calls arrived once. A new order replaces the old one, whose arrived is never called. Throws if the location isn't loaded.
+
+### interface IPhysicalActor : IActor — Ports/Offered/IPhysicalActor.cs:8
+Offered port: an actor with a body standing somewhere in the world.
+Implemented by: Actor (Oyung.Actors)
+- `Vector3 Position { get; }` :11 — Where its feet are.
+- `float Height { get; }` :15 — From its feet to the top of its body, in metres.
 
 ### interface ISpeakingActor : IActor — Ports/Offered/ISpeakingActor.cs:9
 Offered port: an actor that can speak. How it sounds is its own business.
@@ -216,6 +226,10 @@ undocumented
 undocumented
 - `override void Execute()` :17 (override of Instruction)
 
+### class SetGlobalString : StringInstruction — Instructions/SetGlobalString.cs:11
+undocumented
+- `override void Execute(string value)` :15 (override of StringInstruction)
+
 ## Oyung.Hints
 
 ### interface IHints — Ports/Offered/IHints.cs:4
@@ -277,7 +291,8 @@ Implemented by: InteractionInputAdapter (Oyung.Root)
 
 ### class Interactable : MonoBehaviour, IInteractable — Interactable.cs:18
 undocumented
-- `IReadOnlyList<IInteraction> IInteractable.Interactions { get; }` :30 — undocumented
+- `event Action<bool> FocusChanged` :32 — The gaze came to this object (true) or left (false). For its own look, like a highlight.
+- `IReadOnlyList<IInteraction> IInteractable.Interactions { get; }` :37 — undocumented
 
 ### class InteractionInstaller : MonoBehaviour, IDisposable — InteractionInstaller.cs:11
 Interaction: needs the interact press. Interactables reach other modules through their conditions and instructions; offers nothing yet.
@@ -313,6 +328,19 @@ Takes its body to a destination over the NavMesh at a calm pace: turns towards w
 - `bool IsWalking { get; }` :40 — undocumented
 - `void WalkTo(Vector3 destination, Quaternion? finalFacing = null)` :54 — Starts walking; replaces any walk in progress. Throws if the NavMesh has no path there.
 - `void Stop()` :70 — Stops where it is, without Arrived.
+
+## Oyung.Minigames.NamePop
+
+### class NamePopGame : MonoBehaviour — NamePopGame.cs:16
+undocumented
+
+### class NamePopInstaller : MonoBehaviour — NamePopInstaller.cs:10
+NamePop: needs saving to be blockable. Started by a StartNamePop instruction; hands its name out through the config's instruction.
+- `void Build(ISaveBlocker saveBlocker)` :14 — undocumented
+
+### class StartNamePop : Instruction — StartNamePop.cs:11
+undocumented
+- `override void Execute()` :15 (override of Instruction)
 
 ## Oyung.Quests
 
@@ -408,7 +436,7 @@ Quests: needs nothing from other modules (they reach it through conditions and i
 
 ## Oyung.Root
 
-### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:25
+### class CompositionRoot : MonoBehaviour — CompositionRoot.cs:26
 The only place that creates modules and hands them what they need. Startup: create → load → start. Shutdown: reverse order.
 
 ## Oyung.Save
@@ -560,12 +588,16 @@ Implemented by: ActorStore (Oyung.Actors), CutsceneStore (Oyung.Cutscenes), Glob
 Shared Kernel contract: an order to change some module's state ("set intro_seen", "remove 5 flowers"). Knows nothing itself; each state owner subclasses it in its own .Unity side. Used by deciders (Story, NPC AI), which hold it inline and never know which module carries it out.
 - `abstract void Execute()` :18 — Carries out the order. Strict: if it can't be done (precondition broken), throws naming the asset. To check first, the designer pairs it with a Condition.
 
+### class StringInstruction — StringInstruction.cs:12
+Shared Kernel contract: an order that carries a text only known while playing ("remember this name"). Like Instruction, each state owner subclasses it on its own .Unity side, and the decider holds it inline without knowing which module carries it out.
+- `abstract void Execute(string value)` :16 — Carries out the order. Strict: throws naming the asset if it can't be done.
+
 ## Oyung.SharedKernel.Editor
 
-### class TypePickerDrawer : PropertyDrawer — TypePickerDrawer.cs:23
+### class TypePickerDrawer : PropertyDrawer — TypePickerDrawer.cs:24
 Inspector for [SerializeReference] fields of the kernel contracts listed below (Condition, Instruction), in any module: a dropdown to pick the concrete type, then its fields. Applies only to those contracts, not to every [SerializeReference] field. A module adds its own contract by subclassing it in its Editor assembly with its own [CustomPropertyDrawer]. Knows: every non-abstract subclass of the field's type (TypeCache). Does: creates / replaces / clears the inline instance. Used by: Unity, automatically; deciders only write [SerializeReference] and never reference this assembly.
-- `override void OnGUI(Rect position, SerializedProperty property, GUIContent label)` :27 (override)
-- `override float GetPropertyHeight(SerializedProperty property, GUIContent label)` :72 (override)
+- `override void OnGUI(Rect position, SerializedProperty property, GUIContent label)` :28 (override)
+- `override float GetPropertyHeight(SerializedProperty property, GUIContent label)` :73 (override)
 
 ## Oyung.SharedKernel.Unity
 
@@ -610,9 +642,9 @@ Composite condition: met when its one child is NOT met. Knows only its child (an
 How a number condition compares the fact's value with its target. Used by IntCondition and FloatCondition.
 Equal, NotEqual, Less, LessOrEqual, Greater, GreaterOrEqual
 
-### class StringCondition : FactCondition<string> — Conditions/StringCondition.cs:11
-Met when a string fact equals the target exactly (case matters). For "not equal", wrap it in Not.
-- `override bool IsMet { get; }` :15 (override of Condition)
+### class StringCondition : FactCondition<string> — Conditions/StringCondition.cs:12
+Met when a string fact equals the target exactly (case matters). For "not equal", wrap it in Not. A fact never set counts as empty, so Not(equals "") means "this text has been given".
+- `override bool IsMet { get; }` :16 (override of Condition)
 
 ### class `ModuleFact<T>` : ScriptableObject, ICataloguedItem — ModuleFact.cs:10
 undocumented

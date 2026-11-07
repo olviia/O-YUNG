@@ -6,10 +6,10 @@ Depends on: Oyung.SharedKernel
 Used by: Oyung.Sequences.Editor
 Internal and private members only; the rest is in INDEX.md.
 
-### class TypePickerDrawer — TypePickerDrawer.cs:23
-- `private static IEnumerable<SerializedProperty> VisibleChildren(SerializedProperty property)` :87 — undocumented
-- `private void ShowTypeMenu(SerializedProperty property, Type current)` :100 — undocumented
-- `private static void Assign(SerializedObject target, string path, Type type)` :117 — undocumented
-- `private Type BaseType()` :130 — undocumented
-- `private static IEnumerable<Type> ConcreteTypes(Type baseType)` :139 — undocumented
-- `private static string MenuPath(Type type)` :151 — undocumented
+### class TypePickerDrawer — TypePickerDrawer.cs:24
+- `private static IEnumerable<SerializedProperty> VisibleChildren(SerializedProperty property)` :88 — undocumented
+- `private void ShowTypeMenu(SerializedProperty property, Type current)` :101 — undocumented
+- `private static void Assign(SerializedObject target, string path, Type type)` :118 — undocumented
+- `private Type BaseType()` :131 — undocumented
+- `private static IEnumerable<Type> ConcreteTypes(Type baseType)` :140 — undocumented
+- `private static string MenuPath(Type type)` :152 — undocumented

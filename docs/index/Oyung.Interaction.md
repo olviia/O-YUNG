@@ -3,7 +3,7 @@
 Root: Assets/Scripts/Interaction
 Pure C#: yes
 Depends on: Oyung.SharedKernel
-Used by: Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Root
+Used by: Oyung.Interaction.Tests, Oyung.Interaction.Unity, Oyung.Minigames.NamePop, Oyung.Root
 Internal and private members only; the rest is in INDEX.md.
 
 ### internal interface IInteractable — IInteractable.cs:10

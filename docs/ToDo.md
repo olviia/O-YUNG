@@ -18,13 +18,6 @@
     Objective 1 done when the player focuses the parents' voices;
     objective 2 "Eavesdrop your name"; quest done when the name is
     chosen. One slice per session:
-    B. name: letter bubbles float out of the parents' mouths and drift
-       around the name; the player aims with the head and pops them to
-       build the name. All 26 letters stay alive (a popped one comes
-       back from a mouth, each loosely in its own zone), so up to 20
-       letters take under a minute. Remove and done bubbles are always
-       reachable; at the maximum length letters stop attaching. Must be
-       clear that this IS choosing your name. Plus a string fact.
     C. parents' voices at the crib:
        4. muffled voices: AudioLowPassFilter on the speakers.
        5. sound waves at each mouth, readable through the blur.
@@ -34,8 +27,6 @@
     they play under. Each line is one string table key: the voice always
     speaks its English entry, the display shows the localized one. One
     step per session:
-    2. first quest: pressing E stops the parents' chat and opens the
-       name minigame.
     3. reactions: an event picks the most specific matching line by
        conditions; a row can play its lines in order, one per event
        (pinch mum: first, second, later). Built with the first real

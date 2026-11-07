@@ -27,6 +27,13 @@ namespace Oyung.Interaction.Unity
 
         private Collider[] _colliders;
 
+        /// <summary>The gaze came to this object (true) or left (false).
+        /// For its own look, like a highlight.</summary>
+        public event Action<bool> FocusChanged;
+
+        internal void SetFocused(bool focused) =>
+            FocusChanged?.Invoke(focused);
+
         IReadOnlyList<IInteraction> IInteractable.Interactions =>
             interactions;
 
@@ -55,6 +62,10 @@ namespace Oyung.Interaction.Unity
             [Tooltip("What the prompt says, e.g. Listen, Open, Pet.")]
             [SerializeField] private LocalizedString verb;
 
+            [Tooltip("No prompt at all: the object shows by itself that " +
+                     "it can be used. Needs no verb.")]
+            [SerializeField] private bool silent;
+
             [Tooltip("Empty: always available.")]
             [SerializeReference] private Condition availableWhen;
 
@@ -63,13 +74,15 @@ namespace Oyung.Interaction.Unity
 
             internal LocalizedString Verb => verb;
 
+            internal bool Silent => silent;
+
             public Condition AvailableWhen => availableWhen;
 
             public IReadOnlyList<Instruction> OnUse => onUse;
 
             internal void Check(Interactable owner)
             {
-                if (verb == null || verb.IsEmpty)
+                if (!silent && (verb == null || verb.IsEmpty))
                     throw owner.Invalid("has an interaction without a verb.");
                 if (onUse.Any(i => i == null))
                     throw owner.Invalid(

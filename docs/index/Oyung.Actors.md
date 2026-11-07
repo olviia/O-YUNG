@@ -3,22 +3,22 @@
 Root: Assets/Scripts/Actors
 Pure C#: no
 Depends on: Oyung.Locations, Oyung.Locomotion, Oyung.SharedKernel, Oyung.SharedKernel.Unity, Oyung.Speech.Unity
-Used by: Oyung.Actors.Tests, Oyung.Dialogues.Unity, Oyung.Root, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity
+Used by: Oyung.Actors.Tests, Oyung.Dialogues.Unity, Oyung.Minigames.NamePop, Oyung.Root, Oyung.Scratch, Oyung.Sequences.Editor, Oyung.Sequences.Unity
 Internal and private members only; the rest is in INDEX.md.
 
 ### class Actor — Actor.cs:20
-- `private void OnEnable()` :45 — undocumented
-- `private void OnDisable()` :60 — undocumented
-- `internal ActorState State { get; }` :96 — Where it stands and how, right now.
-- `internal void Place()` :101 — Stands as the store remembers, at once. With nothing remembered it stays where the scene put it.
-- `private void OnArrived()` :109 — undocumented
-- `private IEnumerator AfterFade(float fade, Action done)` :116 — undocumented
-- `private void StopPosing()` :123 — undocumented
-- `private bool InState(string state)` :130 — undocumented
-- `private ILocation Loaded(LocationId to)` :141 — undocumented
-- `private void Require(UnityEngine.Object part, string field)` :150 — undocumented
-- `private int PoseHash(string pose)` :159 — undocumented
-- `private void OnValidate()` :170 — undocumented
+- `private void OnEnable()` :60 — undocumented
+- `private void OnDisable()` :75 — undocumented
+- `internal ActorState State { get; }` :111 — Where it stands and how, right now.
+- `internal void Place()` :116 — Stands as the store remembers, at once. With nothing remembered it stays where the scene put it.
+- `private void OnArrived()` :124 — undocumented
+- `private IEnumerator AfterFade(float fade, Action done)` :131 — undocumented
+- `private void StopPosing()` :138 — undocumented
+- `private bool InState(string state)` :145 — undocumented
+- `private ILocation Loaded(LocationId to)` :156 — undocumented
+- `private void Require(UnityEngine.Object part, string field)` :165 — undocumented
+- `private int PoseHash(string pose)` :174 — undocumented
+- `private void OnValidate()` :185 — undocumented
 
 ### internal class ActorCatalog : Catalog<ActorId> — ActorCatalog.cs:9
 undocumented
