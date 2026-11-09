@@ -122,3 +122,5 @@ InitTestScene*.unity*
 # Python bytecode
 __pycache__/
 *.pyc
+/Assets/temp
+/Assets/temp.meta

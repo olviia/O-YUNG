@@ -690,20 +690,3 @@ undocumented
 
 ### class LegsWalk : MonoBehaviour — TempForVideo/LegsWalk.cs:8
 undocumented
-
-### class Readme : ScriptableObject — TutorialInfo/Readme.cs:5
-undocumented
-- `StyleSheet commonStyle` :7 — undocumented
-- `StyleSheet darkStyle` :8 — undocumented
-- `StyleSheet lightStyle` :9 — undocumented
-- `Texture2D icon` :10 — undocumented
-- `string title` :11 — undocumented
-- `Section[] sections` :12 — undocumented
-- `bool loadedLayout` :13 — undocumented
-
-### class Readme.Section — TutorialInfo/Readme.cs:16
-undocumented
-- `string heading` :18 — undocumented
-- `string text` :18 — undocumented
-- `string linkText` :18 — undocumented
-- `string url` :18 — undocumented
