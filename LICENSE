@@ -2,8 +2,6 @@ MIT License
 
 Copyright (c) 2026 Olviia Stroivans
 
-O-YUNG was created by Olviia Stroivans, who is its only owner.
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -21,37 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
--------------------------------------------------------------------------------
-Third-party material
--------------------------------------------------------------------------------
-
-The MIT license above covers this project's own work. The third-party
-material below keeps its own license, as listed.
-
-Letter meshes (Assets/Content/Minigames/NamePop/Letters.fbx)
-  "Simple alphabet" by Naira, licensed under CC BY 4.0
-  (https://creativecommons.org/licenses/by/4.0/).
-  https://sketchfab.com/3d-models/simple-alphabet-86bc96d947054d9398402069c02f96fc
-  Changed: centred, scaled, made thinner.
-
-Fabric, wall and floor textures (Assets/Art/Textures), processed with
-tools/blender/textures/adapt.py:
-  Poly Haven, CC0 1.0 (https://polyhaven.com/license):
-    "Caban" (T_Fleece), "Ribbed Corduroy" (T_Corduroy),
-    "Plastered Wall" (T_Plaster), "Wood Floor" (T_WoodFloor).
-  ambientCG, CC0 1.0 (https://docs.ambientcg.com/license/):
-    "Fabric016" (T_Knit).
-  The wicker and strand textures are made procedurally in this project.
-
-Sound sources processed into the parents' voices
-(Assets/Content/Audio/Voices/Bups) and the intro audio:
-  "Cat Purr 301 M" by BadIdeaProductions, CC0 1.0.
-  https://freesound.org/s/856508/
-  Sonniss GDC Game Audio Bundle, Sonniss royalty-free license
-  (https://sonniss.com/gameaudiogdc). Used only processed and mixed into
-  the game's own sounds, not redistributed as standalone sound effects.
-
-TextMesh Pro resources (Assets/TextMesh Pro)
-  Unity Companion License (https://unity.com/legal/licenses/unity-companion-license).
-  LiberationSans font: SIL Open Font License 1.1.

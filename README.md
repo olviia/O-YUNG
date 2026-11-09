@@ -62,6 +62,7 @@ O-YUNG is a solo personal project in early development
 
 ## License
 
-This project is under the [MIT License](LICENSE). Third-party material (letter
-meshes, textures, sound sources, fonts) keeps its own license, listed in the
-same file.
+O-YUNG was created by Olviia Stroivans, who is its only owner. It is under
+the [MIT License](LICENSE). Third-party material (letter meshes, textures,
+sound sources, fonts) keeps its own license, listed in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
